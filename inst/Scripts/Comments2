@@ -1,0 +1,21 @@
+The man page for runCompareComplex:
+ Details needs some filling in. I don't thing I understand what byWhich
+ does.
+
+ - the Value part - I think it should say that you return a list with
+ these components
+
+---This is done. TC
+
+ - I don't think we want a toBeRm slot, that is a decision that should be
+  left to the user
+
+---When the interactome is build, should the merging of 2 sub-interactomes be forced to delete redundant protein complexes? toBeRm is the slot for which mergeBGMat depends on to get rid of this redundancy.
+
+ - and I get:
+ names(cc)
+[1] "JC"           "maxIntersect" "equal"        "toBeRm"       "subcomplex" 
+ so I think simInd needs to go away and JC and maxIntersect need to be
+ documented.
+
+the simInd and JC are the same (in the future, if there are other similarity indices, we can have people chose what they want). I will make sure that only one is there and documented.

@@ -1,0 +1,73 @@
+1) getGOInfo man page:
+   Chemical
+     Component Ontology.
+ there is no Chemical component - please be more careful
+
+  - it should allow you to drop nodes for specified evidence codes
+------This Should be done. I did not use the dropECode since it was not doing what I wanted...I wrote a small function to do this.
+
+2) createGOMatrix - it should take the output of getGOInfo as input,
+ otherwise getGOInfo should be hidden from view
+
+  createGOMatrix = function(cMembers = getGOInfo(), wantList=FALSE)
+
+ is probably a better way to do this
+
+ then you could just call createGODF with two arguments (and this want
+ list thing could go away?). I think this function should return a matrix.
+------Working on this...this should be done.
+
+3) same basic idea for the mips code, best to keep things seperate
+-----Working on this...this sould be done now as well.
+
+4) mergeBGMat:
+ says:     This function takes the union of the row names of matrix1 and
+     matrix2 for the rownames of the aggregate matrix, and concatonates
+ 
+ but the arguments are mat1 and mat2 not matrix1 and matrix2. It is very 
+ important that you get this level of detail right.
+
+ Don't say things like: Again this is an...,
+  this might be the only manual page they read (so where does "Again" come
+  from?). Describe in enough detail for any reader to know what you are 
+  doing. No where does it tell me that you are merging these two matrices,
+ that some action is being taken to resolve overlaps etc. 
+-----I deleted this function...done.
+
+5) I get gene names like:
+  [1] "Q0105"       "Q0045"       "Q0250"       "Q0275"       "Q0080"      
+ [6] "Q0085"       "Q0130"       "Q0140"       "RNA_TLC1"    "SNRNA_NME1" 
+[11] "RNA_RNASE-P"
+
+ which simply don't seem right to me. The Q ones seem to show up, but the
+ other three, I don't know about. Maybe Rachel does?
+-----I will talk to Rachel about this.
+
+6) getAPMSData - the man page does not tell us what the options are, so 
+ how could we know? Please document. This is also a place to use
+ match.arg.
+  You seem to process the data from apComplex so explain what is coming
+ back and please don't use acronyms (BG Incidence Matrix ?? what is BG
+ and surely it is an adjacency matrix if it is anything??)
+
+
+7) the merging is not doing what I think that it should.
+ First, you should use the merge function, for what this is doing, and
+ second, I don't see any value in doing it.
+
+ This is the point where we should try to identify which of the 
+ putative protein complexes are identical (nearly identical) and
+ which are strict subsets of others. That might be one set of calculations,
+ that returns those statistics, without performing any merging.
+ Then, given those the user might want to set some parameters to 
+ do the merging. I think we might want to factor this into two pieces,
+ one that computes the statistics and one that merges.
+
+ As we just discussed, the tools for computing some of these quantities
+ should be moved here from simulateAPMS, as they more properly seem to 
+ fit here (and then simulateAPMS could depend on this package, rather than
+ the other way around, which does seem a bit backwards).
+ -----This should be done. I will need to create new man files since I have changed the functions to do more things here...will do tonight.
+
+
+***I have made all the changes to the code itself...I need to update the man pages..will work on that.

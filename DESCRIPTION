@@ -1,0 +1,10 @@
+Package: ScISI
+Title: In Silico Interactome
+Version: 1.1.8
+Author: Tony Chiang <tchiang@fhcrc.org>
+Description: Package to create ISI
+Depends: apComplex, GO, GOstats, YEAST
+Suggests: Rgraphviz
+Maintainer: Tony Chiang <tchiang@fhcrc.org>
+License: LGPL
+Packaged: Fri Dec  2 10:56:58 2005; tchiang

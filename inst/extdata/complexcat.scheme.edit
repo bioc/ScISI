@@ -1,0 +1,409 @@
+20              2-oxoglutarate dehydrogenase
+
+30              Acetolactate synthase
+
+40              Alpha-agglutinin anchor
+
+50              Alpha, alpha-trehalose-phosphate synthase
+
+60              Anaphase promoting complex (APC)
+
+70              Anthranilate synthase
+
+75              Arginase
+
+80              Arginine-specific carbamoylphosphate synthase
+
+90              Assembly complexes
+90.10                  Chromatin assembly complex (CAC)
+90.20                  Vacuolar assembly complex
+90.30                  ER assembly complex
+
+100             Calcineurin B
+
+110             cAMP-dependent protein kinase
+
+120             Casein kinase
+120.10                 Casein kinase I
+120.20                 Casein kinase II
+
+123             Catalase
+123.10                 Catalase A
+123.20                 Catalase T
+
+125             Cell cycle checkpoint complexes
+125.10                 DNA damage checkpoint
+125.10.10                         Ddc1p-Mec3p complex
+
+130             Chaperonine containing T-complex TRiC (TCP RING Complex) 
+
+132             CTP synthetase
+
+133             Cyclin-CDK (Cyclin-dependent kinases) complexes
+133.10                 Cdc28p complexes
+133.20                 Pho85p complexes
+133.30                 Kin28p complex
+133.40                 Srb10p complex
+133.50                 Ctk1p  complex
+
+140             Cytoskeleton
+140.10                 10 nm filaments
+140.10.10                         Intermediate filaments
+140.10.20                         Septin filaments
+140.20                 Actin filaments
+140.20.10                         Actins
+140.20.20                         Actin-associated proteins
+140.20.30                         Actin-associated motorproteins
+140.30                 Microtubules
+140.30.10                         Tubulins
+140.30.20                         Tubulin-associated proteins
+140.30.30                         Tubulin-associated motorproteins
+140.30.30.10                          Kinesin-related motorproteins
+140.30.30.20                          Dynein-complex motorproteins
+140.30.30.30                          Dynactin complex
+
+
+143             D-arabinose dehydrogenase
+
+145             delta3-cis-delta2-trans-enoyl-CoA isomerase
+
+150             Endonuclease SceI, mitochondrial
+
+160             Exocyst complex
+
+165             Exopolyphosphatase, vacuolar
+
+170             Fatty acid synthetase, cytoplasmic
+
+172             Fatty acid synthetase, mitochondrial
+
+175             Fumarase
+
+177            Gim complexes
+
+180             Prenyltransferases
+180.10                 Farnesyltransferase (FTase)
+180.20                 Geranylgeranyltransferase I (GGTase I)
+180.30                 Geranylgeranyltransferase II (GGTase II)
+
+190             Glucan synthases
+190.10                 1,3-beta-D-glucan synthase
+190.20                 1,6-beta-D-glucan synthase
+
+200             Glycine decarboxylase
+
+210             H+-ATPase, plasma mebrane
+
+220             H+-transporting ATPase, vacuolar
+220.10                 H+-transporting ATPase ATPase V0 domain#
+220.20                 H+-transporting ATPase ATPase V1 domain#
+
+225             Hexokinase 2
+
+230             Histone acetyltransferase complexes
+230.10                 HAT B complex
+230.20                 HAT A complexes
+230.20.10                        ADA complex
+230.20.20                        SAGA complex
+230.20.30                        NuA3 complex
+230.20.40                        NuA4 complex
+
+240             Histone deacetylase complexes
+240.10                 HDA complex
+240.20                 HDB complex
+
+250             Isocitrate dehydrogenase
+
+253             Isocitrate lyase
+
+260             Intracellular transport complexes
+260.10                Clathrin
+260.20                Clathrin-associated protein (AP) complex 
+260.20.10             AP-1 complex
+260.20.20             AP-2 complex
+260.20.30             AP-3 complex
+260.20.40             Golgi transport complex
+260.20.99             other adaptor like proteins
+
+260.30                Coat complexes (COP)
+260.30.10                        COPI
+260.30.20                        COPII
+260.30.30                        Retromer complex
+260.30.30.10                          Vps35/Vps29/Vps26 complex
+260.30.30.20                          Vps5/Vps17 complex
+260.30.90                        other coat complexes
+260.40                NSF-SNAP complex
+260.50                SNAREs
+260.50.10                        t-SNAREs
+260.50.10.10                          Vam3/Vam7 vacuolar t-SNARE complex   
+260.50.20                        v-SNAREs
+260.60                TRAPP (Transport Protein Particle) complex
+260.70                Vps4p ATPase complex (Vps protein complex)
+260.80                Class C Vps protein complex
+260.90                Arp2p/Arp3p complex
+260.100               Aut2p/Aut7p complex
+
+265             Kel1p/Kel2p complex
+
+270             Kinetochore protein complexes
+270.10                Inner Kinetochor Protein Complex
+270.10.10                CBF3 protein complex
+270.20                Outer Kinetochor Protein Complex
+270.20.10                Ctf19 protein complex 
+270.20.20                Ctf3 protein complex 
+270.20.30                Dam1 protein complex 
+270.20.40                Ndc80 protein complex
+270.20.50                Chl4 protein complex
+270.90                 other kinetochore proteins
+
+280             L-aminopadipate-semialdehyde dehydrogenase
+
+290             Mitochondrial translocase complex
+290.10                TOM - transport across the outer membrane
+290.20                TIM - transport across the inner membrane
+290.20.10                 Tim22p-complex
+290.20.20                 Tim17p-complex
+290.20.30                 Tim9p/Tim10p-complex
+
+295             Nem1p-Spo7p complex
+
+300             Nonsense-mediated mRNA decay pathway complex
+
+310             Nuclear pore complex (NPC)
+310.10              NSP1 complex
+310.20              NSP1-NUP82 complex
+310.30              NSP1-NIC96 complex
+310.40              NUP84 complex
+
+320             Nucleosomal protein complex
+
+325             Ornithine carbamoyltransferase
+
+330             Phenylalaninine-tRNA-ligase
+
+340             Phosphofructokinase
+
+350             Proteases, mitochondrial 
+350.10              ATP-dependent protease complexes
+350.10.10                 m-AAA protease complex
+350.10.20                 Lon protease complex (homohexamer)
+350.10.30                 Yme1 protease complex
+350.20              Inner membrane protease
+350.30              Processing peptidase
+
+360             Proteasome
+360.10                26S proteasome
+360.10.10                20S proteasome
+360.10.20                19/22S regulator
+
+370             Protein N-acetyltransferase
+
+
+390             Pyruvate dehydrogenase
+
+380             Pyruvate kinase
+
+400             RSC complex (Remodel the structure of chromatin)
+
+410             Replication complexes
+410.10                Post-replication complex  (Origin recognition complex=ORC )
+410.20                Replication initiation complex
+410.30                Pre-replication complex (pre-RC)
+410.33                GINS complex
+410.35                Replication complex
+410.40                Replication fork complexes
+410.40.10                PCNA
+410.40.20                Replication factor A complex
+410.40.30                Replication factor C complex
+410.40.40                DNA helicases
+410.40.50                DNA ligases
+410.40.60                DNA polymerase alpha (I) - primase complex
+410.40.70                DNA polymerase beta (IV)
+410.40.80                DNA polymerase gamma
+410.40.90                DNA polymerase delta (III)
+410.40.100               DNA polymerase epsilon (II)
+410.40.110               DNA polymerase zeta
+410.40.120               Exonucleases
+410.40.130               RNase H1
+410.40.140               Topoisomerases
+410.50                   Telomerase
+
+420             Respiration chain complexes
+420.10                NADH-dehydrogenase (ubichinon, complex I) NOT IN YEAST
+420.20                Succinate dehydrogenase complex (complex II)
+420.30                Cytochrome bc1 complex (Ubiquinol-cytochrome c reductase complex, complex III)
+420.40                Cytochrome c oxidase (complex IV)
+420.50                F0/F1 ATP synthase (complex V)
+420.60                other respiration chain complexes
+
+430             Ribonucleoside-diphosphate reductase
+
+440             RNA processing complexes
+440.10                Nuclear processing complexes
+440.10.10               pre mRNA3'-end processing factor CFI
+440.10.20               pre mRNA3'-end processing factor CFII
+440.10.30               pre mRNA polyadenylation factor PFI
+440.12                rRNA processing complexes
+440.12.10               Exosome complex
+440.12.20               RNase MRP
+440.12.30               Nop56p/Nop1p complex
+440.14                tRNA processing complexes
+440.14.10               RNase P
+440.20                Mitochondrial processing complexes
+440.30                Nuclear splicing complexes/Spliceosome
+440.30.10               mRNA splicing
+440.30.10.10                          Prp19p-associated complex
+440.30.10.20                          Prp9p/Prp11p/Prp21p complex
+440.30.20               rRNA splicing           
+440.30.30               tRNA splicing
+440.40                Mitochondrial splicing complexes
+440.40.10               mitochondrial 3'-to-5' exoribonuclease (mtEXO)
+
+440.90                other RNA processing components
+
+443             S-adenosyl-methionine delta-24-sterol-c-methyltransferase
+
+445             SCF (Skp1-Cdc53-F-box protein) comlexes 
+445.10                SCF-CDC4 complex
+445.20                SCF-GRR1 complex
+445.30                SCF-MET30 complex
+
+450             Serine/threonine phoshpoprotein phosphatase
+
+
+470             Signal transduction complexes
+470.10                SNF1 complex
+470.20                STE5-MAPK complex
+470.30                Trimeric G-proteins
+470.30.10                   Pheromone response pathway
+
+475             Nuclear cohesion
+475.05                Sister chromatid cohesion complex
+475.10                Sister chromatid separation complex
+
+
+480             Spindle pole body (SPB)
+480.10                  SPB components
+480.10.05                        gamma-tubulin complex
+480.20                  SPB associated proteins
+
+485             Succinyl-CoA ligase
+
+490             Synaptonemal complex (SC)
+
+500             Translation complexes
+500.10                Cytoplasmic translation initiation
+500.10.10                        eIF1
+500.10.20                        eIF2
+500.10.30                        eIF2B
+500.10.40                        eIF3
+500.10.50                        eIF4A
+500.10.60                        eIF4B
+500.10.70                        eIF4E
+500.10.80                        eIF4F
+500.10.90                        eIF5
+500.10.100                       eIF5A
+500.10.110                       eIF4E/eIF4G/Pab1p complex
+500.10.990                       other cytoplasmic translation initiation components
+500.20                Cytoplasmic translation elongation
+500.20.10                        eEF1
+500.20.20                        eEF2
+500.20.30                        eEF3
+500.30                Cytoplasmic translation termination
+500.30.10                        eRF1
+500.30.30                        eRF3
+500.40                Cytoplasmic ribosomes
+500.40.10                        cytoplasmic ribosomal large subunit
+500.40.20                        cytoplasmic ribosomal small subunit
+500.40.30                        cytoplasmic ribosomal RNA components
+500.50                Mitochondrial translation complexes
+500.50.10                        Mto1p/Mss1p complex
+500.60                Mitochondrial ribosomes
+500.60.10                        mitochondrial ribosomal large subunit
+500.60.20                        mitochondrial ribosomal small subunit
+500.60.30                        mitochondrial ribosomal RNA components
+
+510             Transcription complexes/Transcriptosome
+510.10                RNA polymerase I
+510.20                Core Factor (CF)
+510.30                Upstream Activation Factor (UAF) complex
+
+510.40                RNA polymerase II holoenzyme
+510.40.10                        RNA polymerase II
+510.40.20                        Kornberg's mediator (SRB) complex
+510.50                TFIIA
+510.60                TFIIB
+510.70                TFIID
+510.70.10                        TBP 
+510.70.20                        TAFIIs
+510.80                TFIIE
+510.90                TFIIF
+510.100               TFIIH
+510.110               TFIIK (CTD kinase)
+
+510.120               RNA polymerase III
+510.130               TFIIIA
+510.140               TFIIIB
+510.150               TFIIIC
+
+510.160               CCAAT-binding factor complex
+ 
+510.170               mRNA guanylyl transferase (capping complex)
+
+510.180               DNA repair complexes
+510.180.10               Nucleotide excision repairosome
+510.180.10.10                    NEF1 complex
+510.180.10.20                    NEF2 complex
+510.180.10.30                    NEF3 complex
+510.180.10.40                    NEF4 complex
+510.180.30               Non-homologous end-joining apparatus   
+510.180.30.10                    Ku complex
+510.180.30.20                    DNA ligase IV
+510.180.30.30                    MRE11/RAD50/XRS2 complex
+510.180.50               DNA mismatch repair complexes
+510.180.50.10                    MSH2/MSH3 complex
+510.180.50.20                    MSH2/MSH6 complex
+510.180.50.30                    MLH1/PMS1 complex
+510.180.20               other DNA repair complexes
+
+510.190               Other transcription complexes
+510.190.10               ADA complexes
+510.190.10.10                    ADA complex
+510.190.10.20                    Ada-Spt complexes
+510.190.10.20.10                    SAGA complex
+510.190.10.20.20                    SAGA-like complex (SLIK)
+510.190.20               HPR1 complex
+510.190.30               NAC complex
+510.190.40               NOT complex
+510.190.50               SWI/SNF transcription activator complex
+510.190.60               SBF complex
+510.190.70               MBF complex
+510.190.80               GAL80 complex
+510.190.90               GCR complex
+510.190.100              OAF complex
+510.190.110              CCR4 complex
+510.190.120              ARG complex
+510.190.130              RTG complex
+510.190.140              Tup1/Ssn6 complex
+510.190.150              Sin3 complex
+510.190.160              Met4 complexes
+510.190.160.10                   Cbf1/Met4/Met28 complex
+510.190.160.20                   Met4/Met28/Met31 complex
+510.190.160.30                   Met4/Met28/Met32 complex
+510.190.180              Mot1 complex
+510.190.190              NC2 complex
+510.190.200              Ume6/Ime1 complex
+510.190.210              LEU3 complex
+510.190.900              other transcription complexes
+
+
+520             Translocon
+520.10                   ER protein-translocation complex  (Sec complex)
+520.10.10                        Sec61 complex
+520.10.20                        Sec62-63 complex
+520.10.99                        ER protein-translocation complex associated  proteins   
+520.20                   Oligosaccharyltransferase
+520.30                   Signal peptidase
+520.40                   Signal recognition particle (SRP)
+520.50                   Signal recognition particle receptor (SR)
+
