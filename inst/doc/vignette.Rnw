@@ -67,9 +67,7 @@ or CO-IP. The second network is recognized as a protein complex membership struc
 encapsulated in the form of a hyper-graph. Again, expressed proteins represent 
 the vertex set of the hyper-graph. The hyper-edges, which  can be any subset
 of the vertex set, is comprised of the clusters of proteins which determine the 
-protein complexes. It is important to note that a hyper-graph is a generalization
-of an ordinary graph with the restriction that all hyper-edges have cardinality
-at most two. By providing an estimate of these hyper-graphs, these algorithms 
+protein complexes. By providing an estimate of these hyper-graphs, these algorithms 
 provide a necessary computational tool in the study of bio-physical and cellular
 processes.
 
@@ -136,13 +134,16 @@ The parameters of \Rfunction{getGOInfo} have the following characteristics:
 
 \begin{itemize}
 \item[1] \Rfunarg{wantDefault}: This is a logical. If passed into the function as TRUE, 
-three default terms will be parsed: complex by agrep, ase by grep, and 
-some by grep.
+three default terms will be parsed: complex by agrep, \texttt{\\Base\\b} by grep, and 
+\texttt{\\Bsome\\b} by grep. The latter terms will search for protein complexes such as 
+RNA polymerase or Ribosomes which may not contain the term complex.
 
 \item[2] \Rfunarg{toGrep}: A named list with only one entry named ``pattern'' supplied. 
 The pattern entry holds a character vector of terms, with perl regular expressions,
 supplied by the users. \Rfunction{getGOInfo} will parse for these terms within the CC 
-ontology. If toGrep is not NULL, parseType must not be NULL neither.
+ontology. If toGrep is not NULL, parseType must not be NULL neither. This argument lets 
+the user append to the search terms if \Rfunarg{wantDefault} is TRUE, or it allows 
+the user to set the search terms if FALSE.
 
 \item[3] \Rfunarg{parseType}: A character vector of parse terms, e.g. ``grep'' or ``agrep''. 
 This vector must either be of length one or of the same length as the vector toGrep. If 
@@ -156,7 +157,7 @@ goGrep = getGOInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
                    eCode = NULL, wantAllComplexes = FALSE)
 length(go)
 length(goGrep)
-setdiff(names(goGrep), names(go))
+getGOTerm(setdiff(names(goGrep), names(go)))
 
 @ 
 
@@ -168,7 +169,14 @@ complex.
 
 <<getGOInfoCoded, eval = TRUE>>=
   goCoded = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
-                      eCode = "IEA", wantAllComplexes = FALSE)
+                      eCode = c("IEA", "IDA","ISS"), wantAllComplexes = FALSE)
+  nm = names(go)
+  protDiff = sapply(nm, function(w) {setdiff(go[[w]], goCoded[[w]])})
+  for (i in 1:length(protDiff)){
+      if (length(protDiff[[i]][1]) != 0){
+          print(protDiff[[i]][1])
+      }
+  }
 @ 
 
 \item[5] \Rfunarg{wantAllComplexes}: A logical. If TRUE, the children of parsed nodes will 
@@ -218,7 +226,8 @@ some by grep.
 \item[2] \Rfunarg{toGrep}: A named list with only one entry named ``pattern''.
 The entry is a character vector containing terms, with perl regular expressions,
 supplied by the users. \Rfunction{getMipsInfo} will parse for these terms within the 
-hierarchical clusterings. If toGrep is not NULL, parseType must not be NULL neither.
+hierarchical clusterings. If toGrep is not NULL, parseType must not be NULL neither. The 
+terms supplied
 
 \item[3] \Rfunarg{parseType}: A character vector of parse terms, e.g. ``grep'' or ``agrep''. 
 This vector must either be of length one or of the same length as the vector toGrep. If 
@@ -232,7 +241,7 @@ mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "gre
                        wantAllComplexes = FALSE)
 length(mips$Mips)
 length(mipsGrep$Mips)
-setdiff(names(mipsGrep$Mips), names(mips$Mips))
+mips$DESC[setdiff(names(mipsGrep$Mips), names(mips$Mips))]
 
 @ 
 
@@ -364,8 +373,8 @@ The complexes
 that are reported from \Rpackage{apComplex} are high level estimates of direct wet-lab 
 experimental data. One further step has been taken to produce higher quality complexes:
 only those estimates which fall under the multi-bait (more than one protein in the complex 
-was used as a bait protein in the AP-MS techonology) and multi-hit (multiple proteins within 
-the reported complex were actually pulled down as prey) were taken to be high quality protein
+was used as a bait protein in the AP-MS techonology) and multi-edge (the directed graph showed 
+higher instances of reciprocity) were taken to be high quality protein
 complex estimates. 
 
 <<getAPMSDataOut, eval=TRUE>>=
@@ -457,7 +466,8 @@ mips2go$maxIntersect$maxComp$row[1:5]
 
 \subsection{Equality of Protein Complexes}
 The $equal$ entry records protein complexes of the first bi-partite graph matrix equal to those
-in the second. To produce an \textit{in silico} interactome, we will eventually merge the different 
+in the second and this is easily done by selecting those complexes which have a Jaccard index of 
+unity. To produce an \textit{in silico} interactome, we will eventually merge the different 
 bi-partite graph matrices, and if two different bi-partite graphs have common protein complexes, we need
 to determine those complexes and eliminate redundancy. 
 

@@ -1,6 +1,7 @@
 \name{yeastData-class}
 \docType{class}
 \alias{yeastData-class}
+\alias{yeastData}
 
 \title{Class "yeastData"}
 
