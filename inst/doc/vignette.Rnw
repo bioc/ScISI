@@ -35,7 +35,7 @@
 \maketitle
 
 \section{Introduction}
-With the advent of bait to prey technologies such as co-immunoprecipitation
+With the advent of technologies such as co-immunoprecipitation
 (CO-IP), affinity purification - mass spectroscopy (AP-MS), and tandem 
 affinity purification (TAP), high through-put data sets have become available
 in the determination of protein complex co-membership. We remark that such 
@@ -50,7 +50,7 @@ complex to which $q$ truly belongs and a false negative (FN) observation has
 been recorded. 
 
 The need to decipher these errors, either FP or FN, from true protein complexes
-has lead many to develop protein complex co-membership algorithms. These 
+has lead many to develop protein complex co-membership algorithms(cite diff alg). These 
 algorithms use different statistical and mathematical models to extrapolate the
 underlying interactomes - which protein complexes are present in the cell or 
 tissue and each protein complex's composition.
@@ -89,7 +89,8 @@ different data sets and culls those elements that best represents the protein
 complexes of interest. Two data sets are online yeast genome databases, Gene 
 Ontology and the Munich Information Center for Protein Sequences. The last data
 set is a collection of estimates from three different wet-lab experiments 
-(cite Gavin, Ho, Krogan) derived from the \Rpackage{apComplex} package. Once 
+(cite Gavin, Ho, Krogan) derived from the \Rpackage{apComplex} package 
+(footnote - explain that GO and MIPS do not rely heavily on AP-MS data). Once 
 an \textit{in silico} interactome is built, the R package \Rpackage{simulatorAPMS} 
 can simulate AP-MS experiments rendering data sets very similar to those of actual wet-
 lab experiments. Estimates for the \textit{in silico} interactome can be generated
@@ -111,6 +112,7 @@ library(ScISI)
 
 \section{Obtaining Information}
 
+\subsection{Gene Ontology}
 Before an \textit{in silico} interactome can be assembled, we must obtain the necessary
 information. As remarked earlier, two sources are online databases, Gene Ontology (GO) 
 and the Munich Information Center for Protein Sequences (MIPS), and the third is a 
@@ -173,8 +175,8 @@ complex.
   nm = names(go)
   protDiff = sapply(nm, function(w) {setdiff(go[[w]], goCoded[[w]])})
   for (i in 1:length(protDiff)){
-      if (length(protDiff[[i]][1]) != 0){
-          print(protDiff[[i]][1])
+      if (length(protDiff[[i]]) != 0){
+          print(protDiff[[i]])
       }
   }
 @ 
@@ -197,6 +199,49 @@ represent the hyper-graph. Each entry of the return value $go$ represents a part
 edge, and the union over all the entries of the list (i.e. over all the hyper-edges) yields the
 vertex set.
 
+Now that we have derived part of our \textit{in silico} interactome from the GO  
+database, we need to modify the data structure to one that is more flexible and resiliant for
+computational methodologies. Most computational tools will rarely take the hyper-graph 
+structure in its list representation; rather, computational tools generally use the matrix 
+representation of the bi-partite graphs.
+
+It is a natural place to remark on the equivalence of the categories of hyper-graphs to the 
+categories of bi-partite graphs. First suppose we have a hyper-graph; then for the bi-partite
+graph, one set of vertices is again the set of expressed proteins while the other set of 
+nodes consists of the hyper-edges of the known hyper-graph. Edges within the bi-partite graph 
+is given by membership, i.e. protien $p$ is incident to hyper-edge $h$ if and only if $p$ is 
+a member of the protein complex represented by $h$. The other direction is trivial, for if we are
+given a bipartite graph, we can reconstruct the hyper-edge $h$ by taking the collection of 
+proteins $p$ which are incident to a node $h$. Thus we can construct all hyper-edges and thus
+the hyper-graph. The bi-partite graph representation will be used more frequently though we
+will use both representations inter-changeably.
+
+The incidence matrix, $M$, of a bi-partite graph has its rows indexed by proteins and has its columns
+indexed by the protein complexes. $M_{i,j} = 1$ if and only if protein $i$ is a member of complex $j$,
+and $M_{i,j} = 0$ otherwise. Therefore, $M$ is a $\{0,1\}$ matrix which is generally sparse.
+
+The function \Rfunction{createGOMatrix} takes the output of \Rfunction{getGOInfo} and creates the 
+bi-partite graph incidence matrix of this hyper-graph list. 
+
+<<createGOMatrix, eval=TRUE>>=
+goM = createGOMatrix(go)
+
+@ 
+
+We remark that we the proteins names used to index the rows of the incidence matrix are the 
+standard gene names for yeast. To establish uniformity, we have used the standard gene names
+across all data sets. The colunmes of the incidence matrix are indexed by the GO id's 
+corresponding to certain protein complexes. By looking at a table of the column sums and row
+sums of the matrix \Robject{goM}, we can see a range of sizes of the protein complexes from GO
+and relative membership of each protein $p$ respectively.
+
+<<createGOMatrixOut, eval=TRUE>>=
+goM[1:10, 1:6]
+table(colSums(goM))
+table(rowSums(goM))
+@ 
+
+\subsection{Munich Information Center for Protein Sequences}
 Parsing for information from the MIPS database (completely analogous to parsing the GO database) 
 is done by calling the \Rfunction{getMipsInfo} function:
 
@@ -208,8 +253,9 @@ mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
 @
 
 Unlike the \Rfunction{getGOInfo} function, \Rfunction{getMipsInfo} parse through two files 
-downloaded from the complex catalogue of the MIPS database. One file contains a hierarchical 
-clustering methodolgy for protein complexes while the second file contains the protein 
+downloaded from the complex catalogue of the MIPS database. One file contains a hierarchy 
+for the protein complexes(i.e. complexes are built from sub-complexes)
+ while the second file contains the protein 
 composition of each of the levels of the hierarchical clustering from the first. Thes files 
 are updated bi-annually, so it is important to note that \Rfunction{getMipsInfo} should be 
 updated periodically to correspond with the newer data files. With the exception of evidence 
@@ -226,8 +272,9 @@ some by grep.
 \item[2] \Rfunarg{toGrep}: A named list with only one entry named ``pattern''.
 The entry is a character vector containing terms, with perl regular expressions,
 supplied by the users. \Rfunction{getMipsInfo} will parse for these terms within the 
-hierarchical clusterings. If toGrep is not NULL, parseType must not be NULL neither. The 
-terms supplied
+hierarchy. If toGrep is not NULL, parseType must not be NULL neither. The 
+terms supplied will be in addition to those of the default if \Rfunarg{wantDefault} is 
+TRUE or will be the only terms parsed if FALSE.
 
 \item[3] \Rfunarg{parseType}: A character vector of parse terms, e.g. ``grep'' or ``agrep''. 
 This vector must either be of length one or of the same length as the vector toGrep. If 
@@ -241,13 +288,15 @@ mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "gre
                        wantAllComplexes = FALSE)
 length(mips$Mips)
 length(mipsGrep$Mips)
-mips$DESC[setdiff(names(mipsGrep$Mips), names(mips$Mips))]
+mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
+mId = strsplit(mNm, split = "-")
+sapply(mId, function(q) mipsGrep$DESC[q[2]])
 
 @ 
 
 \item[4] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
 hierarchical clustering will be returned (the aggregate protein complex); if TRUE, 
-all the intermediates of the hierarchical clustering will also be returned (the sub-
+all the intermediates of the hierarchy  will also be returned (the sub-
 complexes as well). 
 \end{itemize}
 
@@ -261,9 +310,7 @@ class(mips$DESC)
 Another difference between the \Rfunction{getGOInfo} and \Rfunction{getMipsInfo} functions is 
 their respective outputs. We have seen that the output from the \Rfunction{getGOInfo} is a named
 list that represents the hyper-graph, but, from looking at the output printed above,
- this is not the case for the output of \Rfunction{getMipsInfo}. 
-
-
+this is not the case for the output of \Rfunction{getMipsInfo}. 
 
 The output of \Rfunction{getMipsInfo} is a list with two 
 entries: the first, $Mips$ is a named list of character vectors where the names are the MIPS ids
@@ -289,57 +336,6 @@ methods of returning descriptions of any GO id, and, therefore, it is irrelevant
 a character vector containing the descriptions. Since there is no such methods for the MIPS 
 dataset, it is necessary to record this vector as we parse the MIPS files. 
 
-The third set from which we can obtain protein complex co-membership data is from the R 
-package \Rpackage{apComplex}. Having been designed as a complex co-membership estimation
-algorithm, \Rpackage{apComplex} takes wet-lab AP-MS data and produces consistent and 
-uniform high level approximations for protein complex composition. Presently, there are three
-publicly available AP-MS raw data sets (cite here) which have been processed by \Rpackage{apComplex}
-and stored in its database. It is important to remark that the MIPS database also has these
-three data sets (processed with methods developed by respective experiments) stored in its 
-database; we have chosen to use the \Rpackage{apComplex} estimates, however, since it gives a level of 
-consistency and uniformity unavailable elsewhere. We defer to the next section in obtaining
-these three data sets, since their method of storage is that of an incidence matrix of 
-a bi-partite graph (the definition of which follows).
-
-It is a natural place to remark on the equivalence of the categories of hyper-graphs to the 
-categories of bi-partite graphs. First suppose we have a hyper-graph; then for the bi-partite
-graph, one set of vertices is again the set of expressed proteins while the other set of 
-nodes consists of the hyper-edges of the known hyper-graph. Edges within the bi-partite graph 
-is given by membership, i.e. protien $p$ is incident to hyper-edge $h$ if and only if $p$ is 
-a member of the protein complex represented by $h$. The other direction is trivial, for if we are
-given a bipartite graph, we can reconstruct the hyper-edge $h$ by taking the collection of 
-proteins $p$ which are incident to a node $h$. Thus we can construct all hyper-edges and thus
-the hyper-graph. The bi-partite graph representation will be used more frequently though we
-will use both representations inter-changeably.
-
-\section{Incidence Matrix Representation of Bi-Paritite Graphs}
-
-Now that we have derived two parts of our \textit{in silico} interactome from the GO and MIPS 
-databases, we need to modify the data structure to one that more flexible and resiliant for
-computational methodologies. Most computational tools will rarely take the hyper-graph 
-structure in its list representation; rather, computational tools generally use the matrix 
-representation of the bi-partite graphs.
-
-The incidence matrix, $M$, of bi-partite graphs has its rows indexed by proteins and has its columns
-indexed by the protein complexes. $M_{i,j} = 1$ if and only if protein $i$ is a member of complex $j$,
-and $M_{i,j} = 0$ otherwise. Therefore, $M$ is a $\{0,1\}$ matrix which is generally sparse.
-
-The function \Rfunction{createGOMatrix} takes the output of \Rfunction{getGOInfo} and creates the 
-bi-partite graph incidence matrix of this hyper-graph list. 
-
-<<createGOMatrix, eval=TRUE>>=
-goM = createGOMatrix(go)
-@ 
-
-We remark that we the proteins names used to index the rows of the incidence matrix are the 
-standard gene names for yeast. To establish uniformity, we have used the standard gene names
-across all data sets. The colunmes of the incidence matrix are indexed by the GO id's 
-corresponding to certain protein complexes.
-
-<<createGOMatrixOut, eval=TRUE>>=
-goM[1:10, 1:6]
-@ 
-
 The MIPS bi-partite graph incidence matrix is created exactly as the GO bipartite graph incidence
 matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunction{getMipsInfo}.
 
@@ -351,16 +347,39 @@ Again we see that the standard gene names for yeast index the rows of the MIPS i
 and the the MIPS id's corresponding to protein complexes index the columns. It is important to 
 note that \Rfunction{createMipsMatrix} has prefixed each of the MIPS id's with the term ``MIPS-''.
 This is useful when we merge difference incidence matrices, for it allows us to know where each
-protein complex orginates.
+protein complex orginates. Again, investigating column and row sums gives insight to complex size 
+and relative protein membership.
 
 <<createMipsMatrixOut, eval=TRUE>>=
 mipsM[1:10, 1:6]
+table(colSums(mipsM))
+table(rowSums(mipsM))
 @ 
 
-The last three bi-partite graph incidence matrices have already been created and stored as 
-data files in the \Rpackage{apComplex} package. There are currently three data sets 
-corresponding to the three available wet-lab experiments (cite 3 experiments). These three
-incidence matrices can be obtained by calling the function \Rfunction{getAPMSData} with
+\subsection{Purified Data Set Complexes estimated by apComplex}
+The third set from which we can obtain protein complex co-membership data is from the R 
+package \Rpackage{apComplex}. Having been designed as a complex co-membership estimation
+algorithm, \Rpackage{apComplex} takes wet-lab AP-MS data and produces consistent and 
+uniform high level approximations for protein complex composition. There are two important
+distinctions between these purified data-set estimates and those estimates collected in GO
+and in MIPS. The first concerns the methodology by which the actual data itself is derived.
+Whereas the purified data-set estimates come exclusively from bait to prey technologies that tries
+to ascertain protein complex co-membership, GO and MIPS both rely on a number of different
+technologies that estimate complex composition which are highly variable. The second distinction
+concerns the how to get purified data-set information. Unlike MIPS and GO, the purified data-set
+estimates are stored as incidence matrices, and therefore, there is no need to parse for 
+hyper-graphs and convert to incidence matrices.
+
+
+Presently, there are three
+publicly available AP-MS raw data sets (cite here) which have been processed by \Rpackage{apComplex}
+and stored in its database. It is important to remark that the MIPS database also has these
+three data sets (processed with methods developed by respective experiments) stored in its 
+database; we have chosen to use the \Rpackage{apComplex} estimates, however, since it gives a level of 
+consistency and uniformity unavailable elsewhere. 
+
+These three incidence matrices can be obtained from \Rpackage{apComplex}
+by calling the function \Rfunction{getAPMSData} with
 one of the following arguments: ``Gavin'', ``Ho'', or ``Krogan''.
 
 <<getAPMSData, eval=TRUE>>= 
@@ -379,6 +398,8 @@ complex estimates.
 
 <<getAPMSDataOut, eval=TRUE>>=
 gavin[1:10, 1:6]
+table(colSums(gavin))
+table(rowSums(gavin))
 @ 
 
 Again the bi-partite graph incidence matrix are indexed in the rows by the yeast standard 
@@ -639,7 +660,7 @@ for(i in 1:length(mipsNames)){
 url[i] = getURL(mipsOb, mipsNames[i])
 linkNames[i] = Desc(mipsOb, mipsNames[i])
 }
-ScISI2html(urlVect = url, linkName = linkNames, filename = "mips", title = "MIPS Protein Complex")
+ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex")
 @ 
 
 The arguments for the \Rfunction{ScISI2html} are somewhat self explanatory, but we will provide
@@ -659,7 +680,7 @@ the output file will be named ``mips.html''.
 \end{itemize}
 
 The purpose for this .html file is a quick and efficient way for users to manually parse the 
-protein complexes derived from \Rpackage{ScISi} either for quality control or for refinement.
+protein complexes derived from \Rpackage{ScISi} either for quality control and for refinement.
 
 
 \subsection{Cutting Interactomes with Gene Expression Time Series Data}
