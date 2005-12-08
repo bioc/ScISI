@@ -1,5 +1,5 @@
 getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
-                        parseType = NULL, wantAllComplexes=TRUE){
+                        parseType = NULL, wantAllComplexes=FALSE){
   ##options(error=recover)
   ##This file is specific towards the downloaded data file from the MIPS repository.
   ##Since the file updated every six months (and it appears that the files are
