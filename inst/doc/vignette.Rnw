@@ -407,21 +407,24 @@ are indexed by such ad hoc ids which reference the wet-lab experiments from wher
 derived.
 
 
-\section{Comparing Protein Complexes Across Databases}
+\section{Comparing Protein Complexes Within and Across Databases}
 
 Now that we have obtained the various bi-partite graph incidence matrices, we need to evaluate and 
-cross reference the protein complexes across databases and eliminate redundancy. There are two items 
+cross reference the protein complexes within a single database as well as
+across databases and eliminate redundancy. There are two items 
 for which we must find when cross referencing protein complexes: equality or inclusion. To compare
 two bi-partite graph incidence matrices, we use the \Rfunction{runCompareComplex} function:
 
 <<runCompareComplex, eval=TRUE>>=
+mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")  
 mips2go = runCompareComplex(mipsM, goM, byWhich="BOTH")
 names(mips2go)
 @ 
 
-The \Rfunction{runCompareComplex} function takes two bipartite-graph incidence matrices as arguments,
+The \Rfunction{runCompareComplex} function takes two bi-partite graph incidence matrices as arguments,
 and compares each complex from the first bipartite graph to the each complex from the second 
-bi-partite graph. The argument $byWhich$ shall be elucidated in the following paragraphs.
+bi-partite graph. The argument $byWhich$ shall be elucidated in the following paragraphs. Note that
+the bi-partite graphs need not be different as we can run this function on a single bi-partite graph.
  The output of this function is a named list whose entries carry various statistical
 information. An explanation of each entry follows:
 
@@ -502,6 +505,14 @@ finally, ``intersect'' records the cardinality of $BG1Comp \cap BG2Comp$. Rather
 the complex names, this data structure allows the user to inspect relative size of those common 
 complexes. 
 
+We remark here that there is redendancy even within the one database as well, and it is necessary that we
+find and eliminate those protein complexes that may have occurred more than once in a database:
+
+<<runCompareComplexEqualMips, eval=TRUE>>=
+ind = which(sapply(mips2mips$equal, function(w) w$BG1Comp != w$BG2Comp))
+mips2mips$equal[ind]
+@ 
+
 \subsection{Eliminating Redundancy}
 The ``toBeRm'' entry takes only those protein complexes of the first bi-partite graph (in our
 running example, this would be mips or equivalently mipsM) which are equal to some protein complexes 
@@ -523,6 +534,7 @@ $equal$ and defer the reader to the explanation written previously.
 
 <<runCompareComplexSub, eval=TRUE>>=
 mips2go$subcomplex[[1]]
+mips2mips$subcomplex[[1]]
 @ 
 
 While the storage of the data does not explicitly state which complex contains the other complex, it is 
@@ -533,6 +545,10 @@ sub-complexes will be masked by the aggregate complex, and thus, removal is need
 redundancy. There may be other computational tools that require the availability of the sub-complexes, 
 so there is no consistent framework calling for the removal of sub-complexes, and hence, we
 leave that decision to the users.
+
+
+
+
 
 \section{Combining Bi-Partite Graphs - Building In Silico Interactomes}
 
