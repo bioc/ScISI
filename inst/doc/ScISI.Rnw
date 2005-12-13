@@ -51,7 +51,8 @@ general to be able to address the more complex situation of different
 protein/polypeptide variants should they arise.
 
 In this paper we consider the problem of estimating an \textit{in
-  silico} interactome. The role of the \textit{in silico} interactome
+  silico} interactome for Saccharomyces cerevisiae. 
+The role of the \textit{in silico} interactome
 is to  provide a tool that can be used to carry out a variety of
 computational experiments. These experiments will help to confirm the
 viability of wet lab experimental procedures by allowing investigators
@@ -111,58 +112,161 @@ In this section we first describe what we mean by a protein complex
 and describe different models for representing these data. We then
 describe the process of creating an \textit{in silico} interactome
 based on two public meta-data sources and three experimental data sets 
-by combining purification of protein complexes with identification of their individual componenets via mass spectroscopy.
+by combining purification of protein complexes with identification of 
+their individual componenets via mass spectroscopy.
 
 
-\subsection{What is a protein complex}
+\subsection{Protein complexes and their representations}
 
 %%FIXME: a few pictures would surely help readers
-A protein complex, for the purposes of this paper is two or more
+A protein complex (defined for this paper) is two or more
 proteins that physically interact for the purposes of carrying out
 some biological objective. There is no need for all members of a
-complex to interact with each other, but the graph connecting all
-members where edges represent interactions must be connected.
+complex to interact with each one another, but all the proteins do need
+to combine to form a macro-proteomic structure. We further note that 
+some proteins will be involved in many complexes
+while others will be involved in relatively few, and one corollary 
+to this remark is that the relative size of the protein complexes 
+range from two proteins to more than fifty. 
 
-We further note that some proteins will be involved in many complexes
-while others will be involved in relatively few.
+This definition of a protein complex is motivated by the various 
+technologies that assay levels of protein complex composition such 
+as Affinity Purification - Mass Spectroscopy and 
+Co-immunoprecipitation. Working within the confines of these 
+technologies, our definition for protein complexes becomes 
+increasingly strict. There are structures within the cytoskeleton,
+for instance, which fit within a more generic setting of a complex; 
+these structures are never pulled down by the mentioned 
+technologies, so we have dis-allowed their membership as a protein
+complex. 
 
 What should be said about sub-complexes? When sub-complexes exist
 there can be identifiability problems that arise due to the technology
 being used. FIXME: it would be good to give some sort of concrete
-example of what might go wrong.
+example of what might go wrong. (Also, some protein complexes might
+be a sub-complex given other conditions...where should we draw the 
+line between when a complex is actually a sub-complex or not??? TC) 
 
 We have chosen to represent the protein complex co-membership graph as
-a bipartite graph. The proteins themselves are represented by one type
-of node while the protein complexes are the other. An edge goes
-between a protein and each complex it is a member of. We note the
-direct relationship between bipartite graphs and hypergraphs, and
-shall make some use of that in our discussion.
+a bipartite graph, $B$. The proteins themselves index one set 
+of nodes which we denote as $P$ while the protein complexes index
+the other set of nodes which we denote as $C$. A protein specific
+node $p_i$ is incident to a protein complex specific node $c_j$ if $p_i$ 
+has membership in $c_j$. We remark that there is an equivalence between the categories
+of bi-partite graphs and the categories of hyper-graphs (cite or supplementary).
+
+To each bi-partite graph comes an associated incidence matrix representation. 
+This incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where proteins
+index the rows and protein complexes index the columns. The entries of $M_B$ 
+correspond to the presence or absence of membership edges, for instance, the $(i,j)$ 
+entry for $M_B$ is unity if protein $p_i$ is a constituent member of complex
+$c_j$; the entry is zero otherwise. 
+
+Because most computational methodologies desire this incidence matrix representation
+rather than the actual bi-partite graph itself, the construction of the \textit{in silico}
+interactome will be the construction of a particular incidence matrix.  
+
+Having streamlined a definition for protein complex and its computational representation, 
+we move forward with the task of diciphering an \textit{in silico} interactome for S. 
+cerevisae. To this end, we have gathered information from  
+two online data sources, Gene Ontology and the Munich Information Center for Protein 
+Sequences, as well as high-level protein complex estimates from three publicly available 
+wet-lab experiments. 
+
 
 \subsection{MIPS}
 
-The MIPS comprehensive yeast genome database is a functional catalogue that provides tools to browse genome wide information for yeast. MIPS catalogues its database into twelve overlapping sections. The catalogue of interest for the construction of the MIPS derived \textit{in silico} sub-interactome is the $complex$ catalogue. 
+The MIPS comprehensive yeast genome database is a functional catalogue that provides tools to browse genome wide information 
+for a number of organisms including S. cerevisae. Within the complex section of the catalogue, the MIPS database has 
+created a hierarchial system of documenting a more general version of a protein complex that what we have defined. For
+instance, the MIPS database catalogues many of the structures of the cytoskeleton as complexes; these 
+structures do not intersect with our definition of protein complexes. Though 
+this hierarchy is more general, an overwhelming majority of the MIPS protein complexes do comply with our definition, and 
+these complexes will play an important role in the \textit{in silico} interactome.
 
-Complications arise because the grouped proteins indexed in the $complex$ are too general and do not meet the standard definition of protein complex in its usual term. With this in mind, we downloaded two files and parsed the data into groups of proteins which did meet the standard definition for protein complex as stated before.
+In addition to the MIPS definition of protein complex, MIPS also documents the protein complexes estimated by the wet-lab
+experiments of (Gavin, Ho, Krogan). Whereas the other complexes documented within MIPS arise from small scale systematic
+protein complex composition experiments, these wet-lab protein complex estimates come from high through-put wet-lab data 
+sets which tend to contain higher levels of error. The data sets rendered by the wet-lab experiments do not give any 
+indication of complex composition, but rather a lower level of co-membership between bait proteins and prey proteins. Each 
+experiment has independently devised a clustering algorithm to estimate protein complex composition. This brings a level of
+inconsistancy to protein complex estimation. We have developed a singular process to remove this inconsistancy (the
+details of which will be given in the following sections) and so we have chosen not to use the MIPS estimates of the
+high through-put data.
 
-The first MIPS downloaded file, $F_1$, is a text file consisting of proteins, the MIPS protein complex ID for which they had membership, and the experiments used in their validation for complex co-membership. The second file, $F_2$ is a text file of that documents the titles for the general grouping of the proteins (collectively referred to as the complexes) along with an outline structure where sub-categories imply subsetting. Our strategy in determining protein complexes for the MIPS database is too mine for the exact term $''complex''$ in the $F_2$ file. Since we are interested in aggregate complexes, if the term $''complex''$ appears multiple levels of $F_2$, only the title of the highest level is recorded and its protein composition is determined from $F_1$. 
+The main task in building the \textit{in silico} interactome is parsing through the MIPS database to select those 
+clusters of proteins which agree with our definition of a protein complex. Therefore, for the MIPS repository, we have 
+downloaded the three data files, two of which encapsulate the protein complexes and their composition. 
 
-Mining for the term $''complex''$ is insufficient, for many protein complexes have specialized titles not including complex. In our search for protein complexes, we have also searched for terms suffixed with $-ase$ as well as with $-some$. In this case, those titles such as RNA Polymerase or Transcriptome will also be included in the formation of the interactome. 
+The first MIPS downloaded file, $complexcat.scheme$, consists of the hierarchical structure of the MIPS repository.
+(maybe put a png of the file here or part of the file here???)  Each 
+top level of this hierarchical structure represents some overall aggregate structure and each sub-structure (or 
+inter-mediary structure) reflects some functional sub-group of the aggregate. This is the file for which we need to parse.
 
-The \textit{in silico} interactome is represented by a hyper-graph where the nodes correspond to proteins and hyper-edges correspond to protein complexes. After collecting the data from MIPS, we organize the collection of proteins into non-disjoint groupings corresponding to the hyper-edges. Each hyper-edge is catalogued so that we may identify the protein complex. In addition to the hyper-graph, we also create its associated hyper-graph incidence matrix where the rows are indexed by the proteins and the columns by the hyper-edges. 
+Our methodology for extracting protein complexes from the MIPS database is to search for three key terms within the
+$complexcat.scheme$ file. The terms, (the word)
+``complex'', and (the suffixes) ``-ase'' as well as ``-some'', provide an almost comprehensive search for the complexes
+which will populate our \textit{in silico} interactome. The first term is self-explanatory while the latter two
+need some elucidation. There are certain protein complexes which are well defined and exhaustively studied but do not
+contain the word ``complex'' in its name (e.g. RNA Polymerase and Proteasome) which need to be incorporated into the
+interactome. 
 
-The last item we create is a dataframe for the MIPS hyper-graph for the sake of record keeping. The dataframe contains three slots: name of the hyper-edge (the column names of the incidence matrix); the MIPS reference number; and the MIPS description (the title from file $F_2$). For ease of accessing the slots of the dataframe, an instance of the class \textit{yeastData} can be created. With this object, three methods have been written for which the hyper-edge name can obtain any one of the three: the MIPS reference number, the MIPS description, as well as the URL for additional data.  
+Parsing this data file is not limited only to differentiating those structures within our definition of a protein complex
+from those structures outside. We also need to work within the restrictions and confines due to the limitations from the
+experimental technologies. The bait to prey technologies such as AP-MS or Co-IP can only pull down aggregate protein
+structures, and cannot demarcate between the various sub-structures. With this restriction at hand, our construction 
+of the \textit{in silico} interactome does not include sub-structures that could not be identified with the available 
+technology, i.e. sub-complexes will not be incorporated. (Footnote here saying that all sub-complexes from mips will
+always be considered a sub-complex as per my comment above???) Under these restrictions, we were able 
+to extract 141 protein complexes. 
 
-We conclude this section with particular reasons why we have not chosen to take the protein complexes obtained by high through-put experimentation. Whereas the protein complexes we have thus selected for the \textit{in silico} interactome have been studied thoroughly (for these are the protein complexes MIPS has mined from the literature itself), those protein complexes given by high through-put experiments have little credibility since the methodology for determining complex composition is inconsistant from one experiment to the next and since each protein complex has been very little studied. Instead we have obtained the raw, unfiltered, and un-clustered bait to prey dataset from each individual experiment and analyzed the content via \textit{apComplex} in one consistent and uniform manner. An overview of \textit{apComplex} and the details of its analysis will be provided in a subsequent section. 
+After we have parsed through the file $complexcat.scheme$ and selected those protein clusters of interest, we use the 
+second file, $complexcat_data_14112005$, to populate the individual protein complexes. Each row of $complex_data_11142005$
+contain information concerning a single protein (many proteins are listed with multiplicity greater than one). The 
+individual protein data consists of its protein complex membership (only one specific complex per row), MIPS specific
+evidence codes describing the what methodologies were used to verify complex membership, and lastly the pubmed 
+identification code for each protein. 
+
+Unfortunately, merely taking the top level protein complex structure is not enough to guarentee the absence of 
+sub-complexes. Once we have populated the protein complexes with their constituent protein members we can further
+examine the complex to sub-complex relationship.
+We have developed a method via the use of the Jaccard similarity coefficients to determine if a 
+protein complex is contained wholly within another complex. The Jaccard index between two sets is defined
+as the cardinality of their intersection quotient the cardinality of their union. If $A \subset B$, then the 
+Jaccard similarity coefficient is $\frac{|A|}{|B|}$. If we let the protein complexes represent the sets of interest
+we can, by examing all the 141 chose 2 set of Jaccard similarity coefficients,
+systematically find all protein complexes which are contained in larger complexes. In this way, we have found
+32 sub-complexes thus bringing the total number of protein complexes with which to populate the \textit{in silico}
+inteactome from the MIPS repository to 109 unique protein complexes.
+
+The third file, $evidencecat.scheme$, lists the MIPS evidence codes and matches the details for protein annotation within 
+the protein complexes. (I don't use any evidence codes, so should we even write anything here in the paper?). 
+
 
 \subsection{GO}
 
-Gene Ontology (GO) began as a collaborative project to provide a single repository for the different database genomes. This repository is detailed by three bio-chemical ontologies: Biological Processes; Cellular Components; and Molecular Functions. For our purposes of building an \textit{in silico} interactome, it is beneficial to restrict our analysis to the Cellular Component ontology. We begin the analysis of the GO repository by recalling that the structure of this database is that of a directed acyclic graph (DAG). In constructing the GO derived \textit{in silico} sub-interactome, we can select a rooted sub-graph from the Cellular Component DAG. The prominent node, $N$, is $GO:0043234$ which refers to the annotation $Protein Complex$. A neccessary (but sometimes insufficient) condition to finding all protein complexes indexed in the GO database is to find all the vertices incident to $N$, or in graph colloquy, all the vertices that are children on the node $N$. 
+Gene Ontology (GO) began as a collaborative project to provide a single repository for the different database genomes. This 
+repository is detailed by three bio-chemical ontologies: Biological Processes; Cellular Components; and Molecular Functions. 
+For our purposes of building an \textit{in silico} interactome, it is beneficial to restrict our analysis to the Cellular 
+Component ontology. Unlike the hierarchical structure of the MIPS repository, GO is organized as a directed acyclic graph 
+(DAG). Additionally, the data from Gene Ontology is directly accessed via the R packages \Rpackage{GO} and 
+\Rpackage{GOstats} rather than via downloaded files. 
 
-%%This needs to be discussed  - The insufficiency to this condition is one of logical semantics in the GO vocabulary. The notion of sub-complexes gives rise to complications. This instance is observed when a decendent of some child of $N$ is also directly incident to $N$ itself. For such a complex, $C$ that is directly (or indirectly) involved with other protein complexes, we need to make the choice of whether or not to include this complex in our \textit{in silico} interactome. For this purpose, the \texttt{getGoInfo} has a logical parameter \texttt{wantALLComplexes}. When search through the GO ontology for protein complexes, we can decide, for whichever conditions we impose on the \textit{in silico} interactome, to include or not to include those protein complexes analogous to protein complex $C$.
+The general methodology used to search for protein complexes in the GO repository is identical to those used in the MIPS
+repository though the implementation is generally different. Much like the process of searching for protein complexes in the 
+MIPS repository, we mine for the term ``complex'' and the
+suffixes ``-ase'' as well as ``-some'' to search for the protein complexes by calling the ``grep'' and ``agrep''
+functions. There is no need to manually populate the GO protein complexesbecause \Rpackage{GO} and \Rpackage{GOstats} have 
+built in methods to populate the protein complexes.  Thus we have determined 208 unique 
+GO nodes that corresponds to our given definition of a protein complex. 
 
-Much like the derived data from the MIPS repository, the GO data is collected and then arranged into a protein complex membership hyper-graph, and the hyper-graph is represented by its incidence matrix representation. We can also create a GO dataframe and an instance of the \textit{yeastData} class. 
+Because of GO nodes are not built from smaller
+constituent nodes, there is not a simple first step in filtering out sub-complexes.
+Again we make use of the Jaccard similarity index to discern sub-complexes from 
+aggregate ones. By investigating the 208 chose 2 derived Jaccard similarity indices, we 
+have found that 28 GO nodes represent protein sub-complexes, and therefore, we are able to 
+generate 180 unique GO protein complexes. 
 
-It is important to note the distinction here between the differences between the selection criteria for incoporating data from the MIPS database and those for the GO database. Recall that data selection for MIPS relied on word mining, in particular, for the term $complex$ and terms suffixed by $-ase$ or by $-some$. Protein complexes such as DNA polymerase and %%FIXME transcriptsome might not be selected with a simple word search for $complex$, but these same complexes %%True? would be annoated as protein complexes in the GO database.
 
 
 \subsection{Experimental Data}
@@ -173,7 +277,8 @@ In each of the three datasets, bait to prey associations were inferred by using 
 
 Analysis by \textit{apComplex} transforms the problem of biological protein complex estimation to a problem of estimating the presence of directed edges in a protein-protein complex co-membership (PPCCM) graph. Recall that two nodes are adjacent in the PPCCM graph if they are co-members for any protein complex. Under such an imposed structure, the identification of protein complexes is equivalent to the identification of maximal cliques in the PPCCM graph. %%Confirm it has been shown that the exhaustive search for maximal cliques within a graph is $np-hard$ based on the number of nodes within the network. Independent of the complexity in maximal clique mining, the PPCCM graph derived from the AP-MS technologies contains errors by embedding false positive (FP) and false negative (FN) bait to prey associations. These errors translate to the addition of FP directed edges and the deletion of FN directed edges respectively %%need picture.
 
-With the wet-lab experimental data, \textit{apComplex} searches for Bait to Hit (BH) maximal complete subgraphs (since maximal complete subgraphs are defined to be maximal cliques) which all recipricated bait-bait edges as well as all unreciprocated bait-hit-only edges exist. When such BH maximal subgraphs are found, \textit{apComplex} uses a statistical paradigm to determine the presence or absence of directed edges (particularly edges from hit-only proteins back towards those bait proteins which have unrecipricated association). The details concerning the statistical model upon which \textit{apComplex} is based can be found in \cite{Scholtens, Gentleman}.
+With the wet-lab experimental data, \textit{apComplex} searches for Bait to Hit (BH) maximal complete subgraphs (since maximal complete subgraphs are defined to be maximal cliques) which all recipricated bait-bait edges as well as all unreciprocated bait-hit-only edges exist. When such BH maximal subgraphs are found, \textit{apComplex} uses a statistical paradigm to determine the presence or absence of directed edges (particularly edges from hit-only proteins back towards those bait proteins which have unrecipricated association)
+. The details concerning the statistical model upon which \textit{apComplex} is based can be found in \cite{Scholtens, Gentleman}.
 
 The estimates derived from \textit{apComplex} can be divided into three groups. The MBME protein complex estimates are those derived from BH maximal subgraphs where multiple bait proteins (represented as nodes) and multiple edges (representing hits) are present. The SBMH protein complex estimates describe those complexes with only one single bait present but multiple hits (edges). Lastly, the UnRBB estimates consist of only two nodes (both bait proteins) where only one unreciprocated directed edge exists between them. It is quite clear that the MBME complexes have the highest probability of estimating true protein complexes since they are based on more biological information. For the construction of the \textit{in silico} interactome, we have elected to use only the MBME estimates because of its relative likelihood for accuracy.
 
