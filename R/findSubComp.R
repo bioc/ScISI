@@ -28,10 +28,11 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
                 rec$orderBG1Comp <- sum(bg1[,rnames[i]])
                 rec$orderBG2Comp <- sum(bg2[,cnames[j]])
                 rec$intersect <- interSectMat[rnames[i], cnames[j]]
-
+                
                 record1[[counter1]] = rec
                 counter1 = counter1+1
                 toBeRm1 = c(toBeRm1, rnames[i])
+                
             }
 
             ##Next we look at complexes where one is entirely contained in the other

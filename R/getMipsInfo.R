@@ -1,12 +1,42 @@
 getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
-                        parseType = NULL, wantAllComplexes=FALSE){
+                        parseType = NULL, eCode = NULL,
+                        wantAllComplexes = FALSE){
   ##options(error=recover)
   ##This file is specific towards the downloaded data file from the MIPS repository.
   ##Since the file updated every six months (and it appears that the files are
   ##not created completely identical) this file must be modified as well.
   fileToRead <- gzfile(system.file("extdata", "complexcat_data_14112005.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")
-  mipsYeastComplex = split(dataY$V1, dataY$V2)
+
+  if(!is.null(eCode)){
+      codes = as.vector(dataY[,3])
+      codesL = strsplit(codes, split = ",")
+      w = vector()
+      
+      v = vector()
+      for(q in 1:length(codesL)){
+          
+          if (length(setdiff(eCode, codesL[[q]])) == 0){
+              v = c(v, q)
+          }
+      }
+      w = unique(c(w,v))
+      print(length(w))
+  
+      if(length(w) != 0){
+          dataY = dataY[-w,]
+      }
+  }
+  
+  print(nrow(dataY))
+  if (nrow(dataY) != 0){
+      mipsYeastComplex = split(dataY$V1, dataY$V2)
+      print(length(mipsYeastComplex))
+  }
+  else{
+      stop("There are no proteins for which to populate the protein complexes")
+  }
+  ##print(mipsYeastComplex)
       
   protInComp <- readLines(system.file("extdata", "complexcat.scheme.edit", package="ScISI"))
   protInComp <- protInComp[-(which(protInComp==""))]
