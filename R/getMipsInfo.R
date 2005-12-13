@@ -4,7 +4,7 @@ getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
   ##This file is specific towards the downloaded data file from the MIPS repository.
   ##Since the file updated every six months (and it appears that the files are
   ##not created completely identical) this file must be modified as well.
-  fileToRead <- gzfile(system.file("extdata", "complexcat_data_20062005.gz", package="ScISI"))
+  fileToRead <- gzfile(system.file("extdata", "complexcat_data_14112005.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")
   mipsYeastComplex = split(dataY$V1, dataY$V2)
       
