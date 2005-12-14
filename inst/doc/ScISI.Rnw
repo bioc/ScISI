@@ -35,61 +35,96 @@
 
 \section{Introduction}
 
-Protein complexes form a fundamental part of biology and are relevant
-to our understanding of complex biological processes and to
-deciphering the different roles played by genes and proteins.
-A number of high throughput experiments have been carried out with the
-goal of helping to better elucidate the nature and number of
-interactions present \cite{Gavin, Ho, Krogan, Ito, Uetz}. We have
-carried out a number of different investigations of these data
-\cite{Scholtens, ScholtensVidalGent} which have focused on the
-estimation of protein complex co-memberships. In our discussion we do
-not distinguish between the term gene and the term protein, since the
-available resolution is not fine enough and equating these concepts
-leads to a more comprehensible dialog. The methodology is sufficiently
-general to be able to address the more complex situation of different
-protein/polypeptide variants should they arise.
+Protein interactions form a fundamental part of biology and are
+relevant to our understanding of complex biological processes and to
+deciphering the different roles played by genes and proteins. A number
+of high throughput experiments have been carried out with the goal of
+helping to better elucidate the nature and number of interactions
+present \cite{Gavin, Ho, Krogan, Ito, Uetz}. Yet, for all organisms or
+cells our knowledge is very incomplete. Hence, many more experiments
+will be needed to fully reveal the network structure. However, such
+experiments are expensive and time consuming to carry out. Hence,
+there is a great need for simulation models that can help to identify
+the viability of experimental procedures, to aid in integrating data
+from disparate sources and to provide a sound basis for the
+development of new methodology to help design experiments and to
+analyze the resultant data. In this paper we outline one approach to
+the creation of \textit{in silica interactomes}.
+
+We begin by distinguishing between many different types of
+interactomes; we begin with general comments and make many of the
+terms and ideas more explicit in later sections of this report. There
+are interactomes that model direct binary interactions and hence are
+related to experiments using the yeast two hybrid (Y2H) system
+\cite{FIXME:citatins here}. A second type of interactome is one that
+models protein complex co-membership, in these models two proteins are
+said to interact if they form a complex, to carry out some objective,
+under the conditions of interest. This second type of interactome is
+more closely related to co-precipitation or affinity-purificatin
+experiments \cite{FIXME:somecitations}. We note, that proteins that
+interact in the second sense, need not interact in the first sense and
+hence our separation of these two different, but related concepts.
+
+In our discussion we do not distinguish between the term gene and the
+term protein, since the available resolution is not fine enough and
+equating these concepts leads to a more comprehensible dialog. The
+methodology is sufficiently general to be able to address the more
+complicated situation of different protein/polypeptide variants should
+they arise.
 
 In this paper we consider the problem of estimating an \textit{in
-  silico} interactome for Saccharomyces cerevisiae. 
-The role of the \textit{in silico} interactome
-is to  provide a tool that can be used to carry out a variety of
-computational experiments. These experiments will help to confirm the
-viability of wet lab experimental procedures by allowing investigators
-to alter experimental conditions (both stochastic and systematic
-errors can be modified) and to measure how the outputs change as the
-error rates do. Another purpose for the \textit{in silico} interactome
-is to provide a tool that can generate multiple data sets, under
-different conditions, so that the statistical properties of different
-of proposed estimation procedures can be directly compared. A third
-use for the \textit{in silico} interactome is to use it to help
-develop tools and strategies for small scale experiments that will
-probe the interactome at a very detailed level. For example, a
-reasonable strategy to investigate a coherent set of protein complexes
-is to first select a small number of candidates and explore their
-interactions, say via affinity purification (co-precipitation)
-experiments. Once the first experiment has been collected one would
-like to analyze the data and determine an optimal, or nearly optimal
-set of baits for future experiments. Finally, a fourth use of an
-\textit{in silico} interactome is to study the effect of perturbations
-in the network, such perturbations could be caused by evolution and
-hence could become part of the study of evolutionary pressure on the
-interactome, or they could be due to drug treatments and hence would
-become part of a clinical investigation into the likely effects of
-drug treatments.
+  silico} interactome for \textit{Saccharomyces cerevisiae} and we
+describe five different roles that such a computational device can be
+used in.  First, the \textit{in silico} interactome provides a tool
+that can be used to mimic wet-lab experiments; these \textit{in
+  silico} experiments can help to confirm the viability of the wet-lab
+experimental procedures by allowing investigators to alter
+experimental conditions (both stochastic and systematic errors can be
+modified) and to measure how the outputs change as the error rates
+do. Second, the \textit{in silico} interactome provides a tool that
+can generate multiple data sets, under different conditions, so that
+the statistical properties of different of proposed estimation
+procedures can be directly compared. A third use for the \textit{in
+  silico} interactome is to use it to help develop tools and
+strategies for small scale experiments that will probe the interactome
+at a very detailed level. For example, a reasonable strategy to
+investigate a coherent set of protein complexes is to first select a
+small number of candidates and explore their interactions, say via
+affinity purification (co-precipitation) experiments. Once the first
+experiment has been collected one would like to analyze the data and
+determine an optimal, or nearly optimal set of baits for future
+experiments. Finally, a fourth use of an \textit{in silico}
+interactome is to study the effect of perturbations in the network,
+such perturbations could be caused by evolution and hence could become
+part of the study of evolutionary pressure on the interactome, or they
+could be due to drug treatments and hence would become part of a
+clinical investigation into the likely effects of drug treatments. The
+fifth use for such a tool is to explore and understand the effects of
+different sampling paradigms on the inferences that can drawn from
+different wet-lab experiments. We note that there are a number of
+recent papers (FIXME:citations) that raise many important issues in
+this regard.
 %%FIXME: we could also mention studying the effects of sampling as yet
 %%another use of the interactome.
 
-Important design considerations include the fact that genomic science
-is rapidly evolving and that new data sources will continuously come
-on line. Hence there must be a mechanism by which the interactome can
-be updated. There are many different and disparate data sources, there
-should be some mechanism for incorporating all available
-data. Different investigators will want to modify the interactome,
-either with localy produced, but not yet public data, or to satisfy
-personal beliefs. We have developed a paradigm that allows
-investigators to create their own estimates, to share interactomes and
-to build, revise and update interactomes.
+While the estimated interactome is itself of some great interest, we
+note that it is more important to describe the procedure by which the
+\textit{in silico interactome} is produced. This methodology is more
+important than the estimate, since from it new estimates can easily be
+produced and it is this construction that is our focus. There are many
+reasons why the answer is of less importance, among them the fact that
+the methodology can be applied to many organisms and tissue types. We
+also note that genomic science is rapidly evolving and that new data
+sources will continuously come on line. Hence there must be a
+mechanism for updating the estimated interactome. There are many
+different and disparate data sources and the system should be
+sufficiently flexible to allow for the addition of data from new, and
+potentially different experimental techniques. Finally we note that
+different investigators will want to modify the interactome, either
+with localy produced, but not yet public, data, or to satisfy personal
+beliefs. We have developed a paradigm that allows investigators to
+create their own personalized estimates, to share interactomes and to
+build, revise and update interactomes.
 
 We are aware of the very dynamic nature of protein interactions and
 that different interactions occur at different times and under
@@ -101,10 +136,16 @@ different conditions could conceivably result in different
 interactomes). We leave the problem of representing state-dependent
 interactomes for a separate report.
 
+% We have carried out a number of different investigations of these data
+% \cite{Scholtens, ScholtensVidalGent} which have focused on the
+% estimation of protein complex co-memberships. 
+
 In this paper we first describe the primary data sources used to
 collect data for the interactome. We then describe how those data
 sources are combined to provide a comprehensive interactome that can
-be used as an input for the various computational tasks described above.
+be used as an input for the various computational tasks described
+above. Finally we report on some \textit{in silico} experiments that
+can be performed using the estimated interactome.
 
 \section{Materials and Methods}
 
