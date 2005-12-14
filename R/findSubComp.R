@@ -19,7 +19,8 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
     ##This is a way to gain useful information about two related complexes:
     ##The return value is names of the two complexes, their respective
     ##cardinality, and the cardinality of their mutual intersection.
-    if (nrow(bg1) == nrow(bg2) && ncol(bg1) == ncol(bg2)){
+    if (sum(rownames(bg1) != rownames(bg2)) == 0
+        && sum(colnames(bg1) != colnames(bg2)) == 0) {
       if (sum(bg1 != bg2) == 0){
         for (i in 1:nrow(simMat)){
           for (j in 1:i){

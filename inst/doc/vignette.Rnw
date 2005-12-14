@@ -256,13 +256,13 @@ Unlike the \Rfunction{getGOInfo} function, \Rfunction{getMipsInfo} parse through
 downloaded from the complex catalogue of the MIPS database. One file contains a hierarchy 
 for the protein complexes (i.e. complexes are built from sub-complexes)
  while the second file contains the protein 
-composition of each of the levels of the hierarchy from the first. The third file contains
-evidence codes which are used to annotate proteins to each protein complex. Thes files 
+composition of each of the levels of the hierarchy from the first. Finally, the third file contains
+evidence codes which are used to annotate proteins to each protein complex. These files 
 are updated bi-annually, so it is important to note that \Rfunction{getMipsInfo} should be 
 updated periodically to correspond with the newer data files. With the exception of the
  \Rfunarg{wantAllComplexes} argument, the functionality of \Rfunction{getMipsInfo} is identical 
-to that of \Rfunction{getGOInfo}. Thus, the parameters of \Rfunction{getMipsInfo} have the following 
-characteristics:
+to that of \Rfunction{getGOInfo} though the implementation is quite different. 
+Thus, the parameters of \Rfunction{getMipsInfo} have the following characteristics:
 
 \begin{itemize}
 \item[1] \Rfunarg{wantDefault}: This is a logical. If passed into the function as TRUE, 
@@ -285,7 +285,7 @@ $i^{th}$ entry from parseType defines the command for the $i^{th}$ entry from to
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
-                       wantAllComplexes = FALSE)
+                       eCode = NULL, wantAllComplexes = FALSE)
 length(mips$Mips)
 length(mipsGrep$Mips)
 mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
@@ -420,16 +420,22 @@ for which we must find when cross referencing protein complexes: equality or inc
 two bi-partite graph incidence matrices, we use the \Rfunction{runCompareComplex} function:
 
 <<runCompareComplex, eval=TRUE>>=
-mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")  
+mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")
+go2go = runCompareComplex(goM, goM, byWhich = "ROW")  
 mips2go = runCompareComplex(mipsM, goM, byWhich="BOTH")
 names(mips2go)
 @ 
 
-The \Rfunction{runCompareComplex} function takes two bi-partite graph incidence matrices as arguments,
-and compares each complex from the first bipartite graph to the each complex from the second 
-bi-partite graph. The argument $byWhich$ shall be elucidated in the following paragraphs. Note that
-the bi-partite graphs need not be different as we can run this function on a single bi-partite graph.
- The output of this function is a named list whose entries carry various statistical
+The \Rfunction{runCompareComplex} function takes two 
+bi-partite graph incidence matrices as arguments,
+and compares each complex from the first bipartite 
+graph to the each complex from the second 
+bi-partite graph. The argument $byWhich$ shall be 
+elucidated in the following paragraphs. Note that
+the bi-partite graphs need not be different as we 
+can run this function on a single bi-partite graph.
+ The output of this function is a named list whose 
+entries carry various statistical
 information. An explanation of each entry follows:
 
 \subsection{Jaccard Coefficients}
@@ -456,8 +462,8 @@ index will be the cardinality of $go_j$ quotient the cardinality of $mips_i$:
 \frac{|go_j|}{|mips_i|};
 \end{equation}
 
-it is important 
-to realize that containment is not easily ascertained without the orders of each complex at hand.
+it is important to realize that containment is not easily 
+ascertained without the orders of each complex at hand.
 
 \subsection{Alignment of Protein Complexes}
 The $maxIntersect$ entry of mips2go aligns either the complexes of $go$ to complexes
@@ -509,8 +515,10 @@ finally, ``intersect'' records the cardinality of $BG1Comp \cap BG2Comp$. Rather
 the complex names, this data structure allows the user to inspect relative size of those common 
 complexes. 
 
-We remark here that there is redendancy even within the one database as well, and it is necessary that we
-find and eliminate those protein complexes that may have occurred more than once in a database:
+We remark here that there is redendancy even within a single
+ database as well, and it is necessary that we
+find and eliminate those protein complexes that may 
+have occurred more than once in a database:
 
 <<runCompareComplexEqualMips, eval=TRUE>>=
 ind = which(sapply(mips2mips$equal, function(w) w$BG1Comp != w$BG2Comp))
@@ -529,7 +537,7 @@ for(i in 1:5){
 print(mips2go$toBeRm[i] == mips2go$equal[[i]][1])
 } 
 mips2go$toBeRm[1:5]
-mips2mips$toBeRm[ind]
+mips2mips$toBeRm
 @ 
 
 \subsection{Protein Sub-Complexes}
@@ -553,8 +561,16 @@ leave that decision to the users.
 
 \subsection{Removing Protein SubComplexes}
 
+In constructing our \textit{in silico} interactome, we have chosen to
+dis-allow the inclusion of protein sub-complexes. The $toBeRmSubC$ entry
+records all those protein clusters which a proper sub-complexes of 
+another protein complex, either within a single database or across 
+databases. 
 
-
+<<runCompareComplexSubC, eval=TRUE>>=
+mips2mips$toBeRmSubC[1:5]
+mips2go$toBeRmSubC[1:5]
+@ 
 
 
 \section{Combining Bi-Partite Graphs - Building In Silico Interactomes}
@@ -570,18 +586,24 @@ To merge two incidence matrices, we simply call the \Rfunction{mergeBGMat} funct
 <<mergeBGMat, eval=TRUE>>=
   dim(mipsM)
   dim(goM)
-  merged = mergeBGMat(mipsM, goM, toBeRm = mips2go$toBeRm)
+  merged = mergeBGMat(mipsM, goM, toBeRm = c(mips2go$toBeRm, mips2mips$toBeRm, go2go$toBeRm,
+                                             mips2go$toBeRmSubC, mips2mips$toBeRmSubC, 
+                                             go2go$toBeRmSubC))
   dim(merged)
   merged[1:10, c(1:2, 200:202)]
 @ 
 
 The first two arguments of the \Rfunction{mergeBGMat} function is two bi-partite graph incidence
 matrices; the last argument is a character vector of those protein complexes which should be 
-deleted in order to avoid redundancy.
+deleted in order to avoid redundancy or to eliminate certain protein complexes
+that should be dis-allowed from the \textit{in silico} interactome.
 
 Once two bi-partite graphs are merged, we can now call the \Rfunction{runCompareComplex} on the $merged$
 incidence matrix and a new bi-partite graph matrix (one which is not any of the constituent 
-matrices of $merged$). In such a way, we can construct the \textit{in silico} interactome
+matrices of $merged$). It is also important to call the \Rfunction{runCompareComplex}
+function on each bi-partite graph from within one database in addition to 
+comparing across databases. In this way, redundancy can be eliminated in 
+all avenues, and we can construct the \textit{in silico} interactome
 iteratively by merging a new incidence matrix in each subsequent iteration. As examples, the user
 is encouraged to merge the AP-MS data with the newly created $merged$ matrix.
 
