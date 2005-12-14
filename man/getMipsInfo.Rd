@@ -24,6 +24,8 @@ parseType = NULL, wantAllComplexes=TRUE)
     text file.}
   \item{parseType}{A character vector. Each entry is a term that tells
     how each entry of toGrep should be parsed; e.g. "grep" or "agrep"}
+  \item{eCode}{A character vector. The evidence code is given in the
+  file evidence.scheme found in the inst/extdata section of the package.}
   \item{wantAllComplexes}{A logical.If TRUE, the function only returns
     aggregate protein complexes. If FALSE, the function will also return
     subcomplexes as well.}
@@ -51,6 +53,11 @@ parseType = NULL, wantAllComplexes=TRUE)
   the GO database. If only one term is supplied for parseType, then all
   the terms in toGrep will be parsed identically. Otherwise, the i-th
   term in parseType will reflect the parsing of the i-th term in toGrep.
+
+  4. The eCode argument is a character vector consistin of MIPS evidence
+  codes. A protein will be removed from the protein complex is ALL the
+  evidence codes used to annotate the protein are supplied in the eCode
+  argument; otherwise, it is left in the complex.
 
   5. If wantAllComplexes parameter is True, the function will return the
   sub-groupings (sub-complexes or sub-structures) as given by the

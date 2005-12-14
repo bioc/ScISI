@@ -14,7 +14,7 @@ findSubComp(bg1, bg2, interSectMat, simMat)
 
 \arguments{
   \item{bg1}{The first bipartite graph matrix}
-  \item{bg2}{The second bipartite graph matrix}
+  \item{bg2}{The second bipartite graph matrix; bg2 may be equal to bg1}
   \item{interSectMat}{A matrix whose rows and columns are indexed by
     protein complexes: the rows are indexed by complexes of bg1
     (colnames of bg1) and the columns indexed by complexes of bg2
@@ -60,6 +60,8 @@ findSubComp(bg1, bg2, interSectMat, simMat)
   \item{toBeRm1}{A character vector of the names of complexes in bg1
     that equal some complex in bg2. These complexes should be deleted to
     avoid redundancy if these two bipartite graphs are merged.}
+  \item{toBeRm2}{A character vector of the names of complexes from
+    either bg1 or bg2 which are sub-complexes of another protein complex.} 
 }
 
 \author{Tony Chiang}

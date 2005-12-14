@@ -42,12 +42,19 @@ runCompareComplex(BGMat1, BGMat2, index = "Jaccard", byWhich)
     and the cardinality of the intersection of C and K}
   \item{toBeRm}{A character vector of complexes that should be removed
     if two bipartite graphs are merged since they would represent
-    redundant complexes. These complexes are derived from BGMat1 only.}
+    redundant complexes. If the function is called on one bi-partite
+    graph, then this vector looks for redundancies within one database
+    and those complexes needs to be removed as well.  These complexes
+    are derived from BGMat1 only.}
   \item{subcomplex}{A list of complexes of BGMat1 which is contained in
     complexes of BGMat2 or vice versa. The values of the list are the
     complex, C, of BGMat1, the complex, K,  of BGMat2, the cardinality
     of C, the cardinality of K, and the cardinality of the intersection
     of C and K}
+  \item{toBeRmSubC}{A character vector. The same as toBeRm but instead
+  of redudant protein complexes, this is a compilation of all the
+  sub-complexes between two bi-partite graph matrices (bi-partite graph
+  matrices need not be different)}
 }
 
 \author{Tony Chiang}
