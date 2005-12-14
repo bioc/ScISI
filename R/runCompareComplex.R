@@ -53,7 +53,9 @@ runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich){
     comparisonList$maxIntersect = maxInterS
     comparisonList$equal = subC$equal
     comparisonList$toBeRm = subC$toBeRm
+    
     comparisonList$subcomplex = subC$subcomplex
+    comparisonList$toBeRmSubC = subC$toBeRmSubC
     comparisonList
 
     

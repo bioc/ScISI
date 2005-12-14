@@ -5,6 +5,7 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
     record1 = list()
     record3 = list()
     toBeRm1 = vector()
+    toBeRm2 = vector()
     rnames = rownames(simMat)
     cnames = colnames(simMat)
     ##This function will allow us an easy way to see if ove complex includes another
@@ -48,6 +49,13 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
                 rec$intersectionBG1BG2 = interSectMat[rnames[i], cnames[j]]
                 record3[[counter3]] = rec
                 counter3 = (counter3)+1
+                if(rec$orderBG1Comp > rec$orderBG2Comp){
+                    toBeRm2 = c(toBeRm2, cnames[j])
+                }
+                if(rec$orderBG1Comp < rec$orderBG2Comp){
+                    toBeRm2 = c(toBeRm2, rnames[i])
+                }
+                
               }
             }
           }
@@ -87,6 +95,12 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
               rec$intersectionBG1BG2 = interSectMat[rnames[i], cnames[j]]
               record3[[counter3]] = rec
               counter3 = (counter3)+1
+              if(rec$orderBG1Comp > rec$orderBG2Comp){
+                  toBeRm2 = c(toBeRm2, cnames[j])
+              }
+              if(rec$orderBG1Comp < rec$orderBG2Comp){
+                  toBeRm2 = c(toBeRm2, rnames[i])
+              }
             }
           }
           
@@ -94,11 +108,14 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
       }
     }
 
+    index = which(sapply(record1, function(q) q$BG1Comp != q$BG2Comp))
+    toBeRm1 = toBeRm1[index]
     
     SubCompList = list()
     SubCompList$equal = record1
     SubCompList$subcomplex = record3
     SubCompList$toBeRm = toBeRm1
+    SubCompList$toBeRmSubC = toBeRm2
     SubCompList
 }
 

@@ -529,6 +529,7 @@ for(i in 1:5){
 print(mips2go$toBeRm[i] == mips2go$equal[[i]][1])
 } 
 mips2go$toBeRm[1:5]
+mips2mips$toBeRm[ind]
 @ 
 
 \subsection{Protein Sub-Complexes}
@@ -549,6 +550,8 @@ sub-complexes will be masked by the aggregate complex, and thus, removal is need
 redundancy. There may be other computational tools that require the availability of the sub-complexes, 
 so there is no consistent framework calling for the removal of sub-complexes, and hence, we
 leave that decision to the users.
+
+\subsection{Removing Protein SubComplexes}
 
 
 

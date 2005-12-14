@@ -120,7 +120,7 @@ getGOInfo <- function(wantDefault = TRUE,
      
       isZero = sapply(yg1, function(y) length(y) == 0)
       yg2 = yg1[!isZero]
-      print(yg2)
+
       protKept = names(yg2)
       ##The rmByEvi removes those proteins from each protein complex
       pComp = lapply(pComp, function(w) {w = rmByEvi(protKept, w)})

@@ -21,17 +21,17 @@ getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
           }
       }
       w = unique(c(w,v))
-      print(length(w))
+
   
       if(length(w) != 0){
           dataY = dataY[-w,]
       }
   }
   
-  print(nrow(dataY))
+
   if (nrow(dataY) != 0){
       mipsYeastComplex = split(dataY$V1, dataY$V2)
-      print(length(mipsYeastComplex))
+
   }
   else{
       stop("There are no proteins for which to populate the protein complexes")

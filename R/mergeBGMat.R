@@ -1,14 +1,22 @@
 mergeBGMat <- function(mat1, mat2, toBeRm = NULL){
 
     if(!is.null(toBeRm)){
-        if(length(setdiff(toBeRm,colnames(mat1))) == 0){
-            indToDel = sapply(toBeRm, function(z) which(z == colnames(mat1)))
-            mat1 = mat1[,-indToDel]
+        if(length(setdiff(toBeRm,colnames(mat1))) != length(toBeRm)){
+            for (i in 1:length(toBeRm)){
+                indToDel = which(toBeRm[i] == colnames(mat1))
+                if(length(indToDel) != 0){
+                    mat1 = mat1[,-indToDel]
+                }
+            }
         }
         
-        if(length(setdiff(toBeRm,colnames(mat2))) == 0){
-            indToDel = sapply(toBeRm, function(z) which(z == colnames(mat2)))
-            mat2 = mat2[,-indToDel]
+        if(length(setdiff(toBeRm,colnames(mat2))) != length(toBeRm)){
+            for(i in 1:length(toBeRm)){
+                indToDel = which(toBeRm[i] == colnames(mat2))
+                if(length(indToDel) != 0){
+                    mat2 = mat2[,-indToDel]
+                }
+            }
         }
     }
         
