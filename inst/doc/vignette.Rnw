@@ -247,21 +247,21 @@ is done by calling the \Rfunction{getMipsInfo} function:
 
 <<getMipsInfo, eval=TRUE>>=
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, 
-                   wantAllComplexes = FALSE)
+                   eCode = NULL, wantAllComplexes = FALSE)
 
 
 @
 
-Unlike the \Rfunction{getGOInfo} function, \Rfunction{getMipsInfo} parse through two files 
+Unlike the \Rfunction{getGOInfo} function, \Rfunction{getMipsInfo} parse through three files 
 downloaded from the complex catalogue of the MIPS database. One file contains a hierarchy 
 for the protein complexes (i.e. complexes are built from sub-complexes)
  while the second file contains the protein 
-composition of each of the levels of the hierarchy from the first. Thes files 
+composition of each of the levels of the hierarchy from the first. The third file contains
+evidence codes which are used to annotate proteins to each protein complex. Thes files 
 are updated bi-annually, so it is important to note that \Rfunction{getMipsInfo} should be 
-updated periodically to correspond with the newer data files. With the exception of evidence 
-codes and \Rfunarg{wantAllComplexes}, the functionality of \Rfunction{getMipsInfo} is identical 
-to that of \Rfunction{getGOInfo}. MIPS does not use evidence codes to reference the proteins 
-nor the protein complexes. Thus, the parameters of \Rfunction{getMipsInfo} have the following 
+updated periodically to correspond with the newer data files. With the exception of the
+ \Rfunarg{wantAllComplexes} argument, the functionality of \Rfunction{getMipsInfo} is identical 
+to that of \Rfunction{getGOInfo}. Thus, the parameters of \Rfunction{getMipsInfo} have the following 
 characteristics:
 
 \begin{itemize}
@@ -294,7 +294,11 @@ sapply(mId, function(q) mipsGrep$DESC[q[2]])
 
 @ 
 
-\item[4] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
+\item[4] \Rfunarg{eCode}: A character vector. This is a character vector of evidence codes.
+If a protein is only indexed by the evidence codes given in this vector, it is removed 
+from the protein complex it was annotated using only these evidence codes.
+
+\item[5] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
 hierarchy will be returned (the aggregate protein complex); if TRUE, 
 all the intermediates of the hierarchy  will also be returned 
 (the sub-complexes as well). 
@@ -533,8 +537,8 @@ in a complex from the other bi-partite graph. The outputs in this entry are iden
 $equal$ and defer the reader to the explanation written previously.
 
 <<runCompareComplexSub, eval=TRUE>>=
-mips2go$subcomplex[[1]]
-mips2mips$subcomplex[[1]]
+mips2go$subcomplex[1:2]
+mips2mips$subcomplex[1:2]
 @ 
 
 While the storage of the data does not explicitly state which complex contains the other complex, it is 

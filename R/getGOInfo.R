@@ -115,9 +115,12 @@ getGOInfo <- function(wantDefault = TRUE,
       ##if the only evidence codes reference it is given by the user as
       ##codes to be eliminated
       yg = as.list(YEASTGO)
+      
       yg1 = lapply(yg, function(x) dropECode(x, eCode))
+     
       isZero = sapply(yg1, function(y) length(y) == 0)
       yg2 = yg1[!isZero]
+      print(yg2)
       protKept = names(yg2)
       ##The rmByEvi removes those proteins from each protein complex
       pComp = lapply(pComp, function(w) {w = rmByEvi(protKept, w)})
