@@ -298,6 +298,14 @@ sapply(mId, function(q) mipsGrep$DESC[q[2]])
 If a protein is only indexed by the evidence codes given in this vector, it is removed 
 from the protein complex it was annotated using only these evidence codes.
 
+<<getMipsInfoECode, eval = TRUE>>=
+mipsCoded = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, eCode = "901.01.01.01",
+                        wantAllComplexes = FALSE)
+mips$Mips$"MIPS-475.05"
+mipsCoded$Mips$"MIPS-475.05"
+
+@ 
+
 \item[5] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
 hierarchy will be returned (the aggregate protein complex); if TRUE, 
 all the intermediates of the hierarchy  will also be returned 
