@@ -162,8 +162,8 @@ It is trivial to see that our second example implies the first, but the
 converse is not true. These two examples clearly illustrates the need 
 for the association within a particular interactome to be well defined.
 
-We can relate the two previous population interactomes to biologically
-interactomes. Let $P$ be the set of genes within the genome of some cell
+We can relate the two previous population interactomes to biological
+interactomes. Now let $P$ be the set of genes within the genome of some cell
 or tissue. Let $Y$ be the interactome on the set $P$ where the association
 is direct binary interactions between genes, i.e. two genes $g_1$ and $g_2$
 are said to be associated if and only if the induced protein of $g_1$ and the 
@@ -181,7 +181,7 @@ due to the definition of protein complex. The reverse relationship,
 however, is not valid. Not all co-members of a particular protein 
 complex need to interact with all other members. These two examples 
 highlight the subtle differences between two distinct interactomes 
-and underscores the necessity to keeping distinct interactimes separate. 
+and underscores the necessity to keeping distinct interactomes separate. 
 
 $Y$ and $A$ describe two instances of protein to protein interactomes,
 but there are a number of other such interactomes with biological 
@@ -189,11 +189,11 @@ relevance. Let $S$ denote the interactome on $P$ where association
 between two genes is that of synthetic lethality. Let $E$ be the 
 interactome on the set $P$ where association between two genes is 
 defined as co-expression. While all four interactomes are 
-inter-related, no two are equivalent, and thus all conclusions must 
+inter-related, no two are equivalent, and thus, all conclusions must 
 be drawn independently for each interactome.
 
-In this paper, we will build the interactome $ScISI$. The elements of $B$
-is the disjoint union of two sets: the first is the set $P$ of genes
+In this paper, we will build the interactome $ScISI$. The elements of $ScISI$
+are the disjoint union of two sets: the first is the set $P$ of genes
 within the genome of a yeast cell; the second is the set $C$ of all protein
 complexes of yeast for a specific cell type. Association is defined as
 protein complex membership, i.e. gene $g$ is associated with protein
