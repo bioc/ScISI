@@ -147,6 +147,61 @@ be used as an input for the various computational tasks described
 above. Finally we report on some \textit{in silico} experiments that
 can be performed using the estimated interactome.
 
+\section{Biological Interactomes}
+
+In the broadest sense, an interactome is a set of elements $P$ where 
+the individual elements of $P$ have some associtation with one another.
+Consider the example where $P$ is the United States population and 
+association is defined as immediate family members, i.e. either parent
+to child or sibling to sibling. In this example, a person is neither 
+associated with his/her grandparent nor associated with his/her
+aunts/uncles. Now let us consider a different interactome where 
+$P$ remains the same set but association is defined as familial relations.
+With this definition, a person is associated to his/her grandparent, etc.
+It is trivial to see that our second example implies the first, but the 
+converse is not true. These two examples clearly illustrates the need 
+for the association within a particular interactome to be well defined.
+
+We can relate the two previous population interactomes to biologically
+interactomes. Let $P$ be the set of genes within the genome of some cell
+or tissue. Let $Y$ be the interactome on the set $P$ where the association
+is direct binary interactions between genes, i.e. two genes $g_1$ and $g_2$
+are said to be associated if and only if the induced protein of $g_1$ and the 
+induced protein of $g_2$ directly interact for some bio-physical or bio-chemical 
+process. We remark that a gene may be associated with itself if it induces a 
+homo-dimer. Let $A$ be the interactome on the set $P$ where the association is
+protein complex co-membership, i.e. two genes $g_3$ and $g_4$ are associated
+if and only if their respective induced proteins form constituent parts to
+some protein complex that has some biological objective. 
+
+These two biological interactomes are related. It is clear from 
+interactome $Y$'s definition of association that any two associated
+genes within $Y$ will also be associated within the interactome $A$
+due to the definition of protein complex. The reverse relationship,
+however, is not valid. Not all co-members of a particular protein 
+complex need to interact with all other members. These two examples 
+highlight the subtle differences between two distinct interactomes 
+and underscores the necessity to keeping distinct interactimes separate. 
+
+$Y$ and $A$ describe two instances of protein to protein interactomes,
+but there are a number of other such interactomes with biological 
+relevance. Let $S$ denote the interactome on $P$ where association 
+between two genes is that of synthetic lethality. Let $E$ be the 
+interactome on the set $P$ where association between two genes is 
+defined as co-expression. While all four interactomes are 
+inter-related, no two are equivalent, and thus all conclusions must 
+be drawn independently for each interactome.
+
+In this paper, we will build the interactome $ScISI$. The elements of $B$
+is the disjoint union of two sets: the first is the set $P$ of genes
+within the genome of a yeast cell; the second is the set $C$ of all protein
+complexes of yeast for a specific cell type. Association is defined as
+protein complex membership, i.e. gene $g$ is associated with protein
+complex $c$ if and only if the induced protein of $g$ is a constituent
+member of $c$. This definition implies that elements of $P$ are only 
+associated with elements of $C$ and conversely, but no element can 
+be associated with other elements of the same type. 
+
 \section{Materials and Methods}
 
 In this section we first describe what we mean by a protein complex
@@ -188,7 +243,7 @@ example of what might go wrong. (Also, some protein complexes might
 be a sub-complex given other conditions...where should we draw the 
 line between when a complex is actually a sub-complex or not??? TC) 
 
-We have chosen to represent the protein complex co-membership graph as
+We have chosen to represent the protein complex membership graph as
 a bipartite graph, $B$. The proteins themselves index one set 
 of nodes which we denote as $P$ while the protein complexes index
 the other set of nodes which we denote as $C$. A protein specific
