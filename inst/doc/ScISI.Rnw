@@ -228,7 +228,9 @@ range from two proteins to more than fifty.
 This definition of a protein complex is motivated by the various 
 technologies that assay levels of protein complex composition such 
 as Affinity Purification - Mass Spectroscopy and 
-Co-immunoprecipitation. Working within the confines of these 
+Co-immunoprecipitation. It is important to note that these 
+technologies only assay protein complex composition of cells
+given a pre-described environment. Working within the confines of these 
 technologies, our definition for protein complexes becomes 
 increasingly strict. There are structures within the cytoskeleton,
 for instance, which fit within a more generic setting of a complex; 
@@ -236,14 +238,30 @@ these structures are never pulled down by the mentioned
 technologies, so we have dis-allowed their membership as a protein
 complex. 
 
-What should be said about sub-complexes? When sub-complexes exist
-there can be identifiability problems that arise due to the technology
-being used. FIXME: it would be good to give some sort of concrete
-example of what might go wrong. (Also, some protein complexes might
-be a sub-complex given other conditions...where should we draw the 
-line between when a complex is actually a sub-complex or not??? TC) 
+Because our definition for protein complexes is experimentally 
+driven, we need to define a convention with respect to protein
+sub-complexes. A protein sub-complex is itself a protein 
+complex that is entirely contained within another protein 
+complex. We remark that a protein sub-complex under certain 
+cell conditions could be a proper protein complex in other
+cell conditions. We define the convention that all protein 
+sub-complexes will be masked by their respective proper 
+protein complexes, and therefore, are not recorded. Thus our 
+definition of protein complex is implicitly directed by the 
+biological state of some particular cell or tissue, i.e. a 
+complex can only be determined along with the context of the 
+cell type.
 
-We have chosen to represent the protein complex membership graph as
+%What should be said about sub-complexes? When sub-complexes exist
+%there can be identifiability problems that arise due to the technology
+%being used. FIXME: it would be good to give some sort of concrete
+%example of what might go wrong. (Also, some protein complexes might
+%be a sub-complex given other conditions...where should we draw the 
+%line between when a complex is actually a sub-complex or not??? TC) 
+
+The collection of proteins and protein complexes with affiliation data can
+be represented as a large membership network or graph. We have chosen 
+to represent the protein complex membership graph as
 a bipartite graph, $B$. The proteins themselves index one set 
 of nodes which we denote as $P$ while the protein complexes index
 the other set of nodes which we denote as $C$. A protein specific
@@ -381,49 +399,76 @@ The estimates derived from \textit{apComplex} can be divided into three groups. 
 Data from the AP-MS experiment have been filtered to yield protein complexes and stored in databases such as MIPS; the process for each experiment, however, is unique to each experiment. %%FixMe Each filtering process is based upon some statistical clustering paradigm that takes the underlying biological conditions with varing degrees. Without a uniform methodology to estimate protein complex co-membership, any \textit{in silico} interactome built from the estimated complexes would be suspect. \textit{apComplex} integrates a significant portion of the biological processes into its statistical model in estimating protein complexes. Thus by using \textit{apComplex} as the unique estimation algorithm, we can not only reduce the variability in confidence but also increase the overall confidence for the estimates of the protein complexes.
 
 
-\subsection{Combining Estimates}
+\subsection{Merging the Data}
 
-When estimates of the interactome are available from different sources
-we must devise a method for combining them to provide a larger and
-more general estimate. How we do this depends a bit on the estimates
-themselves. We leave to another time a discussion of how to address
-issues of sytematic and stochastic errors and rather consider the
-problem of having two different estimates of an interactome that we
-want to combine into a non-redundant joint estimate. The two different
-estimates may come from different sources and hence could overlap by a
-little or a lot. 
+Having obtained the data from all the five disparate data souces, we 
+must combine all of the data into one non-redundant aggregate 
+compilation. Merging the multiple sub-interactomes into one is done 
+iteratively by combining two sub-interactomes at once.
 
-The so-called \textit{alignment} problem arises because some
-complexes might not be labeled or are  unambiguously identified. The genes (or
-proteins) that make them up, are well identified but the collections
-are not. So, one of the first steps is to identify redundancy and to
-eliminate it. For simplicity we presume that the complexes in one
-estimate are labeled $C_1, \ldots, C_k$ and in the other
-$K_1,\ldots,K_l$, where $k$ and $l$ are generally not the same.
-We will discuss set theoretic relationships between the $C_i$ and
-$K_j$ in terms of the proteins that constitute the complexes. Thus,
-the statement, $C_i = K_j$, means that all proteins in $C_i$ are in
-$K_j$ and the converse also holds. The statement, $C_i \subset K_j$
-indicates that $C_i$ is a proper subset of $K_j$, that is, they are
-not equal.
+Let $M$ and $G$ be two interactomes that we wish to merge. We define
+the merging of two interactomes as not only combining the protein 
+complexes from $M$ to $G$, but also removing protein complexes 
+which are common to both interactomes. In addition to removing 
+redundant protein complexes, we have removed any protein complex 
+of $M$ that is a sub-complex of $G$ and vice versa. 
+
+One the sub-interatomes $M$ and $G$ are merged into a comprehensive
+aggregate interactome $A$, we can repeat the process described above
+by merging $A$ with another sub-interactome $S$. 
+
+After a finite number of steps in the iterative process, we have 
+constructed the \textit{in silico interactome}, $ScISI$. The 
+characteristics to this interactome is that protein complexes 
+are either present or absent (we do not attempt to estimate the
+concentration of any protein complex) and protein sub-complexes 
+are always un-identified. 
+
+%%The stuff written below does not seem to fit in the methods section,
+%%but more in a discussion section??? Seems like the intro to a dynamic
+%%algorithm paper or something???
+
+%When estimates of the interactome are available from different sources
+%we must devise a method for combining them to provide a larger and
+%more general estimate. How we do this depends a bit on the estimates
+%themselves. We leave to another time a discussion of how to address
+%issues of sytematic and stochastic errors and rather consider the
+%problem of having two different estimates of an interactome that we
+%want to combine into a non-redundant joint estimate. The two different
+%estimates may come from different sources and hence could overlap by a
+%little or a lot. 
+
+%The so-called \textit{alignment} problem arises because some
+%complexes might not be labeled or are  unambiguously identified. The genes (or
+%proteins) that make them up, are well identified but the collections
+%are not. So, one of the first steps is to identify redundancy and to
+%eliminate it. For simplicity we presume that the complexes in one
+%estimate are labeled $C_1, \ldots, C_k$ and in the other
+%$K_1,\ldots,K_l$, where $k$ and $l$ are generally not the same.
+%We will discuss set theoretic relationships between the $C_i$ and
+%$K_j$ in terms of the proteins that constitute the complexes. Thus,
+%the statement, $C_i = K_j$, means that all proteins in $C_i$ are in
+%$K_j$ and the converse also holds. The statement, $C_i \subset K_j$
+%indicates that $C_i$ is a proper subset of $K_j$, that is, they are
+%not equal.
 
 %%FIXME: could we look at the intersection of their respective PPI
 %%graphs as a measure of concordance?
 
-Complete concordance occurs when $C_i = K_j$, such complexes are
-reasonably easy to identify and only one of them is retained. A
-somewhat more difficult case is when $C_i \subset K_j$. For some
-technologies we will retain $C_i$ and for others we want to retain
-$K_j$. The user will have to specify which of the two alternatives
-they want. Both cannot be retained due to identifiability
-problems. %%FIXME: is this true - and do you have an example etc?
+%Complete concordance occurs when $C_i = K_j$, such complexes are
+%reasonably easy to identify and only one of them is retained. A
+%somewhat more difficult case is when $C_i \subset K_j$. For some
+%technologies we will retain $C_i$ and for others we want to retain
+%$K_j$. The user will have to specify which of the two alternatives
+%they want. Both cannot be retained due to identifiability
+%problems. %%FIXME: is this true - and do you have an example etc?
 
-Since much of the data is derived from experimentation and the
-underlying experiments tend to have high error rates (FIXME:citations
-etc here) some consideration of near concordance must also be
-considered. 
+%Since much of the data is derived from experimentation and the
+%underlying experiments tend to have high error rates (FIXME:citations
+%etc here) some consideration of near concordance must also be
+%considered. 
 
-What measures will we use? What graphics/summary statistics can be produced?
+%What measures will we use? What graphics/summary statistics can be produced?
 
 
 \section{The estimate}
