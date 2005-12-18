@@ -133,11 +133,13 @@ interactomes for a separate report.
 % \cite{Scholtens, ScholtensVidalGent} which have focused on the
 % estimation of protein complex co-memberships. 
 
-In this paper we first describe a computational tool (\textit{ScISI}) 
+In this paper we first define the notion of a biological interactome and 
+give various examples of such interactomes. We then present a  
+computational tool (\textit{ScISI}) 
 we have built to search for and to collect protein complex membership 
-data, Next we describe the primary data sources used to
-collect data by \textit{ScISI} in constructing the interactome. 
-We then describe how those data
+data from various protein interaction repositories. Next we describe 
+the primary data sources used by \textit{ScISI} in constructing the 
+\textit{in silico interactome}. We then describe how those data
 sources are combined to provide a comprehensive interactome that can
 be used as an input for the various computational tasks described
 above. Finally we report on some \textit{in silico} experiments that
@@ -252,11 +254,11 @@ complex.
 
 Because our definition for protein complexes is experimentally 
 driven, we need to define a convention with respect to protein
-sub-complexes. A protein sub-complex is itself a protein 
+sub-complexes. A protein sub-complex is itself a  
 complex that is entirely contained within another protein 
 complex. We remark that a protein sub-complex under certain 
-cell conditions could be a proper protein complex in other
-cell conditions. We define the convention that all protein 
+cell conditions could be a proper complex in other
+cell conditions. We define the convention that all  
 sub-complexes will be masked by their respective proper 
 protein complexes, and therefore, are not recorded. Thus our 
 definition of protein complex is implicitly directed by the 
@@ -555,9 +557,10 @@ the number of unique protein complexes gives us enough complexity to
 conduct \textit{in silico} experiments in order to emulate true wet-lab
 experimnets.
 
-%%Histogram for the cardinalities or protein complexes?
-%%Histogram for the order of each particular protein's complex membership?
+Histogram for the cardinalities or protein complexes?
+Histogram for the order of each particular protein's complex membership?
 
+What else should we put here???
    
 
 
