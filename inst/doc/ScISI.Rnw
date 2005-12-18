@@ -133,8 +133,11 @@ interactomes for a separate report.
 % \cite{Scholtens, ScholtensVidalGent} which have focused on the
 % estimation of protein complex co-memberships. 
 
-In this paper we first describe the primary data sources used to
-collect data for the interactome. We then describe how those data
+In this paper we first describe a computational tool (\textit{ScISI}) 
+we have built to search for and to collect protein complex membership 
+data, Next we describe the primary data sources used to
+collect data by \textit{ScISI} in constructing the interactome. 
+We then describe how those data
 sources are combined to provide a comprehensive interactome that can
 be used as an input for the various computational tasks described
 above. Finally we report on some \textit{in silico} experiments that
@@ -196,8 +199,8 @@ inter-related, no two are equivalent, and thus, all conclusions must
 be drawn independently for each interactome. 
 
 In this paper, we will build an \textit{in silico interactome}
-for Saccharomyces cervisiae (denoted $ScISI$) for a fixed set
-of environmental conditions. The elements of $ScISI$
+for Saccharomyces cervisiae (denoted $I$) for a fixed set
+of environmental conditions. The elements of $I$
 are the disjoint union of two sets: the first is the set $P$ of genes
 within the genome of a yeast cell; the second is the set $C$ of all protein
 complexes of yeast for a specific cell type. Association is defined as
@@ -210,9 +213,13 @@ be associated with other elements of the same type.
 \section{Materials and Methods}
 
 In this section we first describe what we mean by a protein complex
-and describe different models for representing these data. We then
+and describe different models for representing these data. Next we give
+a consise description of the computational tool \textit{ScISI} and show
+its dynamic properties in constructing different complex membership
+interactomes. We then
 describe the process of creating an \textit{in silico} interactome
-based on two public meta-data sources and three experimental data sets 
+via \textit{ScISI} based on two public meta-data sources and three 
+experimental data sets 
 by combining purification of protein complexes with identification of 
 their individual componenets via mass spectroscopy.
 
@@ -285,49 +292,111 @@ Because most computational methodologies desire this incidence matrix representa
 rather than the actual bi-partite graph itself, the construction of the \textit{in silico}
 interactome will be the construction of a particular incidence matrix.  
 
-Having streamlined a definition for protein complex and its computational representation, 
+\subsection{ScISI}
+
+With publicly released data available in a number of disparate sources, there is a 
+need for computational tools to parse through the data-sets and collate them into 
+one single, non-redundant, and meaningful database resource. To this end, we have 
+built the $R$ package \Rpackage{ScISI} for the specific purpose of parsing through 
+protein interaction resources and selecting protein complex information, i.e. 
+the various documented protein complexes as well as their consistuent protein members.
+
+\Rpackage{ScISI} takes a protein interaction repository and systematically parses
+through that repository's database in search for key terms. Depending on the catalogue
+of each repository, \Rpackage{ScISI} parses the data and searches (either by grep or
+agrep) for three key terms: 1. the exact word ``complex''; 2. the suffix ``-ase''; 
+and 3. the suffix ``-some''. We remark that the user can search for any term desired
+though the three terms we have used are the defaults. 
+
+Once the various databases have been parsed and the desired data sets stored, 
+\Rpackage{ScISI} converts the overall collection of protein complexes into a
+bi-partite graph incidence matrix where the rows are indexed by the standard
+gene names and the columns are indexed by the protein complex identification 
+codes (unique to each different repository). Therefore, \Rpackage{ScISI} has 
+produced an \textit{in silico sub-interactome} (or a sub-bi-partite graph
+of the bi-partite interactome graph).
+
+While the overwhelming majority of protein interaction repositories store protein
+complex data as some form of a catalogue (unique to the repository), there are 
+a small number of repositories which store the bi-partite graph incidence graph 
+matrix for the protein complex data. For these repositories, \Rpackage{ScISI} 
+simply downloads these matrices.
+
+Once the various protein complex membership data has been stored, and the various
+bi-partite graph incidence matrices have been constructed, \Rpackage{ScISI} compares
+all each of these matrices with one another and eliminates redundancy by removing 
+multiple occurances of a particular protein complex; and based on our model and 
+definition for protein complexes, \Rpackage{ScISI} also removes any complex if it
+is contained entirely within another complex. The details of this merging process 
+will be given in a later section.
+
+Having streamlined a definition for protein complex and its computational representation
+as well as given a description of the computational tool used, 
 we move forward with the task of diciphering an \textit{in silico} interactome for S. 
 cerevisae. To this end, we have gathered information from  
 two online data sources, Gene Ontology and the Munich Information Center for Protein 
 Sequences, as well as high-level protein complex estimates from three publicly available 
 wet-lab experiments. 
 
+\subsection{Online Repositories}
 
-\subsection{MIPS}
-
-The MIPS comprehensive yeast genome database is a functional catalogue that provides tools to browse genome wide information 
-for a number of organisms including S. cerevisae. Within the complex section of the catalogue, the MIPS database has 
-created a hierarchial system of documenting a more general version of a protein complex that what we have defined. For
-instance, the MIPS database catalogues many of the structures of the cytoskeleton as complexes; these 
+The MIPS comprehensive yeast genome database is a functional catalogue that 
+provides tools to browse genome wide information 
+for a number of organisms including S. cerevisae. Within the complex section of 
+the catalogue, the MIPS database has 
+created a hierarchial system of documenting a more general version of a protein 
+complex that what we have defined. For
+instance, the MIPS database catalogues many of the structures of the cytoskeleton 
+as complexes; these 
 structures do not intersect with our definition of protein complexes. Though 
-this hierarchy is more general, an overwhelming majority of the MIPS protein complexes do comply with our definition, and 
+this hierarchy is more general, an overwhelming majority of the MIPS protein 
+complexes do comply with our definition, and 
 these complexes will play an important role in the \textit{in silico} interactome.
 
-In addition to the MIPS definition of protein complex, MIPS also documents the protein complexes estimated by the wet-lab
-experiments of (Gavin, Ho, Krogan). Whereas the other complexes documented within MIPS arise from small scale systematic
-protein complex composition experiments, these wet-lab protein complex estimates come from high through-put wet-lab data 
-sets which tend to contain higher levels of error. The data sets rendered by the wet-lab experiments do not give any 
-indication of complex composition, but rather a lower level of co-membership between bait proteins and prey proteins. Each 
-experiment has independently devised a clustering algorithm to estimate protein complex composition. This brings a level of
-inconsistancy to protein complex estimation. We have developed a singular process to remove this inconsistancy (the
-details of which will be given in the following sections) and so we have chosen not to use the MIPS estimates of the
+In addition to the MIPS definition of protein complex, MIPS also documents the 
+protein complexes estimated by the wet-lab
+experiments of (Gavin, Ho, Krogan). Whereas the other complexes documented within 
+MIPS arise from small scale systematic
+protein complex composition experiments, these wet-lab protein complex estimates 
+come from high through-put wet-lab data 
+sets which tend to contain higher levels of error. The data sets rendered by the 
+wet-lab experiments do not give any 
+indication of complex composition, but rather a lower level of co-membership 
+between bait proteins and prey proteins. Each 
+experiment has independently devised a clustering algorithm to estimate protein 
+complex composition. This brings a level of
+inconsistancy to protein complex estimation. We have developed a singular process 
+to remove this inconsistancy (the
+details of which will be given in the following sections) and so we have chosen 
+not to use the MIPS estimates of the
 high through-put data.
 
-The main task in building the \textit{in silico} interactome is parsing through the MIPS database to select those 
-clusters of proteins which agree with our definition of a protein complex. Therefore, for the MIPS repository, we have 
-downloaded the three data files, two of which encapsulate the protein complexes and their composition. 
+The main task in building the \textit{in silico} interactome is parsing through 
+the MIPS database to select those 
+clusters of proteins which agree with our definition of a protein complex. 
+Therefore, for the MIPS repository, we have 
+downloaded the three data files, two of which encapsulate the protein complexes 
+and their composition. 
 
-The first MIPS downloaded file, $complexcat.scheme$, consists of the hierarchical structure of the MIPS repository.
+The first MIPS downloaded file, $complexcat.scheme$, consists of the hierarchical 
+structure of the MIPS repository.
 (maybe put a png of the file here or part of the file here???)  Each 
-top level of this hierarchical structure represents some overall aggregate structure and each sub-structure (or 
-inter-mediary structure) reflects some functional sub-group of the aggregate. This is the file for which we need to parse.
+top level of this hierarchical structure represents some overall aggregate structure 
+and each sub-structure (or 
+inter-mediary structure) reflects some functional sub-group of the aggregate. This 
+is the file for which we need to parse.
 
-Our methodology for extracting protein complexes from the MIPS database is to search for three key terms within the
+Our methodology for extracting protein complexes from the MIPS database is to search 
+for three key terms within the
 $complexcat.scheme$ file. The terms, (the word)
-``complex'', and (the suffixes) ``-ase'' as well as ``-some'', provide an almost comprehensive search for the complexes
-which will populate our \textit{in silico} interactome. The first term is self-explanatory while the latter two
-need some elucidation. There are certain protein complexes which are well defined and exhaustively studied but do not
-contain the word ``complex'' in its name (e.g. RNA Polymerase and Proteasome) which need to be incorporated into the
+``complex'', and (the suffixes) ``-ase'' as well as ``-some'', provide an almost 
+comprehensive search for the complexes
+which will populate our \textit{in silico} interactome. The first term is self-explanatory 
+while the latter two
+need some elucidation. There are certain protein complexes which are well defined and 
+exhaustively studied but do not
+contain the word ``complex'' in its name (e.g. RNA Polymerase and Proteasome) which 
+need to be incorporated into the
 interactome. 
 
 Parsing this data file is not limited only to differentiating those structures within our definition of a protein complex
@@ -362,7 +431,6 @@ The third file, $evidencecat.scheme$, lists the MIPS evidence codes and matches 
 the protein complexes. (I don't use any evidence codes, so should we even write anything here in the paper?). 
 
 
-\subsection{GO}
 
 Gene Ontology (GO) began as a collaborative project to provide a single repository for the different database genomes. This 
 repository is detailed by three bio-chemical ontologies: Biological Processes; Cellular Components; and Molecular Functions. 
@@ -388,7 +456,7 @@ generate 180 unique GO protein complexes.
 
 
 
-\subsection{Experimental Data}
+\subsection{AP-MS Experimental Data Repository}
 
 In this section, we describe the experiments conducted by Gavin, et al; Ho, et al; and most recently, Krogan, et al. All three experiments are based on the high-throughput techonology of complex purification followed by identification by mass spectroscopy. Each affinity purification - mass spectronomic (AP-MS) experiment yielded a tremendous wealth of bait to prey associations, but we must take these data points with care because high through-put data is known to repot high levels of error in addition to true associations between proteins. 
 
@@ -418,12 +486,12 @@ which are common to both interactomes. In addition to removing
 redundant protein complexes, we have removed any protein complex 
 of $M$ that is a sub-complex of $G$ and vice versa. 
 
-One the sub-interatomes $M$ and $G$ are merged into a comprehensive
+Once the sub-interatomes $M$ and $G$ are merged into a comprehensive
 aggregate interactome $A$, we can repeat the process described above
 by merging $A$ with another sub-interactome $S$. 
 
 After a finite number of steps in the iterative process, we have 
-constructed the \textit{in silico interactome}, $ScISI$. The 
+constructed the \textit{in silico interactome}, $I$. The 
 characteristics to this interactome is that protein complexes 
 are either present or absent (we do not attempt to estimate the
 concentration of any protein complex) and protein sub-complexes 
