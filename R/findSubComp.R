@@ -111,8 +111,11 @@ findSubComp <- function(bg1, bg2, interSectMat, simMat){
       }
     }
 
-    index = which(sapply(record1, function(q) q$BG1Comp != q$BG2Comp))
-    toBeRm1 = toBeRm1[index]
+    if(length(record1) > 0){
+        index = which(sapply(record1, function(q) q$BG1Comp != q$BG2Comp))
+        toBeRm1 = toBeRm1[index]
+    }
+    
     
     SubCompList = list()
     SubCompList$equal = record1
