@@ -349,12 +349,12 @@ are quite different, \Rpackage{ScISI} identifies each repository and (using
 different functions and methods) from each, extracts the protein complexes.
 
 As we have stated previously, \Rpackage{ScISI} parses through each repository
-and searchs for the terms $complex$, $\verb1\\base\\B1$, and $verb1\\bsome\\B1$.
+and searchs for the terms $complex$, $\verb1\\base\\B1$, and $\verb1\\bsome\\B1$.
 The first term is searched for either with $grep$ witin the MIPS database and with
 $agrep$ within the GO database. The search functions within \Rpackage{ScISI} parse
 the titles of each protein complex by $(a)grep$ and looks for the exact term
 ``complex'' (e.g. SAGA complex). The latter two terms are simply $grepped$ but 
-contain perl regular expressions which serve as boundary conditions for this parse 
+contain perl regular expressions serve as boundary conditions for this parse 
 function within \Rpackage{ScISI}. These boundary conditions narrow the pool of 
 return values (e.g. DNA-directed Polymerase II, holoenzyme or repairosome). 
 
@@ -363,8 +363,15 @@ A second boundary condition encoded within the parse functions of
 these codes are unique to each repository) to annotate individual 
 proteins to the various protein complexes. \Rpackage{ScISI} can take a
 list of evidence codes and dis-allow those proteins whose annotations
-are based exclusively on this list. (Should we use actually use some
-evidence codes when constructing the ISI???)
+are based exclusively on this list. Within the GO repository, we 
+restrict those proteins annotated by the following evindence codes:
+Non-traceable Author Statement (NAS); No Biological Data Available 
+(ND); Not Recorded(NR). For the MIPS repository, we restrict the 
+following: Overview Information - review and text (901.01.03, 
+901.01.03.01, 901.01.03.02); Personal Communication - via homepage 
+(web) or electronic mail (901.01.04, 901.01.04.01, 901.01.04.02), and
+Closed Information - institution or private (901.01.05, 901.01.05.01, 
+901.01.05.02)
 
 After parsing the GO repository (as of 17 December 2005), 208 protein 
 complexes were extracted and stored. The MIPS repository (as of 17
@@ -389,39 +396,76 @@ these complexes have a significant level of accuracy with respect to their
 constituent protein members. 
 
 Some of the MIPS protein complexes have been uniquely identified by high 
-through-put experimentation such as affinity purification and 
-co-immunoprecipitation; we have, however, deliberately chosen not to 
+through-put experimentation such as affinity purification - mass spectroscopy
+; we have, however, deliberately chosen not to 
 extract these protein complexes. While high through-put data from AP-MS
 specifically tries to ascertain protein complex composition, the data 
 itself is overwhelmed by experimental error (both stochastic as well as
 systematic). The protein complexes were estimated by clustering algorithms
-decided by the individual investigator of the high through-put experiments,
+determined by the individual investigator of the high through-put experiments,
 and therefore, protein complexes identified via high through-put AP-MS
-technologies lack uniformity and consistency. We have chosen one standard
-algorithm to parse high through-put data and estimate protein complex
-composition from the raw data.   
+technologies lack uniformity and consistency from one experiment to the next. 
+We have chosen one standard algorithm to parse high through-put data and 
+estimate protein complex composition from the raw data by this algorithm.   
 
 \subsection{AP-MS Experimental Data Repository}
+In addition to online repositories such as Gene Ontolog and the Munich
+Informations Center for Protein Sequences, there are also databases which
+collect and estimate protein complex composition from AP-MS experimental 
+bait to prey associations. One such database is the R package 
+\Rpackage{apComplex}.
 
-In this section, we describe the experiments conducted by Gavin, et al; Ho, et al; and most recently, Krogan, et al. All three experiments are based on the high-throughput techonology of complex purification followed by identification by mass spectroscopy. Each affinity purification - mass spectronomic (AP-MS) experiment yielded a tremendous wealth of bait to prey associations, but we must take these data points with care because high through-put data is known to repot high levels of error in addition to true associations between proteins. 
+\Rpackage{apComplex} takes in raw, unrefined experimental data and 
+processes them with some algorithm (Denise, I am going to need help 
+here on this...). 
 
-In each of the three datasets, bait to prey associations were inferred by using various kinds of the same methodology: an affinity based process to localize groups of proteins (the associated prey proteins) that have high probability of sharing some complex co-membership with the bait protein followed by a purification procedure to eliminate non-associated proteins which might haven been pulled down due to some stochastic elements and a protein complex identification process relying on mass spectroscopy. Gavin, et al used the procedure of tandem affinity purification (TAP) where the TAP tag is generated by polymerase chain reaction (PCR). Ho, et al used a version of immunoprecipitation which they have called high-throughput mass sprctrometric protein complex identification (HMS-PCI). Krogan, et al used a C-terminal tandem affinity purification (TAP) tagging. Because these three experiments are based on bait to prey association for protein complex identification, the raw data can be systematically and uniformly analyzed by \textit{apComplex} for estimation of protein complex composition.
+The database portion of \Rpackage{apComplex} stores the estimated 
+protein complexes and their constituent protein members in bi-partite
+graph incidence matrices indexed by the primary investigator. Presently
+there are three high-level estimates corresponding to the three publicly
+available data-sets from (FIXME cite). \Rpackage{ScISI} accesses the
+database of \Rpackage{apComplex} directly and downloads these matrices.
 
-Analysis by \textit{apComplex} transforms the problem of biological protein complex estimation to a problem of estimating the presence of directed edges in a protein-protein complex co-membership (PPCCM) graph. Recall that two nodes are adjacent in the PPCCM graph if they are co-members for any protein complex. Under such an imposed structure, the identification of protein complexes is equivalent to the identification of maximal cliques in the PPCCM graph. %%Confirm it has been shown that the exhaustive search for maximal cliques within a graph is $np-hard$ based on the number of nodes within the network. Independent of the complexity in maximal clique mining, the PPCCM graph derived from the AP-MS technologies contains errors by embedding false positive (FP) and false negative (FN) bait to prey associations. These errors translate to the addition of FP directed edges and the deletion of FN directed edges respectively %%need picture.
-
-With the wet-lab experimental data, \textit{apComplex} searches for Bait to Hit (BH) maximal complete subgraphs (since maximal complete subgraphs are defined to be maximal cliques) which all recipricated bait-bait edges as well as all unreciprocated bait-hit-only edges exist. When such BH maximal subgraphs are found, \textit{apComplex} uses a statistical paradigm to determine the presence or absence of directed edges (particularly edges from hit-only proteins back towards those bait proteins which have unrecipricated association)
-. The details concerning the statistical model upon which \textit{apComplex} is based can be found in \cite{Scholtens, Gentleman}.
-
-The estimates derived from \textit{apComplex} can be divided into three groups. The MBME protein complex estimates are those derived from BH maximal subgraphs where multiple bait proteins (represented as nodes) and multiple edges (representing hits) are present. The SBMH protein complex estimates describe those complexes with only one single bait present but multiple hits (edges). Lastly, the UnRBB estimates consist of only two nodes (both bait proteins) where only one unreciprocated directed edge exists between them. It is quite clear that the MBME complexes have the highest probability of estimating true protein complexes since they are based on more biological information. For the construction of the \textit{in silico} interactome, we have elected to use only the MBME estimates because of its relative likelihood for accuracy.
-
-Data from the AP-MS experiment have been filtered to yield protein complexes and stored in databases such as MIPS; the process for each experiment, however, is unique to each experiment. %%FixMe Each filtering process is based upon some statistical clustering paradigm that takes the underlying biological conditions with varing degrees. Without a uniform methodology to estimate protein complex co-membership, any \textit{in silico} interactome built from the estimated complexes would be suspect. \textit{apComplex} integrates a significant portion of the biological processes into its statistical model in estimating protein complexes. Thus by using \textit{apComplex} as the unique estimation algorithm, we can not only reduce the variability in confidence but also increase the overall confidence for the estimates of the protein complexes.
+With the addition of these three \textit{in silico sub-interactomes}, 
+we now move forward to analyzing each data set within itself as well as 
+comparing complexes across data-sets to search for repeated complexes.
+In addition, we look for and remove protein sub-complexes that might 
+reside in the various data-sets. 
 
 
-\subsection{Merging the Data}
+\subsection{Analysis and Merging of the Data-Sets}
 
 Having obtained the data from all the five disparate data souces, we 
-must combine all of the data into one non-redundant aggregate 
-compilation. Merging the multiple sub-interactomes into one is done 
+must search for and eliminate repeated protein complexes as well as 
+protein sub-complexes. We will take the resulting \textit{sub interactomes}
+and combine all of the data into one non-redundant aggregate 
+compilation. 
+
+First we analyze each data-set independently. The MIPS protein complex
+set had three repeated protein complexes; it also contained sixteen 
+protein sub-complexes. The GO data-set had no repeated protein complexes 
+though it did contain fourteen protein sub-complexes.None of the three
+high through-put data set contained any repetitions nor any protein
+sub-complexes. 
+
+Next we compared the protein complex data sets across the five disparate
+data-sets. Thirty-three protein complexes were found in both the MIPS 
+and GO repository while twenty-seven GO protein complexes were found to
+be sub-complexes of some MIPS complexes and fourty-four MIPS complexes were 
+sub-complexes to GO complexes.
+
+Now the Gavin data-set compared to the combined MIPS-GO data-sets 
+(modulo the repetitions and the sub-complexes), we find that four 
+Gavin protein complexes are repetitions to the MIPS-GO and seventeen 
+Gavin protein complexes are sub-complexes to the MIPS-GO complexes. In
+addition, eight GO and five MIPS complexes are sub-complexes to the 
+Gavin set.
+
+(This is ridiculous...I am going to make a table of the data-sets
+and there intersection and inclusions)
+
+
+Merging the multiple sub-interactomes into one is done 
 iteratively by combining two sub-interactomes at once.
 
 Let $M$ and $G$ be two interactomes that we wish to merge. We define
@@ -442,7 +486,7 @@ are either present or absent (we do not attempt to estimate the
 concentration of any protein complex) and protein sub-complexes 
 are always un-identified. 
 
-%%Talk about the number of redundancies and sub-comps
+
 
 %%The stuff written below does not seem to fit in the methods section,
 %%but more in a discussion section??? Seems like the intro to a dynamic

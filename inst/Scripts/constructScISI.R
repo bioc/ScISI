@@ -1,15 +1,19 @@
 ##This file gives the exact commands for the construction of the ScISI.
 
 library(ScISI)
-
+goECodes = c("NAS", "ND", "NR")
 go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
-               eCode = NULL, wantAllComplexes = TRUE)
+               eCode = goECodes, wantAllComplexes = TRUE)
 goM = createGOMatrix(go)
 go2go = runCompareComplex(goM, goM, byWhich = "ROW")
 rmFromGo = c(go2go$toBeRm, go2go$toBeRmSubC)
 
+mipsECode = c("901.01.03", "901.01.03.01", "901.01.03.02",
+              "901.01.04", "901.01.04.01", "901.01.04.02",
+              "901.01.05", "901.01.05.01", "901.01.05.02")
+
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
-               eCode = NULL, wantAllComplexes = FALSE)
+               eCode = mipsECode, wantAllComplexes = FALSE)
 mipsM = createMipsMatrix(mips)
 mips2mips = runCompareComplex(mipsM, mipsM, byWhich= "ROW")
 rmFromMips = c(mips2mips$toBeRm, mips2mips$toBeRmSubC)
