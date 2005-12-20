@@ -51,14 +51,14 @@ the viability of experimental procedures, to aid in integrating data
 from disparate sources, and to provide a sound basis for the
 development of new methodology to help design experiments and to
 analyze the resultant data. In this paper we outline one approach to
-the creation of \textit{in silica interactomes}. (in silica???)
+the creation of \textit{in silico interactomes}.
 
 We begin by distinguishing between many different types of
 interactomes with a few general comments and make many of the
 terms and ideas more explicit in later sections of this report. There
 are interactomes that model direct binary interactions and hence are
 related to experiments using the yeast two hybrid (Y2H) system
-\cite{FIXME:citatins here}. A second type of interactome is one that
+\cite{FIXME:citations here}. A second type of interactome is one that
 models protein complex co-membership. In this model, two proteins are
 said to interact if they are constituent members of some protein complex 
 under the conditions of interest. This second type of interactome is
@@ -319,7 +319,7 @@ produced an \textit{in silico sub-interactome} (or a sub-bi-partite graph
 of the bi-partite interactome graph).
 
 While the overwhelming majority of protein interaction repositories store protein
-complex data as some form of a catalogue (unique to the repository), there are 
+complex data as some form of a catalog (unique to the repository), there are 
 a small number of repositories which store the bi-partite graph incidence graph 
 matrix for the protein complex data. For these repositories, \Rpackage{ScISI} 
 simply downloads these matrices.
@@ -327,15 +327,15 @@ simply downloads these matrices.
 Once the various protein complex membership data has been stored, and the various
 bi-partite graph incidence matrices have been constructed, \Rpackage{ScISI} compares
 all each of these matrices with one another and eliminates redundancy by removing 
-multiple occurances of a particular protein complex; and based on our model and 
+multiple occurrences of a particular protein complex; and based on our model and 
 definition for protein complexes, \Rpackage{ScISI} also removes any complex if it
 is contained entirely within another complex. The details of this merging process 
 will be given in a later section.
 
 Having streamlined a definition for protein complex and its computational representation
 as well as given a description of the computational tool used, 
-we move forward with the task of diciphering an \textit{in silico} interactome for S. 
-cerevisae. To this end, we have gathered information from  
+we move forward with the task of deciphering an \textit{in silico} interactome for S. 
+cerevisiae. To this end, we have gathered information from  
 two online data sources, Gene Ontology and the Munich Information Center for Protein 
 Sequences, as well as high-level protein complex estimates from three publicly available 
 wet-lab experiments. 
@@ -349,12 +349,12 @@ are quite different, \Rpackage{ScISI} identifies each repository and (using
 different functions and methods) from each, extracts the protein complexes.
 
 As we have stated previously, \Rpackage{ScISI} parses through each repository
-and searchs for the terms $complex$, $\verb1\\base\\B1$, and $\verb1\\bsome\\B1$.
+and searches for the terms $complex$, $\verb1\\base\\B1$, and $\verb1\\bsome\\B1$.
 The first term is searched for either with $grep$ witin the MIPS database and with
 $agrep$ within the GO database. The search functions within \Rpackage{ScISI} parse
 the titles of each protein complex by $(a)grep$ and looks for the exact term
 ``complex'' (e.g. SAGA complex). The latter two terms are simply $grepped$ but 
-perl regular expressions serve as boundary conditions for this parse 
+RePerl regular expressions serve as boundary conditions for this parse 
 function within \Rpackage{ScISI}. These boundary conditions narrow the pool of 
 return values (e.g. DNA-directed Polymerase II, holoenzyme or repairosome). 
 
@@ -364,7 +364,7 @@ these codes are unique to each repository) to annotate individual
 proteins to the various protein complexes. \Rpackage{ScISI} can take a
 list of evidence codes and dis-allow those proteins whose annotations
 are based exclusively on this list. Within the GO repository, we 
-dis-allow those proteins annotated by the following evindence codes:
+dis-allow those proteins annotated by the following evidence codes:
 Inferred from Electronic Annotation (IEA); 
 Non-traceable Author Statement (NAS); No Biological Data Available 
 (ND); Not Recorded(NR). For the MIPS repository, we restrict the 
@@ -386,7 +386,7 @@ Once a list of protein complexes is generated for a particular repository,
 \Rpackage{ScISI} transforms this list into a bi-partite graph incidence
 matrix, i.e. an \textit{in silico sub-interactome}. These two matrices must
 be examined both by themselves or cross referenced between one another to 
-search for repeated protein complexes or for the prescence of protein 
+search for repeated protein complexes or for the presence of protein 
 sub-complexes. The details of this examination is left for a later section.
 
 We remark that the complexes documented within Gene Ontology and the Munich
@@ -410,7 +410,7 @@ We have chosen one standard algorithm to parse high through-put data and
 estimate protein complex composition from the raw data by this algorithm.   
 
 \subsection{AP-MS Experimental Data Repository}
-In addition to online repositories such as Gene Ontolog and the Munich
+In addition to online repositories such as Gene Ontology and the Munich
 Informations Center for Protein Sequences, there are also databases which
 collect and estimate protein complex composition from AP-MS experimental 
 bait to prey associations. One such database is the R package 
@@ -436,7 +436,7 @@ reside in the various data-sets.
 
 \subsection{Analysis and Merging of the Data-Sets}
 
-Having obtained the data from the five disparate data souces, we 
+Having obtained the data from the five disparate data sources, we 
 must search for and eliminate repeated protein complexes as well as 
 protein sub-complexes. We will take the resulting \textit{sub interactomes}
 and combine all of the data into one non-redundant aggregate 
@@ -476,7 +476,7 @@ independently to find and remove all protein sub-complexes. Again once
 we have parsed each set individually, we cross reference the data-sets
 to look for protein complex inclusion between pairwise data-sets. The
 row names of Table 2 detail from where the sub-complex reside and the
-column names detail where the aggreagate protein complex reside. 
+column names detail where the aggregate protein complex reside. 
 
 \begin{table}[ht]
 \begin{center}
@@ -512,7 +512,7 @@ which are common to both interactomes. In addition to removing
 redundant protein complexes, we have removed any protein complex 
 of $M$ that is a sub-complex of $G$ and vice versa. 
 
-Once the sub-interatomes $M$ and $G$ are merged into a comprehensive
+Once the sub-interactomes $M$ and $G$ are merged into a comprehensive
 aggregate interactome $A$, we can repeat the process described above
 by merging $A$ with another sub-interactome $S$. 
 
@@ -533,7 +533,7 @@ are always un-identified.
 %we must devise a method for combining them to provide a larger and
 %more general estimate. How we do this depends a bit on the estimates
 %themselves. We leave to another time a discussion of how to address
-%issues of sytematic and stochastic errors and rather consider the
+%issues of systematic and stochastic errors and rather consider the
 %problem of having two different estimates of an interactome that we
 %want to combine into a non-redundant joint estimate. The two different
 %estimates may come from different sources and hence could overlap by a
@@ -577,11 +577,11 @@ are always un-identified.
 The result of combining data from multiple database sources is an aggregate 
 protein complex membership \textit{in silico interactome}. The elements of 
 this interactome consists of $1755$ proteins and $743$ protein complexes. The 
-number of proteins is consistant with biological estimates (%%~40% of genome?)
+number of proteins is consistent with biological estimates (%%~40% of genome?)
 of the number of expressed genes for the a particular genome;
 the number of unique protein complexes gives us enough complexity to 
 conduct \textit{in silico} experiments in order to emulate true wet-lab
-experimnets.
+experiments.
 
 Histogram for the cardinalities or protein complexes?
 Histogram for the order of each particular protein's complex membership?
