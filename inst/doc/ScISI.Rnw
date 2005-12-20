@@ -317,20 +317,40 @@ the categories of bipartite graphs and the categories of hyper-graphs
 
 \subsection{Graphs and Hypergraphs}
 
-We require
+We require a small amount of graph theory to allow for succinct
+discussion of the relevant concepts. A graph $G$, consists of a pair
+of sets; the vertices, or nodes, $V$, and the edges, or relations,
+$E$. We write $G=(V,E)$. Graphs can be used to represent binary
+relationships and hence are an appropriate model and data structure
+for $I_b$. They cannot represent the more complicated situation of
+modeling protein complex co-membership. In this case we require the
+use of hypergraphs \cite{Berge}. A hypergraph, $H$, consists of a set
+of nodes, $V$, and a set of hyperedges. A hyperedge is any subset of
+$V$. Thus, for modeling protein interaction data the vertex set is the
+set of proteins in the organism or tissue under study. To represent binary
+relationships we will use a graph, where the edges indicate the
+presence of a binary interaction and for complex co-membership data we
+will use a hypergraph, where the hyperedges are the identities of the
+proteins that constitute the complex. There is a one-to-one
+relationship between hypergraphs and bipartite graphs and in some
+reports bipartite graphs are used.
 
-To each bipartite graph comes an associated incidence matrix
-representation.  This incidence matrix representation, $M_B$, is a
-$\{0,1\}$-matrix where proteins index the rows and protein complexes
-index the columns. The entries of $M_B$ correspond to the presence or
-absence of membership edges, for instance, the $(i,j)$ entry for $M_B$
-is unity if protein $p_i$ is a constituent member of complex $c_j$;
-the entry is zero otherwise.
+There are a variety of different representations for both graphs and
+hypergraphs. We will mainly make use of the incidence matrix
+representation for both. For the protein complex hypergraph the
+incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where
+proteins index the rows and protein complexes index the columns. The
+$(i,j)$ entry for $M_B$ is one if protein $p_i$ is a constituent
+member of complex $c_j$; the entry is zero otherwise. When studying
+binary interactions the representation will be of a graph, and then
+the incidence matrix is typically square (or upper triangular) with
+the proteins indexing both the rows and the columns. In this graph a
+one in position $(i,j)$ indicates that protein $p_i$ interacts with
+protein $p_j$. This graph is likely to be sparse and we will make use
+of appropriate software tools and data representations.
 
-Because most computational methodologies desire this incidence matrix
-representation rather than the actual bipartite graph itself, the
-construction of the \textit{in silico} interactome will be the
-construction of a particular incidence matrix.
+The construction of the \textit{in silico} interactomes, $I_c$ and
+$I_b$, will be the construction of appropriate incidence matrices.
 
 \subsection{ScISI}
 
