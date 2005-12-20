@@ -54,25 +54,29 @@ analyze the resultant data. In this paper we outline one approach to
 the creation of \textit{in silico interactomes}.
 
 We begin by distinguishing between many different types of
-interactomes with a few general comments and make many of the
+interactomes with a few general comments, we will make the
 terms and ideas more explicit in later sections of this report. There
 are interactomes that model direct binary interactions and hence are
 related to experiments using the yeast two hybrid (Y2H) system
-\cite{FIXME:citations here}. A second type of interactome is one that
+\cite{Y2H, Ito, Uetz}. A second type of interactome is one that
 models protein complex co-membership. In this model, two proteins are
 said to interact if they are constituent members of some protein complex 
 under the conditions of interest. This second type of interactome is
 more closely related to co-precipitation or affinity-purification
-experiments \cite{FIXME:somecitations}. We note that proteins which
+experiments \cite{Ho, Gavin, Krogan}. We note that proteins which
 interact in the second sense, need not interact in the first sense;
-hence, we separate these two different, but related, concepts.
+hence, we separate these two different, but related, concepts. Other
+interactomes can be created by considering other relationships such as
+those between transcription factors and their direct targets or the
+interaction network that can be defined on pairs of synthetically
+lethal genes \cite{Tong2004}.
 
 In this paper we consider the problem of estimating an \textit{in
   silico} interactome for \textit{Saccharomyces cerevisiae} and we
 describe five different roles where such a computational device can be
-used.  First, the \textit{in silico} interactome provides a tool
-that can be used to mimic wet-lab experiments; these \textit{in
-  silico} experiments can help to confirm the viability of the wet-lab
+used.  First, the \textit{in silico} interactome provides a tool that
+can be used to mimic wet-lab experiments; these \textit{in silico}
+experiments can help to confirm the viability of the wet-lab
 experimental procedures by allowing investigators to alter
 experimental conditions (both stochastic and systematic errors can be
 modified) and to measure how the outputs change as the error rates
@@ -88,17 +92,17 @@ small number of candidates and explore their interactions, say via
 affinity purification (co-precipitation) experiments. Once the first
 experiment has been collected one would like to analyze the data and
 determine an optimal, or nearly optimal set of baits for future
-experiments. A fourth use of an \textit{in silico}
-interactome is to study the effect of perturbations in a network.
-Such perturbations could be caused by evolution (and hence could become
-part of the study of evolutionary pressure on the interactome) or due 
-to drug treatments (and hence would become part of a
-clinical investigation into the likely effects of drug treatments). The
-fifth use for such a tool is to explore and understand the effects of
-different sampling paradigms on the inferences that can drawn from
-different wet-lab experiments. We note that there are a number of
-recent papers (FIXME:citations) that raise many important issues in
-this regard.
+experiments. A fourth use of an \textit{in silico} interactome is to
+study the effect of perturbations in a network.  Such perturbations
+could be caused by evolution (and hence could become part of the study
+of evolutionary pressure on the interactome) or due to drug treatments
+(and hence would become part of a clinical investigation into the
+likely effects of drug treatments). The fifth use for such a tool is
+to explore and understand the effects of different sampling paradigms
+on the inferences that can drawn from different wet-lab
+experiments. We note that there are a number of recent papers
+\cite{Oltavi,Goverview, SubsampNetworks} that raise many important
+issues in this regard.
 
 While the estimated interactome is itself of some great interest, we
 note that it is more important to describe the procedure by which the
@@ -152,56 +156,76 @@ methodology is sufficiently general to be able to address the more
 complicated situation of different protein/polypeptide variants should
 they arise.
 
-
-
 \section{Biological Interactomes}
 
-In the broadest sense, an interactome is a set of elements $P$ where 
-the individual elements of $P$ have some association with one another.
-Consider the example where $P$ is the United States population and 
-association is defined as immediate family members, i.e. either parent
-to child or sibling to sibling. In this example, a person is neither 
-associated with his/her grandparent nor associated with his/her
-aunts/uncles. Now let us consider a different interactome where 
-$P$ remains the same set but association is defined as familial relations.
-With this definition, a person is now associated to his/her grandparent, etc.
-It is trivial to see that association in the second example implies 
-association in the first, but the 
-converse is not true. These two examples clearly illustrates the need 
-for the association within a particular interactome to be well defined.
+In the broadest sense, an interactome is a set of elements $P$, for
+our purposes $P$ is the set of genes (or their related proteins)
+within a particular organism or cell type. The elements of $P$ have
+a variety relationships with each other and each of these different
+relationships can be modeled using some form of graph. Some
+relationships are binary, for example, protein $p_1$ is known to
+directly physically interact with some other protein, $p_2$. In other
+cases, the relations are not binary but rather are one to many or many
+to many. The example we use for this second type of relationship is
+that of protein complex co-membership. In this setting all members of
+a complex are related to each other, but they need not directly
+interact and the relationship is not binary. A reasonable model for
+such data is as either a hypergraph \cite{Berge} or the equivalent
+bipartite graph representation. Proteins are grouped into sets
+according to whether they are in a complex and these sets constitute the
+hyperedges of the graph. There is no need for the hyperedges to be
+disjoint and proteins can be in many or few hyperedges, depending on
+whether the protein is in many or few complexes.
 
-We can relate the two previous population interactomes to biological
-interactomes. Now let $P$ be the set of genes within the genome of some cell
-or tissue. Let $Y$ be the interactome on the set $P$ where the association
-is direct binary interactions between genes, i.e. two genes $g_1$ and $g_2$
-are said to be associated if and only if the induced protein of $g_1$ and the 
-induced protein of $g_2$ directly interact for some bio-physical or bio-chemical 
-process. We remark that a gene may be associated with itself if it induces a 
-homo-dimer. Next, let $A$ be the interactome on the set $P$ where the association is
-protein complex co-membership, i.e. two genes $g_3$ and $g_4$ are associated
-if and only if their respective induced proteins form constituent parts to
-some protein complex that has some biological objective. 
+% We can relate the two previous population interactomes to biological
+% interactomes. Now let $P$ be the set of genes within the genome of some cell
+% or tissue. Let $Y$ be the interactome on the set $P$ where the association
+% is direct binary interactions between genes, i.e. two genes $g_1$ and $g_2$
+% are said to be associated if and only if the induced protein of $g_1$ and the 
+% induced protein of $g_2$ directly interact for some bio-physical or bio-chemical 
+% process. We remark that a gene may be associated with itself if it induces a 
+% homo-dimer. Next, let $A$ be the interactome on the set $P$ where the association is
+% protein complex co-membership, i.e. two genes $g_3$ and $g_4$ are associated
+% if and only if their respective induced proteins form constituent parts to
+% some protein complex that has some biological objective. 
 
-These two biological interactomes are related. It is clear from 
-interactome $Y$'s definition of association that any two associated
-genes within $Y$ will also be associated within the interactome $A$. 
-The reverse relationship,
-however, is not valid. Not all co-members of a particular protein 
-complex need to interact with all other members. These two examples 
-highlight the subtle differences between two distinct interactomes 
-and underscores the necessity to keeping distinct interactomes separate. 
+These two biological interactomes are related, but they are also
+distinct, and the use of the data in modeling and other downstream
+uses requires that some caution be used to not confuse the
+concepts. It is certainly the case that for our working definition of
+a protein complex the members of that complex will have some binary
+interactions with other members. But not all members have direct
+physical interactions with other members, so we would not use a
+so-called \textit{matrix} model \cite{FIXME:matrixmodelcitation} to
+represent those interactions. These two examples highlight the subtle
+differences between two distinct interactomes and underscores the
+necessity to keeping distinct interactomes separate. We will refer to
+the first of these interactomes as $I_b$, where the $b$ subscript
+reinforces the notion that binary relationships are being modeled and
+the second as $I_c$ where the $c$ subscript reinforces the notion that
+protien complexes are being modeled.
 
-$Y$ and $A$ describe two instances of protein to protein interactomes,
-but there are a number of other such interactomes with biological 
-relevance. Let $S$ denote the interactome on $P$ where association 
-between two genes is that of synthetic lethality. Let $E$ be the 
-interactome on the set $P$ where association between two genes is 
-defined as co-expression. While all four interactomes are 
-inter-related, no two are equivalent, and thus, all conclusions must 
-be drawn independently for each interactome. 
+There are of course many limitations to such an approach, however,
+there will be ample opportunity to refine and revise the models
+proposed here as our knowledge of the underlying biology improves and
+as the available computer technology improves. Among the limitations
+is the observation that some interactions will only take place under a
+specific set of conditions, and that other interactions, sometimes
+involving the same proteins, will occur under other conditions. Thus,
+the model representing these data will need to become richer and to be
+able to indicate under which conditions a given relationship is known
+to occur. Some interactions are specific to certain tissues (in higher
+organisms) or to particular phases of the cell cycle, and so on. The
+models we propose can be extended in fairly straightforward ways to
+encompass these details, but the available data are currently to
+sparse to warrant such an approach. We will note some experiments, and
+some uses of existing experimental data, that can provide some
+insight. 
 
-In this paper, we will build an \textit{in silico interactome}
-for Saccharomyces cerevisiae (denoted $I$) for a fixed set
+In this paper, we will report on a set of methodological tools that
+can be used to construct an \textit{in silico interactome}
+for \textit{S. cerevisiae}. We restrict our attention to the two
+interactomes described above, $I_b$ and $I_c$.
 of environmental conditions. The elements of $I$
 are the disjoint union of two sets: the first is the set $P$ of genes
 within the genome of a yeast cell; the second is the set $C$ of all protein
@@ -215,56 +239,63 @@ be associated with other elements of the same type.
 \section{Materials and Methods}
 
 In this section we first describe what we mean by a protein complex
-and describe different models for representing these data. Next we give
-a concise description of the computational tool \textit{ScISI} and show
-its dynamic properties in constructing different complex membership
-interactomes. We then
-describe the process of creating an \textit{in silico} interactome
-via \textit{ScISI} based on two public meta-data sources and three 
-experimental data sets 
-by combining purification of protein complexes with identification of 
-their individual components via mass spectroscopy.
+and describe different models for representing these data. Next we
+give a concise description of the computational tool \textit{ScISI}
+and show its dynamic properties in constructing different complex
+membership interactomes. We then describe the process of creating an
+\textit{in silico} interactome via \textit{ScISI} based on two public
+meta-data sources and three experimental data sets by combining
+purification of protein complexes with identification of their
+individual components via mass spectroscopy.
 
 
 \subsection{Protein complexes and their representations}
 
 %%FIXME: a few pictures would surely help readers
-A protein complex (defined for this paper) is two or more
-proteins that physically interact for the purposes of carrying out
-some biological objective. There is no need for all members of a
-complex to interact with each one another, but all the proteins do need
-to combine to form a macro-proteomic structure. We further note that 
-some proteins will be involved in many complexes
-while others will be involved in relatively few, and one corollary 
-to this remark is that the relative size of the protein complexes 
-range from two proteins to more than fifty. 
+We define a protein complex to be two or more proteins that physically
+interact for the purposes of carrying out some biological
+objective. There is no need for all members of a complex to physically
+interact with each one another, but all the proteins do need to
+combine to form a connected multi-protein structure. Some proteins
+will be involved in many complexes while others will be involved in
+relatively few. Protein complexes range in size from two proteins to
+more than fifty.
 
-This definition of a protein complex is motivated by the various 
-technologies that assay levels of protein complex composition such 
-as Affinity Purification - Mass Spectroscopy and 
-Co-immunoprecipitation. It is important to note that these 
-technologies only assay protein complex composition of cells
-given a pre-described environment. Working within the confines of these 
-technologies, our definition for protein complexes becomes 
-increasingly strict. There are structures within the cytoskeleton,
-for instance, which fit within a more generic setting of a complex; 
-these structures are never pulled down by the mentioned 
-technologies, so we have dis-allowed their membership as a protein
-complex. 
+%%I don't see how this helps us, we would use this if we could, we are
+%%not limited in anyway by the technology, we want all the complexes.
 
-Because our definition for protein complexes is experimentally 
-driven, we need to define a convention with respect to protein
-sub-complexes. A protein sub-complex is itself a  
-complex that is entirely contained within another protein 
-complex. We remark that a protein sub-complex under certain 
-cell conditions could be a proper complex in other
-cell conditions. We define the convention that all  
-sub-complexes will be masked by their respective proper 
-protein complexes, and therefore, are not recorded. Thus our 
-definition of protein complex is implicitly directed by the 
-biological state of some particular cell or tissue, i.e. a 
-complex can only be determined along with the context of the 
-cell type.
+% This definition of a protein complex is motivated by the various 
+% technologies that assay levels of protein complex composition such 
+% as Affinity Purification - Mass Spectroscopy and 
+% Co-immunoprecipitation. It is important to note that these 
+% technologies only assay protein complex composition of cells
+% given a pre-described environment. Working within the confines of these 
+% technologies, our definition for protein complexes becomes 
+% increasingly strict. There are structures within the cytoskeleton,
+% for instance, which fit within a more generic setting of a complex; 
+% these structures are never pulled down by the mentioned 
+% technologies, so we have dis-allowed their membership as a protein
+% complex. 
+
+There are sure to be situations where a protein complex, that exists
+under one set of conditions, is a proper subset of a complex that
+exists under another set of conditions. However, such situations will
+cause some mathematical problems and for the purposes of this
+presentation we remove all subcomplexes that are proper subsets of
+other complexes from our estimated interactome. The appropriate
+modeling of these can be handled by attaching attributes to the
+complexes and then selecting those complexes with the correct set of
+attributes for the conditions we are going to simulate from.
+
+% a complex that is entirely contained within another protein
+% complex. We remark that a protein sub-complex under certain cell
+% conditions could be a proper complex in other cell conditions. We
+% define the convention that all sub-complexes will be masked by their
+% respective proper protein complexes, and therefore, are not
+% recorded. Thus our definition of protein complex is implicitly
+% directed by the biological state of some particular cell or tissue,
+% i.e. a complex can only be determined along with the context of the
+% cell type.
 
 %What should be said about sub-complexes? When sub-complexes exist
 %there can be identifiability problems that arise due to the technology
@@ -273,59 +304,70 @@ cell type.
 %be a sub-complex given other conditions...where should we draw the 
 %line between when a complex is actually a sub-complex or not??? TC) 
 
-The collection of proteins and protein complexes with affiliation data can
-be represented as a large membership network or graph. We have chosen 
-to represent the protein complex membership graph as
-a bipartite graph, $B$. The proteins themselves index one set 
-of nodes which we denote as $P$ while the protein complexes index
-the other set of nodes which we denote as $C$. A protein specific
-node $p_i$ is incident to a protein complex specific node $c_j$ if $p_i$ 
-has membership in $c_j$. We remark that there is an equivalence between the categories
-of bi-partite graphs and the categories of hyper-graphs (cite or supplementary).
+The collection of proteins and protein complexes with affiliation data
+can be represented as a large membership network or graph. We have
+chosen to represent the protein complex membership graph as a
+bipartite graph, $B$. The proteins themselves index one set of nodes
+which we denote as $P$ while the protein complexes index the other set
+of nodes which we denote as $C$. A protein specific node $p_i$ is
+incident to a protein complex specific node $c_j$ if $p_i$ has
+membership in $c_j$. We remark that there is an equivalence between
+the categories of bipartite graphs and the categories of hyper-graphs
+(cite or supplementary).
 
-To each bi-partite graph comes an associated incidence matrix representation. 
-This incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where proteins
-index the rows and protein complexes index the columns. The entries of $M_B$ 
-correspond to the presence or absence of membership edges, for instance, the $(i,j)$ 
-entry for $M_B$ is unity if protein $p_i$ is a constituent member of complex
-$c_j$; the entry is zero otherwise. 
+\subsection{Graphs and Hypergraphs}
 
-Because most computational methodologies desire this incidence matrix representation
-rather than the actual bi-partite graph itself, the construction of the \textit{in silico}
-interactome will be the construction of a particular incidence matrix.  
+We require
+
+To each bipartite graph comes an associated incidence matrix
+representation.  This incidence matrix representation, $M_B$, is a
+$\{0,1\}$-matrix where proteins index the rows and protein complexes
+index the columns. The entries of $M_B$ correspond to the presence or
+absence of membership edges, for instance, the $(i,j)$ entry for $M_B$
+is unity if protein $p_i$ is a constituent member of complex $c_j$;
+the entry is zero otherwise.
+
+Because most computational methodologies desire this incidence matrix
+representation rather than the actual bipartite graph itself, the
+construction of the \textit{in silico} interactome will be the
+construction of a particular incidence matrix.
 
 \subsection{ScISI}
 
-With publicly released data available in a number of disparate sources, there is a 
-need for computational tools to parse through the data-sets and collate them into 
-one single, non-redundant, and meaningful database resource. To this end, we have 
-built the $R$ package \Rpackage{ScISI} for the specific purpose of parsing through 
-protein interaction resources and selecting protein complex information, i.e. 
-the various documented protein complexes as well as their consistent protein members.
+With publicly released data available in a number of disparate
+sources, there is a need for computational tools to parse through the
+data-sets and collate them into one single, non-redundant, and
+meaningful database resource. To this end, we have built the $R$
+package \Rpackage{ScISI} for the specific purpose of parsing through
+protein interaction resources and selecting protein complex
+information, i.e.  the various documented protein complexes as well as
+their consistent protein members.
 
-\Rpackage{ScISI} takes a protein interaction repository and systematically parses
-through that repository's database in search for key terms. Depending on the catalog
-of each repository, \Rpackage{ScISI} parses the data and searches (either by grep or
-agrep) for three key terms: 1. the exact word ``complex''; 2. the suffix ``-ase''; 
-and 3. the suffix ``-some''. We remark that the user can search for any term desired
-though the three terms we have used are the defaults. 
+\Rpackage{ScISI} takes a protein interaction repository and
+systematically parses through that repository's database in search for
+key terms. Depending on the catalog of each repository,
+\Rpackage{ScISI} parses the data and searches (either by grep or
+agrep) for three key terms: 1. the exact word ``complex''; 2. the
+suffix ``-ase''; and 3. the suffix ``-some''. We remark that the user
+can search for any term desired though the three terms we have used
+are the defaults.
 
 Once the various databases have been parsed and the desired data sets stored, 
 \Rpackage{ScISI} converts the overall collection of protein complexes into a
-bi-partite graph incidence matrix where the rows are indexed by the standard
+bipartite graph incidence matrix where the rows are indexed by the standard
 gene names and the columns are indexed by the protein complex identification 
 codes (unique to each different repository). Therefore, \Rpackage{ScISI} has 
-produced an \textit{in silico sub-interactome} (or a sub-bi-partite graph
-of the bi-partite interactome graph).
+produced an \textit{in silico sub-interactome} (or a sub-bipartite graph
+of the bipartite interactome graph).
 
 While the overwhelming majority of protein interaction repositories store protein
 complex data as some form of a catalog (unique to the repository), there are 
-a small number of repositories which store the bi-partite graph incidence graph 
+a small number of repositories which store the bipartite graph incidence graph 
 matrix for the protein complex data. For these repositories, \Rpackage{ScISI} 
 simply downloads these matrices.
 
 Once the various protein complex membership data has been stored, and the various
-bi-partite graph incidence matrices have been constructed, \Rpackage{ScISI} compares
+bipartite graph incidence matrices have been constructed, \Rpackage{ScISI} compares
 all each of these matrices with one another and eliminates redundancy by removing 
 multiple occurrences of a particular protein complex; and based on our model and 
 definition for protein complexes, \Rpackage{ScISI} also removes any complex if it
@@ -383,7 +425,7 @@ protein members are stored in a list type structure and must be further
 processed.
 
 Once a list of protein complexes is generated for a particular repository, 
-\Rpackage{ScISI} transforms this list into a bi-partite graph incidence
+\Rpackage{ScISI} transforms this list into a bipartite graph incidence
 matrix, i.e. an \textit{in silico sub-interactome}. These two matrices must
 be examined both by themselves or cross referenced between one another to 
 search for repeated protein complexes or for the presence of protein 
@@ -421,7 +463,7 @@ processes them with some algorithm (Denise, I am going to need help
 here on this...). 
 
 The database portion of \Rpackage{apComplex} stores the estimated 
-protein complexes and their constituent protein members in bi-partite
+protein complexes and their constituent protein members in bipartite
 graph incidence matrices indexed by the primary investigator. Presently
 there are three high-level estimates corresponding to the three publicly
 available data-sets from (FIXME cite). \Rpackage{ScISI} accesses the
@@ -593,5 +635,8 @@ What else should we put here???
 \section{Discussion}
 
 What did we learn,
+
+\bibliographystyle{plainnat}
+\bibliography{Graph}
 
 \end{document}
