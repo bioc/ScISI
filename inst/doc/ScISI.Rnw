@@ -304,7 +304,7 @@ protein interaction resources and selecting protein complex information, i.e.
 the various documented protein complexes as well as their consistent protein members.
 
 \Rpackage{ScISI} takes a protein interaction repository and systematically parses
-through that repository's database in search for key terms. Depending on the cataloglog
+through that repository's database in search for key terms. Depending on the catalog
 of each repository, \Rpackage{ScISI} parses the data and searches (either by grep or
 agrep) for three key terms: 1. the exact word ``complex''; 2. the suffix ``-ase''; 
 and 3. the suffix ``-some''. We remark that the user can search for any term desired
@@ -365,6 +365,7 @@ proteins to the various protein complexes. \Rpackage{ScISI} can take a
 list of evidence codes and dis-allow those proteins whose annotations
 are based exclusively on this list. Within the GO repository, we 
 dis-allow those proteins annotated by the following evindence codes:
+Inferred from Electronic Annotation (IEA); 
 Non-traceable Author Statement (NAS); No Biological Data Available 
 (ND); Not Recorded(NR). For the MIPS repository, we restrict the 
 following: Overview Information - review and text (901.01.03, 
@@ -435,7 +436,7 @@ reside in the various data-sets.
 
 \subsection{Analysis and Merging of the Data-Sets}
 
-Having obtained the data from all the five disparate data souces, we 
+Having obtained the data from the five disparate data souces, we 
 must search for and eliminate repeated protein complexes as well as 
 protein sub-complexes. We will take the resulting \textit{sub interactomes}
 and combine all of the data into one non-redundant aggregate 

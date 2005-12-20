@@ -1,7 +1,7 @@
 ##This file gives the exact commands for the construction of the ScISI.
 
 library(ScISI)
-goECodes = c("NAS", "ND", "NR")
+goECodes = c("IEA", "NAS", "ND", "NR")
 go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = goECodes, wantAllComplexes = TRUE)
 goM = createGOMatrix(go)
