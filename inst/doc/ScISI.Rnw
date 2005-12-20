@@ -43,7 +43,7 @@ helping to elucidate the nature of the interactions and the number
 of interactions.
 present \cite{Gavin, Ho, Krogan, Ito, Uetz}. Yet, for all organisms or
 cells our knowledge is very incomplete. Hence, not only do we need
-much more experiments but we also need funcdamentally different 
+much more experiments but we also need fundamentally different 
 experiments to fully reveal the different network structures. However, 
 such experiments are expensive and time consuming to carry out; hence,
 the need for simulation models that can help to identify
@@ -60,9 +60,9 @@ are interactomes that model direct binary interactions and hence are
 related to experiments using the yeast two hybrid (Y2H) system
 \cite{FIXME:citatins here}. A second type of interactome is one that
 models protein complex co-membership. In this model, two proteins are
-said to interact if they are consitutent members of some protein complex 
+said to interact if they are constituent members of some protein complex 
 under the conditions of interest. This second type of interactome is
-more closely related to co-precipitation or affinity-purificatin
+more closely related to co-precipitation or affinity-purification
 experiments \cite{FIXME:somecitations}. We note that proteins which
 interact in the second sense, need not interact in the first sense;
 hence, we separate these two different, but related, concepts.
@@ -114,7 +114,7 @@ different and disparate data sources and the system should be
 sufficiently flexible to allow for the addition of data from new and
 potentially different experimental techniques. Finally we note that
 different investigators will want to modify the interactome, either
-with localy produced, though not yet public, data, or to satisfy personal
+with locally produced, though not yet public, data, or to satisfy personal
 beliefs. We have developed a paradigm that allows investigators to
 create their own personalized estimates, to share interactomes and to
 build, revise and update interactomes.
@@ -157,7 +157,7 @@ they arise.
 \section{Biological Interactomes}
 
 In the broadest sense, an interactome is a set of elements $P$ where 
-the individual elements of $P$ have some associtation with one another.
+the individual elements of $P$ have some association with one another.
 Consider the example where $P$ is the United States population and 
 association is defined as immediate family members, i.e. either parent
 to child or sibling to sibling. In this example, a person is neither 
@@ -201,7 +201,7 @@ inter-related, no two are equivalent, and thus, all conclusions must
 be drawn independently for each interactome. 
 
 In this paper, we will build an \textit{in silico interactome}
-for Saccharomyces cervisiae (denoted $I$) for a fixed set
+for Saccharomyces cerevisiae (denoted $I$) for a fixed set
 of environmental conditions. The elements of $I$
 are the disjoint union of two sets: the first is the set $P$ of genes
 within the genome of a yeast cell; the second is the set $C$ of all protein
@@ -216,14 +216,14 @@ be associated with other elements of the same type.
 
 In this section we first describe what we mean by a protein complex
 and describe different models for representing these data. Next we give
-a consise description of the computational tool \textit{ScISI} and show
+a concise description of the computational tool \textit{ScISI} and show
 its dynamic properties in constructing different complex membership
 interactomes. We then
 describe the process of creating an \textit{in silico} interactome
 via \textit{ScISI} based on two public meta-data sources and three 
 experimental data sets 
 by combining purification of protein complexes with identification of 
-their individual componenets via mass spectroscopy.
+their individual components via mass spectroscopy.
 
 
 \subsection{Protein complexes and their representations}
@@ -301,10 +301,10 @@ need for computational tools to parse through the data-sets and collate them int
 one single, non-redundant, and meaningful database resource. To this end, we have 
 built the $R$ package \Rpackage{ScISI} for the specific purpose of parsing through 
 protein interaction resources and selecting protein complex information, i.e. 
-the various documented protein complexes as well as their consistuent protein members.
+the various documented protein complexes as well as their consistent protein members.
 
 \Rpackage{ScISI} takes a protein interaction repository and systematically parses
-through that repository's database in search for key terms. Depending on the catalogue
+through that repository's database in search for key terms. Depending on the cataloglog
 of each repository, \Rpackage{ScISI} parses the data and searches (either by grep or
 agrep) for three key terms: 1. the exact word ``complex''; 2. the suffix ``-ase''; 
 and 3. the suffix ``-some''. We remark that the user can search for any term desired
