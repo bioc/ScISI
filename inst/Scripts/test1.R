@@ -54,24 +54,13 @@ g1 = getAPMSData("Gavin")
 nam = names(go)
 sapply(nam, function(w) {setdiff(go[[w]], goCoded[[w]])})
 
-#getting the url and launching the webpages:
+###y2h stuff
+mipsY2H = getMipsY2HInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, eCode = NULL)
 
-cNamesGO = colnames(goM)
-urlGO = vector(length = length(cNamesGO))
+mipsPPI = createMipsY2HMatrix(mipsY2H)
 
-for (i in 1:length(cNamesGO)){
-    urlGO[i] = getURL(goOb, cNamesGO[i])
-}
-
-
-isiLaunchBrowser(urlGO)
-
-
-cNamesMips = colnames(mipsM)
-urlMips = vector(length=length(cNamesMips))
-
-for (i in 1:length(cNamesMips)){
-    urlMips[i] = getURL(mipsOb, cNamesMips[i])
-}
-
-isiLaunchBrowser(urlMips)
+###the arguments don't mean anything right now. there is a potential for something meaningful
+###right now, the data from MIPS implies interaction can be ascertained from not only y2h but
+###also co-immunoprecipitation, etc. i have grepped for those with "two hybrid" in the
+###desc part of the file. this is prelim...Robert what else do you think we should default
+###grep for? we can let others decide in the toGrep stuff. 
