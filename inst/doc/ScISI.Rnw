@@ -204,7 +204,7 @@ necessity to keeping distinct interactomes separate. We will refer to
 the first of these interactomes as $I_b$, where the $b$ subscript
 reinforces the notion that binary relationships are being modeled and
 the second as $I_c$ where the $c$ subscript reinforces the notion that
-protien complexes are being modeled.
+protein complexes are being modeled.
 
 There are of course many limitations to such an approach, however,
 there will be ample opportunity to refine and revise the models
@@ -394,7 +394,7 @@ contain one of the three expressions listed here,
 \begin{enumerate}
 \item  the exact word \texttt{complex};
 \item one or more words that end with the suffix \texttt{ase};
-\item one or more words that end with the suffic \texttt{some}.
+\item one or more words that end with the suffix \texttt{some}.
 \end{enumerate}
 Users can modify the search criteria to add new terms or to remove any
 of those default values listed above. Terms selected correspond to
@@ -422,7 +422,7 @@ removed at this time.
 
 We make use of the following three regular expressions,
 \verb+complex+, \verb+\\Base\\b+,
-and \verb+\\Bsome\\b+ as the default regular expressions in our seach. 
+and \verb+\\Bsome\\b+ as the default regular expressions in our search. 
 These can narrow the pool of return values yet include
 DNA-directed Polymerase II, holoenzyme or repairosome. 
 %%FIXME: Tony - I don't see how you find holoenzyme this way?
