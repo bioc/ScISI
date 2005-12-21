@@ -724,7 +724,7 @@ url = vector(length = length(goNames))
 linkNames = vector(length = length(goNames))
 for(i in 1:length(goNames)){
 url[i] = getURL(goOb, goNames[i])
-linkNames[i] = Desc(mipsOb, goNames[i])
+linkNames[i] = Desc(goOb, goNames[i])
 }
 ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex")
 

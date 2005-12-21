@@ -427,9 +427,9 @@ We make use of the following three regular expressions,
 and \verb+\\Bsome\\b+ as the default regular expressions in our search. 
 These can narrow the pool of return values yet include
 DNA-directed Polymerase II, holoenzyme or repairosome. 
-%%FIXME: Tony - I don't see how you find holoenzyme this way?
+%%FIXME: Tony - I don't see how you find holoenzyme this way?  Robert...the name is ``DNA-directed Polymerase II, holoenzyme''
 %%FIXME: Tony, in the para below, I don't see why we want to exclude
-%%NAS, they should be fine.
+%%NAS, they should be fine.  Robert, Denise and I talked about what is iffy from her talks with the GO guy in Boston
 Both GO and MIPS provide additional information on the curation and
 provenance of the data that they report. This information comes in the
 form of evidence codes, which are used by both resources, although the
@@ -440,13 +440,33 @@ repository, we disallow those proteins annotated by the following
 evidence codes: Inferred from Electronic Annotation (IEA);
 Non-traceable Author Statement (NAS); No Biological Data Available
 (ND); Not Recorded(NR). 
-%%FIXME: I have no idea what is happening here.
+%%FIXME: I have no idea what is happening here. These numbers act exactly like the evidence codes in GO
+%%This is how the proteins were annotated to each protein complex via the MIPS evidence codes
 For the MIPS repository, we restrict the
 following: Overview Information - review and text (901.01.03,
 901.01.03.01, 901.01.03.02); Personal Communication - via homepage
 (web) or electronic mail (901.01.04, 901.01.04.01, 901.01.04.02), and
 Closed Information - institution or private (901.01.05, 901.01.05.01,
 901.01.05.02)
+
+In addition to the MIPS evidence codes listed above, we have dis-allowed proteins 
+which are indexed exclusively by the following codes:
+
+"902.01.01.02.01.01.02" (co-immunoprecipitation, epitope tag)
+"902.01.01.04.01.03" (matrix-assisted laser desorption/ionization time-of-light
+mass spectrometry (MALDI TOF MS))
+"902.01.09.02" (high throughput experiment)
+
+When the function is given these three evidence codes, all high through-put protein
+complexes are eliminated (Gavin, Ho, Krogan) with the exception of one Krogan protein 
+complex. This unique Krogan protein complex (originally with 14 constituent proteins) 
+has 2 proteins which are indexed by some other evidence codes in addition to those 
+listed above, and therefore, the function selected these two proteins and the protein 
+complex for which they belong in its parse mechanism. Because we have built 
+\Rpackage{ScISI} in a way so that users can allow or dis-allow proteins based on evidence
+codes, this small anomoly cannot be circumvented by the function itself. We shall 
+describe in a later section on QC for minor anomolies.
+
 
 %%FIXME: the numbers in here should be part of an \Sexpr and be
 %%computed from the actual data - otherwise why are we using a
@@ -458,10 +478,10 @@ protein complexes. The GO protein complexes include 1,213 unique
 proteins while the MIPS protein complexes contains 651 unique
 proteins. 
 
-Some of the MIPS protein complexes have been uniquely identified by
+As mentioned before some of the MIPS protein complexes have been uniquely identified by
 high through-put experimentation such as affinity purification - mass
 spectroscopy ; we have, however, deliberately chosen not to extract
-these protein complexes. %%FIXME: then we should do the same for GO?
+these protein complexes. %%FIXME: then we should do the same for GO? I don't know how, do you Denise?
 The protein complexes were estimated by clustering
 algorithms determined by the individual investigator of the high
 through-put experiments, and therefore, protein complexes identified
