@@ -8,6 +8,7 @@
 \documentclass{article}
 
 \usepackage{hyperref}
+\usepackage{natbib}
 
 \textwidth=6.2in
 \textheight=8.5in
@@ -642,6 +643,6 @@ What else should we put here???
 What did we learn,
 
 \bibliographystyle{plainnat}
-\bibliography{Graph}
+\bibliography{bioc}
 
 \end{document}
