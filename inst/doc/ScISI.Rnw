@@ -227,6 +227,8 @@ In this paper, we will report on a set of methodological tools that
 can be used to construct an \textit{in silico interactome}
 for \textit{S. cerevisiae}. We restrict our attention to the two
 interactomes described above, $I_b$ and $I_c$.
+
+
 of environmental conditions. The elements of $I$
 are the disjoint union of two sets: the first is the set $P$ of genes
 within the genome of a yeast cell; the second is the set $C$ of all protein

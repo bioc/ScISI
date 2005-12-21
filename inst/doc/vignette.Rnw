@@ -247,7 +247,8 @@ is done by calling the \Rfunction{getMipsInfo} function:
 
 <<getMipsInfo, eval=TRUE>>=
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, 
-                   eCode = NULL, wantAllComplexes = FALSE)
+                   eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"), 
+                   wantAllComplexes = FALSE)
 
 
 @
@@ -285,7 +286,8 @@ $i^{th}$ entry from parseType defines the command for the $i^{th}$ entry from to
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
-                       eCode = NULL, wantAllComplexes = FALSE)
+                       eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"), 
+                       wantAllComplexes = FALSE)
 length(mips$Mips)
 length(mipsGrep$Mips)
 mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
@@ -296,7 +298,11 @@ sapply(mId, function(q) mipsGrep$DESC[q[2]])
 
 \item[4] \Rfunarg{eCode}: A character vector. This is a character vector of evidence codes.
 If a protein is only indexed by the evidence codes given in this vector, it is removed 
-from the protein complex it was annotated using only these evidence codes.
+from the protein complex it was annotated using only these evidence codes. The default uses
+the codes: "902.01.01.02.01.01.02" (co-immunoprecipitation, epitope tag),
+"902.01.01.04.01.03" (matrix-assisted laser desorption/ionization time-of-light 
+mass spectrometry (MALDI TOF MS)),
+"902.01.09.02" (high throughput experiment).
 
 <<getMipsInfoECode, eval = TRUE>>=
 mipsCoded = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, eCode = "901.01.01.01",
@@ -671,6 +677,7 @@ by calling the \Rfunction{createYeastDataObj} function:
 
 <<createYeastDataObj, eval=TRUE>>=
 mipsOb = createYeastDataObj(mipsDF)
+goOb = createYeastDataObj(goDF)
 @ 
 
 With the instance of the \Rclass{yeastData} class, we have access to three generic methods: 
@@ -711,6 +718,16 @@ url[i] = getURL(mipsOb, mipsNames[i])
 linkNames[i] = Desc(mipsOb, mipsNames[i])
 }
 ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex")
+
+goNames = colnames(goM)
+url = vector(length = length(goNames))
+linkNames = vector(length = length(goNames))
+for(i in 1:length(goNames)){
+url[i] = getURL(goOb, goNames[i])
+linkNames[i] = Desc(mipsOb, goNames[i])
+}
+ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex")
+
 @ 
 
 The arguments for the \Rfunction{ScISI2html} are somewhat self explanatory, but we will provide
@@ -723,7 +740,7 @@ a terse description of each argument:
 \item[2] \Rfunarg{linkName} is a character vector taht will be anchored by \Rfunarg{url}.
 
 \item[3] \Rfunarg{filename} is a character that will name the file, e.g. in our running example, 
-the output file will be named ``mips.html''.
+the output file will be named ``mips.html'' and ``go.html''.
 
 \item[4] \Rfunarg{title} will be the title of the .html file.
 

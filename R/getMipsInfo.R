@@ -1,5 +1,7 @@
-getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
-                        parseType = NULL, eCode = NULL,
+getMipsInfo <- function(wantDefault = TRUE,
+                        toGrep = NULL,
+                        parseType = NULL,
+                        eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"),
                         wantAllComplexes = FALSE){
   ##options(error=recover)
   ##This file is specific towards the downloaded data file from the MIPS repository.
@@ -38,7 +40,7 @@ getMipsInfo <- function(wantDefault = TRUE, toGrep = NULL,
   }
   ##print(mipsYeastComplex)
       
-  protInComp <- readLines(system.file("extdata", "complexcat.scheme.edit", package="ScISI"))
+  protInComp <- readLines(system.file("extdata", "complexcat.scheme", package="ScISI"))
   protInComp <- protInComp[-(which(protInComp==""))]
   protInComp <- protInComp[-(which(protInComp==" "))]
   protInComp1 <- strsplit(protInComp, "   +")
