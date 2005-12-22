@@ -60,7 +60,7 @@ terms and ideas more explicit in later sections of this report. There
 are interactomes that model direct binary interactions and hence are
 related to experiments using the yeast two hybrid (Y2H) system
 \cite{Y2H, Ito, Uetz}. A second type of interactome is one that
-models protein complex co-membership. In this model, two proteins are
+models protein complex membership. In this model, two proteins are
 said to interact if they are constituent members of some protein complex 
 under the conditions of interest. This second type of interactome is
 more closely related to co-precipitation or affinity-purification
