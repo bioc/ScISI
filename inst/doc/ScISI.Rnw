@@ -36,64 +36,43 @@
 
 \section{Introduction}
 
-Protein interactions form a fundamental part of biology and are
-relevant to our understanding of complex biological processes and to
-deciphering the different roles played by genes and proteins. A number
-of high throughput experiments have been carried out with the goal of
-helping to elucidate the nature of the interactions and the number
-of interactions.
-present \cite{Gavin, Ho, Krogan, Ito, Uetz}. Yet, for all organisms or
-cells our knowledge is very incomplete. Hence, not only do we need
-much more experiments but we also need fundamentally different 
-experiments to fully reveal the different network structures. However, 
-such experiments are expensive and time consuming to carry out; hence,
-the need for simulation models that can help to identify
-the viability of experimental procedures, to aid in integrating data
-from disparate sources, and to provide a sound basis for the
-development of new methodology to help design experiments and to
-analyze the resultant data. In this paper we outline one approach to
-the creation of \textit{in silico interactomes}.
-
-We begin by distinguishing between many different types of
-interactomes with a few general comments, we will make the
-terms and ideas more explicit in later sections of this report. There
-are interactomes that model direct binary interactions and hence are
-related to experiments using the yeast two hybrid (Y2H) system
-\cite{Y2H, Ito, Uetz}. A second type of interactome is one that
-models protein complex membership. In this model, two proteins are
-said to interact if they are constituent members of some protein complex 
-under the conditions of interest. This second type of interactome is
-more closely related to co-precipitation or affinity-purification
-experiments \cite{Ho, Gavin, Krogan}. We note that proteins which
-interact in the second sense, need not interact in the first sense;
-hence, we separate these two different, but related, concepts. Other
-interactomes can be created by considering other relationships such as
-those between transcription factors and their direct targets or the
-interaction network that can be defined on pairs of synthetically
-lethal genes \cite{Tong2004}.
+Protein interactions form a fundamental part of molecular biology and
+are relevant to our understanding of complex biological processes and
+to deciphering the different roles played by genes and proteins. A
+number of high throughput experiments have been carried out with the
+goal of helping to elucidate the nature and number of interactions
+present \citep{Gavin, Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge is
+very incomplete. Hence, not only do we need more experiments but we
+also need fundamentally different experiments to fully reveal the
+different network structures (FIXME: justify this?). However, such
+experiments are expensive and time consuming to carry out, suggesting
+that simulation models may help to identify the viability of
+experimental procedures, to aid in integrating data from disparate
+sources, and to provide a sound basis for the development of new
+methodology to help design experiments and to analyze the resultant
+data. In this paper we outline one approach to the creation of
+\textit{in silico interactomes}.
 
 In this paper we consider the problem of estimating an \textit{in
-  silico} interactome for \textit{Saccharomyces cerevisiae} and we
-describe five different roles where such a computational device can be
-used.  First, the \textit{in silico} interactome provides a tool that
-can be used to mimic wet-lab experiments; these \textit{in silico}
-experiments can help to confirm the viability of the wet-lab
-experimental procedures by allowing investigators to alter
-experimental conditions (both stochastic and systematic errors can be
-modified) and to measure how the outputs change as the error rates
-do. Second, the \textit{in silico} interactome provides a tool that
-can generate multiple data sets, under different conditions, so that
-the statistical properties of different of proposed estimation
-procedures can be directly compared. A third use for the \textit{in
-  silico} interactome is to use it to help develop tools and
-strategies for small scale experiments that will probe the interactome
-at a very detailed level. For example, a reasonable strategy to
-investigate a coherent set of protein complexes is to first select a
-small number of candidates and explore their interactions, say via
-affinity purification (co-precipitation) experiments. Once the first
-experiment has been collected one would like to analyze the data and
-determine an optimal, or nearly optimal set of baits for future
-experiments. A fourth use of an \textit{in silico} interactome is to
+  silico} interactome, ISI, for \textit{Saccharomyces cerevisiae} and
+we describe five different roles where such a computational device can
+be used.  First, the ISI provides a tool that can be used to mimic
+wet-lab experiments; these \textit{in silico} experiments can help to
+confirm the viability of the wet-lab experimental procedures by
+allowing investigators to alter experimental conditions (both
+stochastic and systematic errors can be modified) and to measure how
+the outputs change as the error rates do. Second, the ISI provides a
+tool that can generate multiple data sets, under different conditions,
+so that the statistical properties of different of proposed estimation
+procedures can be directly compared. A third use for the ISI is to use
+it to help develop tools and strategies for small scale experiments
+that will probe the interactome at a very detailed level. For example,
+a reasonable strategy to investigate a coherent set of protein
+complexes is to first select a small number of candidates and explore
+their interactions, say via affinity purification (co-precipitation)
+experiments. Once the first experiment has been collected one would
+like to analyze the data and determine an optimal, or nearly optimal
+set of baits for future experiments. A fourth use of an ISI is to
 study the effect of perturbations in a network.  Such perturbations
 could be caused by evolution (and hence could become part of the study
 of evolutionary pressure on the interactome) or due to drug treatments
@@ -102,41 +81,48 @@ likely effects of drug treatments). The fifth use for such a tool is
 to explore and understand the effects of different sampling paradigms
 on the inferences that can drawn from different wet-lab
 experiments. We note that there are a number of recent papers
-\cite{Oltavi,Goverview, SubsampNetworks} that raise many important
+\citep{Oltavi,Goverview, SubsampNetworks} that raise many important
 issues in this regard.
 
-While the estimated interactome is itself of some great interest, we
-note that it is more important to describe the procedure by which the
-\textit{in silico interactome} is produced. This methodology is more
-important than the estimate, since from it new estimates can easily be
-produced, and thus it is this construction that is our focus. There are many
-reasons why the answer is of less importance, among them the fact that
-the methodology can be applied to many organisms and tissue types. We
-also note that genomic science is rapidly evolving and that new data
-sources will continuously come on-line. Hence there must be a
-mechanism for updating the estimated interactome. There are many
-different and disparate data sources and the system should be
-sufficiently flexible to allow for the addition of data from new and
-potentially different experimental techniques. Finally we note that
-different investigators will want to modify the interactome, either
-with locally produced, though not yet public, data, or to satisfy personal
-beliefs. We have developed a paradigm that allows investigators to
-create their own personalized estimates, to share interactomes and to
-build, revise and update interactomes.
-
+An ISI is not without its limitiations. It cannot reveal new
+relationships between its members, but rather can only reflect the
+current state of biological knowledge. It can, be used out any of the
+five tasks listed above, however. Further, one type of interaction can
+be used to either predict or model other types of interactions, and
+provide information about the likelihood of interactions; the
+verification of interactions remains the domain of experimental
+biology. 
+%%FIXME: this needs a bit more
 We are aware of the very dynamic nature of protein interactions and
 that different interactions occur at different times and under
-different conditions. In this paper we consider the description of an
-interactome that can be thought of as representing the state of a
-single type cell (our example will be based on
-\textit{S. cerevisiae} where there is a single cell, but where
-different conditions could conceivably result in different
-interactomes). We leave the problem of representing state-dependent
-interactomes for a separate report.
+different conditions. We provide some tools that will allow
+investigators the ability to indicate situations and conditions under
+which an interaction is known to occur and we discuss a paradigm where
+an investigator will be able to select all interactions for a given
+condition. Our example is based on \textit{S. cerevisiae}.
+%%FIXME: we are going to need a separate table that maps protein
+%%complexes to conditions. Then users could ask for the complexes that
+%%are active under condition X.
 
-% We have carried out a number of different investigations of these data
-% \cite{Scholtens, ScholtensVidalGent} which have focused on the
-% estimation of protein complex co-memberships. 
+While the estimated interactome is itself of some great interest, we
+note that it is more important to describe the procedure by which an
+ISI is produced. There are many reasons why the estimate is of less
+importance, among them the fact that the methodology can be applied to
+many organisms and tissue types to yield specialized ISI estimates. We
+also note that the data used in the construction is constantly being
+updated and improved, hence users will want to regularly update any
+estimate as new data sources become availble, or old ones are
+updated. Hence, there to be viable there must be a mechanism for
+updating and refining the ISI. We also note that there are many
+different and disparate data sources and the system should be
+sufficiently flexible to allow users to select data sources
+appropriate for their studies as well as the ability to incorporate
+additional data from new and potentially different experimental
+techniques. Finally we note that investigators will often want to
+modify the ISI, either with locally produced, though not yet public,
+data, or to satisfy personal beliefs. The paradigm we describe here
+allows investigators to create their own personalized estimates, to
+share interactomes and to revise and update interactomes.
 
 In this paper we first define the notion of a biological interactome and 
 give various examples of such interactomes. We then present a  
@@ -177,6 +163,24 @@ according to whether they are in a complex and these sets constitute the
 hyperedges of the graph. There is no need for the hyperedges to be
 disjoint and proteins can be in many or few hyperedges, depending on
 whether the protein is in many or few complexes.
+
+We begin by distinguishing between many different types of
+interactomes with a few general comments, we will make the
+terms and ideas more explicit in later sections of this report. There
+are interactomes that model direct binary interactions and hence are
+related to experiments using the yeast two hybrid (Y2H) system
+\citep{Y2H, Ito, Uetz}. A second type of interactome is one that
+models protein complex membership. In this model, two proteins are
+said to interact if they are constituent members of some protein complex 
+under the conditions of interest. This second type of interactome is
+more closely related to co-precipitation or affinity-purification
+experiments \citep{Ho, Gavin, Krogan}. We note that proteins which
+interact in the second sense, need not interact in the first sense;
+hence, we separate these two different, but related, concepts. Other
+interactomes can be created by considering other relationships such as
+those between transcription factors and their direct targets or the
+interaction network that can be defined on pairs of synthetically
+lethal genes \citep{Tong2004}.
 
 % We can relate the two previous population interactomes to biological
 % interactomes. Now let $P$ be the set of genes within the genome of some cell
@@ -457,14 +461,16 @@ which are indexed exclusively by the following codes:
 mass spectrometry (MALDI TOF MS))
 "902.01.09.02" (high throughput experiment)
 
-When the function is given these three evidence codes, all high through-put protein
-complexes are eliminated (Gavin, Ho, Krogan) with the exception of one Krogan protein 
-complex. This unique Krogan protein complex (originally with 14 constituent proteins) 
-has 2 proteins which are indexed by some other evidence codes in addition to those 
-listed above, and therefore, the function selected these two proteins and the protein 
-complex for which they belong in its parse mechanism. Because we have built 
-\Rpackage{ScISI} in a way so that users can allow or dis-allow proteins based on evidence
-codes, this small anomoly cannot be circumvented by the function itself. We shall 
+When the function is given these three evidence codes, all high
+through-put protein complexes are eliminated (Gavin, Ho, Krogan) with
+the exception of one Krogan protein complex. This unique Krogan
+protein complex (originally with 14 constituent proteins) has 2
+proteins which are indexed by some other evidence codes in addition to
+those listed above, and therefore, the function selected these two
+proteins and the protein complex for which they belong in its parse
+mechanism. Because we have built \Rpackage{ScISI} in a way so that
+users can allow or dis-allow proteins based on evidence codes, this
+small anomoly cannot be circumvented by the function itself. We shall
 describe in a later section on QC for minor anomolies.
 
 
