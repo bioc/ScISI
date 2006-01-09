@@ -36,21 +36,22 @@
 
 \section{Introduction}
 
-Protein interactions form a fundamental part of molecular biology and
-are relevant to our understanding of complex biological processes and
+Understanding protein interactions (a fundamental part in the biological
+machinery)
+is relevant to our understanding of complex biological processes and
 to deciphering the different roles played by genes and proteins. A
 number of high throughput experiments have been carried out with the
-goal of helping to elucidate the nature and number of interactions
-present \citep{Gavin, Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge is
+goal of helping to elucidate these nature and number of their 
+occurances \citep{Gavin, Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge is
 very incomplete. Hence, not only do we need more experiments but we
 also need fundamentally different experiments to fully reveal the
-different network structures (FIXME: justify this?). However, such
-experiments are expensive and time consuming to carry out, suggesting
+various network structures (FIXME: justify this?). Such
+experiments, however,  are expensive and time consuming to carry out, suggesting
 that simulation models may help to identify the viability of
 experimental procedures, to aid in integrating data from disparate
 sources, and to provide a sound basis for the development of new
-methodology to help design experiments and to analyze the resultant
-data. In this paper we outline one approach to the creation of
+methodology in designing experiments and in analyzing the resultant
+data. In this paper we outline one approach in the creation of
 \textit{in silico interactomes}.
 
 In this paper we consider the problem of estimating an \textit{in
@@ -59,14 +60,14 @@ we describe five different roles where such a computational device can
 be used.  First, the ISI provides a tool that can be used to mimic
 wet-lab experiments; these \textit{in silico} experiments can help to
 confirm the viability of the wet-lab experimental procedures by
-allowing investigators to alter experimental conditions (both
-stochastic and systematic errors can be modified) and to measure how
+allowing investigators to alter experimental conditions (by the modification
+of both stochastic and systematic error rates) and then measure how
 the outputs change as the error rates do. Second, the ISI provides a
-tool that can generate multiple data sets, under different conditions,
-so that the statistical properties of different of proposed estimation
+tool from which multiple data sets can be generated, under different conditions,
+so that the statistical properties of different proposed estimation
 procedures can be directly compared. A third use for the ISI is to use
 it to help develop tools and strategies for small scale experiments
-that will probe the interactome at a very detailed level. For example,
+that can probe the interactome at a very detailed level. For example,
 a reasonable strategy to investigate a coherent set of protein
 complexes is to first select a small number of candidates and explore
 their interactions, say via affinity purification (co-precipitation)
@@ -86,9 +87,10 @@ issues in this regard.
 
 An ISI is not without its limitiations. It cannot reveal new
 relationships between its members, but rather can only reflect the
-current state of biological knowledge. It can, be used out any of the
-five tasks listed above, however. Further, one type of interaction can
-be used to either predict or model other types of interactions, and
+current state of biological knowledge. It can, however,  be used out 
+in any of the
+five tasks listed above. Further, one type of interaction can
+be used either to predict or to model other types of interactions, and
 provide information about the likelihood of interactions; the
 verification of interactions remains the domain of experimental
 biology. 
@@ -154,11 +156,11 @@ relationships are binary, for example, protein $p_1$ is known to
 directly physically interact with some other protein, $p_2$. In other
 cases, the relations are not binary but rather are one to many or many
 to many. The example we use for this second type of relationship is
-that of protein complex co-membership. In this setting all members of
+that of protein complex membership. In this setting all members of
 a complex are related to each other, but they need not directly
 interact and the relationship is not binary. A reasonable model for
-such data is as either a hypergraph \cite{Berge} or the equivalent
-bipartite graph representation. Proteins are grouped into sets
+such data is as either a hypergraph \cite{Berge} or, equivalently,
+the bipartite graph representation. Proteins are grouped into sets
 according to whether they are in a complex and these sets constitute the
 hyperedges of the graph. There is no need for the hyperedges to be
 disjoint and proteins can be in many or few hyperedges, depending on
@@ -233,15 +235,15 @@ for \textit{S. cerevisiae}. We restrict our attention to the two
 interactomes described above, $I_b$ and $I_c$.
 
 
-of environmental conditions. The elements of $I$
-are the disjoint union of two sets: the first is the set $P$ of genes
-within the genome of a yeast cell; the second is the set $C$ of all protein
-complexes of yeast for a specific cell type. Association is defined as
-protein complex membership, i.e. gene $g$ is associated with protein
-complex $c$ if and only if the induced protein of $g$ is a constituent
-member of $c$. This definition implies that elements of $P$ are only 
-associated with elements of $C$ and conversely, but no element can 
-be associated with other elements of the same type. 
+%of environmental conditions. The elements of $I$
+%are the disjoint union of two sets: the first is the set $P$ of genes
+%within the genome of a yeast cell; the second is the set $C$ of all protein
+%complexes of yeast for a specific cell type. Association is defined as
+%protein complex membership, i.e. gene $g$ is associated with protein
+%complex $c$ if and only if the induced protein of $g$ is a constituent
+%member of $c$. This definition implies that elements of $P$ are only 
+%associated with elements of $C$ and conversely, but no element can 
+%be associated with other elements of the same type. 
 
 \section{Materials and Methods}
 
@@ -286,13 +288,13 @@ more than fifty.
 
 There are sure to be situations where a protein complex, that exists
 under one set of conditions, is a proper subset of a complex that
-exists under another set of conditions. However, such situations will
+exists under another set of conditions. Such situations, however, will
 cause some mathematical problems and for the purposes of this
 presentation we remove all subcomplexes that are proper subsets of
 other complexes from our estimated interactome. The appropriate
 modeling of these can be handled by attaching attributes to the
 complexes and then selecting those complexes with the correct set of
-attributes for the conditions we are going to simulate from.
+attributes for the conditions from which we are going to simulate.
 
 % a complex that is entirely contained within another protein
 % complex. We remark that a protein sub-complex under certain cell
@@ -311,16 +313,16 @@ attributes for the conditions we are going to simulate from.
 %be a sub-complex given other conditions...where should we draw the 
 %line between when a complex is actually a sub-complex or not??? TC) 
 
-The collection of proteins and protein complexes with affiliation data
-can be represented as a large membership network or graph. We have
-chosen to represent the protein complex membership graph as a
-bipartite graph, $B$. The proteins themselves index one set of nodes
-which we denote as $P$ while the protein complexes index the other set
-of nodes which we denote as $C$. A protein specific node $p_i$ is
-incident to a protein complex specific node $c_j$ if $p_i$ has
-membership in $c_j$. We remark that there is an equivalence between
-the categories of bipartite graphs and the categories of hyper-graphs
-(cite or supplementary).
+%The collection of proteins and protein complexes with affiliation data
+%can be represented as a large membership network or graph. We have
+%chosen to represent the protein complex membership graph as a
+%bipartite graph, $B$. The proteins themselves index one set of nodes
+%which we denote as $P$ while the protein complexes index the other set
+%of nodes which we denote as $C$. A protein specific node $p_i$ is
+%incident to a protein complex specific node $c_j$ if $p_i$ has
+%membership in $c_j$. We remark that there is an equivalence between
+%the categories of bipartite graphs and the categories of hyper-graphs
+%(cite or supplementary).
 
 \subsection{Graphs and Hypergraphs}
 
@@ -344,20 +346,21 @@ reports bipartite graphs are used.
 
 There are a variety of different representations for both graphs and
 hypergraphs. We will mainly make use of the incidence matrix
-representation for both. For the protein complex hypergraph the
+representation for $H$
+and the adjacency matrix representation of $G$. For the protein complex hypergraph the
 incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where
 proteins index the rows and protein complexes index the columns. The
 $(i,j)$ entry for $M_B$ is one if protein $p_i$ is a constituent
 member of complex $c_j$; the entry is zero otherwise. When studying
 binary interactions the representation will be of a graph, and then
-the incidence matrix is typically square (or upper triangular) with
-the proteins indexing both the rows and the columns. In this graph a
+the adjacency matrix is typically square (or upper triangular) with
+the proteins indexing both the rows and the columns. In this matrix a
 one in position $(i,j)$ indicates that protein $p_i$ interacts with
-protein $p_j$. This graph is likely to be sparse and we will make use
+protein $p_j$. This matrix is likely to be sparse and we will make use
 of appropriate software tools and data representations.
 
 The construction of the \textit{in silico} interactomes, $I_c$ and
-$I_b$, will be the construction of appropriate incidence matrices.
+$I_b$, will be the construction of appropriate matrices.
 
 
 \subsection{Constructing the Interactome}
@@ -436,7 +439,7 @@ DNA-directed Polymerase II, holoenzyme or repairosome.
 %%NAS, they should be fine.  Robert, Denise and I talked about what is iffy from her talks with the GO guy in Boston
 Both GO and MIPS provide additional information on the curation and
 provenance of the data that they report. This information comes in the
-form of evidence codes, which are used by both resources, although the
+form of evidence codes, which are used by both resource, although the
 codes themselves are unique to the different resources. Users can
 specify a list of evidence codes and disallow those proteins whose
 annotations are found in the supplied list. Within the GO
