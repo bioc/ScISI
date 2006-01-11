@@ -711,22 +711,24 @@ directory.
 
 <<ScISI2html, eval=TRUE, results = hide>>=
 mipsNames = colnames(mipsM)
+mipsCompOrder = colSums(mipsM)
 url = vector(length = length(mipsNames))
 linkNames = vector(length = length(mipsNames))
 for(i in 1:length(mipsNames)){
 url[i] = getURL(mipsOb, mipsNames[i])
 linkNames[i] = Desc(mipsOb, mipsNames[i])
 }
-ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex")
+ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex", compSize = mipsCompOrder)
 
 goNames = colnames(goM)
+goCompOrder = colSums(goM)
 url = vector(length = length(goNames))
 linkNames = vector(length = length(goNames))
 for(i in 1:length(goNames)){
 url[i] = getURL(goOb, goNames[i])
 linkNames[i] = Desc(goOb, goNames[i])
 }
-ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex")
+ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex", compSize = goCompOrder)
 
 @ 
 
@@ -747,7 +749,35 @@ the output file will be named ``mips.html'' and ``go.html''.
 \end{itemize}
 
 The purpose for this .html file is a quick and efficient way for users to manually parse the 
-protein complexes derived from \Rpackage{ScISi} either for quality control and for refinement.
+protein complexes derived from \Rpackage{ScISi} either for quality control and for refinement.\
+
+In the interactome that we wish to create, we have deleted eleven protein complexes. These were chosen 
+after investigating each protein complex from the .html file. Deleting these complexes is done by a call
+to the function \Rfunction{unWantedComp}.
+
+<<unWantedComp, eval = TRUE>>=
+
+updatedMerged = unWantedComp(merged, unwantedComplex =
+                         c("GO:0000262",
+                           "GO:0000228",
+                           "GO:0000775",
+                           "GO:0010008",
+                           "GO:0005792",
+                           "GO:0005768",
+                           "GO:0005769",
+                           "GO:0005770",
+                           "GO:0005777",
+                           "GO:0005844",
+                           "GO:0001400"))
+
+dim(merged)
+dim(updatedMerged)
+@ 
+
+The function has two arguments, the bi-partite graph incidence matrix and a character vector. 
+Each entry of the character vector is an protein complex ID which will be deleted. After the 
+deletion of these protein complexes, the function also removes any proteins which are no longer 
+apart of any protein complex.
 
 \section{Conclusion}
 The process given above has created one example on an \textit{in silico} interactome. For the purposes of 
