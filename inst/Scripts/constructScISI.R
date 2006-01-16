@@ -10,7 +10,9 @@ rmFromGo = c(go2go$toBeRm, go2go$toBeRmSubC)
 
 mipsECode = c("901.01.03", "901.01.03.01", "901.01.03.02",
               "901.01.04", "901.01.04.01", "901.01.04.02",
-              "901.01.05", "901.01.05.01", "901.01.05.02")
+              "901.01.05", "901.01.05.01", "901.01.05.02",
+              "902.01.01.02.01.01.02", "902.01.01.04.01.03",
+              "902.01.09.02")
 
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = mipsECode, wantAllComplexes = FALSE)
@@ -52,6 +54,8 @@ rmFromMGGHK = c(krogan2mergeMGGH$toBeRm, krogan2mergeMGGH$toBeRmSubC)
 
 ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
                                                         rmFromMGGHK)))
+
+ScISI = unWantedComp(ScISI)
 
 ##If the sub-complexes are to be included in the interactome
 
@@ -101,3 +105,4 @@ rmFromMGGHK = c(krogan2mergeMGGH$toBeRm)
 
 ScISIsubC = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
                                                         rmFromMGGHK)))
+ScISIsubC = unWantedComp(ScISIsubC)
