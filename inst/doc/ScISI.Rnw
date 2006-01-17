@@ -346,8 +346,8 @@ reports bipartite graphs are used.
 
 There are a variety of different representations for both graphs and
 hypergraphs. We will mainly make use of the incidence matrix
-representation for $H$
-and the adjacency matrix representation of $G$. For the protein complex hypergraph the
+representation for $H$ and the adjacency matrix representation of $G$.
+For the protein complex hypergraph the
 incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where
 proteins index the rows and protein complexes index the columns. The
 $(i,j)$ entry for $M_B$ is one if protein $p_i$ is a constituent
