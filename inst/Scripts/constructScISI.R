@@ -25,7 +25,7 @@ mipsECode = c("901.01.03", "901.01.03.01", "901.01.03.02",
               "902.01.01.02.01.02.02", "902.01.01.04.01",
               "902.01.01.04.01.02", "902.01.01.04.01.01",
               "902.01.01.04", "902.01.01.04.01.01",
-              "902.01.01.04.02")
+              "902.01.01.04.02", "901.01.09.02")
 ##Getting the Mips protein complex composition:
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = mipsECode, wantAllComplexes = FALSE)
@@ -96,6 +96,191 @@ ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ##After verifying each protein complex, we deleted those complexes
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(ScISI)
+
+#######################
+##Statistics on ScISI##
+#######################
+mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")
+go2go = runCompareComplex(goM, goM, byWhich = "ROW")
+mips2go = runCompareComplex(mipsM, goM, byWhich = "ROW")
+gavin2mips = runCompareComplex(gavin, mipsM, byWhich = "ROW")
+gavin2go = runCompareComplex(gavin, goM, byWhich = "ROW")
+gavin2ho = runCompareComplex(gavin, ho, byWhich = "ROW")
+gavin2krogan = runCompareComplex(gavin, krogan, byWhich = "ROW")
+ho2mips = runCompareComplex(ho, mipsM, byWhich = "ROW")
+ho2go = runCompareComplex(ho, goM, byWhich = "ROW")
+ho2krogan = runCompareComplex(ho, krogan, byWhich = "ROW")
+krogan2mips = runCompareComplex(krogan, mipsM, byWhich = "ROW")
+krogan2go = runCompareComplex(krogan, goM, byWhich = "ROW")
+gavin2gavin = runCompareComplex(gavin, gavin, byWhich = "ROW")
+ho2ho = runCompareComplex(ho, ho, byWhich = "ROW")
+krogan2krogan = runCompareComplex(krogan, krogan, byWhich = "ROW")
+
+redundantMips = mips2mips$equal
+rMM = length(redundantMips) - ncol(mipsM)
+redundantGO = go2go$equal
+rGG = length(redundantGO) - ncol(goM)
+redundantMG = mips2go$equal
+rMG = length(redundantMG) 
+#redundantMGG = gavin2mergeMG$equal
+#redundantMGGH = ho2mergeMGG$equal
+#redundantMGGHK = krogan2mergeMGGH$equal
+redundantGavM = gavin2mips$equal
+rGavM = length(redundantGavM) 
+redundantGavG = gavin2go$equal
+rGavG = length(redundantGavG)
+redundantGavH = gavin2ho$equal
+rGavH = length(redundantGavH)
+redundantGavK = gavin2krogan$equal
+rGavK = length(redundantGavK)
+redundantHoM = ho2mips$equal
+rHM = length(redundantHoM)
+redundantHoG = ho2go$equal
+rHG = length(redundantHoG)
+redundantHoK = ho2krogan$equal
+rHK = length(redundantHoK)
+redundantKroM = krogan2mips$equal
+rKM = length(redundantKroM)
+redundantKroG = krogan2go$equal
+rKG = length(redundantKroG)
+redundantGav = gavin2gavin$equal
+rGav = length(redundantGav) - ncol(gavin)
+redundantHo = ho2ho$equal
+rH = length(redundantHo) - ncol(ho)
+redundantKro = krogan2krogan$equal
+rK = length(redundantKro) - ncol(krogan)
+
+subC <- function(dataL, twoSets){
+
+  x = sapply(dataL, function(v) v$orderBG1Comp)
+  y = sapply(dataL, function(w) w$orderBG2Comp)
+
+  z = sum(y<x)
+
+  a = sum(x<y)
+
+  name1 = twoSets[1]
+  print(name1)
+  name2 = twoSets[2]
+  
+  q = list(name1 = z, name2 = a)
+  names(q) = twoSets
+  q
+}
+
+subMips = mips2mips$subcomplex
+sM = subC(subMips, c("Mips1", "Mips2"))
+subGO = go2go$subcomplex
+sG = subC(subGO, c("GO1","GO2"))
+subMG = mips2go$subcomplex
+sMG = subC(subMG, c("Mips","GO"))
+subGav = gavin2gavin$subcomplex
+sGav = subC(subGav, c("Gavin1","Gavin2"))
+#subMGG = gavin2mergeMG$subcomplex
+subHo = ho2ho$subcomplex
+sH = subC(subHo, c("Ho1","Ho2"))
+#subMGGH = ho2mergeMGG$subcomplex
+subKrogan = krogan2krogan$subcomplex
+sK = subC(subKrogan, c("Krogan1","Krogan2"))
+#subMGGHK = krogan2mergeMGGH$subcomplex
+subGavM = gavin2mips$subcomplex
+sGavM = subC(subGavM, c("Gavin","Mips"))
+subGavG = gavin2go$subcomplex
+sGavG = subC(subGavG, c("Gavin","GO"))
+subGavH = gavin2ho$subcomplex
+sGavH = subC(subGavH, c("Gavin","Ho"))
+subGavK = gavin2krogan$subcomplex
+sGavK = subC(subGavK, c("Gavin","Krogan"))
+subHoM = ho2mips$subcomplex
+sHM = subC(subHoM, c("Ho","Mips"))
+subHoG = ho2go$subcomplex
+sHG = subC(subHoG, c("Ho","GO"))
+subHoK = ho2krogan$subcomplex
+sHK = subC(subHoK, c("Ho","Krogan"))
+subKroM = krogan2mips$subcomplex
+sKM = subC(subKroM, c("Krogan","Mips"))
+subKroG = krogan2go$subcomplex
+sKG = subC(subKroG, c("Krogan","GO"))
+
+
+redundantM = matrix(0, nrow=5, ncol=5)
+subCompM = matrix(0, nrow = 5, ncol = 5)
+repos = c("GO","Mips","Gavin","Ho","Krogan")
+dNames1 = list(complexNames = repos, complexNames = repos)
+dNames2 = list(subCompNames = repos, complexNames = repos)
+dimnames(redundantM) = dNames1
+dimnames(subCompM) = dNames2
+
+redundantM["Mips","Mips"] = rMM 
+redundantM["GO","GO"] = rGG
+redundantM["Gavin","Gavin"] = rGav
+redundantM["Ho","Ho"] = rH
+redundantM["Krogan","Krogan"] = rK
+redundantM["Mips","GO"] = rMG
+redundantM["Mips","Gavin"] = rGavM
+redundantM["Mips","Ho"] = rHM
+redundantM["Mips","Krogan"] = rKM
+redundantM["GO","Gavin"] = rGavG
+redundantM["GO","Ho"] = rHG
+redundantM["GO","Krogan"] = rKG
+redundantM["Gavin","Ho"] = rGavH
+redundantM["Gavin","Krogan"] = rGavK
+redundantM["Ho","Krogan"] = rHK
+
+subCompM["Mips","Mips"] = sM$"Mips1" + sM$"Mips2" 
+subCompM["GO","GO"] = sG$"GO1" + sG$"GO2"
+subCompM["Gavin","Gavin"] = sGav$"Gavin1" + sGav$"Gavin2"
+subCompM["Ho","Ho"] = sH$"Ho1" + sH$"Ho2"
+subCompM["Krogan","Krogan"] = sK$"Krogan1" + sK$"Krogan2"
+subCompM["Mips","GO"] = sMG$"GO"
+subCompM["Mips","Gavin"] = sGavM$"Gavin"
+subCompM["Mips","Ho"] = sHM$"Ho"
+subCompM["Mips","Krogan"] = sKM$"Krogan"
+subCompM["GO","Gavin"] = sGavG$"Gavin"
+subCompM["GO","Ho"] = sHG$"Ho"
+subCompM["GO","Krogan"] = sKG$"Krogan"
+subCompM["Gavin","Ho"] = sGavH$"Ho"
+subCompM["Gavin","Krogan"] = sGavK$"Krogan"
+subCompM["Ho","Krogan"] = sHK$"Krogan"
+subCompM["GO","Mips"] = sMG$"Mips"
+subCompM["Gavin","Mips"] = sGavM$"Mips"
+subCompM["Ho","Mips"] = sHM$"Mips"
+subCompM["Krogan","Mips"] = sKM$"Mips"
+subCompM["Gavin","GO"] = sGavG$"GO"
+subCompM["Ho","GO"] = sHG$"GO"
+subCompM["Krogan","GO"] = sKG$"GO"
+subCompM["Ho","Gavin"] = sGavH$"Gavin"
+subCompM["Krogan","Gavin"] = sGavK$"Gavin"
+subCompM["Krogan","Ho"] = sHK$"Ho"
+
+
+
+
+
+#  #Prevc = data[ind]
+#  #prevComp = sapply(prevC, function(h) h$BG2Comp)
+#  #unlist(prevComp)
+#  prevComp = y[ind]
+#
+#  n = length(listOtherData)
+#  
+#  for (i in 1:n){
+#    q = sapply(listOtherData[[i]], function(u) u$BG1Comp)
+#    p = sapply(listOtherData[[i]], function(w) w$BG2Comp)
+#    for (j in 1:length(prevComp)){
+#      g = which(q == prevComp[j])
+#      h = which(p == prevComp[j])
+#      if(length(g) != 0){
+#        ##q[g]
+#      }
+#      if(length(h) != 0 ){
+#        ##q[h]
+#      }
+#    }
+#  }
+#  
+
+
 
 ##If the sub-complexes are to be included in the interactome
 

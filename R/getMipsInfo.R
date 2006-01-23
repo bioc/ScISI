@@ -3,55 +3,55 @@ getMipsInfo <- function(wantDefault = TRUE,
                         parseType = NULL,
                         eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"),
                         wantAllComplexes = FALSE){
-  ##options(error=recover)
-  ##This file is specific towards the downloaded data file from the MIPS repository.
-  ##Since the file updated every six months (and it appears that the files are
-  ##not created completely identical) this file must be modified as well.
+
   fileToRead <- gzfile(system.file("extdata", "complexcat_data_14112005.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")
 
   if(!is.null(eCode)){
       codes = as.vector(dataY[,3])
       codesL = strsplit(codes, split = ",")
+
       w = vector()
       
       v = vector()
       for(q in 1:length(codesL)){
-          
-          if (length(setdiff(eCode, codesL[[q]])) == 0){
-              v = c(v, q)
+
+        if(length(codesL[[q]]) != 0){
+          if (length(setdiff(codesL[[q]], eCode)) == 0){
+            v = c(v, q)
           }
+        }
       }
       w = unique(c(w,v))
-
-  
       if(length(w) != 0){
-          dataY = dataY[-w,]
+        dataY = dataY[-w,]
       }
   }
-  
+
+
 
   if (nrow(dataY) != 0){
       mipsYeastComplex = split(dataY$V1, dataY$V2)
-
-  }
+    }
   else{
       stop("There are no proteins for which to populate the protein complexes")
   }
-  ##print(mipsYeastComplex)
+
       
   protInComp <- readLines(system.file("extdata", "complexcat.scheme", package="ScISI"))
   protInComp <- protInComp[-(which(protInComp==""))]
   protInComp <- protInComp[-(which(protInComp==" "))]
   protInComp1 <- strsplit(protInComp, "   +")
-
+  
   ##Get the MIPS ID and their descriptions
   id <- sapply(protInComp1, function(x) x[1])
+  
   desc <- sapply(protInComp1, function(x) x[2])
-  names(desc) <- id
-  #print(id)
 
-  pattern = c("complex\\b","\\Base\\b","\\Bsome\\b")
+  names(desc) <- id
+  
+
+  pattern = c("\\b[Cc]omplex\\b","\\Base\\b","\\Bsome\\b")
   parseT = rep("grep", length(pattern))
   theDefault = vector("list", length = length(pattern))
 
@@ -95,31 +95,38 @@ getMipsInfo <- function(wantDefault = TRUE,
 
   for(i in 1:length(grepL)){
       parsed[[i]] = id[do.call(parseType[i], grepL[[i]], quote=TRUE)]
-      parsed2minus[[i]] = id[grep("complexes\\b", desc, perl=TRUE)]
+      
+      parsed2minus[[i]] = id[grep("\\b[Cc]omplexes\\b", desc, perl=TRUE)]
+      
       parsed[[i]] = setdiff(parsed[[i]], parsed2minus[[i]])
-      if(wantAllComplexes == FALSE){
-          for(j in 1:length(parsed[[i]])){
-              index = grep(paste("^",parsed[[i]][j],sep=""), parsed[[i]])
-              if(length(index) > 1){
-                  parsed[[i]] = parsed[[i]][-(index[2:length(index)])]
-              }
-          }
-      }
-  }
-  
-  compId2 = NULL
-  for (k in 1:length(parsed)){
-      compId2 = union(compId2, parsed[[k]])
       
   }
 
+  parsed = unlist(parsed)
+  parsed = unique(parsed)
+
+  if(wantAllComplexes == FALSE){
+    toDel = vector()
+    for (j in 1:length(parsed)){
+      index = grep(paste("^",parsed[j], "\\.", sep=""), parsed)
+      toDel = c(toDel, index)
+    }
+    toDel = unique(toDel)
+    parsed <- parsed[-toDel]
+
+  }
+  
+  compId2 = parsed
+  print(parsed)
   desc = desc[compId2]
 
   
-  MipList <- list()
   
+  MipList <- list()
+
   mipsYeastComplex <- lapply(mipsYeastComplex, as.vector)
   nam = names(mipsYeastComplex)
+  
   
 
   ##This for loop will find the hierarchical structure for one particular
@@ -128,6 +135,8 @@ getMipsInfo <- function(wantDefault = TRUE,
 
       
       indices1 = grep(paste("^", compId2[i], "$", sep=""), nam, perl=TRUE)
+
+
       indices2 = grep(paste("^", compId2[i], "\\.", sep=""), nam, perl=TRUE)
       indices = c(indices1, indices2)
 
@@ -148,11 +157,15 @@ getMipsInfo <- function(wantDefault = TRUE,
 
   isUnit = sapply(MipList, function(u) length(u) == 1)
   MipList = MipList[!isUnit]
+
   desc = desc[!isUnit]
+
   isZero = sapply(MipList, function(u) length(u) == 0)
-  MipList = MipList[!isZero]
-  desc = desc[!isZero]
   
+  MipList = MipList[!isZero]
+
+  desc = desc[!isZero]
+
   inPutforCreate = list()
   inPutforCreate$Mips = MipList
   inPutforCreate$DESC = desc
