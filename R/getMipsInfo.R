@@ -117,7 +117,7 @@ getMipsInfo <- function(wantDefault = TRUE,
   }
   
   compId2 = parsed
-  print(parsed)
+
   desc = desc[compId2]
 
   
