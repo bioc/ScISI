@@ -1,6 +1,8 @@
 ##This file gives the exact commands for the construction of the ScISI.
 
 library(ScISI)
+
+##GO Section##
 ##Determine the GO evidence codes to exclude:
 goECodes = c("IEA", "NAS", "ND", "NR")
 ##Getting the GO protein complex composition:
@@ -13,19 +15,34 @@ go2go = runCompareComplex(goM, goM, byWhich = "ROW")
 ##Those GO complexes which are redundant or sub-complexes
 ##to other GO complexes:
 rmFromGo = c(go2go$toBeRm, go2go$toBeRmSubC)
+##End of GO##
 
+
+##MIPS Section##
 ##Determine the MIPS evidence codes to exclude:
-mipsECode = c("901.01.03", "901.01.03.01", "901.01.03.02",
-              "901.01.04", "901.01.04.01", "901.01.04.02",
-              "901.01.05", "901.01.05.01", "901.01.05.02",
-              "902.01.01.02.01.01.02", "902.01.01.04.01.03",
-              "902.01.09.02", "902.01.01.02.01.01",
-              "902.01.01.02.01.01.01", "902.01.01.02.01.01.02",
-              "902.01.01.02.01.02", "902.01.01.02.01.02.01",
-              "902.01.01.02.01.02.02", "902.01.01.04.01",
-              "902.01.01.04.01.02", "902.01.01.04.01.01",
-              "902.01.01.04", "902.01.01.04.01.01",
-              "902.01.01.04.02", "901.01.09.02")
+mipsECode = c("901.01.03",
+              "901.01.03.01",
+              "901.01.03.02",
+              "901.01.04",
+              "901.01.04.01",
+              "901.01.04.02",
+              "901.01.05",
+              "901.01.05.01",
+              "901.01.05.02",
+              "902.01.09.02",
+              "902.01.01.02.01.01",
+              "902.01.01.02.01.01.01",
+              "902.01.01.02.01.01.02",
+              "902.01.01.02.01.02",
+              "902.01.01.02.01.02.01",
+              "902.01.01.02.01.02.02",
+              "902.01.01.04",
+              "902.01.01.04.01",
+              "902.01.01.04.01.01",
+              "902.01.01.04.01.02",
+              "902.01.01.04.01.03",
+              "902.01.01.04.02",
+              "901.01.09.02")
 ##Getting the Mips protein complex composition:
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = mipsECode, wantAllComplexes = FALSE)
@@ -33,9 +50,9 @@ mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
 mipsM = createMipsMatrix(mips)
 ##Deleting any protein complexes ascertained from AP-MS high
 ##through-put (Gavin, Ho, Krogan) found within Mips:
-#cn = colnames(mipsM)
-#apms = grep("MIPS-550", cn)
-#mipsM = mipsM[,-apms]
+cn = colnames(mipsM)
+apms = grep("MIPS-550", cn)
+mipsM = mipsM[,-apms]
 ##Comparing Mips complexes with all other Mips complexes:
 mips2mips = runCompareComplex(mipsM, mipsM, byWhich= "ROW")
 ##Those Mips complexes which are redundant or sub-complexes
@@ -49,6 +66,10 @@ rmFromMipsGo = c(mips2go$toBeRm, mips2go$toBeRmSubC)
 ##Merging mipsM and goM:
 mergeMipsGo = mergeBGMat(mipsM, goM, toBeRm = unique(c(rmFromGo, rmFromMips,
                                                        rmFromMipsGo)))
+##End of Mips##
+
+
+##Gavin##
 ##Downloading the Gavin data from bioconductor:
 gavin = getAPMSData("Gavin")
 ##Comparing the gavin complexes with all other gavin
@@ -65,6 +86,10 @@ rmFromMGG = c(gavin2mergeMG$toBeRm, gavin2mergeMG$toBeRmSubC)
 ##Merging the gavin complexes with mergeMipsGo:
 mergeMGG = mergeBGMat(gavin, mergeMipsGo, toBeRm = unique(c(rmFromGavin,
                                                              rmFromMGG)))
+##End of Gavin##
+
+
+##Ho##
 ##Downloading the Ho data from bioconductor:
 ho = getAPMSData("Ho")
 ##Comparing the ho complexes with other ho complexes:
@@ -79,7 +104,10 @@ ho2mergeMGG = runCompareComplex(ho, mergeMGG, byWhich= "ROW")
 rmFromMGGH = c(ho2mergeMGG$toBeRm, ho2mergeMGG$toBeRmSubC)
 ##Merging ho with mergeMGG:
 mergeMGGH = mergeBGMat(ho, mergeMGG, toBeRm = unique(c(rmFromHo, rmFromMGGH)))
+##End of Ho##
 
+
+##Krogan##
 ##Downloading the krogan from bioconductor:
 krogan = getAPMSData("Krogan")
 ##Comparing the krogan complexes with krogan complexes:
@@ -93,6 +121,9 @@ rmFromMGGHK = c(krogan2mergeMGGH$toBeRm, krogan2mergeMGGH$toBeRmSubC)
 ##Merging the krogan complexes with mergeMGGH:
 ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
                                                         rmFromMGGHK)))
+##End of Krogan##
+
+
 ##After verifying each protein complex, we deleted those complexes
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(ScISI)
@@ -100,9 +131,9 @@ ScISI = unWantedComp(ScISI)
 #######################
 ##Statistics on ScISI##
 #######################
-mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")
-go2go = runCompareComplex(goM, goM, byWhich = "ROW")
-mips2go = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")
+#go2go = runCompareComplex(goM, goM, byWhich = "ROW")
+#mips2go = runCompareComplex(mipsM, goM, byWhich = "ROW")
 gavin2mips = runCompareComplex(gavin, mipsM, byWhich = "ROW")
 gavin2go = runCompareComplex(gavin, goM, byWhich = "ROW")
 gavin2ho = runCompareComplex(gavin, ho, byWhich = "ROW")
@@ -205,7 +236,7 @@ sKG = subC(subKroG, c("Krogan","GO"))
 
 redundantM = matrix(0, nrow=5, ncol=5)
 subCompM = matrix(0, nrow = 5, ncol = 5)
-repos = c("GO","Mips","Gavin","Ho","Krogan")
+repos = c("Mips","GO","Gavin","Ho","Krogan")
 dNames1 = list(complexNames = repos, complexNames = repos)
 dNames2 = list(subCompNames = repos, complexNames = repos)
 dimnames(redundantM) = dNames1
@@ -337,4 +368,4 @@ ScISIsubC = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ScISIsubC = unWantedComp(ScISIsubC)
 
 
-##Running the script without manually removing the 
+
