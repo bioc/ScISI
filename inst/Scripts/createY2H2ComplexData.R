@@ -30,8 +30,9 @@ createY2H2ComplexData <- function(y2hList, wantOnlyAPMSPrey = FALSE){
         for(i in 1:length(numPreyFound)){
             
             if(class(numPreyFound[[i]])=="matrix"){
-                tmp = intersect(rownames(numPreyFound[[i]]), rNames)
-                numPreyFound[[i]] = numPreyFound[[i]][tmp,,drop=FALSE]
+                commonPrey = intersect(rownames(numPreyFound[[i]]),
+                  names(ScISI[which(ScISI[,i] == 1),i]))
+                numPreyFound[[i]] = numPreyFound[[i]][commonPrey,,drop=FALSE]
             }
         }
     }
