@@ -1,7 +1,8 @@
-createY2H2ComplexData <- function(y2hList){
+createY2H2ComplexData <- function(y2hList, wantOnlyAPMSPrey = FALSE){
 
     library(ScISI)
     data(ScISI)
+    rNames <- rownames(ScISI)
     data(baitsSystematic)
     
     y2hBaitInEachScISI = list()
@@ -24,5 +25,16 @@ createY2H2ComplexData <- function(y2hList){
             numPreyFound[[i]] = numPreyFound[[i]][index,,drop=FALSE]
         }
     }
+
+    if(wantOnlyAPMSPrey){
+        for(i in 1:length(numPreyFound)){
+            
+            if(class(numPreyFound[[i]])=="matrix"){
+                tmp = intersect(rownames(numPreyFound[[i]]), rNames)
+                numPreyFound[[i]] = numPreyFound[[i]][tmp,,drop=FALSE]
+            }
+        }
+    }
+    
 
 }
