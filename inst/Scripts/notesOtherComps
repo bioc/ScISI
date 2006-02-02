@@ -1,0 +1,17 @@
+There were 32 other GO protein complexes gotten by grepping for the term 
+"[Cc]omplex" in the description (definition) of each GO node and then parsing
+by hand. Of these 32 GO complexes (the GO id's are stored as the character
+vector xtGO.rda in the data directory) 20 complexes became trivial when 
+restricted to yeast genes, and the other twelve are characterized by the
+function checkComplex(). 
+
+5 were already attained by the getGOInfo() function. Two are sub-complexes of 
+Mips protein complexes. Two are larger complexes containing one Mips complex
+(Mips-160) and one Gavin Complex (Gavin236).
+
+Three complexes did not have any proper inclusion properties. Thus 5 
+extra protein complexes should be investigated thoroughly and either 
+added to the ScISI or ignored.
+
+The two super-complexes are GO:0000145; GO:0030127
+The three others are: GO:0000776; GO:0005786; GO:0000943
