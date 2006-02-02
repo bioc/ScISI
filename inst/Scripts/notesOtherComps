@@ -15,3 +15,5 @@ added to the ScISI or ignored.
 
 The two super-complexes are GO:0000145; GO:0030127
 The three others are: GO:0000776; GO:0005786; GO:0000943
+
+newComps = c("GO:0000145", "GO:0030127", "GO:0000776", "GO:0005786", "GO:0000943")
