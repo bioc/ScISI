@@ -9,7 +9,7 @@ getGOInfo <- function(wantDefault = TRUE,
   gt <- getGOTerm(xx)
   gtcc <- gt$CC
   yy <- as.list(YEASTGO2PROBE)
-  grepL = list()
+  Grepl = list()
 
   ##The pattern and parseT is used for the default searches
   pattern = c("complex", "\\Base\\b", "\\Bsome\\b")
