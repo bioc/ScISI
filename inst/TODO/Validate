@@ -1,0 +1,19 @@
+Hi,
+  I really want to push on this to the point where we at least have a workable, defensible validation tool.
+
+  As I see it we can use:
+  1) Y2H, here the major problem (Tony, any progress) is that any genes/proteins that were not either bait or prey will cause havoc. So we need to know the prey populations for all experiments.
+
+     Given that we can do some things, they are mostly aimed at seeing how close to connected, given the data, the Y2H graph is. I believe that it cannot be merely a count, but it has to somehow reflect complex size (or little complexes will look better).
+
+  2) predicted interactions. Tony had a paper - any progress on that front? Last we spoke Ting was going to get us more data.
+    We could also take all the Y2H data and use the PFAM/SMART domains to see which domain combinations seem to be showing up. Has anyone done something that simple?
+
+  3) Using the output of apComplex the SBMH predictions from one of the three (and soon to be four) runs against the final ScISI. Here we are looking to see if the SBMH is larger than a prediction (and the prediction would need to be modified for what was tested).
+
+  4) The new Bader paper uses SL data to identify likely complex co-members (at least that is one way to think of it). They look at pairs of genes that have lots of common SL partners and claim that those pairs are related. We could use that same data, but do something a bit more graph based.
+
+ Comparisons, as Denise did to MIPS or GO might also be useful. 
+
+ Other suggestions?
+
