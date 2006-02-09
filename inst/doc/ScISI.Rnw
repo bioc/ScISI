@@ -433,7 +433,8 @@ We make use of the following three regular expressions,
 \verb+complex+, \verb+\\Base\\b+,
 and \verb+\\Bsome\\b+ as the default regular expressions in our search. 
 These can narrow the pool of return values yet include
-DNA-directed Polymerase II, holoenzyme or repairosome. 
+\textit{DNA-directed Polymerase II, holoenzyme} or 
+\textit{repairosome}. 
 %%FIXME: Tony - I don't see how you find holoenzyme this way?  Robert...the name is ``DNA-directed Polymerase II, holoenzyme''
 %%FIXME: Tony, in the para below, I don't see why we want to exclude
 %%NAS, they should be fine.  Robert, Denise and I talked about what is iffy from her talks with the GO guy in Boston
@@ -456,8 +457,9 @@ following: Overview Information - review and text (901.01.03,
 Closed Information - institution or private (901.01.05, 901.01.05.01,
 901.01.05.02)
 
-In addition to the MIPS evidence codes listed above, we have dis-allowed proteins 
-which are indexed exclusively by the following codes:
+In addition to the MIPS evidence codes listed above, we have
+dis-allowed proteins which are indexed exclusively by the following
+codes:
 
 "902.01.01.02.01.01.02" (co-immunoprecipitation, epitope tag)
 "902.01.01.04.01.03" (matrix-assisted laser desorption/ionization time-of-light
@@ -667,6 +669,68 @@ Histogram for the order of each particular protein's complex membership?
 
 What else should we put here???
    
+\section{Validation}
+
+There are a number of different methods that can be used to validate
+the ScISI prediction. Since we have made use of protein complexes
+described in both GO and MIPS we cannot compare our estimates to those
+sources. But rather will require less direct approach.
+
+A working hypothesis is that every protein complex is a single
+connected component, so that when the complex is functional it is a
+single unit. This does not mean that every protein physically
+interacts with every other protein, in some cases a protein may
+interact with only one other protein, while in other cases it may
+interact with many. %%FIXME: Tony we need some pictures, we should
+                    %%have some small number of proteins with labeled
+                    %%edges so we can refer to them in the text.
+
+This observation suggests making use of either yeast two-hybrid data
+or computational predictions of interactions in order to assess
+whether there is sufficient evidence in favor of the complex being
+connected.
+
+We rely on Y2H data provided by IntAct (citation) and compute a number
+of summary statistics for the complex estimates in the ScISI. We
+obtained data on X Y2H experiments comprising Y baits and Z prey
+protein. It is important to recognize the fact that information can
+only be obtained for complex estimates that contain one or more Y2H
+bait proteins. And since the actually physical interactions are not
+known, the topology of the Y2H graph is also not known.
+%%FIXME: Tony describe the number of experiments here, a table
+%%describing something about baits into
+
+Any bait protein in a Y2H experiment should find one or more complex
+comembers provided those comembers were available as prey in the Y2H
+experiment. This proviso indicates one of the true weaknesses of Y2H
+data as they are often reported since only information about the prey
+that were detected and not the prey that were tested is
+reported. Thus, the absence of an edge is not as informative as it
+could be. We do not know if it was tested and not found or not tested,
+and these are very different things.
+
+We propose three different summary statistics and investigate their
+behavior using the ScISI and the available Y2H data.
+
+\begin{enumerate}
+\item For a given protein complex, $C_i$, find all complex members,
+  $P_j$ that were used as a bait in some Y2H experiment. For these,
+  compute the proportion that found at least one other member of the
+  complex. If $P_j$ was used as a bait in more than one Y2H experiment
+  do not double count, but take any positive result as positive.
+\item For a given protein complex, $C_i$, find the average out-degree
+  of all bait proteins, again avoid double counting, in this case by
+  taking the maximum out-degree. Divide this by the complex size.
+\item Given the number of proteins in a complex that are detected as
+  either bait or prey, find the number that are connected to at least
+  one other complex co-member. [Should this be the proportion of
+  complex members that are connected to at least one other complex
+  member?] 
+\item Compute the ratio of the number of edges needed to make the
+  complex connected, by adding to the observed edges, divided by the
+  minimum number of edges needed to create a connected graph from the
+  complex. This is essentially a measure of incompleteness.
+\end{enumerate}
 
 
 \section{Discussion}
