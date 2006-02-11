@@ -672,9 +672,39 @@ What else should we put here???
 \section{Validation}
 
 There are a number of different methods that can be used to validate
-the ScISI prediction. Since we have made use of protein complexes
-described in both GO and MIPS we cannot compare our estimates to those
-sources. But rather will require less direct approach.
+the ScISI prediction. Our basic premise is that the complex is a
+collection of physically connected proteins. While, in some cases this
+may not be strictly true and there could be two or more subcomponents
+that do not physically interact we will demonstrate that such cases
+have little impact on the validation methods we employ and hence are,
+to a large extent, covered by our proposals.
+
+If all physical interactions between proteins were known, then the
+problem would be somewhat straightforward to address. One would simply
+take a predicted complex and determine whether the constituent
+elements interact and deem the complex \textit{viable} if it could be
+configured as a single connected component. However, very few
+interactions are known, and it is this incompleteness that requires us
+to make inference about whether the prediction is likely to be
+valid. Unfortunately the topology of the complexes (the set of actual
+true interactions) is unknown and hence cannot itself be used to
+assess the observed data. We do not know how many edges (physical
+interactions) there should be, and whether the complex follows a spoke
+topology, a matrix topology or any of the many other
+possibilities. 
+
+We also note that one of the alternatives that some have used, which
+is to compare their predictions to the published, and to some extent
+verified complexes described in GO and MIPS is not available to us. We
+used those sources in construction of our estimate and hence cannot
+validate against them. Instead we make use of two other sources of
+data. One being the set of observed yeast two-hybrid (Y2H) experiments
+available from IntAct and the other being a set of predicted
+protein-protein interactions from \cite{PPIpred}.
+
+Before describing the data we briefly discuss the statistical issues
+involved. In most cases only a subset of the genes were assayed, or
+considered and it will be important to restrict the computations to 
 
 A working hypothesis is that every protein complex is a single
 connected component, so that when the complex is functional it is a
@@ -685,10 +715,13 @@ interact with many. %%FIXME: Tony we need some pictures, we should
                     %%have some small number of proteins with labeled
                     %%edges so we can refer to them in the text.
 
-This observation suggests making use of either yeast two-hybrid data
-or computational predictions of interactions in order to assess
-whether there is sufficient evidence in favor of the complex being
-connected.
+\subsection{Y2H Validation}
+
+%%FIXME: Tony, please report here 1) number of experiments, that we
+%%are dropping those with less than 20 interactions since there is
+%%likely to be substantial experiment to experiment variability.
+%% Maybe a table with experiments, system (Gal4), number of baits
+%% and whether it is genome wide.
 
 We rely on Y2H data provided by IntAct (citation) and compute a number
 of summary statistics for the complex estimates in the ScISI. We
@@ -709,8 +742,91 @@ reported. Thus, the absence of an edge is not as informative as it
 could be. We do not know if it was tested and not found or not tested,
 and these are very different things.
 
-We propose three different summary statistics and investigate their
-behavior using the ScISI and the available Y2H data.
+
+\subsection{PPI Predictions}
+
+<<ppipred, echo=FALSE, results=hide>>=
+library("y2hStat")
+data(ppipred)
+@ 
+
+\cite{PPIpred} report \Sexpr{nrow(ppipred)} pairwise predictions
+between proteins in \textit{S. cerevisiae}, with a presumed 
+false positive rate of $3E-4$ and a presumed false negative rate of
+$0.85$. The predictions are accompanied by a probability and one can
+select only those predicted interactions according to this
+probability. We have chosen to use only those interactions where the
+probability is at least $0.5$. This greatly reduces the number of 
+predicted interactions and also greatly reduces the number of
+proteins that were observed. 
+
+When using these data, only proteins that are predicted to be involved
+in at least one interaction are \textit{observable}. This changes as
+the probability cut-off changes and can be interpreted as the
+sensitivity of the analysis. This phenomenon is no different than that
+observed with different experimental procedures, not all interactions can
+be detected with all procedures and one must make some efforts to determine
+which interactions can be detected.
+
+Once the observable proteins have been determined they can be use to
+compute the different summary statistics discussed in
+Section~\ref{sec:summary}. 
+
+For each protein complex, $C$, we divide its constituent proteins into two
+sets, those that are observable, denoted $U$ and those that are not,
+$\overbar{U} = C \\ U$. If $P \in U$, then we expect there to be 
+an edge between $P$ and some other member of $C$, but we will only
+observe this edge if it is to another member of $U$. 
+
+
+\subsection{Summary Statistics}
+\label{sec:summary}
+
+As stated above, our definition of a multiprotein complex presumes
+that every member is physically linked to at least one other member of
+the complex. Stated in graph theoretic terms we assume that the graph
+of a complex where nodes represent proteins and edges represent
+physical interactions is connected. 
+
+To develop appropriate statistical methods we describe the same
+setting in a slightly more abstract notation. For a given complex,
+$C$, say, consisting of $n$ proteins there are between $n-1$ and
+$n(n-1)$ edges. We can conceptualize this in the following
+way. Consider an urn that contains balls, each ball represents on
+possible edge, or binary interaction. For $C$ there are $n(n-1)$
+possible edges and hence there are that many balls in the urn. Some of
+the balls represent edges that truly exist, we can imagine that these
+are black and the remainder are white. 
+
+If the graph is connected there must be at least $n-1$ black balls,
+but simply having $n-1$ black balls will not ensure that the graph is
+connected. However, the more black balls there are, the more likely it
+is that the graph is connected. We use this observation as the basis
+for our proposals. We let $X$ represent the true number of black balls
+in the urn and note that this number is unknown and hence needs to be
+estimated.
+%%FIXME: note that if we associate a pair of names with each ball then
+%%the graph is connected when the union of those names is of size n,
+%%but it is not obvious to me how we might use that.
+
+Both sampling schemes, Y2H and PPI predictions, can be viewed as
+drawing some number of balls from the urn. For each ball drawn we do
+know if that ball represents a true edge (and hence is black) or not,
+provided we are willing to presume that there are no false positives
+and no false negatives. Thus the observed data can be interpreted as
+having $k$ black balls among $l$ draws. A simple estimate of $X$ can
+then be found by equating the proportion of black balls in the sample
+with the proportion of black balls in the population. And hence that, 
+\[
+\hat{X} = \frac{k n (n-1)}{l},
+\]
+and one can also easily show that $E(k n(n-1) / l) = X$, under a
+random sampling scheme and that
+$var(k n(n-1)/l ) = X(n(n-1) - X) (n(n-1) - l) / [l (n(n-1) - 1)]$,
+although one suspects that better estimates can be obtained.
+
+In addition we propose three different summary statistics and
+investigate their behavior using the ScISI and the available Y2H data.
 
 \begin{enumerate}
 \item For a given protein complex, $C_i$, find all complex members,
