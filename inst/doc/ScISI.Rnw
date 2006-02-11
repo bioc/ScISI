@@ -825,6 +825,14 @@ random sampling scheme and that
 $var(k n(n-1)/l ) = X(n(n-1) - X) (n(n-1) - l) / [l (n(n-1) - 1)]$,
 although one suspects that better estimates can be obtained.
 
+A potentially better idea is to use the fact that for some types of sampling,
+especially that of Y2H, the observed out-degree is an unbiased
+estimate of the true outdegree. That, times the number of nodes/genes
+in the complex gives an estimate of the number of edges, which has
+the advantage of being unbiased. One suspects that better estimates
+of the number of edges could be acheived by using in-degree as well,
+but those estimates are biased.
+
 In addition we propose three different summary statistics and
 investigate their behavior using the ScISI and the available Y2H data.
 
