@@ -3,7 +3,7 @@
  library("RBGL")
 
 
- simFun = function( nnode=30, p=.1, nsim, nsamp=5, seed) {
+ simFun = function(nnode=30, p=.1, nsim, nsamp=5, seed) {
   set.seed(seed)
   ans = NULL
   V = paste("V", 1:nnode, sep="")
@@ -20,11 +20,11 @@
 
   ##this seems to come close to giving 1/2 connected 1/2 not 
 
-  v1=simFun(nsim=100, p= .125, seed=123)
+  v1=simFun(nsim=1000, p= .125, seed=123)
   tE = sapply(v1, function(x) numEdges(x$graph))
   eE = sapply(v1, function(x) x$estE)
 
-  connG = sapply(v1, function(x) isConnected(x$graph))
+  connG = sapply(v1, function(x) isConnected$graph))
 
   ##now we want to use the sampled nodes to predict connectivity
   ## of the graph. 
@@ -34,11 +34,51 @@
    t.test(tE~connG)
 
   ##look at number of distinct edges
-
+  ##more distinct edges suggests connected
+  
   numUE = sapply(v1, function(x) 
          length(unique(unlist(edges(x$graph, x$edges)))))
 
   sapply(split(numUE, connG), mean)
 
+  ##so we do see a relationship
   t.test(numUE~connG)
+
+  
+  ##combine both by trying to see how to connect the
+  ##whole graph, given the observed part
+
+  buildSubG = function( inV ) {
+      testE = edges(inV$graph, inV$edges)
+      obsvdN = unique(c(unlist(testE), inV$edges))
+      tE2 = lapply(testE, function(x) 
+                list(edges=match(x, obsvdN)))
+      eL = lapply(obsvdN, function(x) character(0))
+      names(eL) = obsvdN
+      eL[names(tE2)] = tE2
+      new("graphNEL", nodes=obsvdN, edgeL=eL)
+  }
+
+
+  subGs = lapply(v1, buildSubG)
+
+  ##compute number of edges needed to get a complete graph
+  ##given what we already know
+  ## one edge for each node in the large graph that we did
+  ## not select (numNode - mN) + how ever many are needed
+  ## to make the subgraph connected
+
+  nNeeded = function( gL, sGL) {
+    numNode = sapply(gL, function(x) numNodes(x$graph))
+    cc1 = sapply(sGL, function(x) 
+             length(connectedComp(x)))
+    mN = sapply(sGL, numNodes)
+    numNode - mN + (cc1-1)
+  }
+
+
+  nn2=nNeeded(v1, subGs)
+
+  ##again a small p-value
+  t.test(nn2~connG)
 
