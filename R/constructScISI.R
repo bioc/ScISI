@@ -1,15 +1,30 @@
 ##This file gives the exact commands for the construction of the ScISI.
 
-library(ScISI)
-
-##GO Section##
-##Determine the GO evidence codes to exclude:
+constructScISI <- function(){
+    ##GO Section##
+    ##Determine the GO evidence codes to exclude:
 goECodes = c("IEA", "NAS", "ND", "NR")
 ##Getting the GO protein complex composition:
 go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = goECodes, wantAllComplexes = TRUE)
 ##Creating the GO bi-partite graph incidence matrix:
 goM = createGOMatrix(go)
+
+
+##Please read the notesOtherComps found in the inst/Scripts
+##directory to see why we add the following five GO Complexes
+newComps = c("GO:0000145", "GO:0030127", "GO:0000776", "GO:0005786", "GO:0000943")
+xx = names(as.list(GOTERM))
+gt <- getGOTerm(xx)
+gtcc <- gt$CC
+yy <- as.list(YEASTGO2PROBE)
+toAdd <- yy[newComps]
+tAM <- createGOMatrix(toAdd)
+######This ends the section for notesOtherComps
+
+goM <- mergeBGMat(goM, tAM)
+
+
 ##Comparing GO complexes with all other GO complexes:
 go2go = runCompareComplex(goM, goM, byWhich = "ROW")
 ##Those GO complexes which are redundant or sub-complexes
@@ -53,6 +68,12 @@ mipsM = createMipsMatrix(mips)
 cn = colnames(mipsM)
 apms = grep("MIPS-550", cn)
 mipsM = mipsM[,-apms]
+a1 = which(rownames(mipsM) == "YDL185W1")
+a2 = which(rownames(mipsM) == "RNA_TLC1")
+a3 = which(rownames(mipsM) == "SNRNA_NME1")
+a4 = which(rownames(mipsM) == "RNA_RNASE-P")
+nonNames = c(a1, a2, a3, a4)
+mipsM = mipsM[-nonNames,]
 ##Comparing Mips complexes with all other Mips complexes:
 mips2mips = runCompareComplex(mipsM, mipsM, byWhich= "ROW")
 ##Those Mips complexes which are redundant or sub-complexes
@@ -128,6 +149,11 @@ ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(ScISI)
 
+
+
+tA2ScISI <- runCompareComplex(tAM, ScISI, byWhich="ROW")
+ScISI <- mergeBGMat(tAM, ScISI, tA2ScISI$toBeRmSubC)
+
 #######################
 ##Statistics on ScISI##
 #######################
@@ -191,7 +217,7 @@ subC <- function(dataL, twoSets){
   a = sum(x<y)
 
   name1 = twoSets[1]
-  print(name1)
+  #print(name1)
   name2 = twoSets[2]
   
   q = list(name1 = z, name2 = a)
@@ -285,32 +311,9 @@ subCompM["Krogan","Gavin"] = sGavK$"Gavin"
 subCompM["Krogan","Ho"] = sHK$"Ho"
 
 
-
-
-
-#  #Prevc = data[ind]
-#  #prevComp = sapply(prevC, function(h) h$BG2Comp)
-#  #unlist(prevComp)
-#  prevComp = y[ind]
-#
-#  n = length(listOtherData)
-#  
-#  for (i in 1:n){
-#    q = sapply(listOtherData[[i]], function(u) u$BG1Comp)
-#    p = sapply(listOtherData[[i]], function(w) w$BG2Comp)
-#    for (j in 1:length(prevComp)){
-#      g = which(q == prevComp[j])
-#      h = which(p == prevComp[j])
-#      if(length(g) != 0){
-#        ##q[g]
-#      }
-#      if(length(h) != 0 ){
-#        ##q[h]
-#      }
-#    }
-#  }
-#  
-
+Tables <- list()
+Tables$R <- redundantM
+Tables$S <- subCompM
 
 
 ##If the sub-complexes are to be included in the interactome
@@ -368,4 +371,6 @@ ScISIsubC = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ScISIsubC = unWantedComp(ScISIsubC)
 
 
+Tables
 
+}

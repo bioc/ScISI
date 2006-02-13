@@ -3,7 +3,7 @@ Title: In Silico Interactome
 Version: 1.1.19
 Author: Tony Chiang <tchiang@fhcrc.org>
 Description: Package to create ISI
-Depends: apComplex, GO, GOstats, YEAST
+Depends: apComplex, GO, GOstats, YEAST, xtable
 Suggests: Rgraphviz
 Maintainer: Tony Chiang <tchiang@fhcrc.org>
 License: LGPL
