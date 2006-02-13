@@ -834,7 +834,7 @@ proportion of edges in the sample, with the unknown proportion in the
 population. That is,
 \begin{eqnarray*}
 \frac{\hat{X}}{n(n-1)/2} & = & \frac{x}{[(n-1)+(n-2)+\ldots+(n-k)]} \\
-\hat{X} = \frac{ x (n)(n-1)}{2 [(n-1)+(n-2)+\ldots+(n-k)]} \\
+\hat{X} & = & \frac{ x (n)(n-1)}{2 [(n-1)+(n-2)+\ldots+(n-k)]} \\
 \end{eqnarray*}
 
 A second estimator can be derived from the following argument. If the
