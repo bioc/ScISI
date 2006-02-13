@@ -35,7 +35,9 @@
 
   ##look at number of distinct edges
   ##more distinct edges suggests connected
-  
+  ##this is ok, but we have left out the nodes
+  ## selected - so that needs a little fixing up
+ 
   numUE = sapply(v1, function(x) 
          length(unique(unlist(edges(x$graph, x$edges)))))
 
@@ -82,3 +84,9 @@
   ##again a small p-value
   t.test(nn2~connG)
 
+  ss1=split(connG, nn2)
+  ss2 = sapply(ss1, table)
+  ss3 = sapply(ss1, function(x) sum(x)/length(x))
+
+##we need a simulator - to see how likely it is that a graph is connected
+##
