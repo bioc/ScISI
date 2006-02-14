@@ -12,8 +12,13 @@
     s1 = sample(V, nsamp)
     eL = edges(g1, s1) 
     outD = sum(sapply(eL, length))
-    estE = outD*nnode/(2*nsamp)
-    ans[[i]] = list(graph=g1, edges=s1, estE = estE)
+    #if we find an edge to an element of s1 we find it twice
+    numTwice = sum(sapply(eL, function(x) sum(s1 %in% x)))
+    numE = outD - (numTwice/2)
+    estE1 = outD*nnode/(2*nsamp)
+    estE2 = (numE*nnode*(nnode-1))/(2*sum(nnode-(1:nsamp)))
+    ans[[i]] = list(graph=g1, edges=s1, estE1 = estE1, estE2=estE2, 
+       nT=numTwice)
   }
   return(ans)
  }
@@ -22,7 +27,12 @@
 
   v1=simFun(nsim=1000, p= .125, seed=123)
   tE = sapply(v1, function(x) numEdges(x$graph))
-  eE = sapply(v1, function(x) x$estE)
+  eE1 = sapply(v1, function(x) x$estE1)
+  eE2 = sapply(v1, function(x) x$estE2)
+
+  ##suggests eE2 is better
+  sum(abs(tE-eE1))
+  sum(abs(tE-eE2))
 
   connG = sapply(v1, function(x) isConnected$graph))
 
