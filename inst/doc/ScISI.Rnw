@@ -525,36 +525,47 @@ for the three experiments.
 \subsection{Analysis and Merging of the Data-Sets}
 
 %%FIXME: what is reported?
-Table~\ref{ta:Repetitions} reports ??? comparing the experiments
-pairwise. details the number of repeated 
-protein complexes for each pairwise repository comparison.
+Table~\ref{ta:Repetitions} reports the number of protein complexes 
+that were redundant by comparing the repositories
+pairwise including self comparisons. Table~\ref{ta:Repetitions} shows 
+that the only data-set with self-redundancy is derived from the 
+MIPS repository; and upon investigation, MIPS has categorized protein
+complexes by known functionality, and three protein complexes were 
+placed in two different categories each. Table~\ref{ta:Repetitions} 
+directly shows that the no two repositories has extremely large 
+overlap.
 
 <<testStuff, echo=FALSE, results=hide>>=
-library(ScISI)
-tb <- constructScISI()
+library("ScISI")
+data("redundantM")
+data("subCompM")
 @ 
+
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex >>=
 
 
-xtable(tb$R)
+xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", caption="Number of repetitive Protein Complexes")
 
 @ 
 
-We process each data set independently to find and remove all protein
-sub-complexes. We then compare the data sets pairwise to identify
-sub-complex relationships between the different data sets.  The
+Not limited to redundant protein complexes, we also process each data-set
+independently to find and to remove all protein
+sub-complexes. The
 results are reported in Table~\ref{ta:subComplexes} where the row
 names indicate the location of the sub-complex and the
-column names indicate the location of the including protein complex.
-Reading across row one of Table~\ref{ta:subComplexes} we see that
-there were 14 complexes in the GO estimate that were subcomplexes of
-other GO complexes, and seven complexes in GO that are subcomplexes of
-complexes in the Krogan data. 
+column names indicate the location of the aggregate protein complex.
+Reading across row two of Table~\ref{ta:subComplexes} we see that
+GO contains protein complexes that were protein sub-complexes 
+in each of the other data repositories including itself. Table~\ref{ta:subComplexes}
+is much less sparse relative to Table~\ref{ta:Repetitions}, and it is this
+relative comparison that makes all the estimates more credible since each 
+data repository is based on unique experiments coupled with unique 
+estimation algorithms. 
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex>>=
 
-xtable(tb$S)
+xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", caption = "Number of Protein Sub-Complexes")
 
 @ 
   

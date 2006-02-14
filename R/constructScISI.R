@@ -1,6 +1,6 @@
 ##This file gives the exact commands for the construction of the ScISI.
 
-constructScISI <- function(){
+constructScISI <- function(pathToSave = NULL){
     ##GO Section##
     ##Determine the GO evidence codes to exclude:
 goECodes = c("IEA", "NAS", "ND", "NR")
@@ -153,6 +153,8 @@ ScISI = unWantedComp(ScISI)
 
 tA2ScISI <- runCompareComplex(tAM, ScISI, byWhich="ROW")
 ScISI <- mergeBGMat(tAM, ScISI, tA2ScISI$toBeRmSubC)
+
+save(ScISI, file = paste(pathToSave, "ScISI.rda", sep=""), compress=TRUE)
 
 #######################
 ##Statistics on ScISI##
@@ -311,9 +313,8 @@ subCompM["Krogan","Gavin"] = sGavK$"Gavin"
 subCompM["Krogan","Ho"] = sHK$"Ho"
 
 
-Tables <- list()
-Tables$R <- redundantM
-Tables$S <- subCompM
+save(redundantM, file = paste(pathToSave, "redundantM.rda", sep=""), compress=TRUE)
+save(subCompM, file = paste(pathToSave, "subCompM.rda", sep=""), compress=TRUE)
 
 
 ##If the sub-complexes are to be included in the interactome
@@ -371,6 +372,6 @@ ScISIsubC = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ScISIsubC = unWantedComp(ScISIsubC)
 
 
-Tables
+
 
 }
