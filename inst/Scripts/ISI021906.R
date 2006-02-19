@@ -2,8 +2,8 @@ ISI021906 <- function(){
 
 ##This file gives the exact commands for the construction of the ScISI.
 
-library(ScISI)
-
+#library(ScISI)
+options(errors=recover)
 ##GO Section##
 ##Determine the GO evidence codes to exclude:
 goECodes = c("IEA", "NAS", "ND", "NR")
@@ -12,6 +12,21 @@ go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
                eCode = goECodes, wantAllComplexes = TRUE)
 ##Creating the GO bi-partite graph incidence matrix:
 goM = createGOMatrix(go)
+
+##Please read the section on notesOtherComplexes
+newComps = c("GO:0000145", "GO:0030127", "GO:0000776", "GO:0005786", "GO:0000943")
+xx = names(as.list(GOTERM))
+gt <- getGOTerm(xx)
+gtcc <- gt$CC
+yy <- as.list(YEASTGO2PROBE)
+toAdd <- yy[newComps]
+print(toAdd)
+tAM <- createGOMatrix(toAdd)
+######This ends the section for notesOtherComps
+
+goM <- mergeBGMat(goM, tAM)
+
+
 ##Comparing GO complexes with all other GO complexes:
 go2go = runCompareComplex(goM, goM, byWhich = "ROW")
 ##Those GO complexes which are redundant or sub-complexes
@@ -71,6 +86,7 @@ mergeMipsGo = mergeBGMat(mipsM, goM, toBeRm = unique(c(rmFromGo, rmFromMips,
 ##End of Mips##
 
 
+
 ##Gavin##
 ##Downloading the Gavin data from bioconductor:
 gavin = getAPMSData("Gavin")
@@ -84,20 +100,27 @@ rmFromGavin = c(gavin2gavin$toBeRm, gavin2gavin$toBeRmSubC)
 gavin2mergeMG = runCompareComplex(gavin, mergeMipsGo, byWhich="ROW")
 ##Those gavin complexes which are redundant or sub-complexes to
 ##complexes in mergeMipsGo:
+
 whereGO <- grep("GO:", gavin2mergeMG$toBeRmSubC)
+
 whereMIPS <- grep("MIPS-", gavin2mergeMG$toBeRmSubC)
 comboMG <- c(whereGO, whereMIPS)
+
 if(length(comboMG) != 0){
-  whichMips <- gavin2mergeMG$toBeRmSubC[-comboMG]
+  whichMips <- unique(gavin2mergeMG$toBeRmSubC[-comboMG])
+
 }
 else{
   whichMips <- gavin2mergeMG$toBeRmSubC
 }
-rmFromMGG = c(gavin2mergeMG$toBeRm, whichMips)
+rmFromMGG = unique(c(gavin2mergeMG$toBeRm, whichMips))
+
 ##Merging the gavin complexes with mergeMipsGo:
 mergeMGG = mergeBGMat(gavin, mergeMipsGo, toBeRm = unique(c(rmFromGavin,
                                                              rmFromMGG)))
 ##End of Gavin##
+
+
 
 
 ##Ho##
@@ -113,15 +136,21 @@ ho2mergeMGG = runCompareComplex(ho, mergeMGG, byWhich= "ROW")
 whereGO <- grep("GO:", ho2mergeMGG$toBeRmSubC)
 whereMIPS <- grep("MIPS-", ho2mergeMGG$toBeRmSubC)
 comboMG <- c(whereGO, whereMIPS)
+
 if(length(comboMG)!=0){
-  whichOthers <- ho2mergeMGG[-comboMG]
+  whichOthers <- ho2mergeMGG$toBeRmSubC[-comboMG]
+ 
 }
 else{
   whichOthers <- ho2mergeMGG$toBeRmSubC
 }
+
+
+
 ##Those complexes which are redundant or sub-complexes to
 ##any of the previous three sets:
 rmFromMGGH = c(ho2mergeMGG$toBeRm, whichOthers)
+print(rmFromMGGH)
 ##Merging ho with mergeMGG:
 mergeMGGH = mergeBGMat(ho, mergeMGG, toBeRm = unique(c(rmFromHo, rmFromMGGH)))
 ##End of Ho##
@@ -141,7 +170,7 @@ krogan2mergeMGGH = runCompareComplex(krogan, mergeMGGH, byWhich = "ROW")
 whereGO <- grep("GO:", krogan2mergeMGGH$toBeRmSubC)
 whereMIPS <- grep("MIPS-", krogan2mergeMGGH$toBeRmSubC)
 comboMG <- c(whereGO, whereMIPS)
-if(length(whereOthers)!=0){
+if(length(whichOthers)!=0){
   whichOthers <- krogan2mergeMGGH$toBeRmSubC[-comboMG]
 }
 else{
@@ -149,6 +178,7 @@ else{
 }
 ##Those complexes which need to be removed:
 rmFromMGGHK = c(krogan2mergeMGGH$toBeRm, whichOthers)
+print(rmFromMGGHK)
 ##Merging the krogan complexes with mergeMGGH:
 ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
                                                         rmFromMGGHK)))
