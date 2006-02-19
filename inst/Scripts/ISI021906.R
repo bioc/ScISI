@@ -1,3 +1,5 @@
+ISI021906 <- function(){
+
 ##This file gives the exact commands for the construction of the ScISI.
 
 library(ScISI)
@@ -157,3 +159,5 @@ ScISI = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(ScISI)
 
+ScISI
+}
