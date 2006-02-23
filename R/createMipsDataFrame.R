@@ -1,7 +1,10 @@
 createMipsDataFrame <- function(desc, mips){
 
-    MipsID = names(desc)
-    MipsNames = desc
+    leftInMipsM <- strsplit(colnames(mips), "MIPS-")
+    leftInMipsM <- sapply(leftInMipsM, function(x) x[2])
+    
+    MipsID = intersect(leftInMipsM, names(desc))
+    MipsNames = desc[MipsID]
     interactomeNames = colnames(mips)
     MipsReference = data.frame(names=I(interactomeNames),id=I(MipsID), description=I(MipsNames))
 

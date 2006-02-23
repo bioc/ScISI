@@ -1,0 +1,323 @@
+%
+% NOTE -- ONLY EDIT THE .Rnw FILE!!!  The .tex file is
+% likely to be overwritten.
+%
+% \VignetteIndexEntry{Using PPI predictions}
+%\VignetteDepends{}
+%\VignettePackage{y2hStat}
+\documentclass[11pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+
+\usepackage[authoryear,round]{natbib}
+\usepackage{times}
+\usepackage{comment}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+\bibliographystyle{plainnat}
+
+\title{Creating an in silico interactome}
+\author{T. Chiang}
+
+\begin{document}
+
+\maketitle
+
+This document details how the ScISI is created.
+
+<<loadlibs>>=
+
+library("ScISI")
+
+@
+
+The first task is to collect all the data from both the 
+GO and the MIPS repositories. We will do this sequentially
+and then combine the data into a single bi-partite graph
+incidence matrix. 
+
+We first begin with the GO repository:
+
+<<collectGO>>=
+
+goECodes = c("IEA", "NAS", "ND", "NR")
+go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
+               eCode = goECodes, wantAllComplexes = TRUE)
+goM = createGOMatrix(go)
+goM[1:10, 1:10]
+@
+
+The code is relatively self-explantory. The first line lists those
+evidence codes we have chosen as un-acceptable, i.e. if proteins
+have been annotated by only these evidence codes, they will 
+be deleted from the GO protein complex where they would have appeared. 
+Next we collect all the
+protein complexes from GO; this is done in two ways: the first is 
+grepping a certain term (complex) and suffixes (-ase, -some) and 
+the second is taking 
+the children of the protein complex node. Presently if we do not take 
+the children of the protein complex GO node, we do not lose any
+protein complexes from the GO repository. The reason we take the 
+children of the protein complex node is because this is a simple
+double check to ensure that all the protein complexes we have obtained
+is also a child of the protein complex node since it is very likely
+that a node can be a child of the protein complex node but would not 
+contain any of the terms in which we have searched. (NB - there are
+only 60+ nodes which are children to the protein complex node which
+implies that this part of GO needs to be updated).  The 
+\Robject{wantAllComplexes} agrument will obtain the children of the protein 
+complex GO node, but this action can be excluded if the logical FALSE is 
+entered. The last step is a call on the function \Rfunction{createGOMatrix} 
+to create the incidence matrix for the GO protein complexes.
+
+Even these two methods will still miss certain GO protein 
+complexes, either they are not children of the protein complex node 
+nor are do they have any of the terms we have grepped for in their
+description (i.e. the GO terms). The \Robject{xtraGO} data set is a character
+vector of hand selected GO protein complexes. There are 32 total 
+extra complexes and 6 of these complexes were already obtained 
+by the \Rfunction{getGOInfo} function. From the remaining 26 complexes,
+only 6 complexes were found to have non-trivial overlap with 
+budding yeast in the CC ontology.
+
+<<xtraGO>>=
+
+data(xtraGO)
+xtraGO
+length(xtraGO)
+xtraGO <- setdiff(xtraGO, colnames(goM))
+length(xtraGO)
+##Decide if each complex has overlap in yeast CC ontology
+##first we get the go term (i.e. the go ID's)
+##xx = names(as.list(GOTERM))
+##from the go ID's we can extract a desc of each node
+##gt <- getGOTerm(xx)
+##now we restrict to the CC ontology
+##gtcc <- gt$CC
+yG2P <- as.list(YEASTGO2PROBE)
+xtraComp <- yG2P[xtraGO]
+xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
+length(xtraComp)
+xCM <- createGOMatrix(xtraComp)
+
+
+goM <- mergeBGMat(goM, xCM)
+
+@
+
+When all the protein complexes have been collected, we need to 
+make sure to compare all the GO protein complexes with all other
+GO protein complexes so as to make sure that redundancies are
+eliminated.
+
+<<GOredund>>= 
+go2go = runCompareComplex(goM, goM, byWhich = "ROW")
+rmFromGo = go2go$toBeRm
+go2go$toBeRm
+@ 
+
+The \Robject{toBeRm} entry of \Robject{go2go} records those redudant 
+GO protein complexes. We don't remove these redundancies until we 
+combine this data set 
+with the MIPS data set (NB there are no redudancies found within
+GO, but this check still needs to be resolved).
+\\
+\\
+Next we collect the MIPS protein complexes. While the collection of 
+Mips protein complexes is identical to those of the GO protein complexes,
+the difference here is that the Mips evidence codes are overwhelming 
+in number (there are 23 that pertain to the high through-put APMS
+protein complexes) yet do not remove all the APMS protein complexes 
+(with the evidence codes, a third of the APMS complexes still remain). 
+So for Mips, we have decided not to use evidence codes (though one
+has the option if there are proteins that need to be eliminated based
+on their annotated codes), but rather use another method discussed shortly.
+
+<<collectMips>>= 
+mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
+               eCode = NULL, wantAllComplexes = TRUE)
+mipsM = createMipsMatrix(mips)
+mipsM[1:10, 1:10]
+@ 
+
+The Mips protein complexes have unique identification codes which is based
+on a hierarchy classification. An example is Mitochondrial translocase complex 
+which is given the code 290 (in the MIPS incidence matrix, the ID is MIPS-290);
+it can be broken up into two distinct sections: TOM - transport across the outer 
+membrane encoded 290.10 and TIM - transport across the inner membrane, 290.20. Of 
+these two, the latter has been categorized into further sub-complexes: 
+Tim22p-complex, 290.20.10; Tim17p-complex, 290.20.20; Tim9p/Tim10p-complex, 
+290.20.30. 
+
+In collecting the protein complexes from Mips, we have kept all 
+sub-complexes if they meet the criterion we have established, i.e. they are
+kept if they contain any of the terms or suffixes for which we grepped. If 
+one would like for the function not to keep the sub-complexes, then all he/she
+would have to do is set the \Robject{wantAllComplexes} argment to FALSE. It
+is important to note that this argument has two very entirely different 
+functionality with respect to GO and with respect to MIPS.
+
+The nomenclature of Mips protein complexes makes it easy to select and eliminate
+the high through-put APMS protein complex estimates. All estimated based on APMS
+technology is encoded initially by $550$ (in the incidence matrix by $MIPS-550$);
+thus we can search for these codes and eliminate them from the incidence matrix.
+
+<<delAPMS>>=
+cn = colnames(mipsM)
+apms = grep("MIPS-550", cn)
+mipsM = mipsM[,-apms]
+@ 
+
+After we have have eliminated the APMS protein complexes, we have to compare each of
+Mips protein complexes with all other Mips protein complexes. 
+
+<<compareMips>>=
+mips2mips = runCompareComplex(mipsM, mipsM, byWhich= "ROW")
+rmFromMips = mips2mips$toBeRm
+mips2mips$toBeRm
+@ 
+
+Again, the \Robject{toBeRm} entry \Robject{mips2mips} contains the redundant
+Mips protein complexes.
+Mips is structured differently than GO, the protein complexes are categorized
+by functionality. There are 4 protein complexes which are repeated with 
+multiplicity 2. The complexes will be removed when merged with the GO incidence 
+matrix.
+
+Next we compare the protein complexes of GO with the protein complexes of MIPS:
+
+<<compareGOMIPS>>=
+mips2go = runCompareComplex(mipsM, goM, byWhich= "ROW")
+rmFromMipsGo = mips2go$toBeRm
+rmFromMipsGo
+@ 
+
+After comparing the MIPS and GO protein complexes, we find that there are
+39 redundant complexes. Because there is a more streamlined structure for
+GO protein complexes (i.e. the DAG structure in the GO repository) we have decided
+ to remove the Mips complexes when the two incidence matrices are combined.
+
+Next we combine the two incidence matrices:
+
+<<joinMipsGO>>=
+mergeMipsGo = mergeBGMat(mipsM, goM, toBeRm = unique(c(rmFromGo, rmFromMips,
+                                                       rmFromMipsGo)))
+@ 
+
+In combining these two incidence matrices, we have deleted the self 
+redundancies from MIPS and GO as well as the cross redundancies between 
+MIPS and GO.
+
+Now we download the apComplex estimates of the APMS data:
+
+<<downloadAPMS>>=
+gavin = getAPMSData("Gavin")
+ho = getAPMSData("Ho")
+krogan = getAPMSData("Krogan")
+@ 
+
+Because the estimation algorithm of apComplex is written as to avoid 
+redundancies, we do not need to compare each experimental estimate 
+within itself. We can, therefore, begin iteratively to merge each 
+APMS estimate with the combined MIPS and GO incidence matrix.
+
+<<mergeGavin>>=
+gavin2mergeMG = runCompareComplex(gavin, mergeMipsGo, byWhich="ROW")
+rmFromMGG = gavin2mergeMG$toBeRm
+rmFromMGG
+mergeMGG = mergeBGMat(gavin, mergeMipsGo, toBeRm = unique(rmFromMGG))
+@  
+
+<<mergeHo>>=
+ho2mergeMGG = runCompareComplex(ho, mergeMGG, byWhich= "ROW")
+rmFromMGGH = ho2mergeMGG$toBeRm
+rmFromMGGH
+mergeMGGH = mergeBGMat(ho, mergeMGG, toBeRm = unique(rmFromMGGH))
+@ 
+
+<<mergeKrogan>>=
+krogan2mergeMGGH = runCompareComplex(krogan, mergeMGGH, byWhich = "ROW")
+rmFromMGGHK = krogan2mergeMGGH$toBeRm
+rmFromMGGHK
+mergeMGGHK = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(rmFromMGGHK))
+@ 
+
+After iteratively combining the APMS data, we have created one single 
+incidence matrix which can serve as our in silico interactome. Now that 
+we have let the computational tools detect protein complexes of interest, 
+we must go through the incidence matrix and hand curate which complexes
+are those truly of interest.
+
+We need to know all the information pertainining to each GO and MIPS 
+protein complex; to this end, we can create a .html file which can link 
+to a description page for each protein complex we have selected.
+
+<<createHTML, eval=TRUE, results = hide>>=
+goDF = createGODataFrame(go, goM)
+mipsDF = createMipsDataFrame(mips$DESC, mipsM)
+mipsOb = createYeastDataObj(mipsDF)
+goOb = createYeastDataObj(goDF)
+mipsNames = colnames(mipsM)
+mipsCompOrder = colSums(mipsM)
+url = vector(length = length(mipsNames))
+linkNames = vector(length = length(mipsNames))
+for(i in 1:length(mipsNames)){
+url[i] = getURL(mipsOb, mipsNames[i])
+linkNames[i] = Desc(mipsOb, mipsNames[i])
+}
+ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex", compSize = mipsCompOrder)
+
+goNames = goDF[,2]
+goCompOrder = colSums(goM[,goNames])
+url = vector(length = length(goNames))
+linkNames = vector(length = length(goNames))
+for(i in 1:length(goNames)){
+url[i] = getURL(goOb, goNames[i])
+linkNames[i] = Desc(goOb, goNames[i])
+}
+ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex", compSize = goCompOrder)
+@ 
+
+The .html file is generated by running a small script shown above and will be saved to 
+the present working directory. Each protein complex of Mips and GO is investigated by
+inspecting the respective informational pages. The script above is an ad hoc way of 
+these .html files. For instance, we don't use simply use colnames function on the 
+\Robject{goM} because we had to manually add some protein complexes. One task will be 
+to streamline this script as a de facto function.
+
+We inspected each GO and MIPS protein complex and chose to elimate the following:
+"GO:0000262", "GO:0000228", "GO:0000775",
+                           "GO:0010008",
+                           "GO:0005792",
+                           "GO:0005768",
+                           "GO:0005769",
+                           "GO:0005770",
+                           "GO:0005777",
+                           "GO:0005844",
+                           "GO:0001400".
+
+The function \Rfunction{unWantedComp} is designed specifically to eliminate
+those protein complexes which are determined to be irrelevant for the 
+interactome. Presently, those 11 GO protein complexes are the default to
+be eliminated, though any complexes can be removed.
+
+<<elim>>=
+ScISI <- unWantedComp(mergeMGGHK)
+dim(ScISI)
+@ 
+
+
+
+\end{document}

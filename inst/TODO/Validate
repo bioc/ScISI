@@ -17,3 +17,42 @@ Hi,
 
  Other suggestions?
 
+----------------------
+
+For Tony (by Tony):
+
+1. Generate new ScISI - write a script to generate a new ScISI and provide documentation.
+        Two working models: an ScISI to be used for simulatorAPMS where no sub-complexes are available
+                            an ScISI to be used for SL where sub-complexes are necessary
+        Whatever the methodology, we should be consistent. Either we delete all sub-complexes bi-laterally 
+        or we should not remove any (unless there is some firmer justification as to why we do so)
+
+--> The new script to generate the ScISI is in place. The SL paradigm is now the working model.
+
+        1a. I need to re-tool the vignette since our working paradigm 
+            has changed. There needs to be a large number of changes to the
+            ScISI.Rnw, but that will wait.
+
+        1b. Write Scripts to generate summary statistics for the new ScISI. 
+                (The old ones are now obsolete as we have chosen to use a new paradigm)
+
+        1c. Put these new summary stats into the table of ScISI.Rnw
+
+        1d. I had make some minor modifications to a couple of functions so I need to update each man page as well.
+
+        1e. Streamline script to generate the .html files.
+
+
+2. Create images for ScISI paper; also some distribution graphs for y2h v. ScISI as well as pathway data. Awaiting
+   the exact structure from Denise so I can generated ap-ms co-membership graphs as well as the some exact graphs.
+
+3. Encode the hypergeometric sampling scheme as well as connected component scheme.
+
+4. Download and parse pathway data from Kegg and SGD. 
+        I have already used the KEGG R-data package to cull the information between pathway and orfs
+        I have downloaded and parsed the .tab file from SGD.
+        Preliminary stats show that this data is sparser than y2h.
+
+5. Run simulations on GO and MIPS data. Confirm the viability of apComplex.
+
+6. Work on the paper.
