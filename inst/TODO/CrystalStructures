@@ -1,0 +1,47 @@
+
+Here are binary physical interactions for two crystal structures (no
+directionality is intended).  
+
+Arp2/3 complex:
+
+Arc18 Arp3
+Arp3  Arp2
+Arp3  Arc35
+Arp2  Arc40
+Arc35 Arc40
+Arc35 Arc19
+Arc19 Arc40
+Arc19 Arc15
+Arc15 Arc40
+
+Cleavage Factor IA (CFIA) complex:
+
+Clp1	Pcf11
+Pcf11	Rna15
+Pcf11	Rna14
+
+
+Notes:
+
+The crystal structure of Arp2/3 was discussed by Bader and Hogue (2003) when
+they described their MCODE algorithm.  I think MCODE is probably the closest
+competitor of apComplex in terms of complex membership estimation, but the
+code is no longer available -- or at least I can't find it.
+
+We discussed the crystal structure and provided a picture of CFIA in our
+Biofinformatics paper, so this should probably be referenced and rendered
+differently for this paper.
+
+
+References: 
+
+Bader GD and Hogue CWV.  An automated method for finding molecular complexes
+in large protein interaction networks.  BMC Bioinformatics 2003, 4:2.
+
+Robinson RC, Turbedsky K, Kaiser DA, Marchand JB, Higgs HN, Choe S, et al.
+Crystal structure of Arp2/3 complex.  Science 2001, 294:1679-1684.
+
+Gross S and Moore C.  Five subunits are required for reconstitutions of the
+cleavage and polyadenylation activities of Saccharomyces cerevisiae cleavage
+factor I.  PNAS USA 2001, 98: 6080-6085.
+
