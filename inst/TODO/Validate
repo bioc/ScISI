@@ -42,17 +42,26 @@ For Tony (by Tony):
 
         1e. Streamline script to generate the .html files.
 
+	
 
 2. Create images for ScISI paper; also some distribution graphs for y2h v. ScISI as well as pathway data. Awaiting
    the exact structure from Denise so I can generated ap-ms co-membership graphs as well as the some exact graphs.
 
 3. Encode the hypergeometric sampling scheme as well as connected component scheme.
 
-4. Download and parse pathway data from Kegg and SGD. 
+4. Determine protein complexes contained in nuclues.
+	
+	4a. Find all nodes which are children of the nucleus node in GO.
+	
+	4b. Seach for "nuclues" in MIPS repository
+
+	4c. Search literature.
+
+5. Download and parse pathway data from Kegg and SGD. 
         I have already used the KEGG R-data package to cull the information between pathway and orfs
         I have downloaded and parsed the .tab file from SGD.
         Preliminary stats show that this data is sparser than y2h.
 
-5. Run simulations on GO and MIPS data. Confirm the viability of apComplex.
+6. Run simulations on GO and MIPS data. Confirm the viability of apComplex.
 
-6. Work on the paper.
+7. Work on the paper.
