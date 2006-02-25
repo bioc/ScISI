@@ -36,6 +36,9 @@ For Tony (by Tony):
         1b. Write Scripts to generate summary statistics for the new ScISI. 
                 (The old ones are now obsolete as we have chosen to use a new paradigm)
 
+                --> This has been started but seems to be trickier than I thought...need to think about this 
+                    some more.
+
         1c. Put these new summary stats into the table of ScISI.Rnw
 
         1d. I had make some minor modifications to a couple of functions so I need to update each man page as well.
@@ -51,11 +54,20 @@ For Tony (by Tony):
     have a definitive topology. For each constituent protein, I looked in the Y2H data and generated a bait to
     prey directed graph. Unfortunately, only one protein is found as a bait, and futhermore, it had only one hit. 
     I also cross referenced these proteins with the predicted interactions and found one interaction from each
-    protein complex.
+    protein complex. The graphNEL's are located in the inst/extdata/ directory. They have the letter "G" before 
+    the .rda. There is a script called ckCrystStruct.R located in the inst/Scripts/ directory which checks 
+    the interaction in y2h data and ppipred.
 
+        2a. I will generate the co-membership graphNEL's of these objects as well since apComplex identified
+            them exactly. 
+
+        2b. Put some words into the script as well as analyze what these data mean. apComplex can identify 
+            these complexes under certain conditions but even then the y2h data as well as predictions are
+            too sparse to validate at this point.
 
 
 3. Encode the hypergeometric sampling scheme as well as connected component scheme.
+        --> The mean degree statistic has been encoded, but I need to test before I check it into SVN.        
 
 4. Determine protein complexes contained in nuclues.
 	
