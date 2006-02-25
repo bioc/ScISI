@@ -47,6 +47,14 @@ For Tony (by Tony):
 2. Create images for ScISI paper; also some distribution graphs for y2h v. ScISI as well as pathway data. Awaiting
    the exact structure from Denise so I can generated ap-ms co-membership graphs as well as the some exact graphs.
 
+--> I have graphNEL for each of the crystal structures Denise sent me. There are two protein complexes that we 
+    have a definitive topology. For each constituent protein, I looked in the Y2H data and generated a bait to
+    prey directed graph. Unfortunately, only one protein is found as a bait, and futhermore, it had only one hit. 
+    I also cross referenced these proteins with the predicted interactions and found one interaction from each
+    protein complex.
+
+
+
 3. Encode the hypergeometric sampling scheme as well as connected component scheme.
 
 4. Determine protein complexes contained in nuclues.
