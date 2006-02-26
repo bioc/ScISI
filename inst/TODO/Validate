@@ -59,12 +59,15 @@ For Tony (by Tony):
     the interaction in y2h data and ppipred.
 
         2a. I will generate the co-membership graphNEL's of these objects as well since apComplex identified
-            them exactly. 
+            them exactly.
+
+                --> Done 
 
         2b. Put some words into the script as well as analyze what these data mean. apComplex can identify 
             these complexes under certain conditions but even then the y2h data as well as predictions are
             too sparse to validate at this point.
-
+        
+                -->In progress
 
 3. Encode the hypergeometric sampling scheme as well as connected component scheme.
         --> The mean degree statistic has been encoded, but I need to test before I check it into SVN.        
@@ -72,14 +75,37 @@ For Tony (by Tony):
 4. Determine protein complexes contained in nuclues.
 	
 	4a. Find all nodes which are children of the nucleus node in GO.
+                
+                --> The nucleus GO nodes is "GO:0005634". There are 1127 yeast genes/features that have been directly
+                    annotated to the term nucleus. A few questions that need to be addressed_
+
+                        ?1 - Are there proteins which are entirely nucleus bound? If yes, then each protein complex
+                             to which they belong is also entirely nucleus bound.
+
+                        ?2 - Are there proteins which are entirely outside nucleus? This gives us the protein complexes
+                             which do can eliminate automatically if ?1 is negative.
+
+                        ?3 - How should we categorize complexes if ?1 and ?2 are both false? 
+
 	
-	4b. Seach for "nuclues" in MIPS repository
+	4b. Seach for "nucleus" in MIPS repository
+
+                --> Mips does not have (any obvious way anyhow) a localization of proteins nor genes. We have a list
+                    of genes which are annotated by nucleus from GO; we can make a decision on how to use this 
+                    information with respect to MIPS.
 
 	4c. Search literature.
 
+                --> Paper of interest: Huh WK, et al. (2003) Global analysis of protein localization in budding yeast. Nature 425(6959):686-91
+                        
+
 5. Download and parse pathway data from Kegg and SGD. 
         I have already used the KEGG R-data package to cull the information between pathway and orfs
+                --> An incidence matrix for Orfs and Pathways is in the inst/extdata/ directory
+
         I have downloaded and parsed the .tab file from SGD.
+                --> Need to get the data into an incidence matrix and loaded into the package.
+
         Preliminary stats show that this data is sparser than y2h.
 
 6. Run simulations on GO and MIPS data. Confirm the viability of apComplex.
