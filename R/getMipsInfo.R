@@ -24,7 +24,7 @@ getMipsInfo <- function(wantDefault = TRUE,
                           "902.01.01.04.01.03",
                           "902.01.01.04.02",
                           "901.01.09.02"),
-                        wantAllComplexes = FALSE){
+                        wantAllComplexes = TRUE){
 
   fileToRead <- gzfile(system.file("extdata", "complexcat_data_14112005.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")

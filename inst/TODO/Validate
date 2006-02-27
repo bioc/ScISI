@@ -37,11 +37,17 @@ For Tony (by Tony):
                 (The old ones are now obsolete as we have chosen to use a new paradigm)
 
                 --> This has been started but seems to be trickier than I thought...need to think about this 
-                    some more.
+                    some more...
+                --> This is done. The script is entitled sumStats.R in the inst/Scripts/ directory. It generates
+                    all the redundant complexes and sub-complexes either within repositories or across repositories.
 
         1c. Put these new summary stats into the table of ScISI.Rnw
 
+                --> Done
+
         1d. I had make some minor modifications to a couple of functions so I need to update each man page as well.
+
+                --> Done
 
         1e. Streamline script to generate the .html files.
 
@@ -77,7 +83,7 @@ For Tony (by Tony):
 	4a. Find all nodes which are children of the nucleus node in GO.
                 
                 --> The nucleus GO nodes is "GO:0005634". There are 1127 yeast genes/features that have been directly
-                    annotated to the term nucleus. A few questions that need to be addressed_
+                    annotated to the term nucleus. A few questions that need to be addressed-
 
                         ?1 - Are there proteins which are entirely nucleus bound? If yes, then each protein complex
                              to which they belong is also entirely nucleus bound.
@@ -85,14 +91,28 @@ For Tony (by Tony):
                         ?2 - Are there proteins which are entirely outside nucleus? This gives us the protein complexes
                              which do can eliminate automatically if ?1 is negative.
 
-                        ?3 - How should we categorize complexes if ?1 and ?2 are both false? 
+                        ?3 - How should we categorize complexes if ?1 and ?2 are both false?
 
+                --> I have read the paper of Huh WK, et al. concerning the localization of certain ORF's within sub-
+                    components of the yeast cell. The answer to ?1 and ?2 is (at least right now) false. We do not 
+                    have 100% certainty that a certain protein (ORF) exists only within the nucleus or without. To this
+                    end we need to find some strategy as to how to use the localization data.
+
+                --> One strategy is to use the localization data directly. It is necessary (but certainly not sufficient)
+                    that protein co-members need to have the same localization for at least one sub-component of the cell.
+                    An indirect method would be to use to localization data to cut the y2h data (as well as the PPI) data.
+                    This way, we get more confidant interaction data to validate the ScISI.
+ 
+                --> The localization data is contained in the inst/extdata/ directory called "localization.rda"
 	
 	4b. Seach for "nucleus" in MIPS repository
 
                 --> Mips does not have (any obvious way anyhow) a localization of proteins nor genes. We have a list
                     of genes which are annotated by nucleus from GO; we can make a decision on how to use this 
                     information with respect to MIPS.
+
+                --> It looks like we can either use the localization data on the Mips protein complexes either directly 
+                    or indirectly as above. 
 
 	4c. Search literature.
 
