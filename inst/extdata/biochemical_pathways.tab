@@ -1,0 +1,1005 @@
+4-aminobutyrate degradation	4-aminobutyrate aminotransferase	2.6.1.19	UGA1	
+4-aminobutyrate degradation	Succinate-semialdehyde dehydrogenase	1.2.1.24		
+4-aminobutyrate degradation	Succinate-semialdehyde dehydrogenase (NAD(P)+)	1.2.1.16	UGA2	
+acetate utilization	Acetate--CoA ligase	6.2.1.1	ACS1	
+acetate utilization	Acetate--CoA ligase	6.2.1.1	ACS2	
+acrylonitrile degradation	Aliphatic nitrilase	3.5.5.7		
+acrylonitrile degradation	Amidase	3.5.1.4	AMD2	
+acrylonitrile degradation	Nitrile hydratase	4.2.1.84		
+aerobic glycerol catabolism	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH1	
+aerobic glycerol catabolism	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH2	
+aerobic glycerol catabolism	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH3	
+aerobic glycerol catabolism	Glycerol kinase	2.7.1.30	GUT1	
+aerobic glycerol catabolism	Glycerol-3-phosphate dehydrogenase	1.1.99.5	GUT2	
+aerobic glycerol catabolism	Glycerol-3-phosphate dehydrogenase (NAD+)	1.1.1.8	GPD1	
+aerobic glycerol catabolism	Glycerol-3-phosphate dehydrogenase (NAD+)	1.1.1.8	GPD2	
+aerobic glycerol catabolism	Phosphoglycerate kinase	2.7.2.3	PGK1	
+aerobic glycerol catabolism	Phosphoglycerate mutase	5.4.2.1	GPM1	
+aerobic glycerol catabolism	Phosphopyruvate hydratase	4.2.1.11	ENO1	
+aerobic glycerol catabolism	Phosphopyruvate hydratase	4.2.1.11	ENO2	
+aerobic glycerol catabolism	Pyruvate kinase	2.7.1.40	CDC19	
+aerobic glycerol catabolism	Pyruvate kinase	2.7.1.40	PYK2	
+aerobic glycerol catabolism	Triosephosphate isomerase	5.3.1.1	TPI1	
+aerobic respiration, electron donors reaction list	Glycerol-3-phosphate dehydrogenase	1.1.99.5	GUT2	
+aerobic respiration, electron donors reaction list	Hydrogenase	1.18.99.1		
+aerobic respiration, electron donors reaction list	lactate oxidation			
+aerobic respiration, electron donors reaction list	Succinate dehydrogenase (ubiquinone)	1.3.5.1	YJL045W	
+alanine biosynthesis	Alanine aminotransferase	2.6.1.2	YLR089C	
+alanine degradation	Alanine aminotransferase	2.6.1.2	YLR089C	
+aldoxime metabolism		4.2.1.-		
+aldoxime metabolism	Amidase	3.5.1.4	AMD2	
+aldoxime metabolism	Nitrile hydratase	4.2.1.84		
+allantoin degradation	Allantoicase	3.5.3.4	DAL2	PMID:6105114|SGD_REF:S000042072|SGD_REF:S000075551
+allantoin degradation	Allantoinase	3.5.2.5	DAL1	PMID:6105114|SGD_REF:S000042072|SGD_REF:S000075551
+allantoin degradation	Allophanate hydrolase	3.5.1.54	DUR1,2	PMID:6105114|SGD_REF:S000042072|SGD_REF:S000075551
+allantoin degradation	Urea carboxylase	6.3.4.6	DUR1,2	PMID:6105114|SGD_REF:S000042072|SGD_REF:S000075551
+allantoin degradation	Ureidoglycolate lyase	4.3.2.3	DAL3	PMID:6105114|SGD_REF:S000042072|SGD_REF:S000075551
+anaerobic respiration, electron donors reaction list	Formate dehydrogenase	1.2.1.2	FDH1	
+anaerobic respiration, electron donors reaction list	Glycerol-3-phosphate dehydrogenase	1.1.99.5	GUT2	
+anaerobic respiration, electron donors reaction list	Hydrogenase	1.18.99.1		
+anaerobic respiration, electron donors reaction list	lactate oxidation			
+arginine biosynthesis	Argininosuccinate lyase	4.3.2.1	ARG4	PMID:12603335|SGD_REF:S000073096|PMID:11553611|SGD_REF:S000066207
+arginine biosynthesis	Argininosuccinate synthase	6.3.4.5	ARG1	PMID:12603335|SGD_REF:S000073096|PMID:11553611|SGD_REF:S000066207
+arginine biosynthesis	Ornithine carbamoyltransferase	2.1.3.3	ARG3	PMID:12603335|SGD_REF:S000073096|PMID:11553611|SGD_REF:S000066207
+arginine degradation (aerobic)	arginine degradation (anaerobic) (Pathway)			
+arginine degradation (aerobic)	proline utilization (Pathway)			
+arginine degradation (anaerobic)	Arginase	3.5.3.1	CAR1	PMID:12620851|SGD_REF:S000072637
+arginine degradation (anaerobic)	Ornithine--oxo-acid aminotransferase	2.6.1.13	CAR2	PMID:12620851|SGD_REF:S000072637
+arginine degradation (anaerobic)	Pyrroline-5-carboxylate reductase	1.5.1.2	PRO3	PMID:12620851|SGD_REF:S000072637
+asparagine biosynthesis	Asparagine synthase (glutamine-hydrolysing)	6.3.5.4	ASN1	SGD_REF:S000070200
+asparagine biosynthesis	Asparagine synthase (glutamine-hydrolysing)	6.3.5.4	ASN2	SGD_REF:S000070200
+asparagine biosynthesis	Aspartate aminotransferase	2.6.1.1	AAT1	SGD_REF:S000070200
+asparagine biosynthesis	Aspartate aminotransferase	2.6.1.1	AAT2	SGD_REF:S000070200
+asparagine degradation	Asparaginase	3.5.1.1	ASP1	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Asparaginase	3.5.1.1	ASP3-1	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Asparaginase	3.5.1.1	ASP3-2	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Asparaginase	3.5.1.1	ASP3-3	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Asparaginase	3.5.1.1	ASP3-4	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Aspartate aminotransferase	2.6.1.1	AAT1	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+asparagine degradation	Aspartate aminotransferase	2.6.1.1	AAT2	PMID:10640599|SGD_REF:S000061758|SGD_REF:S000070200
+aspartate biosynthesis	Aspartate aminotransferase	2.6.1.1	AAT1	PMID:11082192|SGD_REF:S000059345|SGD_REF:S000070200
+aspartate biosynthesis	Aspartate aminotransferase	2.6.1.1	AAT2	PMID:11082192|SGD_REF:S000059345|SGD_REF:S000070200
+aspartate biosynthesis	Pyruvate carboxylase	6.4.1.1	PYC1	PMID:11082192|SGD_REF:S000059345|SGD_REF:S000070200
+aspartate biosynthesis	Pyruvate carboxylase	6.4.1.1	PYC2	PMID:11082192|SGD_REF:S000059345|SGD_REF:S000070200
+biotin biosynthesis	8-amino-7-oxononanoate synthase	2.3.1.47		PMID:12658511|SGD_REF:S000079647
+biotin biosynthesis	Adenosylmethionine--8-amino-7-oxononanoate aminotransferase	2.6.1.62	BIO3	PMID:12658511|SGD_REF:S000079647
+biotin biosynthesis	Biotin synthase	2.8.1.6	BIO2	PMID:12658511|SGD_REF:S000079647
+biotin biosynthesis	Dethiobiotin synthase	6.3.3.3	BIO4	PMID:12658511|SGD_REF:S000079647
+carbon monoxide dehydrogenase pathway		2.1.1.-	SPB1	
+carbon monoxide dehydrogenase pathway	Acetate kinase	2.7.2.1		
+carbon monoxide dehydrogenase pathway	Carbon-monoxide dehydrogenase	1.2.99.2		
+carbon monoxide dehydrogenase pathway	Formate dehydrogenase (NADP+)	1.2.1.43		
+carbon monoxide dehydrogenase pathway	Formate--tetrahydrofolate ligase	6.3.4.3	ADE3	
+carbon monoxide dehydrogenase pathway	Formate--tetrahydrofolate ligase	6.3.4.3	MIS1	
+carbon monoxide dehydrogenase pathway	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	ADE3	
+carbon monoxide dehydrogenase pathway	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	MIS1	
+carbon monoxide dehydrogenase pathway	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	ADE3	
+carbon monoxide dehydrogenase pathway	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	MIS1	
+carbon monoxide dehydrogenase pathway	Phosphate acetyltransferase	2.3.1.8		
+chorismate biosynthesis	2-dehydro-3-deoxyphosphoheptonate aldolase	4.1.2.15	ARO3	
+chorismate biosynthesis	2-dehydro-3-deoxyphosphoheptonate aldolase	4.1.2.15	ARO4	
+chorismate biosynthesis	3-dehydroquinate dehydratase	4.2.1.10	ARO1	
+chorismate biosynthesis	3-dehydroquinate synthase	4.6.1.3	ARO1	
+chorismate biosynthesis	3-phosphoshikimate 1-carboxyvinyltransferase	2.5.1.19	ARO1	
+chorismate biosynthesis	Chorismate synthase	4.6.1.4	ARO2	
+chorismate biosynthesis	Shikimate 5-dehydrogenase	1.1.1.25	ARO1	
+chorismate biosynthesis	shikimate-kinase	2.7.1.71	ARO1	
+citrulline biosynthesis		6.3.5.5	CPA1	PMID:8626695|SGD_REF:S000045338|SGD_REF:S000070200
+citrulline biosynthesis		6.3.5.5	CPA2	PMID:8626695|SGD_REF:S000045338|SGD_REF:S000070200
+citrulline biosynthesis	Ornithine carbamoyltransferase	2.1.3.3	ARG3	PMID:8626695|SGD_REF:S000045338|SGD_REF:S000070200
+citrulline degradation	Carbamate kinase	2.7.2.2		
+citrulline degradation	Ornithine carbamoyltransferase	2.1.3.3	ARG3	
+colanic acid building blocks biosynthesis		1.-.-.-		
+colanic acid building blocks biosynthesis		5.-.-.-		
+colanic acid building blocks biosynthesis	Galactokinase	2.7.1.6	GAL1	
+colanic acid building blocks biosynthesis	GDP-mannose 4,6-dehydratase	4.2.1.47		
+colanic acid building blocks biosynthesis	Mannose-1-phosphate guanylyltransferase (GDP)	2.7.7.22		
+colanic acid building blocks biosynthesis	Mannose-6-phosphate isomerase	5.3.1.8	PMI40	
+colanic acid building blocks biosynthesis	Phosphomannomutase	5.4.2.8	SEC53	
+colanic acid building blocks biosynthesis	UDP-glucose 4-epimerase	5.1.3.2	GAL10	
+colanic acid building blocks biosynthesis	UDP-glucose 6-dehydrogenase	1.1.1.22		
+colanic acid building blocks biosynthesis	UDP-glucose--hexose-1-phosphate uridylyltransferase	2.7.7.12	GAL7	
+colanic acid building blocks biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+colanic acid building blocks biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+Core lipid-linked oligosaccharide biosynthesis	Chitobiosyldiphosphodolichol alpha-mannosyltransferase	2.4.1.-	ALG1	PMID:9878760|SGD_REF:S000058396
+Core lipid-linked oligosaccharide biosynthesis	N-acetylglucosaminyldiphosphodolichol N-acetylglucosaminyltransferase	2.4.1.141		PMID:9878760|SGD_REF:S000058396
+Core lipid-linked oligosaccharide biosynthesis	UDP-N-acetylglucosamine--dolichyl-phosphate N-acetylglucosaminephosphotransferase	2.7.8.15	ALG7	PMID:9878760|SGD_REF:S000058396
+cysteine biosynthesis from homoserine		4.2.99.-	MET17	PMID:15042590|SGD_REF:S000075748
+cysteine biosynthesis from homoserine	Cystathionine beta-synthase	4.2.1.22	CYS4	PMID:15042590|SGD_REF:S000075748
+cysteine biosynthesis from homoserine	Cystathionine gamma-lyase	4.4.1.1	CYS3	PMID:15042590|SGD_REF:S000075748
+cysteine biosynthesis from homoserine	Homoserine O-acetyltransferase	2.3.1.31	MET2	PMID:15042590|SGD_REF:S000075748
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR2	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR2	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR3	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR3	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR4	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		1.17.4.1	RNR4	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		2.7.4.6	YNK1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides		2.7.4.6	YNK1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Adenylate kinase	2.7.4.3	ADK1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Adenylate kinase	2.7.4.3	ADK2	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Adenylosuccinate lyase	4.3.2.2	ADE13	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Adenylosuccinate lyase	4.3.2.2	ADE13	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Adenylosuccinate synthase	6.3.4.4	ADE12	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Amidophosphoribosyltransferase	2.4.2.14	ADE4	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	GMP synthase	6.3.4.1		PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	GMP synthase (glutamine-hydrolysing)	6.3.5.2	GUA1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Guanylate kinase	2.7.4.8	GUK1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	IMP cyclohydrolase	3.5.4.10	ADE16	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	IMP cyclohydrolase	3.5.4.10	ADE17	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	IMP dehydrogenase	1.1.1.205	IMD2	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	IMP dehydrogenase	1.1.1.205	IMD3	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	IMP dehydrogenase	1.1.1.205	IMD4	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Nucleoside-diphosphate kinase	2.7.4.6	YNK1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylamine--glycine ligase	6.3.4.13	ADE5,7	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylaminoimidazole carboxylase	4.1.1.21	ADE2	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylaminoimidazolecarboxamide formyltransferase	2.1.2.3	ADE16	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylaminoimidazolecarboxamide formyltransferase	2.1.2.3	ADE17	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylaminoimidazole-succinocarboxamide synthase	6.3.2.6	ADE1	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylformylglycinamidine cyclo-ligase	6.3.3.1	ADE5,7	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylformylglycinamidine synthase	6.3.5.3	ADE6	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of purine nucleotides	Phosphoribosylglycinamide formyltransferase	2.1.2.2	ADE8	PMID:11689683|SGD_REF:S000068861
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR2	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR2	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR3	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR3	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR4	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		1.17.4.1	RNR4	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		2.7.4.13		PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		2.7.4.13	CDC8	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		2.7.4.6	YNK1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		2.7.4.6	YNK1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides		2.7.4.6	YNK1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides	dCTP deaminase	3.5.4.13		PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides	dUTP pyrophosphatase	3.6.1.23	DUT1	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides	Thymidylate kinase	2.7.4.9	CDC8	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine deoxyribonucleotides	Thymidylate synthase	2.1.1.45	CDC21	PMID:12472466|SGD_REF:S000072775|PMID:1659321|SGD_REF:S000065769|PMID:6094555|SGD_REF:S000049877
+de novo biosynthesis of pyrimidine ribonucleotides		2.7.4.4	URA6	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Aspartate carbamoyltransferase	2.1.3.2	URA2	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Carbamoyl-phosphate synthase (glutamine-hydrolysing)	6.3.5.5	URA2	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	CTP synthase	6.3.4.2	URA7	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	CTP synthase	6.3.4.2	URA8	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Dihydroorotase	3.5.2.3	URA4	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Dihydroorotate dehydrogenase	1.3.99.11	URA1	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Orotate phosphoribosyltransferase	2.4.2.10	URA10	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Orotate phosphoribosyltransferase	2.4.2.10	URA10	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Orotate phosphoribosyltransferase	2.4.2.10	URA5	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Orotate phosphoribosyltransferase	2.4.2.10	URA5	PMID:9485596|SGD_REF:S000042936
+de novo biosynthesis of pyrimidine ribonucleotides	Orotidine-5'-phosphate decarboxylase	4.1.1.23	URA3	PMID:9485596|SGD_REF:S000042936
+de novo NAD biosynthesis	NAD biosynthesis (Pathway)			
+de novo NAD biosynthesis	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA1	PMID:12062417|SGD_REF:S000069977
+de novo NAD biosynthesis	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA2	PMID:12062417|SGD_REF:S000069977
+de novo NAD biosynthesis	Nicotinate-nucleotide pyrophosphorylase (carboxylating)	2.4.2.19	BNA6	PMID:12062417|SGD_REF:S000069977
+de novo NAD biosynthesis	tryptophan degradation via kynurenine (Pathway)			
+deoxyribose phosphate metabolism	Cytidine deaminase	3.5.4.5	CDD1	
+deoxyribose phosphate metabolism	Cytidine deaminase	3.5.4.5	CDD1	
+deoxyribose phosphate metabolism	Deoxyribose-phosphate aldolase	4.1.2.4		
+deoxyribose phosphate metabolism	Phosphopentomutase	5.4.2.7		
+deoxyribose phosphate metabolism	Phosphopentomutase	5.4.2.7		
+deoxyribose phosphate metabolism	Thymidine phosphorylase	2.4.2.4		
+deoxyribose phosphate metabolism	Transketolase	2.2.1.1	TKL1	
+deoxyribose phosphate metabolism	Transketolase	2.2.1.1	TKL2	
+deoxyribose phosphate metabolism	Uridine phosphorylase	2.4.2.3		
+dissimilation of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminic acid		2.7.-.-		
+dissimilation of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminic acid		5.-.-.-		
+dissimilation of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminic acid	Glucosamine--fructose-6-phosphate aminotransferase (isomerizing)	2.6.1.16	GFA1	
+dissimilation of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminic acid	N-acetylneuraminate lyase	4.1.3.3		
+dissimilation of N-acetylglucosamine, N-acetylmannosamine and N-acetylneuraminic acid	UDP-N-acetylglucosamine pyrophosphorylase	2.7.7.23	QRI1	
+ectoine synthesis		2.3.1.-		
+ectoine synthesis	Aspartate kinase	2.7.2.4	HOM3	
+ectoine synthesis	Aspartate-semialdehyde dehydrogenase	1.2.1.11	HOM2	
+ectoine synthesis	Diaminobutyrate--pyruvate aminotransferase	2.6.1.46		
+ergosterol biosynthesis			ERG2	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis			ERG25	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis			ERG3	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis			ERG4	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis			ERG5	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis		1.14.13.70	ERG11	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis		1.3.1.70	ERG24	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis		2.1.1.41	ERG6	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis	Dimethylallyltransferase	2.5.1.1	ERG20	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis	Farnesyl-diphosphate farnesyltransferase	2.-.-.-	ERG9	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis	Geranyltranstransferase	2.5.1.10	ERG20	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis	Lanosterol synthase	5.4.99.7	ERG7	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+ergosterol biosynthesis	mevalonate pathway (Pathway)			
+ergosterol biosynthesis	Squalene monooxygenase	1.14.99.7	ERG1	SGD_REF:S000058496|PMID:8561481|SGD_REF:S000079645
+fatty acid biosynthesis, initial steps	3-hydroxypalmitoyl-[acyl-carrier protein] dehydratase	4.2.1.61	FAS1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	FAS2	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	OAR1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	CEM1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	FAS2	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	Acetyl-CoA carboxylase	6.4.1.2	ACC1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	Acetyl-CoA carboxylase	6.4.1.2	HFA1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	[Acyl-carrier protein] S-acetyltransferase	2.3.1.38	FAS1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	[Acyl-carrier protein] S-malonyltransferase	2.3.1.39	FAS1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	[Acyl-carrier protein] S-malonyltransferase	2.3.1.39	MCT1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	Biotin carboxylase	6.3.4.14	ACC1	SGD_REF:S000058496
+fatty acid biosynthesis, initial steps	Enoyl-[acyl-carrier protein] reductase (NADPH, B-specific)	1.3.1.10	FAS1	SGD_REF:S000058496
+fatty acid elongation, saturated		3.1.2.22		SGD_REF:S000058496
+fatty acid elongation, saturated	3-hydroxypalmitoyl-[acyl-carrier protein] dehydratase	4.2.1.61	FAS1	SGD_REF:S000058496
+fatty acid elongation, saturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	FAS2	SGD_REF:S000058496
+fatty acid elongation, saturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	OAR1	SGD_REF:S000058496
+fatty acid elongation, saturated	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	CEM1	SGD_REF:S000058496
+fatty acid elongation, saturated	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	FAS2	SGD_REF:S000058496
+fatty acid elongation, saturated	Enoyl-[acyl-carrier protein] reductase (NADH)	1.3.1.10	FAS1	SGD_REF:S000058496
+fatty acid elongation, unsaturated	3-hydroxydecanoyl-[acyl-carrier protein] dehydratase	4.2.1.60		
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	FAS2	
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	FAS2	
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	OAR1	
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] reductase	1.1.1.100	OAR1	
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	CEM1	
+fatty acid elongation, unsaturated	3-oxoacyl-[acyl-carrier protein] synthase	2.3.1.41	FAS2	
+fatty acid oxidation pathway	3-hydroxyacyl-CoA dehydrogenase	1.1.1.35	FOX2	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Acetyl-CoA C-acyltransferase	2.3.1.16	POT1	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Acyl-CoA oxidase	1.3.3.6	POX1	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Dodecenoyl-CoA delta-isomerase	5.3.3.8	DCI1	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Dodecenoyl-CoA delta-isomerase	5.3.3.8	ECI1	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Enoyl-CoA hydratase	4.2.1.17	FOX2	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA1	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA2	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA3	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA4	PMID:1551874|SGD_REF:S000054412
+fatty acid oxidation pathway	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAT1	PMID:1551874|SGD_REF:S000054412
+folic acid biosynthesis		3.6.1.-		
+folic acid biosynthesis		3.6.1.-		
+folic acid biosynthesis		4.1.3.38	LIP1	
+folic acid biosynthesis		6.3.5.8	ABZ1	
+folic acid biosynthesis	2-amino-4-hydroxy-6-hydroxymethyldihydropteridine pyrophosphokinase	2.7.6.3	FOL1	
+folic acid biosynthesis	Dihydrofolate reductase	1.5.1.3	DFR1	
+folic acid biosynthesis	Dihydrofolate synthase	6.3.2.12	FOL3	
+folic acid biosynthesis	Dihydroneopterin aldolase	4.1.2.25	FOL1	
+folic acid biosynthesis	Dihydropteroate synthase	2.5.1.15	FOL1	
+folic acid biosynthesis	Folylpolyglutamate synthase	6.3.2.17	FOL3	
+folic acid biosynthesis	Folylpolyglutamate synthase	6.3.2.17	MET7	
+folic acid biosynthesis	Formate--tetrahydrofolate ligase	6.3.4.3	ADE3	
+folic acid biosynthesis	Formate--tetrahydrofolate ligase	6.3.4.3	MIS1	
+folic acid biosynthesis	Glycine hydroxymethyltransferase	2.1.2.1	SHM1	
+folic acid biosynthesis	Glycine hydroxymethyltransferase	2.1.2.1	SHM2	
+folic acid biosynthesis	GTP cyclohydrolase I	3.5.4.16	FOL2	
+folic acid biosynthesis	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	ADE3	
+folic acid biosynthesis	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	MIS1	
+folic acid biosynthesis	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	ADE3	
+folic acid biosynthesis	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	MIS1	
+formylTHF biosynthesis	5,10-methylenetetrahydrofolate reductase (FADH)	1.7.99.5		
+formylTHF biosynthesis	5-methyltetrahydrofolate--homocysteine S-methyltransferase	2.1.1.13		
+formylTHF biosynthesis	Dihydrofolate reductase	1.5.1.3	DFR1	
+formylTHF biosynthesis	Dihydrofolate synthase	6.3.2.12	FOL3	
+formylTHF biosynthesis	Formate--tetrahydrofolate ligase	6.3.4.3	ADE3	
+formylTHF biosynthesis	Formate--tetrahydrofolate ligase	6.3.4.3	MIS1	
+formylTHF biosynthesis	Formyltetrahydrofolate deformylase	3.5.1.10		
+formylTHF biosynthesis	Glycine hydroxymethyltransferase	2.1.2.1	SHM1	
+formylTHF biosynthesis	Glycine hydroxymethyltransferase	2.1.2.1	SHM2	
+formylTHF biosynthesis	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	ADE3	
+formylTHF biosynthesis	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	MIS1	
+formylTHF biosynthesis	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	ADE3	
+formylTHF biosynthesis	Methylenetetrahydrofolate dehydrogenase (NADP+)	1.5.1.5	MIS1	
+formylTHF biosynthesis	Thymidylate synthase	2.1.1.45	CDC21	
+galactose metabolism	Aldose 1-epimerase	5.1.3.3	GAL10	PMID:14764091|SGD_REF:S000075515
+galactose metabolism	Galactokinase	2.7.1.6	GAL1	PMID:14764091|SGD_REF:S000075515
+galactose metabolism	Phosphoglucomutase	5.4.2.2	PGM1	PMID:14764091|SGD_REF:S000075515
+galactose metabolism	Phosphoglucomutase	5.4.2.2	PGM2	PMID:14764091|SGD_REF:S000075515
+galactose metabolism	UDP-glucose 4-epimerase	5.1.3.2	GAL10	PMID:14764091|SGD_REF:S000075515
+galactose metabolism	UDP-glucose--hexose-1-phosphate uridylyltransferase	2.7.7.12	GAL7	PMID:14764091|SGD_REF:S000075515
+gluconeogenesis	Fructose-bisphosphatase	3.1.3.11	FBP1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Fructose-bisphosphate aldolase	4.1.2.13	FBA1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Glucose-6-phosphate isomerase	5.3.1.9	PGI1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH2	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH3	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Malate dehydrogenase	1.1.1.37	MDH2	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Malate dehydrogenase (oxaloacetate decarboxylating)	1.1.1.38	MAE1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Phosphoenolpyruvate carboxykinase (ATP)	4.1.1.49	PCK1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Phosphoglycerate kinase	2.7.2.3	PGK1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Phosphoglycerate mutase	5.4.2.1	GPM1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Phosphopyruvate hydratase	4.2.1.11	ENO1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Phosphopyruvate hydratase	4.2.1.11	ENO2	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Pyruvate carboxylase	6.4.1.1	PYC1	PMID:9467897|SGD_REF:S000041426
+gluconeogenesis	Pyruvate carboxylase	6.4.1.1	PYC2	PMID:9467897|SGD_REF:S000041426
+glucose 1-phosphate metabolism	Glucose dehydrogenase (pyrroloquinoline-quinone)	1.1.99.17		
+glucose 1-phosphate metabolism	Glucose-1-phosphatase	3.1.3.10		
+glucose 1-phosphate metabolism	Phosphoglucomutase	5.4.2.2	PGM1	
+glucose 1-phosphate metabolism	Phosphoglucomutase	5.4.2.2	PGM2	
+glucose 1-phosphate metabolism	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+glucose 1-phosphate metabolism	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+glucose 1-phosphate metabolism	Xylose isomerase	5.3.1.5		
+glucose fermentation 		1.1.1.1	ADH1	
+glucose fermentation 		1.1.1.1	ADH2	
+glucose fermentation 		1.1.1.1	ADH3	
+glucose fermentation 		1.1.1.1	ADH4	
+glucose fermentation 		1.1.1.1	ADH5	
+glucose fermentation 		1.2.1.5	ALD4	
+glucose fermentation 		1.2.1.5	ALD5	
+glucose fermentation 	Aldehyde dehydrogenase (NAD+)	1.2.1.3		
+glucose fermentation 	Aldehyde dehydrogenase (NADP+)	1.2.1.4	ALD6	
+glucose fermentation 	glycolysis			
+glucose fermentation 	Hexokinase	2.7.1.1	HXK2	
+glucose fermentation 	Pyruvate decarboxylase	4.1.1.1	PDC1	
+glucose fermentation 	Pyruvate decarboxylase	4.1.1.1	PDC5	
+glucose fermentation 	Pyruvate decarboxylase	4.1.1.1	PDC6	
+glucuronate degradation (to xylulose 5-phosphate)	Dehydro-L-gulonate decarboxylase	4.1.1.34		
+glucuronate degradation (to xylulose 5-phosphate)	D-xylulose reductase	1.1.1.9	XYL2	
+glucuronate degradation (to xylulose 5-phosphate)	Glucuronate reductase	1.1.1.19		
+glucuronate degradation (to xylulose 5-phosphate)	L-gulonate 3-dehydrogenase	1.1.1.45		
+glucuronate degradation (to xylulose 5-phosphate)	L-xylulose reductase	1.1.1.10		
+glucuronate degradation (to xylulose 5-phosphate)	Xylulokinase	2.7.1.17	XKS1	
+glutamate biosynthesis from ammonia	Glutamate dehydrogenase (NADP+)	1.4.1.4	GDH1	PMID:9287019|SGD_REF:S000049665|PMID:11562373|SGD_REF:S000066220|SGD_REF:S000070200|SGD_REF:S000075551
+glutamate biosynthesis from ammonia	Glutamate dehydrogenase (NADP+)	1.4.1.4	GDH3	PMID:9287019|SGD_REF:S000049665|PMID:11562373|SGD_REF:S000066220|SGD_REF:S000070200|SGD_REF:S000075551
+glutamate biosynthesis from glutamine	Glutamate synthase (NADH)	1.4.1.14	GLT1	SGD_REF:S000070200|SGD_REF:S000075551
+glutamate degradation I	4-aminobutyrate aminotransferase	2.6.1.19	UGA1	PMID:11031268|SGD_REF:S000042602
+glutamate degradation I	Glutamate decarboxylase	4.1.1.15	GAD1	PMID:11031268|SGD_REF:S000042602
+glutamate degradation I	Succinate-semialdehyde dehydrogenase (NAD(P)+)	1.2.1.16	UGA2	PMID:11031268|SGD_REF:S000042602
+glutamate degradation IX	Glutamate dehydrogenase	1.4.1.2	GDH2	PMID:1975578|SGD_REF:S000053418
+glutamine biosynthesis	Glutamate--ammonia ligase	6.3.1.2	GLN1	SGD_REF:S000070200|SGD_REF:S000075551
+glutathione biosynthesis	Glutamate--cysteine ligase	6.3.2.2	GSH1	PMID:11169096|SGD_REF:S000061564
+glutathione biosynthesis	Glutathione synthase	6.3.2.3	GSH2	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions			GRX2	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione peroxidase	1.11.1.9	GPX1	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione peroxidase	1.11.1.9	GPX2	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione peroxidase	1.11.1.9	HYR1	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione reductase (NADPH)	1.8.1.7	GLR1	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione transferase	2.5.1.18	GTT1	PMID:11169096|SGD_REF:S000061564
+glutathione-glutaredoxin redox reactions	Glutathione transferase	2.5.1.18	GTT2	PMID:11169096|SGD_REF:S000061564
+glycerol biosynthesis	Acylglycerol lipase	3.1.1.23		
+glycerol biosynthesis	Triacylglycerol lipase	3.1.1.3	ATG15	
+glycerol biosynthesis	Triacylglycerol lipase	3.1.1.3	TGL1	
+glycerol biosynthesis	Triacylglycerol lipase	3.1.1.3	TGL2	
+glycerol metabolism	Glycerol dehydrogenase	1.1.1.6		
+glycerol metabolism	Glycerol kinase	2.7.1.30	GUT1	
+glycerol metabolism	Glycerol-3-phosphate dehydrogenase	1.1.99.5	GUT2	
+glycerol metabolism	Glycerol-3-phosphate dehydrogenase (NAD(P)+)	1.1.1.94		
+glycerol metabolism	Glycerophosphodiester phosphodiesterase	3.1.4.46		
+glycerol teichoic acid biosynthesis	Glycerol-3-phosphate cytidylyltransferase	2.7.7.39		
+glycerol teichoic acid biosynthesis	Phosphoglucomutase	5.4.2.2	PGM1	
+glycerol teichoic acid biosynthesis	Phosphoglucomutase	5.4.2.2	PGM2	
+glycerol teichoic acid biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+glycerol teichoic acid biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+glycine biosynthesis from alanine	Alanine--glyoxylate aminotransferase	2.6.1.44	AGX1	PMID:14745783|SGD_REF:S000075415
+glycine biosynthesis from serine	Glycine hydroxymethyltransferase	2.1.2.1	SHM1	SGD_REF:S000070200
+glycine biosynthesis from serine	Glycine hydroxymethyltransferase	2.1.2.1	SHM2	SGD_REF:S000070200
+glycine biosynthesis from threonine	Threonine aldolase	4.1.2.5	GLY1	PMID:9163906|SGD_REF:S000053396
+glycine degradation	Aminomethyltransferase	2.1.2.10	GCV1	
+glycine degradation	Formate dehydrogenase (cytochrome)	1.2.2.1		
+glycine degradation	Formate--tetrahydrofolate ligase	6.3.4.3	ADE3	
+glycine degradation	Formate--tetrahydrofolate ligase	6.3.4.3	MIS1	
+glycine degradation	Glycine dehydrogenase (decarboxylating)	1.4.4.2	GCV2	
+glycine degradation	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	ADE3	
+glycine degradation	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	MIS1	
+glycine degradation	Methylenetetrahydrofolate dehydrogenase (NAD+)	1.5.1.15	ADE3	
+glycine degradation	Methylenetetrahydrofolate dehydrogenase (NAD+)	1.5.1.15	MIS1	
+glycine degradation	Methylenetetrahydrofolate dehydrogenase (NAD+)	1.5.1.15	MTD1	
+glycogen biosynthesis	1,4-alpha-glucan branching enzyme	2.4.1.18	GLC3	PMID:11152943|SGD_REF:S000059437
+glycogen biosynthesis	Glycogen (starch) synthase	2.4.1.11	GSY1	PMID:11152943|SGD_REF:S000059437
+glycogen biosynthesis	Glycogen (starch) synthase	2.4.1.11	GSY2	PMID:11152943|SGD_REF:S000059437
+glycogen biosynthesis	Glycogenin glucosyltransferase	2.4.1.186	GLG2	PMID:11152943|SGD_REF:S000059437
+glycogen biosynthesis	Glycogenin glucosyltransferase	2.4.1.186	TOA2	PMID:11152943|SGD_REF:S000059437
+glycogen catabolism			GPH1	PMID:11152943|SGD_REF:S000059437
+glycogen catabolism		3.2.1.33	GDB1	PMID:11152943|SGD_REF:S000059437
+glycogen catabolism	4-alpha-glucanotransferase	2.4.1.25	GDB1	PMID:11152943|SGD_REF:S000059437
+glycogen catabolism	Glucan 1,4-alpha-glucosidase	3.2.1.3	SGA1	PMID:11152943|SGD_REF:S000059437
+glycolysis	6-phosphofructokinase	2.7.1.11	PFK1	
+glycolysis	6-phosphofructokinase	2.7.1.11	PFK2	
+glycolysis	Fructose-bisphosphate aldolase	4.1.2.13	FBA1	
+glycolysis	Glucose-6-phosphate isomerase	5.3.1.9	PGI1	
+glycolysis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH1	
+glycolysis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH2	
+glycolysis	Glyceraldehyde 3-phosphate dehydrogenase (phosphorylating)	1.2.1.12	TDH3	
+glycolysis	Phosphoglycerate kinase	2.7.2.3	PGK1	
+glycolysis	Phosphoglycerate mutase	5.4.2.1	GPM1	
+glycolysis	Phosphopyruvate hydratase	4.2.1.11	ENO1	
+glycolysis	Phosphopyruvate hydratase	4.2.1.11	ENO2	
+glycolysis	Pyruvate kinase	2.7.1.40	CDC19	
+glycolysis	Pyruvate kinase	2.7.1.40	PYK2	
+glycolysis	Triosephosphate isomerase	5.3.1.1	TPI1	
+heme biosynthesis	5-aminolevulinic acid synthase	2.3.1.37	HEM1	
+heme biosynthesis	Coproporphyrinogen oxidase	1.3.3.3	HEM13	
+heme biosynthesis	Ferrochelatase	4.99.1.1	HEM15	
+heme biosynthesis	Hydroxymethylbilane synthase	4.3.1.8	HEM3	
+heme biosynthesis	Porphobilinogen synthase	4.2.1.24	HEM2	
+heme biosynthesis	Protoporphyrinogen oxidase	1.3.3.4	HEM14	
+heme biosynthesis	Uroporphyrinogen decarboxylase	4.1.1.37	HEM12	
+heme biosynthesis	Uroporphyrinogen-III synthase	4.2.1.75	HEM4	
+hexaprenyl diphosphate biosynthesis		2.5.1.-	COQ1	PMID:11583838|SGD_REF:S000072241|PMID:2681213|SGD_REF:S000056919
+hexaprenyl diphosphate biosynthesis	Dimethylallyltransferase	2.5.1.1	ERG20	PMID:11583838|SGD_REF:S000072241|PMID:2681213|SGD_REF:S000056919
+hexaprenyl diphosphate biosynthesis	Farnesyltranstransferase	2.5.1.29	BTS1	PMID:11583838|SGD_REF:S000072241|PMID:2681213|SGD_REF:S000056919
+hexaprenyl diphosphate biosynthesis	Geranyltranstransferase	2.5.1.10	ERG20	PMID:11583838|SGD_REF:S000072241|PMID:2681213|SGD_REF:S000056919
+hexitol degradation super-pathway	mannitol degradation (Pathway)			
+hexitol degradation super-pathway	sorbitol degradation (Pathway)			
+histidine biosynthesis		2.4.2.-	HIS7	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	ATP phosphoribosyltransferase	2.4.2.17	HIS1	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Histidinol dehydrogenase	1.1.1.23	HIS4	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Histidinol dehydrogenase	1.1.1.23	HIS4	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Histidinol-phosphatase	3.1.3.15	HIS2	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Histidinol-phosphate aminotransferase	2.6.1.9	HIS5	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Imidazoleglycerol-phosphate dehydratase	4.2.1.19	HIS3	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	N-(5'-phospho-D-ribosylformimino)-5-amino-1-(5''-phosphoribosyl)-4- imidazole carboxamide isomerase	5.3.1.16	HIS6	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Phosphoribosyl-AMP cyclohydrolase	3.5.4.19	HIS4	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+histidine biosynthesis	Phosphoribosyl-ATP pyrophosphatase	3.6.1.31	HIS4	PMID:9822821|SGD_REF:S000041612|PMID:8852895|SGD_REF:S000057959
+homocysteine and cysteine interconversion			STR2	PMID:9409150|SGD_REF:S000055397
+homocysteine and cysteine interconversion	Cystathionine beta-lyase	4.4.1.8	STR3	PMID:9409150|SGD_REF:S000055397
+homocysteine and cysteine interconversion	homocysteine degradation (Pathway)			
+homocysteine degradation	Cystathionine beta-synthase	4.2.1.22	CYS4	PMID:10509018|SGD_REF:S000046732
+homocysteine degradation	Cystathionine gamma-lyase	4.4.1.1	CYS3	PMID:10509018|SGD_REF:S000046732
+homoserine biosynthesis	Aspartate kinase	2.7.2.4	HOM3	
+homoserine biosynthesis	Aspartate-semialdehyde dehydrogenase	1.2.1.11	HOM2	
+homoserine biosynthesis	Homoserine dehydrogenase	1.1.1.3	HOM6	
+homoserine methionine biosynthesis		4.2.99.-	MET17	PMID:9409150|SGD_REF:S000055397
+homoserine methionine biosynthesis	5-methyltetrahydropteroyltriglutamate--homocysteine S-methyltransferase	2.1.1.14	MET6	PMID:9409150|SGD_REF:S000055397
+homoserine methionine biosynthesis	Homoserine O-acetyltransferase	2.3.1.31	MET2	PMID:9409150|SGD_REF:S000055397
+isoleucine biosynthesis	Acetolactate synthase	4.1.3.18	ILV2	
+isoleucine biosynthesis	Acetolactate synthase	4.1.3.18	ILV6	
+isoleucine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	
+isoleucine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	
+isoleucine biosynthesis	Dihydroxy-acid dehydratase	4.2.1.9	ILV3	
+isoleucine biosynthesis	Ketol-acid reductoisomerase	1.1.1.86	ILV5	
+isoleucine biosynthesis	Threonine dehydratase	4.3.1.19	ILV1	
+isoleucine degradation		4.1.1.-	ARO10	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation		4.1.1.-	PDC1	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation		4.1.1.-	PDC5	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation		4.1.1.-	PDC6	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation		4.1.1.-	THI3	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	PMID:10753893|SGD_REF:S000051759
+isoleucine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	PMID:10753893|SGD_REF:S000051759
+lactose degradation	Aldose 1-epimerase	5.1.3.3	GAL10	
+lactose degradation	Beta-galactosidase	3.2.1.23		
+lactose degradation	Galactokinase	2.7.1.6	GAL1	
+lactose degradation	Phosphoglucomutase	5.4.2.2	PGM1	
+lactose degradation	Phosphoglucomutase	5.4.2.2	PGM2	
+lactose degradation	UDP-glucose 4-epimerase	5.1.3.2	GAL10	
+lactose degradation	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+lactose degradation	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+lactose degradation	UTP--hexose-1-phosphate uridylyltransferase	2.7.7.10	GAL7	
+leucine biosynthesis	2-isopropylmalate synthase	4.1.3.12	LEU4	SGD_REF:S000066074
+leucine biosynthesis	2-isopropylmalate synthase	4.1.3.12	LEU9	SGD_REF:S000066074
+leucine biosynthesis	3-isopropylmalate dehydratase	4.2.1.33	LEU1	SGD_REF:S000066074
+leucine biosynthesis	3-isopropylmalate dehydrogenase	1.1.1.85	LEU2	SGD_REF:S000066074
+leucine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	SGD_REF:S000066074
+leucine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	SGD_REF:S000066074
+leucine degradation		4.1.1.-	ARO10	PMID:12499363|SGD_REF:S000072614|PMID:9341119|SGD_REF:S000066173
+leucine degradation		4.1.1.-	THI3	PMID:12499363|SGD_REF:S000072614|PMID:9341119|SGD_REF:S000066173
+leucine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	PMID:12499363|SGD_REF:S000072614|PMID:9341119|SGD_REF:S000066173
+leucine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	PMID:12499363|SGD_REF:S000072614|PMID:9341119|SGD_REF:S000066173
+lipases biosynthesis	1-phosphatidylinositol phosphodiesterase	3.1.4.10		
+lipases biosynthesis	1-phosphatidylinositol-4,5-bisphosphate phosphodiesterase	3.1.4.11	PLC1	
+lipases biosynthesis	Phospholipase A2	3.1.1.4	SPO22	
+lipases biosynthesis	Phospholipase C	3.1.4.3	ISC1	
+lipases biosynthesis	Phospholipase D	3.1.4.4	SPO14	
+Lipid-linked oligosaccharide biosynthesis		2.4.1.-		PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.-	ALG2	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.-	ALG6	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.-	ALG8	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.-	DIE2	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.130		PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.130	ALG12	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.130	ALG3	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis		2.4.1.130	ALG9	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis	Core lipid-linked oligosaccharide biosynthesis (Pathway)			
+Lipid-linked oligosaccharide biosynthesis	Glycolipid 2-alpha-mannosyltransferase	2.4.1.-	ALG11	PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+Lipid-linked oligosaccharide biosynthesis	Glycolipid 3-alpha-mannosyltransferase	2.4.1.132		PMID:11278778|SGD_REF:S000060698|PMID:10336995|SGD_REF:S000070115|PMID:9878760|SGD_REF:S000058396
+L-serine degradation	L-serine dehydratase	4.2.1.13	CHA1	PMID:1628804|SGD_REF:S000044188
+lysine biosynthesis		1.5.1.10	LYS9	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis		2.6.1.39		SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis		4.2.1.36	LYS4	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Aminoadipate-semialdehyde dehydrogenase	1.2.1.31	LYS2	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Homoaconitate hydratase	4.2.1.36	LYS4	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Homocitrate synthase	4.1.3.21	LYS20	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Homocitrate synthase	4.1.3.21	LYS21	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Homoisocitrate dehydrogenase	1.1.1.155	LYS12	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine biosynthesis	Saccharopine dehydrogenase (NAD+, L-lysine forming)	1.5.1.7	LYS1	SGD_REF:S000066074|PMID:10714900|SGD_REF:S000075849
+lysine degradation III		1.1.1.-		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+lysine degradation III		2.3.1.-		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+lysine degradation III		2.6.1.-		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+lysine degradation III		2.6.1.-		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+lysine degradation III		3.5.1.-		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+lysine degradation III	Glutarate-semialdehyde dehydrogenase	1.2.1.20		PMID:131119|SGD_REF:S000086910|PMID:8257283|SGD_REF:S000086911
+mannitol degradation	6-phosphofructokinase	2.7.1.11	PFK1	
+mannitol degradation	6-phosphofructokinase	2.7.1.11	PFK2	
+mannitol degradation	Fructose-bisphosphate aldolase	4.1.2.13	FBA1	
+mannitol degradation	Mannitol-1-phosphate 5-dehydrogenase	1.1.1.17		
+mannose and GDP-mannose metabolism	Mannokinase	2.7.1.7		
+mannose and GDP-mannose metabolism	Mannose-1-phosphate guanylyltransferase (GDP)	2.7.7.22		
+mannose and GDP-mannose metabolism	Mannose-6-phosphate isomerase	5.3.1.8	PMI40	
+mannose and GDP-mannose metabolism	Phosphomannomutase	5.4.2.8	SEC53	
+mannose catabolism	Mannokinase	2.7.1.7		
+mannose catabolism	Mannose-6-phosphate isomerase	5.3.1.8	PMI40	
+m-cresol degradation	3,5-xylenol methylhydroxylase	1.14.13.-		
+m-cresol degradation	3-hydroxybenzoate 4-monooxygenase	1.14.13.23		
+m-cresol degradation	3-hydroxybenzoate 6-monooxygenase	1.14.13.24		
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD10	
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD14	
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD15	
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD3	
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD4	
+m-cresol degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD6	
+m-cresol degradation	Benzaldehyde dehydrogenase (NADP+)	1.2.1.7		
+methionine and S-adenosylmethionine synthesis	5-methyltetrahydropteroyltriglutamate--homocysteine S-methyltransferase	2.1.1.14	MET6	PMID:9409150|SGD_REF:S000055397
+methionine and S-adenosylmethionine synthesis	Methionine adenosyltransferase	2.5.1.6	SAM1	PMID:9409150|SGD_REF:S000055397
+methionine and S-adenosylmethionine synthesis	Methionine adenosyltransferase	2.5.1.6	SAM2	PMID:9409150|SGD_REF:S000055397
+methionine biosynthesis	homoserine biosynthesis (Pathway)			
+methionine biosynthesis	homoserine methionine biosynthesis (Pathway)			
+methionine degradation		4.4.1.-		
+methionine degradation	Adenosylhomocysteinase	3.3.1.1	SAH1	
+methionine degradation	Cystathionine beta-synthase	4.2.1.22	CYS4	
+methionine degradation	DNA (cytosine-5-)-methyltransferase	2.1.1.37		
+methionine degradation	Methionine adenosyltransferase	2.5.1.6	SAM1	
+methionine degradation	Methionine adenosyltransferase	2.5.1.6	SAM2	
+methionine degradation	Methylmalonyl-CoA epimerase	5.1.99.1		
+methionine degradation	Methylmalonyl-CoA mutase	5.4.99.2		
+methylglyoxal catabolism	Hydroxyacylglutathione hydrolase	3.1.2.6	GLO2	PMID:8824231|SGD_REF:S000050684|PMID:9261170|SGD_REF:S000050952
+methylglyoxal catabolism	Hydroxyacylglutathione hydrolase	3.1.2.6	GLO4	PMID:8824231|SGD_REF:S000050684|PMID:9261170|SGD_REF:S000050952
+methylglyoxal catabolism	Lactoylglutathione lyase	4.4.1.5	GLO1	PMID:8824231|SGD_REF:S000050684|PMID:9261170|SGD_REF:S000050952
+mevalonate pathway	Acetyl-CoA C-acetyltransferase	2.3.1.9	ERG10	SGD_REF:S000058496
+mevalonate pathway	Diphosphomevalonate decarboxylase	4.1.1.33	MVD1	SGD_REF:S000058496
+mevalonate pathway	Hydroxymethylglutaryl-CoA reductase (NADPH)	1.1.1.34	HMG1	SGD_REF:S000058496
+mevalonate pathway	Hydroxymethylglutaryl-CoA reductase (NADPH)	1.1.1.34	HMG2	SGD_REF:S000058496
+mevalonate pathway	Hydroxymethylglutaryl-CoA synthase	4.1.3.5	ERG13	SGD_REF:S000058496
+mevalonate pathway	Isopentenyl-diphosphate delta-isomerase	5.3.3.2	IDI1	SGD_REF:S000058496
+mevalonate pathway	Mevalonate kinase	2.7.1.36	ERG12	SGD_REF:S000058496
+mevalonate pathway	Phosphomevalonate kinase	2.7.4.2	ERG8	SGD_REF:S000058496
+NAD biosynthesis	NAD(+) synthase (glutamine-hydrolysing)	6.3.5.1	QNS1	PMID:11884393|SGD_REF:S000070049
+NAD biosynthesis	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA1	PMID:11884393|SGD_REF:S000070049
+NAD biosynthesis	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA2	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	NAD biosynthesis (Pathway)			
+NAD salvage pathway	NAD(+) nucleosidase	3.2.2.5		PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	NAD+ pyrophosphatase	3.6.1.22	NPY1	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	Nicotinamidase	3.5.1.19	PNC1	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	Nicotinamide-nucleotide amidase	3.5.1.42		PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	Nicotinate phosphoribosyltransferase	2.4.2.11	NPT1	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA1	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	Nicotinate-nucleotide adenylyltransferase	2.7.7.18	NMA2	PMID:11884393|SGD_REF:S000070049
+NAD salvage pathway	NMN nucleosidase	3.2.2.14		PMID:11884393|SGD_REF:S000070049
+non-oxidative branch of the pentose phosphate pathway			TKL1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND2	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Ribose 5-phosphate epimerase	5.3.1.6	RKI1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	ribulose phosphate 3-epimerase	5.1.3.1	RPE1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Transaldolase	2.2.1.2	TAL1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Transaldolase	2.2.1.2	YGR043C	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Transketolase	2.2.1.1	TKL1	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+non-oxidative branch of the pentose phosphate pathway	Transketolase	2.2.1.1	TKL2	PMID:8534086|SGD_REF:S000053822|PMID:14690456|SGD_REF:S000076698
+octane oxidation		1.1.99.-		
+octane oxidation	Alkane-1 monooxygenase	1.14.15.3		
+octane oxidation	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA1	
+octane oxidation	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA2	
+octane oxidation	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA3	
+octane oxidation	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAA4	
+octane oxidation	Long-chain-fatty-acid--CoA ligase	6.2.1.3	FAT1	
+octane oxidation	Rubredoxin--NAD(+) reductase	1.18.1.1		
+oxidative branch of the pentose phosphate pathway	6-phosphogluconolactonase	3.1.1.31		
+oxidative branch of the pentose phosphate pathway	Glucose-6-phosphate 1-dehydrogenase	1.1.1.49	ZWF1	
+oxidative branch of the pentose phosphate pathway	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND1	
+oxidative branch of the pentose phosphate pathway	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND2	
+pantothenate and coenzyme A biosynthesis	2-dehydropantoate 2-reductase	1.1.1.169	PAN5	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	3-methyl-2-oxobutanoate hydroxymethyltransferase	2.1.2.11	ECM31	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	3-methyl-2-oxobutanoate hydroxymethyltransferase	2.1.2.11	ECM31	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Dephospho-CoA kinase	2.7.1.24	YDR196C	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Pantetheine-phosphate adenylyltransferase	2.7.7.3	YGR277C	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Pantoate--beta-alanine ligase	6.3.2.1	PAN6	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Pantothenate kinase	2.7.1.33	YDR531W	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Phosphopantothenate--cysteine ligase	6.3.2.5	YIL083C	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Phosphopantothenoylcysteine decarboxylase	4.1.1.36	SIS2	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Phosphopantothenoylcysteine decarboxylase	4.1.1.36	VHS3	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	Phosphopantothenoylcysteine decarboxylase	4.1.1.36	YKL088W	PMID:11154694|SGD_REF:S000060103
+pantothenate and coenzyme A biosynthesis	polyamine degradation (Pathway)			
+pathways of chorismate	folic acid biosynthesis (Pathway)			
+pathways of chorismate	phenylalanine, tyrosine and tryptophan biosynthesis, complete (Pathway)			
+p-cymene degradation		1.13.11.-		
+p-cymene degradation		1.13.11.-		
+p-cymene degradation		1.14.13.-		
+p-cymene degradation		1.3.1.58		
+p-cymene degradation		3.7.1.-		
+p-cymene degradation		4.1.1.-		
+p-cymene degradation		4.1.3.-		
+p-cymene degradation		4.2.1.-		
+p-cymene degradation	Acetaldehyde dehydrogenase (acetylating)	1.2.1.10		
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD10	
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD14	
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD15	
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD3	
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD4	
+p-cymene degradation	Aryl-alcohol dehydrogenase	1.1.1.90	AAD6	
+p-cymene degradation	Aryl-aldehyde dehydrogenase	1.2.1.29		
+pentose phosphate pathway	non-oxidative branch of the pentose phosphate pathway (Pathway)			
+pentose phosphate pathway	oxidative branch of the pentose phosphate pathway (Pathway)			
+periplasmic NAD degradation	5'-nucleotidase	3.1.3.5		
+periplasmic NAD degradation	NAD+ pyrophosphatase	3.6.1.22	NPY1	
+phenylalanine biosynthesis	Aromatic amino acid transferase	2.6.1.57	ARO8	PMID:9642265|SGD_REF:S000051258|PMID:9491082|SGD_REF:S000054047|PMID:9491083|SGD_REF:S000054049|SGD_REF:S000070200
+phenylalanine biosynthesis	Aromatic amino acid transferase	2.6.1.57	ARO9	PMID:9642265|SGD_REF:S000051258|PMID:9491082|SGD_REF:S000054047|PMID:9491083|SGD_REF:S000054049|SGD_REF:S000070200
+phenylalanine biosynthesis	Chorismate mutase	5.4.99.5	ARO7	PMID:9642265|SGD_REF:S000051258|PMID:9491082|SGD_REF:S000054047|PMID:9491083|SGD_REF:S000054049|SGD_REF:S000070200
+phenylalanine biosynthesis	Prephenate dehydratase	4.2.1.51	PHA2	PMID:9642265|SGD_REF:S000051258|PMID:9491082|SGD_REF:S000054047|PMID:9491083|SGD_REF:S000054049|SGD_REF:S000070200
+phenylalanine degradation		1.1.1.1	ADH1	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		1.1.1.1	ADH2	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		1.1.1.1	ADH3	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		1.1.1.1	ADH4	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		1.1.1.1	ADH5	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		1.1.1.1	SFA1	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		4.1.1.-	ARO10	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		4.1.1.-	PDC1	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		4.1.1.-	PDC5	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation		4.1.1.-	PDC6	PMID:12499363|SGD_REF:S000072614
+phenylalanine degradation	Aromatic amino acid transferase	2.6.1.57	ARO9	PMID:12499363|SGD_REF:S000072614
+phenylalanine, tyrosine and tryptophan biosynthesis, complete	chorismate biosynthesis (Pathway)			
+phenylalanine, tyrosine and tryptophan biosynthesis, complete	superpathway of phenylalanine, tyrosine, and tryptophan biosynthesis (Pathway)			
+phosphatidic acid and phospholipid biosynthesis	Diacylglycerol kinase	2.7.1.107		SGD_REF:S000058496
+phosphatidic acid and phospholipid biosynthesis	phosphatidic acid synthesis (Pathway)			
+phosphatidic acid and phospholipid biosynthesis	phospholipid biosynthesis (Kennedy pathway) (Pathway)			
+phosphatidic acid and phospholipid biosynthesis	phospholipid biosynthesis (Pathway)			
+phosphatidic acid synthesis		1.1.1.101	AYR1	PMID:9401016|SGD_REF:S000041391|PMID:10617610|SGD_REF:S000055653
+phosphatidic acid synthesis	1-acylglycerol-3-phosphate O-acyltransferase	2.3.1.51	SLC1	PMID:9401016|SGD_REF:S000041391|PMID:10617610|SGD_REF:S000055653
+phosphatidic acid synthesis	Glycerol-3-phosphate O-acyltransferase	2.3.1.15	GPT2	PMID:9401016|SGD_REF:S000041391|PMID:10617610|SGD_REF:S000055653
+phospholipid biosynthesis		2.1.1.71	OPI3	SGD_REF:S000058496
+phospholipid biosynthesis		2.1.1.71	OPI3	SGD_REF:S000058496
+phospholipid biosynthesis		2.7.8.-	CRD1	SGD_REF:S000058496
+phospholipid biosynthesis	CDP-diacylglycerol--glycerol-3-phosphate 3-phosphatidyltransferase	2.7.8.5	PGS1	SGD_REF:S000058496
+phospholipid biosynthesis	CDP-diacylglycerol--serine O-phosphatidyltransferase	2.7.8.8	CHO1	SGD_REF:S000058496
+phospholipid biosynthesis	Phosphatidate cytidylyltransferase	2.7.7.41	CDS1	SGD_REF:S000058496
+phospholipid biosynthesis	Phosphatidylethanolamine N-methyltransferase	2.1.1.17	CHO2	SGD_REF:S000058496
+phospholipid biosynthesis	Phosphatidylglycerophosphatase	3.1.3.27		SGD_REF:S000058496
+phospholipid biosynthesis	Phosphatidylserine decarboxylase	4.1.1.65	PSD1	SGD_REF:S000058496
+phospholipid biosynthesis	Phosphatidylserine decarboxylase	4.1.1.65	PSD2	SGD_REF:S000058496
+phospholipid biosynthesis (Kennedy pathway)	Choline kinase	2.7.1.32	CKI1	SGD_REF:S000058496
+phospholipid biosynthesis (Kennedy pathway)	Cholinephosphate cytidylyltransferase	2.7.7.15	PCT1	SGD_REF:S000058496
+phospholipid biosynthesis (Kennedy pathway)	Diacylglycerol cholinephosphotransferase	2.7.8.2	CPT1	SGD_REF:S000058496
+p-hydroxybenzoate biosynthesis		4.-.-.-		
+polyamine biosynthesis	Adenosylmethionine decarboxylase	4.1.1.50	SPE2	PMID:9573363|SGD_REF:S000040546
+polyamine biosynthesis	Ornithine decarboxylase	4.1.1.17	SPE1	PMID:9573363|SGD_REF:S000040546
+polyamine biosynthesis	Spermidine synthase	2.5.1.16	SPE3	PMID:9573363|SGD_REF:S000040546
+polyamine biosynthesis	Spermine synthase	2.5.1.22	SPE4	PMID:9573363|SGD_REF:S000040546
+polyamine degradation	Aldehyde dehydrogenase (NAD+)	1.2.1.3	ALD2	PMID:12586697|SGD_REF:S000072585
+polyamine degradation	Aldehyde dehydrogenase (NAD+)	1.2.1.3	ALD3	PMID:12586697|SGD_REF:S000072585
+polyamine degradation	Amine oxidase (flavin-containing)	1.4.3.4	FMS1	PMID:12586697|SGD_REF:S000072585
+ppGpp metabolism	GTP pyrophosphokinase	2.7.6.5	VTC2	
+ppGpp metabolism	GTP pyrophosphokinase	2.7.6.5	VTC3	
+ppGpp metabolism	GTP pyrophosphokinase	2.7.6.5	VTC4	
+ppGpp metabolism	Guanosine-3',5'-bis(diphosphate) 3'-pyrophosphohydrolase	3.1.7.2		
+ppGpp metabolism	Guanosine-5'-triphosphate,3'-diphosphate pyrophosphatase	3.6.1.40		
+proline biosynthesis	Glutamate 5-kinase	2.7.2.11	PRO1	PMID:12513997|SGD_REF:S000072492|PMID:2824433|SGD_REF:S000054523|SGD_REF:S000070200
+proline biosynthesis	Glutamate-5-semialdehyde dehydrogenase	1.2.1.41	PRO2	PMID:12513997|SGD_REF:S000072492|PMID:2824433|SGD_REF:S000054523|SGD_REF:S000070200
+proline biosynthesis	Pyrroline-5-carboxylate reductase	1.5.1.2	PRO3	PMID:12513997|SGD_REF:S000072492|PMID:2824433|SGD_REF:S000054523|SGD_REF:S000070200
+proline utilization	1-pyrroline-5-carboxylate dehydrogenase	1.5.1.12	PUT2	PMID:10629046|SGD_REF:S000041607|PMID:387737|SGD_REF:S000040886|SGD_REF:S000075551
+proline utilization	Proline dehydrogenase	1.5.99.8	PUT1	PMID:10629046|SGD_REF:S000041607|PMID:387737|SGD_REF:S000040886|SGD_REF:S000075551
+protein modifications		2.5.1.-	BET2	
+protein modifications		2.5.1.-	BET4	
+protein modifications		2.5.1.-	CDC43	
+protein modifications		2.5.1.-	RAM1	
+protein modifications		2.5.1.-	RAM2	
+protein modifications	Biotin--[protein] ligase	6.3.4.-	BPL1	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT1	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT2	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT3	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT4	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT5	
+protein modifications	Dolichyl-phosphate-mannose--protein mannosyltransferase	2.4.1.109	PMT6	
+purine fermentation	Adenine deaminase	3.5.4.2	AAH1	
+purine fermentation	Formate dehydrogenase	1.2.1.2	FDH1	
+purine fermentation	Formate--tetrahydrofolate ligase	6.3.4.3	ADE3	
+purine fermentation	Formate--tetrahydrofolate ligase	6.3.4.3	MIS1	
+purine fermentation	Formiminotetrahydrofolate cyclodeaminase	4.3.1.4		
+purine fermentation	Glycine formiminotransferase	2.1.2.4		
+purine fermentation	Guanine deaminase	3.5.4.3		
+purine fermentation	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	ADE3	
+purine fermentation	Methenyltetrahydrofolate cyclohydrolase	3.5.4.9	MIS1	
+purine fermentation	Xanthine dehydrogenase	1.1.1.204		
+pyridoxal 5'-phosphate salvage pathway		2.7.1.-		
+pyridoxal 5'-phosphate salvage pathway	Pyridoxal kinase	2.7.1.35		
+pyridoxal 5'-phosphate salvage pathway	Pyridoxamine-phosphate oxidase	1.4.3.5	PDX3	
+pyruvate dehydrogenase	Dihydrolipoamide dehydrogenase	1.8.1.4	LPD1	PMID:9123965|SGD_REF:S000058092
+pyruvate dehydrogenase	Dihydrolipoamide S-acetyltransferase	2.3.1.12	LAT1	PMID:9123965|SGD_REF:S000058092
+pyruvate dehydrogenase	Pyruvate dehydrogenase (lipoamide)	1.2.4.1	PDA1	PMID:9123965|SGD_REF:S000058092
+pyruvate dehydrogenase	Pyruvate dehydrogenase (lipoamide)	1.2.4.1	PDB1	PMID:9123965|SGD_REF:S000058092
+removal of superoxide radicals	Catalase	1.11.1.6	CTA1	
+removal of superoxide radicals	Catalase	1.11.1.6	CTT1	
+removal of superoxide radicals	Superoxide dismutase	1.15.1.1		
+riboflavin, FMN and FAD biosynthesis			RIB2	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis			RIB3	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis			RIB4	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis			RIB7	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis	FMN adenylyltransferase	2.7.7.2	FAD1	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis	GTP cyclohydrolase II	3.5.4.25	RIB1	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis	Riboflavin kinase	2.7.1.26	FMN1	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+riboflavin, FMN and FAD biosynthesis	Riboflavin synthase	2.5.1.9	RIB5	PMID:7559556|SGD_REF:S000045926|PMID:9068650|SGD_REF:S000054618
+ribose and deoxyribose phosphate metabolism	deoxyribose phosphate metabolism (Pathway)			
+ribose and deoxyribose phosphate metabolism	ribose catabolism (Pathway)			
+ribose catabolism	Ribokinase	2.7.1.15	RBK1	
+ribose catabolism	Ribose 5-phosphate epimerase	5.3.1.6	RKI1	
+ribose catabolism	Transketolase	2.2.1.1	TKL1	
+ribose catabolism	Transketolase	2.2.1.1	TKL2	
+RuMP cycle and formaldehyde assimilation		1.1.1.-		
+RuMP cycle and formaldehyde assimilation	Formaldehyde dehydrogenase	1.2.1.46		
+RuMP cycle and formaldehyde assimilation	Formate dehydrogenase	1.2.1.2	FDH1	
+RuMP cycle and formaldehyde assimilation	Glucose-6-phosphate isomerase	5.3.1.9	PGI1	
+RuMP cycle and formaldehyde assimilation	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND1	
+RuMP cycle and formaldehyde assimilation	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND2	
+S-adenosylhomocysteine catabolism	5-methyltetrahydrofolate--homocysteine S-methyltransferase	2.1.1.13		
+S-adenosylhomocysteine catabolism	Adenosylhomocysteinase	3.3.1.1	SAH1	
+salvage pathways of adenine, hypoxanthine, and their nucleosides		2.4.2.-		PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides		2.4.2.-		PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides		2.4.2.-		PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenine deaminase	3.5.4.2	AAH1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenine phosphoribosyltransferase	2.4.2.7	APT1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenine phosphoribosyltransferase	2.4.2.7	APT2	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD2	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD2	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD3	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine deaminase	3.5.4.4	TAD3	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Adenosine kinase	2.7.1.20	ADO1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	AMP nucleosidase	3.2.2.4		PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Hypoxanthine phosphoribosyltransferase	2.4.2.8	HPT1	PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of adenine, hypoxanthine, and their nucleosides	Inosine kinase	2.7.1.73		PMID:11223943|SGD_REF:S000059917|PMID:11035032|SGD_REF:S000060059
+salvage pathways of guanine, xanthine, and their nucleosides		2.4.2.-	HPT1	
+salvage pathways of guanine, xanthine, and their nucleosides	Guanine deaminase	3.5.4.3		
+salvage pathways of guanine, xanthine, and their nucleosides	Guanosine phosphorylase	2.4.2.15		
+salvage pathways of guanine, xanthine, and their nucleosides	Xanthine-guanine phosphoribosyltransferase	2.4.2.22	XPT1	
+salvage pathways of pyrimidine deoxyribonucleotides		2.7.1.-	URK1	PMID:12111094|SGD_REF:S000070131|PMID:10501935|SGD_REF:S000055858
+salvage pathways of pyrimidine deoxyribonucleotides		3.2.2.-	URH1	PMID:12111094|SGD_REF:S000070131|PMID:10501935|SGD_REF:S000055858
+salvage pathways of pyrimidine deoxyribonucleotides	Cytidine deaminase	3.5.4.5	CDD1	PMID:12111094|SGD_REF:S000070131|PMID:10501935|SGD_REF:S000055858
+salvage pathways of pyrimidine deoxyribonucleotides	Thymidine kinase	2.7.1.21		PMID:12111094|SGD_REF:S000070131|PMID:10501935|SGD_REF:S000055858
+salvage pathways of pyrimidine deoxyribonucleotides	Thymidine phosphorylase	2.4.2.4		PMID:12111094|SGD_REF:S000070131|PMID:10501935|SGD_REF:S000055858
+salvage pathways of pyrimidine ribonucleotides		2.7.1.-	URK1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides		2.7.4.6	YNK1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides		3.2.2.-	URH1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Cytidine deaminase	3.5.4.5	CDD1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Cytidylate kinase	2.7.4.14		PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Cytosine deaminase	3.5.4.1	FCY1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Uracil phosphoribosyltransferase	2.4.2.9	FUR1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Uridine kinase	2.7.1.48	URK1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+salvage pathways of pyrimidine ribonucleotides	Uridine nucleosidase	3.2.2.3	URH1	PMID:10501935|SGD_REF:S000055858|PMID:12111094|SGD_REF:S000070131
+serine and glycine biosynthesis	glycine biosynthesis from serine (Pathway)			
+serine and glycine biosynthesis	serine biosynthesis (Pathway)			
+serine biosynthesis	Phosphoglycerate dehydrogenase	1.1.1.95	SER3	PMID:12525494|SGD_REF:S000072828
+serine biosynthesis	Phosphoglycerate dehydrogenase	1.1.1.95	SER33	PMID:12525494|SGD_REF:S000072828
+serine biosynthesis	Phosphoserine aminotransferase	2.6.1.52	SER1	PMID:12525494|SGD_REF:S000072828
+serine biosynthesis	Phosphoserine phosphatase	3.1.3.3	SER2	PMID:12525494|SGD_REF:S000072828
+serine-isocitrate lyase pathway			ACO1	
+serine-isocitrate lyase pathway	Aconitate hydratase	4.2.1.3	ACO1	
+serine-isocitrate lyase pathway	Aconitate hydratase	4.2.1.3	YJL200C	
+serine-isocitrate lyase pathway	Citrate (si)-synthase	4.1.3.7	CIT1	
+serine-isocitrate lyase pathway	Citrate (si)-synthase	4.1.3.7	CIT2	
+serine-isocitrate lyase pathway	Citrate (si)-synthase	4.1.3.7	CIT3	
+serine-isocitrate lyase pathway	Glycerate kinase	2.7.1.31		
+serine-isocitrate lyase pathway	Glycine hydroxymethyltransferase	2.1.2.1	SHM1	
+serine-isocitrate lyase pathway	Glycine hydroxymethyltransferase	2.1.2.1	SHM2	
+serine-isocitrate lyase pathway	Hydroxypyruvate reductase	1.1.1.81		
+serine-isocitrate lyase pathway	Isocitrate lyase	4.1.3.1	ICL1	
+serine-isocitrate lyase pathway	Malate dehydrogenase	1.1.1.37	MDH2	
+serine-isocitrate lyase pathway	Malate--CoA ligase	6.2.1.9		
+serine-isocitrate lyase pathway	Malyl-CoA lyase	4.1.3.24		
+serine-isocitrate lyase pathway	Phosphoenolpyruvate carboxylase	4.1.1.31		
+serine-isocitrate lyase pathway	Phosphoglycerate mutase	5.4.2.1	GPM1	
+serine-isocitrate lyase pathway	Phosphopyruvate hydratase	4.2.1.11	ENO1	
+serine-isocitrate lyase pathway	Phosphopyruvate hydratase	4.2.1.11	ENO2	
+serine-isocitrate lyase pathway	Serine--glyoxylate aminotransferase	2.6.1.45		
+sorbitol degradation	6-phosphofructokinase	2.7.1.11	PFK1	
+sorbitol degradation	6-phosphofructokinase	2.7.1.11	PFK2	
+sorbitol degradation	Fructose-bisphosphate aldolase	4.1.2.13	FBA1	
+sorbitol degradation	Sorbitol-6-phosphate 2-dehydrogenase	1.1.1.140		
+sphingolipid metabolism		2.4.1.-	IPT1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	3-dehydrosphinganine reductase	1.1.1.102	TSC10	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	Ceramidase	3.5.1.23	YDC1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	Ceramidase	3.5.1.23	YPC1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	ceramide synthase		LAC1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	ceramide synthase		LAG1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	DHS kinase	2.7.1.91	LCB4	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	DHS kinase	2.7.1.91	LCB5	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	dihydrosphingosine phosphatase	2.7.1.91	LCB3	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	dihydrosphingosine phosphatase	2.7.1.91	YSR3	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	dihydrospingosine C-4 hydroxylase	1.14.-.-	SUR2	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	inositol phosphoceramide synthase	2.4.1.-	AUR1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	inositol phosphorylceramide mannosyltransferase	2.4.1.-	CSG2	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	inositol phosphorylceramide mannosyltransferase	2.4.1.-	SUR1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	PHS kinase	2.7.1.91	LCB4	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	PHS kinase	2.7.1.91	LCB5	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	phytospingosine-1-P phosphatase	2.7.1.91	LCB3	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	phytospingosine-1-P phosphatase	2.7.1.91	YSR3	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	Serine C-palmitoyltransferase	2.3.1.50	LCB1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	Serine C-palmitoyltransferase	2.3.1.50	LCB2	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+sphingolipid metabolism	Sphinganine-1-phosphate aldolase	4.1.2.27	DPL1	PMID:12034738|SGD_REF:S000071185|PMID:12069845|SGD_REF:S000073518
+starch and cellulose biosynthesis	1,4-alpha-glucan branching enzyme	2.4.1.18	GLC3	
+starch and cellulose biosynthesis	Beta-amylase	3.2.1.2		
+starch and cellulose biosynthesis	Cellulose synthase (GDP-forming)	2.4.1.29		
+starch and cellulose biosynthesis	Glucose-1-phosphate adenylyltransferase	2.7.7.27		
+starch and cellulose biosynthesis	Glucose-1-phosphate guanylyltransferase	2.7.7.34		
+starch and cellulose biosynthesis	Phosphoglucomutase	5.4.2.2	PGM1	
+starch and cellulose biosynthesis	Phosphoglucomutase	5.4.2.2	PGM2	
+starch and cellulose biosynthesis	Starch (bacterial glycogen) synthase	2.4.1.21		
+starch and cellulose biosynthesis	UDP-glucose 6-dehydrogenase	1.1.1.22		
+starch and cellulose biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+starch and cellulose biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+sucrose biosynthesis	Fructokinase	2.7.1.4		
+sucrose biosynthesis	Fructose-bisphosphatase	3.1.3.11	FBP1	
+sucrose biosynthesis	Glucose-6-phosphate isomerase	5.3.1.9	PGI1	
+sucrose biosynthesis	Phosphoglucomutase	5.4.2.2	PGM1	
+sucrose biosynthesis	Phosphoglucomutase	5.4.2.2	PGM2	
+sucrose biosynthesis	Sucrose synthase	2.4.1.13		
+sucrose biosynthesis	Sucrose-phosphatase	3.1.3.24		
+sucrose biosynthesis	Sucrose-phosphate synthase	2.4.1.14		
+sucrose biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+sucrose biosynthesis	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+sucrose degradation	Beta-fructofuranosidase	3.2.1.26	SUC2	
+sucrose degradation	Fructokinase	2.7.1.4		
+sucrose degradation	Protein-N(PI)-phosphohistidine-sugar phosphotransferase	2.7.1.69		
+sulfate assimilation pathway II		1.8.1.-	MET16	PMID:9409150|SGD_REF:S000055397
+sulfate assimilation pathway II		4.2.99.-	MET17	PMID:9409150|SGD_REF:S000055397
+sulfate assimilation pathway II	Adenylylsulfate kinase	2.7.1.25	MET14	PMID:9409150|SGD_REF:S000055397
+sulfate assimilation pathway II	Sulfate adenylyltransferase	2.7.7.4	MET3	PMID:9409150|SGD_REF:S000055397
+sulfate assimilation pathway II	Sulfite reductase (NADPH)	1.8.1.2	ECM17	PMID:9409150|SGD_REF:S000055397
+sulfate assimilation pathway II	Sulfite reductase (NADPH)	1.8.1.2	MET10	PMID:9409150|SGD_REF:S000055397
+sulfur amino acid biosynthesis	cysteine biosynthesis from homoserine (Pathway)			
+sulfur amino acid biosynthesis	homocysteine and cysteine interconversion			PMID:9409150|SGD_REF:S000055397
+sulfur amino acid biosynthesis	Homoserine O-acetyltransferase	2.3.1.31	MET2	PMID:9409150|SGD_REF:S000055397
+sulfur amino acid biosynthesis	methionine and S-adenosylmethionine synthesis (Pathway)			
+sulfur amino acid biosynthesis	sulfate assimilation pathway II (Pathway)			
+sulfur degradation		4.2.99.-		
+sulfur degradation	5-methyltetrahydropteroyltriglutamate--homocysteine S-methyltransferase	2.1.1.14	MET6	
+sulfur degradation	Adenylylsulfate reductase	1.8.99.2		
+sulfur degradation	Cystathionine beta-lyase	4.4.1.8	STR3	
+sulfur degradation	Cysteine synthase	4.2.99.8	YGR012W	
+sulfur degradation	Sulfate adenylyltransferase	2.7.7.4	MET3	
+sulfur degradation	Sulfite reductase (ferredoxin)	1.8.7.1		
+superpathway for gluconate utilization	Gluconokinase	2.7.1.12		
+superpathway for gluconate utilization	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND1	
+superpathway for gluconate utilization	Phosphogluconate dehydrogenase (decarboxylating)	1.1.1.44	GND2	
+superpathway for gluconate utilization	Ribose 5-phosphate epimerase	5.3.1.6	RKI1	
+superpathway of glutamate biosynthesis	glutamate biosynthesis from ammonia (Pathway)			
+superpathway of glutamate biosynthesis	glutamate biosynthesis from glutamine (Pathway)			
+superpathway of glutamate biosynthesis	Glutamate--ammonia ligase	6.3.1.2	GLN1	PMID:8672488|SGD_REF:S000057877
+superpathway of glutamate biosynthesis	Isocitrate dehydrogenase (NADP+)	1.1.1.42	IDP1	PMID:8672488|SGD_REF:S000057877
+superpathway of glutamate biosynthesis	Isocitrate dehydrogenase (NADP+)	1.1.1.42	IDP2	PMID:8672488|SGD_REF:S000057877
+superpathway of glutamate biosynthesis	Isocitrate dehydrogenase (NADP+)	1.1.1.42	IDP3	PMID:8672488|SGD_REF:S000057877
+superpathway of glycine biosynthesis	glycine biosynthesis from alanine (Pathway)			
+superpathway of glycine biosynthesis	glycine biosynthesis from alanine (Pathway)			
+superpathway of glycine biosynthesis	glycine biosynthesis from serine (Pathway)			
+superpathway of glycine biosynthesis	glycine biosynthesis from serine (Pathway)			
+superpathway of glycine biosynthesis	glycine biosynthesis from threonine (Pathway)			
+superpathway of glycine biosynthesis	glycine biosynthesis from threonine (Pathway)			
+superpathway of histidine, purine, and pyrimidine biosynthesis	Amidophosphoribosyltransferase	2.4.2.14	ADE4	
+superpathway of histidine, purine, and pyrimidine biosynthesis	de novo biosynthesis of purine nucleotides (Pathway)			
+superpathway of histidine, purine, and pyrimidine biosynthesis	de novo biosynthesis of pyrimidine ribonucleotides (Pathway)			
+superpathway of histidine, purine, and pyrimidine biosynthesis	histidine biosynthesis (Pathway)			
+superpathway of histidine, purine, and pyrimidine biosynthesis	Ribose-phosphate pyrophosphokinase	2.7.6.1	PRS1	
+superpathway of histidine, purine, and pyrimidine biosynthesis	Ribose-phosphate pyrophosphokinase	2.7.6.1	PRS2	
+superpathway of histidine, purine, and pyrimidine biosynthesis	Ribose-phosphate pyrophosphokinase	2.7.6.1	PRS3	
+superpathway of histidine, purine, and pyrimidine biosynthesis	Ribose-phosphate pyrophosphokinase	2.7.6.1	PRS4	
+superpathway of histidine, purine, and pyrimidine biosynthesis	Ribose-phosphate pyrophosphokinase	2.7.6.1	PRS5	
+superpathway of isoleucine and valine biosynthesis	isoleucine biosynthesis (Pathway)			
+superpathway of isoleucine and valine biosynthesis	valine biosynthesis (Pathway)			
+superpathway of leucine, isoleucine, and valine biosynthesis	isoleucine biosynthesis (Pathway)			
+superpathway of leucine, isoleucine, and valine biosynthesis	leucine biosynthesis (Pathway)			
+superpathway of leucine, isoleucine, and valine biosynthesis	superpathway of isoleucine and valine biosynthesis (Pathway)			
+superpathway of leucine, isoleucine, and valine biosynthesis	valine biosynthesis (Pathway)			
+superpathway of phenylalanine and tyrosine biosynthesis	phenylalanine biosynthesis			
+superpathway of phenylalanine and tyrosine biosynthesis	tyrosine biosynthesis			
+superpathway of phenylalanine, tyrosine, and tryptophan biosynthesis	superpathway of phenylalanine and tyrosine biosynthesis (Pathway)			
+superpathway of phenylalanine, tyrosine, and tryptophan biosynthesis	tryptophan biosynthesis (Pathway)			
+TCA cycle, aerobic respiration			ACO1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Aconitate hydratase	4.2.1.3	ACO1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Aconitate hydratase	4.2.1.3	YJL200C	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Citrate (si)-synthase	4.1.3.7	CIT1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Citrate (si)-synthase	4.1.3.7	CIT2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Citrate (si)-synthase	4.1.3.7	CIT3	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Dihydrolipoamide S-succinyltransferase	2.3.1.61	KGD2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Fumarate hydratase	4.2.1.2	FUM1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Isocitrate dehydrogenase (NAD+)	1.1.1.41	IDH1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Isocitrate dehydrogenase (NAD+)	1.1.1.41	IDH2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Malate dehydrogenase	1.1.1.37	MDH2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Oxoglutarate dehydrogenase (lipoamide)	1.2.4.2	KGD1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Pyruvate carboxylase	6.4.1.1	PYC1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Pyruvate carboxylase	6.4.1.1	PYC2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate dehydrogenase	1.3.99.1	SDH1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate dehydrogenase	1.3.99.1	SDH2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate dehydrogenase	1.3.99.1	SDH3	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate dehydrogenase	1.3.99.1	SDH4	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate--CoA ligase (ADP-forming)	6.2.1.5	LSC1	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+TCA cycle, aerobic respiration	Succinate--CoA ligase (ADP-forming)	6.2.1.5	LSC2	PMID:8099357|SGD_REF:S000056155|PMID:12855708|SGD_REF:S000079646|PMID:9395469|SGD_REF:S000040176
+thiamine biosynthesis	Hydroxyethylthiazole kinase	2.7.1.50		
+thiamine biosynthesis	Hydroxymethylpyrimidine kinase	2.7.1.49		
+thiamine biosynthesis	Phosphomethylpyrimidine kinase	2.7.4.7		
+thiamine biosynthesis	Thiamine kinase	2.7.1.89		
+thiamine biosynthesis	Thiamine-phosphate kinase	2.7.4.16		
+thiamine biosynthesis	Thiamine-phosphate pyrophosphorylase	2.5.1.3	THI6	
+thioredoxin pathway	Thioredoxin reductase (NADPH)	1.6.4.5	TRR1	
+thioredoxin pathway	Thioredoxin reductase (NADPH)	1.6.4.5	TRR2	
+threonine and methionine biosynthesis	methionine biosynthesis (Pathway)			
+threonine and methionine biosynthesis	threonine biosynthesis (Pathway)			
+threonine biosynthesis	homoserine biosynthesis (Pathway)			
+threonine biosynthesis	threonine biosynthesis from homoserine (Pathway)			
+threonine biosynthesis from homoserine	Homoserine kinase	2.7.1.39	THR1	PMID:8082795|SGD_REF:S000043523|PMID:2176637|SGD_REF:S000054441|SGD_REF:S000070200
+threonine biosynthesis from homoserine	Threonine synthase	4.2.99.2	THR4	PMID:8082795|SGD_REF:S000043523|PMID:2176637|SGD_REF:S000054441|SGD_REF:S000070200
+threonine catabolism		2.3.1.-		PMID:1628804|SGD_REF:S000044188
+threonine catabolism		2.7.2.-		PMID:1628804|SGD_REF:S000044188
+threonine catabolism	Cystathionine gamma-lyase	4.4.1.1	CYS3	PMID:1628804|SGD_REF:S000044188
+threonine catabolism	formate C-acetyltransferase	2.3.1.-		PMID:1628804|SGD_REF:S000044188
+threonine catabolism	Glycine C-acetyltransferase	2.3.1.29		PMID:1628804|SGD_REF:S000044188
+threonine catabolism	L-threonine 3-dehydrogenase	1.1.1.103		PMID:1628804|SGD_REF:S000044188
+threonine catabolism	(R)-aminopropanol dehydrogenase	1.1.1.75		PMID:1628804|SGD_REF:S000044188
+threonine catabolism	Threonine dehydratase	4.3.1.19	CHA1	PMID:1628804|SGD_REF:S000044188
+toluene degradation, via catechol		1.14.13.-		
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD10	
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD14	
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD15	
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD3	
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD4	
+toluene degradation, via catechol	Aryl-alcohol dehydrogenase	1.1.1.90	AAD6	
+toluene degradation, via catechol	Benzaldehyde dehydrogenase (NAD+)	1.2.1.28		
+toluene degradation, via catechol	BENZOATE-1,2-DIOXYGENASE, non-decarboxylating	1.14.12.-		
+toluene degradation, via catechol	Cis-1,2-dihydroxycyclohexa-3,5-diene-1-carboxylate dehydrogenase	1.3.1.55		
+trehalose biosynthesis	Alpha,alpha-trehalose-phosphate synthase (UDP-forming)	2.4.1.15	TPS1	PMID:11152943|SGD_REF:S000059437
+trehalose biosynthesis	Trehalose-phosphatase	3.1.3.12	TPS2	PMID:11152943|SGD_REF:S000059437
+trehalose catabolism	Alpha,alpha-trehalase	3.2.1.28	ATH1	PMID:11152943|SGD_REF:S000059437
+trehalose catabolism	Alpha,alpha-trehalase	3.2.1.28	NTH1	PMID:11152943|SGD_REF:S000059437
+triglyceride biosynthesis	1-acylglycerol-3-phosphate O-acyltransferase	2.3.1.51	SLC1	
+triglyceride biosynthesis	Diacylglycerol cholinephosphotransferase	2.7.8.2	CPT1	
+triglyceride biosynthesis	Diacylglycerol O-acyltransferase	2.3.1.20	DGA1	
+triglyceride biosynthesis	Diacylglycerol O-acyltransferase	2.3.1.20	DGA1	
+triglyceride biosynthesis	Glycerol-3-phosphate O-acyltransferase	2.3.1.15	GPT2	
+triglyceride biosynthesis	Phosphatidate phosphatase	3.1.3.4		
+triglyceride biosynthesis	Phospholipase C	3.1.4.3	ISC1	
+tryptophan biosynthesis	Anthranilate phosphoribosyltransferase	2.4.2.18	TRP4	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan biosynthesis	Anthranilate synthase	4.1.3.27	TRP2	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan biosynthesis	Anthranilate synthase	4.1.3.27	TRP3	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan biosynthesis	Indole-3-glycerol-phosphate synthase	4.1.1.48	TRP3	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan biosynthesis	Phosphoribosylanthranilate isomerase	5.3.1.24	TRP1	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan biosynthesis	Tryptophan synthase	4.2.1.20	TRP5	PMID:6323449|SGD_REF:S000040822|PMID:10790693|SGD_REF:S000041474
+tryptophan degradation		1.1.1.1	ADH1	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation		1.1.1.1	ADH2	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation		1.1.1.1	ADH3	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation		1.1.1.1	ADH4	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation		1.1.1.1	ADH5	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation		1.1.1.1	SFA1	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation	Indolepyruvate decarboxylase	4.1.1.74	ARO10	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation	Indolepyruvate decarboxylase	4.1.1.74	PDC1	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation	Indolepyruvate decarboxylase	4.1.1.74	PDC5	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation	Indolepyruvate decarboxylase	4.1.1.74	PDC6	PMID:12499363|SGD_REF:S000072614
+tryptophan degradation	Tryptophan aminotransferase	2.6.1.27		PMID:12499363|SGD_REF:S000072614
+tryptophan degradation via kynurenine			BNA5	PMID:12062417|SGD_REF:S000069977
+tryptophan degradation via kynurenine	3-hydroxyanthranilate 3,4-dioxygenase	1.13.11.6	BNA1	PMID:12062417|SGD_REF:S000069977
+tryptophan degradation via kynurenine	Arylformamidase	3.5.1.9	BNA3	PMID:12062417|SGD_REF:S000069977
+tryptophan degradation via kynurenine	Kynurenine 3-monooxygenase	1.14.13.9	BNA4	PMID:12062417|SGD_REF:S000069977
+tryptophan degradation via kynurenine	Nicotinate-nucleotide pyrophosphorylase (carboxylating)	2.4.2.19	BNA6	PMID:12062417|SGD_REF:S000069977
+tryptophan degradation via kynurenine	Tryptophan 2,3-dioxygenase	1.13.11.11	BNA2	PMID:12062417|SGD_REF:S000069977
+tyrosine biosynthesis	Aromatic amino acid transferase	2.6.1.57	ARO8	PMID:9491082|SGD_REF:S000054047|SGD_REF:S000070200
+tyrosine biosynthesis	Aromatic amino acid transferase	2.6.1.57	ARO9	PMID:9491082|SGD_REF:S000054047|SGD_REF:S000070200
+tyrosine biosynthesis	Chorismate mutase	5.4.99.5	ARO7	PMID:9491082|SGD_REF:S000054047|SGD_REF:S000070200
+tyrosine biosynthesis	Prephenate dehydrogenase (NADP+)	1.3.1.13	TYR1	PMID:9491082|SGD_REF:S000054047|SGD_REF:S000070200
+ubiquinone biosynthesis	hexaprenyl diphosphate biosynthesis (Pathway)			
+ubiquinone biosynthesis	p-hydroxybenzoate biosynthesis (Pathway)			
+ubiquinone biosynthesis	ubiquinone Q prenylation (Pathway)			
+ubiquinone Q prenylation		1.13.-.-	CAT5	PMID:11583838|SGD_REF:S000072241
+ubiquinone Q prenylation		1.14.13.-	COQ6	PMID:11583838|SGD_REF:S000072241
+ubiquinone Q prenylation		2.1.1.-	COQ3	PMID:11583838|SGD_REF:S000072241
+ubiquinone Q prenylation		2.1.1.-	COQ5	PMID:11583838|SGD_REF:S000072241
+ubiquinone Q prenylation	4-hydroxybenzoate nonaprenyltransferase	2.5.1.-	COQ2	PMID:11583838|SGD_REF:S000072241
+ubiquinone Q prenylation	Hexaprenyldihydroxybenzoate methyltransferase	2.1.1.114	COQ3	PMID:11583838|SGD_REF:S000072241
+UDP-glucose conversion	Inorganic pyrophosphatase	3.6.1.1	IPP1	
+UDP-glucose conversion	Inorganic pyrophosphatase	3.6.1.1	PPA2	
+UDP-glucose conversion	UDP-glucose 4-epimerase	5.1.3.2	GAL10	
+UDP-glucose conversion	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	UGP1	
+UDP-glucose conversion	UTP--glucose-1-phosphate uridylyltransferase	2.7.7.9	YHL012W	
+UDP-N-acetylgalactosamine biosynthesis	Glucosamine--fructose-6-phosphate aminotransferase (isomerizing)	2.6.1.16	GFA1	
+UDP-N-acetylgalactosamine biosynthesis	Glucosamine-phosphate N-acetyltransferase	2.3.1.4	GNA1	
+UDP-N-acetylgalactosamine biosynthesis	Phosphoacetylglucosamine mutase	5.4.2.3	PCM1	
+UDP-N-acetylgalactosamine biosynthesis	UDP-N-acetylglucosamine 4-epimerase	5.1.3.7		
+UDP-N-acetylgalactosamine biosynthesis	UDP-N-acetylglucosamine pyrophosphorylase	2.7.7.23	QRI1	
+UDP-N-acetylglucosamine biosynthesis	Glucosamine--fructose-6-phosphate aminotransferase (isomerizing)	2.6.1.16	GFA1	PMID:2656689|SGD_REF:S000040621|PMID:9867860|SGD_REF:S000045927|PMID:8174553|SGD_REF:S000047874|PMID:9603950|SGD_REF:S000043624
+UDP-N-acetylglucosamine biosynthesis	Glucosamine-phosphate N-acetyltransferase	2.3.1.4	GNA1	PMID:2656689|SGD_REF:S000040621|PMID:9867860|SGD_REF:S000045927|PMID:8174553|SGD_REF:S000047874|PMID:9603950|SGD_REF:S000043624
+UDP-N-acetylglucosamine biosynthesis	Phosphoacetylglucosamine mutase	5.4.2.3	PCM1	PMID:2656689|SGD_REF:S000040621|PMID:9867860|SGD_REF:S000045927|PMID:8174553|SGD_REF:S000047874|PMID:9603950|SGD_REF:S000043624
+UDP-N-acetylglucosamine biosynthesis	UDP-N-acetylglucosamine pyrophosphorylase	2.7.7.23	QRI1	PMID:2656689|SGD_REF:S000040621|PMID:9867860|SGD_REF:S000045927|PMID:8174553|SGD_REF:S000047874|PMID:9603950|SGD_REF:S000043624
+valine biosynthesis	Acetolactate synthase	4.1.3.18	ILV2	
+valine biosynthesis	Acetolactate synthase	4.1.3.18	ILV6	
+valine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	
+valine biosynthesis	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	
+valine biosynthesis	Dihydroxy-acid dehydratase	4.2.1.9	ILV3	
+valine biosynthesis	Ketol-acid reductoisomerase	1.1.1.86	ILV5	
+valine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT1	PMID:9748245|SGD_REF:S000049425
+valine degradation	Branched-chain amino acid aminotransferase	2.6.1.42	BAT2	PMID:9748245|SGD_REF:S000049425
+xylulose-monophosphate cycle			TKL1	
+xylulose-monophosphate cycle	Formaldehyde transketolase	2.2.1.3		
+xylulose-monophosphate cycle	Fructose-bisphosphatase	3.1.3.11	FBP1	
+xylulose-monophosphate cycle	Fructose-bisphosphate aldolase	4.1.2.13	FBA1	
+xylulose-monophosphate cycle	Glycerone kinase	2.7.1.29	DAK1	
+xylulose-monophosphate cycle	Glycerone kinase	2.7.1.29	DAK2	
