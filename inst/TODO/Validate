@@ -40,6 +40,9 @@ For Tony (by Tony):
                     some more...
                 --> This is done. The script is entitled sumStats.R in the inst/Scripts/ directory. It generates
                     all the redundant complexes and sub-complexes either within repositories or across repositories.
+                --> The two graph statistics based on hyper-geometric sampling is completed.
+
+                        **Need to create Man page
 
         1c. Put these new summary stats into the table of ScISI.Rnw
 
@@ -68,6 +71,8 @@ For Tony (by Tony):
             them exactly.
 
                 --> Done 
+                
+                --> I have a new idea for the generation of these graphs...will see which is better.
 
         2b. Put some words into the script as well as analyze what these data mean. apComplex can identify 
             these complexes under certain conditions but even then the y2h data as well as predictions are
@@ -76,7 +81,14 @@ For Tony (by Tony):
                 -->In progress
 
 3. Encode the hypergeometric sampling scheme as well as connected component scheme.
-        --> The mean degree statistic has been encoded, but I need to test before I check it into SVN.        
+        --> The mean degree statistic has been encoded, but I need to test before I check it into SVN.
+        --> The two graph statistics (mean vertex degree and edge proportion is encoded)
+                
+                3a. I will generate a script to get the summary statistics        
+
+                        --> Done...called the graphSumStats.R in the inst/Scripts/ directory
+
+                                *** Need to create man pages for the new graph statistics scripts
 
 4. Determine protein complexes contained in nuclues.
 	
@@ -125,6 +137,9 @@ For Tony (by Tony):
 
         I have downloaded and parsed the .tab file from SGD.
                 --> Need to get the data into an incidence matrix and loaded into the package.
+                        --> Done...in the inst/extdata/ directory
+
+                                *** Create man pages.
 
         Preliminary stats show that this data is sparser than y2h.
 
