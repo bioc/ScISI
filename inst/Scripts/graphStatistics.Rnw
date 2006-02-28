@@ -1,0 +1,164 @@
+%
+% NOTE -- ONLY EDIT THE .Rnw FILE!!!  The .tex file is
+% likely to be overwritten.
+%
+% \VignetteIndexEntry{Calculating Graph Stats}
+%\VignetteDepends{}
+%\VignettePackage{y2hStat}
+\documentclass[11pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+
+\usepackage[authoryear,round]{natbib}
+\usepackage{times}
+\usepackage{comment}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+\bibliographystyle{plainnat}
+
+\title{Calculating Summary Statistics on the Induced Y2H Graphs}
+\author{T. Chiang}
+
+\begin{document}
+
+\maketitle
+
+This document details how to obtain the Y2H graph summary statistics 
+to validate the ScISI.
+
+<<loadlibs>>=
+
+library("ScISI")
+library("y2hStat")
+
+@
+
+Presently, we are using Y2H experimental data in an attempt to validate
+the protein complexes present in the in silico interactome. To this end, 
+we simply need the \Robject{ScISI} which we have already built as well as
+the various bait to prey experimental data which we have already parsed
+from the Intact repository.
+
+<<loadData>>=
+data(ScISI)
+data(intactInfo)
+@ 
+
+Currently, there are six summary statistics in which we are interested. 
+The first two concern hyper-geometric sampling schemes to estimate 
+edge proportions and the mean node degree of the induced Y2H graph under 
+the assumptions that the Y2H experiments were perfectly sensative and 
+specific (i.e. we did not record any FN nor any FP) and that the prey 
+population is genome wide while the bait population is restricted to 
+only those bait proteins which successfully found at least one prey.
+
+ \begin{enumerate}
+\item Edge Proportion\\
+\begin{eqnarray*}
+\frac{\hat{X}}{n(n-1)/2} & = & \frac{x}{[(n-1)+(n-2)+\ldots+(n-k)]} \\
+\hat{X} & = & \frac{ x (n)(n-1)}{2 [(n-1)+(n-2)+\ldots+(n-k)]} \\
+\end{eqnarray*}
+\item Mean Nodal Degree\\
+\[
+\tilde{X} = \frac{ n \sum_{i=1}^k d_i}{2k}.
+\]
+\end{enumerate}
+
+The latter four summary statistics is more robust with respect to 
+experimental error. 
+
+\begin{enumerate}
+\item Sampled Baits\\
+  For a given protein complex, $C_i$, find all complex members,
+  $P_j$ that were used as a bait in some Y2H experiment. For these,
+  compute the proportion that found at least one other member of the
+  complex. If $P_j$ was used as a bait in more than one Y2H experiment
+  do not double count, but take any positive result as positive.
+\item Average Out-Degree \\
+  For a given protein complex, $C_i$, find the average out-degree
+  of all bait proteins, again avoid double counting, in this case by
+  taking the maximum out-degree. Divide this by the complex size.
+\item Un-isolated Proteins\\
+  Given the number of proteins in a complex that are detected as
+  either bait or prey, find the number that are connected to at least
+  one other complex co-member. [Should this be the proportion of
+  complex members that are connected to at least one other complex
+  member?] 
+\item Connected Components\\
+  Compute the ratio of the number of edges needed to make the
+  complex connected, by adding to the observed edges, divided by the
+  minimum number of edges needed to create a connected graph from the
+  complex. This is essentially a measure of incompleteness.
+\end{enumerate}
+
+
+We have generated a script to calculate each of these graph summary 
+statistics:
+
+<<graphStats>>=
+graphStats <- graphSumStats(ScISI, intactInfo)
+ncol(ScISI)
+length(graphStats)
+names(graphStats[[1]])
+@ 
+
+We first mention why only a subset of the complexes of ScISI seem
+to have been investigated with respect to the graph statistics. 
+Only those complexes containing some bait protein with non-trivial
+out degree can produce meaningful statistics (otherwise, we would 
+have a quotient with 0 denominator). Thus we have chosen only to 
+record meaningful complexes in our investigation.
+
+The first two hyper-geometric sampling statistics are directly 
+calculated by the \Robject{graphSumStats} script:
+
+<<hyperGeo>>=
+graphStats[[1]]$edgeProp
+graphStats[[1]]$popMeanDeg
+@ 
+
+These two statistics give a reasonable estimate over each 
+\Robject{ScISI} protein complex induced Y2H sub-graph. 
+
+Each of the other four statistics needs a bit of simple manipulation 
+to provide the final outcome.
+
+We produce each in the order they are listed above:
+
+<<sampledB>>=
+graphStats[[1]]$complexBait
+graphStats[[1]]$complex
+graphStats[[1]]$notBait
+sampledProp <- (length(graphStats[[1]]$complexBait))/(length(setdiff(graphStats[[1]]$complex, graphStats[[1]]$notBait)))
+sampledProp
+@ 
+
+<<avgOut>>=
+graphStats[[1]]$avgOutDeg
+@ 
+
+<<notIsolated>>=
+graphStats[[1]]$notIsolated
+@ 
+
+<<connComp>>=
+
+cc <- connectedComp(graphStats[[1]]$y2hGraph)
+cc
+ratio <- (length(cc)-1)/(length(graphStats[[1]]$complex)-1)
+ratio
+@ 
+
+\end{document}

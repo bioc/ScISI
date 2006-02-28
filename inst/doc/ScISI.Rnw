@@ -826,7 +826,7 @@ of the population mean degree. The population mean degree times $n$
 divided by 2 is an estimate of the number of edges. For each sampled
 node we let $d_i$ denote its observed degree. So, we have
 \[
-\tilde{X} = \frac{ \sum_{i=1}^k d_i (n)}{2k}.
+\tilde{X} = \frac{ n \sum_{i=1}^k d_i}{2k}.
 \]
 
 The two estimators are quite similar, and sometimes identical.

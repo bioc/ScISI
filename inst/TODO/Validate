@@ -40,7 +40,6 @@ For Tony (by Tony):
                     some more...
                 --> This is done. The script is entitled sumStats.R in the inst/Scripts/ directory. It generates
                     all the redundant complexes and sub-complexes either within repositories or across repositories.
-                --> The two graph statistics based on hyper-geometric sampling is completed.
 
                         **Need to create Man page
 
@@ -89,6 +88,15 @@ For Tony (by Tony):
                         --> Done...called the graphSumStats.R in the inst/Scripts/ directory
 
                                 *** Need to create man pages for the new graph statistics scripts
+
+                        --> I have written an .Rnw file that shows how to use the graph summary 
+                            statistic functions. It is called graphStatistics.Rnw
+
+                        --> All six of the graph statistics are encoded and fully generated. The
+                            .Rnw file details how to generate these statistics.
+
+                3b. Analysis...in progress
+
 
 4. Determine protein complexes contained in nuclues.
 	

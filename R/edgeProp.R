@@ -1,9 +1,10 @@
 edgeProp <- function(comp, compB2P, sampled){
 
-    b2pAM <- matrix(0, nrow=(length(compB2P)+length(unique(unlist(compB2P)))),
-                    ncol=(length(compB2P)+length(unique(unlist(compB2P)))))
-    rownames(b2pAM) <- c(comp, unique(unlist(compB2P)))
-    colnames(b2pAM) <- c(comp, unique(unlist(compB2P)))
+    proteins <- unique(c(comp, unlist(compB2P)))    
+    b2pAM <- matrix(0, nrow=length(proteins),
+                    ncol=length(proteins))
+    rownames(b2pAM) <- proteins
+    colnames(b2pAM) <- proteins
                          
     
     for(i in 1:length(compB2P)){
@@ -15,6 +16,16 @@ edgeProp <- function(comp, compB2P, sampled){
         }
     }
 
+    ###print(b2pAM)
+    if(sum(b2pAM)>0){
+        y2hGraph <- as(b2pAM, "graphNEL")
+    }
+
+    else{
+        y2hGraph <- NA
+    }
+    ###print(y2hGraph)
+    
     if (length(sampled) != 0){
         denominator <- vector()
         for(l in 1:length(sampled)){
@@ -29,6 +40,8 @@ edgeProp <- function(comp, compB2P, sampled){
         eProp <- NA
     }
     
-  eProp
-
+    eList <- list()
+    eList$eProp <- eProp
+    eList$y2hGraph <- y2hGraph
+    eList
 }

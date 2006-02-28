@@ -2,7 +2,7 @@
 % NOTE -- ONLY EDIT THE .Rnw FILE!!!  The .tex file is
 % likely to be overwritten.
 %
-% \VignetteIndexEntry{Using PPI predictions}
+% \VignetteIndexEntry{Building the ScISI}
 %\VignetteDepends{}
 %\VignettePackage{y2hStat}
 \documentclass[11pt]{article}
