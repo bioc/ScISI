@@ -43,6 +43,8 @@ For Tony (by Tony):
 
                         **Need to create Man page
 
+                                -->Done
+
         1c. Put these new summary stats into the table of ScISI.Rnw
 
                 --> Done
@@ -88,6 +90,8 @@ For Tony (by Tony):
                         --> Done...called the graphSumStats.R in the inst/Scripts/ directory
 
                                 *** Need to create man pages for the new graph statistics scripts
+
+                                        -->Done
 
                         --> I have written an .Rnw file that shows how to use the graph summary 
                             statistic functions. It is called graphStatistics.Rnw
@@ -149,7 +153,9 @@ For Tony (by Tony):
 
                                 *** Create man pages.
 
-        Preliminary stats show that this data is sparser than y2h.
+        5a. Try to see how the pathway data blends with either Y2H, APMS, and/or localization data.
+
+                --> Preliminary stats show that this data is sparser than y2h.
 
 6. Run simulations on GO and MIPS data. Confirm the viability of apComplex.
 
