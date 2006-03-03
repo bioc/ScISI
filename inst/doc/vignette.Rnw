@@ -104,9 +104,9 @@ has a working session of $R$ and investigates the examples as they arise.
 
 
 
-<<loadlibs>>=
+<<loadlibs, eval=TRUE, results=hide>>=
 
-library(ScISI)
+library("ScISI")
 
 @
 
@@ -123,8 +123,9 @@ Parsing through the GO database to collect the required information is done by c
 \Rfunction{getGOInfo} function:
 
 <<getGOInfo, eval=TRUE>>=
+goECodes = c("IEA", "NAS", "ND", "NR")
 go = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType=NULL, 
-               eCode = NULL, wantAllComplexes = FALSE)
+               eCode = goECodes, wantAllComplexes = TRUE)
 @
 
 All the information that is obtained from the \Rfunction{getGOInfo} function comes from the $R$
@@ -157,29 +158,40 @@ toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 goGrep = getGOInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
                    eCode = NULL, wantAllComplexes = TRUE)
-length(go)
-length(goGrep)
+#length(go)
+#length(goGrep)
 getGOTerm(setdiff(names(goGrep), names(go)))
 
-@ 
+@
+
+To illustrate one example of appending to the search defaults, we have supplied the 
+suffix $-somal$ as a candidate for \Rfunarg{toBeParsed} above. Because \Rfunarg{wantDefault} 
+is still kept as $TRUE$, the three default search terms were also parsed. The last line of
+code displays those GO protein complexes found with the addition of the term $-somal$ which 
+were not found with only the default search terms. 
 
 \item[4] \Rfunarg{eCode}: A character vector of evidence code terms (cite here). The is 
-another boundary condition; whereas perl regular expression operated on protein complexes, 
-the evidence codes operate on the proteins themselves. If a protein is only referenced by 
+another search restriction; whereas perl regular expression put restrictions on 
+the protein complexes as a whole, 
+the evidence codes operate on the individual proteins themselves. If a protein is only referenced by 
 evidence codes found within the eCode vector, it is dis-allowed and removed from the protein 
-complex. 
+complex. In the example above, we have chosen the evidence codes $IEA$ (Inferred from Electronic
+Annotation), $NAS$ (Non-traceable Author Statement), $ND$ (No biological Data available),
+and $NR$ (Not Recorded).
 
 <<getGOInfoCoded, eval = TRUE>>=
-  goCoded = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
-                      eCode = c("IEA", "IDA","ISS"), wantAllComplexes = FALSE)
-  nm = names(go)
-  protDiff = sapply(nm, function(w) {setdiff(go[[w]], goCoded[[w]])})
-  for (i in 1:length(protDiff)){
-      if (length(protDiff[[i]]) != 0){
-          print(protDiff[[i]])
-      }
-  }
+#  goNoCode = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
+#                      eCode = NULL, wantAllComplexes = FALSE)
+#  nm = names(go)
+#  protDiff = sapply(nm, function(w) {setdiff(goNoCode[[w]], go[[w]])})
+#  for (i in 1:length(protDiff)){
+#      if (length(protDiff[[i]]) != 0){
+#          print(protDiff[[i]])
+#      }
+#  }
 @ 
+
+
 
 \item[5] \Rfunarg{wantAllComplexes}: A logical. If TRUE, the children of parsed nodes will 
 also be returned (accounting for sub-complexes). In addition, nodes that are children of 
@@ -190,12 +202,13 @@ the node ``GO:0043234'' (the protein complex node) are returned as well.
 class(go)
 names(go)[1:10]
 go$"GO:0005830"
-
 @ 
 
-The return value of \Rfunction{getGOInfo} is a named list. The names corresond to nodal GO id's,
-and the entries of the list correspond to the composition of that GO id. The list is one way to
-represent the hyper-graph. Each entry of the return value $go$ represents a particular hyper-edge, 
+The return value of \Rfunction{getGOInfo} is a named list (the code and actual output is
+shown above). The names of this list corresond to the GO ID's of the protein complexes selected,
+and the entries of the list correspond to the yeast genes (using their systematic names) 
+annotated to the repsective GO ID (node). The list is one way to
+represent the hyper-graph. Each entry of the return value represents a particular hyper-edge, 
 and the union over all the entries of the list (i.e. over all the hyper-edges) yields the
 vertex set.
 
@@ -204,17 +217,6 @@ database, we need to modify the data structure to one that is more flexible and 
 computational methodologies. Most computational tools will rarely take the hyper-graph 
 structure in its list representation; rather, they generally use the matrix 
 representation of the bi-partite graphs.
-
-It is a natural place to remark on the equivalence of the categories of hyper-graphs to the 
-categories of bi-partite graphs. First suppose we have a hyper-graph; then for the bi-partite
-graph, one set of vertices is again the set of expressed proteins while the other set of 
-nodes consists of the hyper-edges of the known hyper-graph. Edges within the bi-partite graph 
-is given by membership, i.e. protien $p$ is incident to hyper-edge $h$ if and only if $p$ is 
-a member of the protein complex represented by $h$. The other direction is trivial, for if we are
-given a bipartite graph, we can reconstruct the hyper-edge $h$ by taking the collection of 
-proteins $p$ which are incident to a node $h$. Thus we can construct all hyper-edges and thus
-the hyper-graph. The bi-partite graph representation will be used more frequently though we
-will use both representations inter-changeably.
 
 The incidence matrix, $M$, of a bi-partite graph has its rows indexed by proteins and has its columns
 indexed by the protein complexes. $M_{i,j} = 1$ if and only if protein $i$ is a member of complex $j$,
@@ -236,19 +238,41 @@ sums of the matrix \Robject{goM}, we can see a range of sizes of the protein com
 and relative membership of each protein $p$ respectively.
 
 <<createGOMatrixOut, eval=TRUE>>=
-goM[1:10, 1:6]
-table(colSums(goM))
-table(rowSums(goM))
+#table(colSums(goM))
+#table(rowSums(goM))
+@
+
+
+
+Unfortunately, term mining is rarely comprehensive nor exhaustive. There exists GO nodes that 
+neither have the term $complex$ in the Go terms nor do they have any terms ending in the suffixes
+$-ase$ nor $-some$. We have manually found additionally GO nodes of potential interest. The 
+\Robject{xtraGO} data set is a character vector of these hand selected GO protein complexes. There are 
+32 total extra complexes though 6 of these complexes were already obtained 
+by the \Rfunction{getGOInfo} function. From the remaining 26 complexes,
+only 6 complexes were found to have non-trivial overlap with S. cerevisae in the GO CC ontology. To 
+check possible GO nodes and to add to the GO protein complexes, we call the \Rfunction{xtraGONodes}
+function. It is important to note that the \Rfunction{xtraGONodes} can only be called after an 
+initial incidence matrix for the bi-partite graph of the GO protein complexes has been built since
+this function will compare the extra GO nodes with those existing GO protein complexes.
+
+<<xtraGO>>=
+data(xtraGO)
+xtraGO
+length(xtraGO)
+length(setdiff(xtraGO, colnames(goM)))
+
+goM <- xtraGONodes(xtraGO, goM)
 @ 
 
 \subsection{Munich Information Center for Protein Sequences}
-Parsing for information from the MIPS database (completely analogous to parsing the GO database) 
-is done by calling the \Rfunction{getMipsInfo} function:
+Parsing for information from the MIPS database (http://mips.gsf.de/genre/proj/yeast/)
+is completely analogous to parsing the GO database and is done by calling the 
+\Rfunction{getMipsInfo} function:
 
 <<getMipsInfo, eval=TRUE>>=
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, 
-                   eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"), 
-                   wantAllComplexes = FALSE)
+                   eCode = NULL, wantAllComplexes = TRUE)
 
 
 @
@@ -286,43 +310,46 @@ $i^{th}$ entry from parseType defines the command for the $i^{th}$ entry from to
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
-                       eCode = c("902.01.01.02.01.01.02","902.01.01.04.01.03","902.01.09.02"), 
-                       wantAllComplexes = FALSE)
-length(mips$Mips)
-length(mipsGrep$Mips)
+                       eCode = NULL, wantAllComplexes = TRUE)
+#length(mips$Mips)
+#length(mipsGrep$Mips)
 mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
 mId = strsplit(mNm, split = "-")
 sapply(mId, function(q) mipsGrep$DESC[q[2]])
-
 @ 
+
+Exactly like our in example with the \Rfunction{getGOInfo} function, we append to the default 
+search terms with the suffix $-somal$. Again the output of the code above shows the extra
+protein clusters obtained with the addition of $-somal$ to the three default search terms.  
 
 \item[4] \Rfunarg{eCode}: A character vector. This is a character vector of evidence codes.
 If a protein is only indexed by the evidence codes given in this vector, it is removed 
-from the protein complex it was annotated using only these evidence codes. The default uses
-the codes: "902.01.01.02.01.01.02" (co-immunoprecipitation, epitope tag),
-"902.01.01.04.01.03" (matrix-assisted laser desorption/ionization time-of-light 
-mass spectrometry (MALDI TOF MS)),
-"902.01.09.02" (high throughput experiment).
+from the protein complex it was annotated using only these evidence codes. The default setting 
+of this parameter is set to $NULL$ as the vast majority of the evidence codes pertain to the 
+protein complex estimates obtained from Affinity Purification - Mass Spectrometry (AP-MS) 
+experiments. 
 
 <<getMipsInfoECode, eval = TRUE>>=
-mipsCoded = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, eCode = "901.01.01.01",
-                        wantAllComplexes = FALSE)
-mips$Mips$"MIPS-475.05"
-mipsCoded$Mips$"MIPS-475.05"
+#mipsCoded = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, eCode = "901.01.01.01",
+#                        wantAllComplexes = TRUE)
+#mips$Mips$"MIPS-475.05"
+#mipsCoded$Mips$"MIPS-475.05"
 
 @ 
 
 \item[5] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
 hierarchy will be returned (the aggregate protein complex); if TRUE, 
 all the intermediates of the hierarchy  will also be returned 
-(the sub-complexes as well). 
+(the sub-complexes as well). There are certain computational instances when retaining
+only the top level protein complexes is necessary, but the default setting is to retain
+all protein complexes, and hence the logical is TRUE. 
 \end{itemize}
 
 <<getMipsInfoEntries, eval=TRUE>>=
-class(mips)
-names(mips)
-class(mips$Mips)
-class(mips$DESC)
+#class(mips)
+#names(mips)
+#class(mips$Mips)
+#class(mips$DESC)
 @ 
 
 Another difference between the \Rfunction{getGOInfo} and \Rfunction{getMipsInfo} functions is 
@@ -331,26 +358,33 @@ list that represents the hyper-graph, but, from looking at the output printed ab
 this is not the case for \Rfunction{getMipsInfo}. 
 
 The output of \Rfunction{getMipsInfo} is a list with two 
-entries: the first, $Mips$ is a named list of character vectors where the names are the MIPS ids
-and the vectors contain proteins corresponding to its particular protein complex (i.e. it is also
+entries: 
+
+<<mipsInfo>>=
+class(mips)
+names(mips)
+@ 
+
+The first, $Mips$ is a named list of character vectors where the names are the MIPS IDs
+and the vectors contain the constituent members to the respective protein complexes (i.e. it is also
 a hyper-graph representation exactly like the \Rfunction{getGOInfo} output):
 
 <<getMipsInfoMips, eval=TRUE>>=
+class(mips$Mips)
 names(mips$Mips)[1:10]
 mips$Mips$"MIPS-510.40"
 @ 
 
-And the second is a
-named character vector where the names correspond to MIPS ID and the entries contain a description
-of its respective protein complex: 
+And the second is a named character vector where the names correspond to MIPS ID and the 
+entries contain a description of its respective protein complex: 
 
 <<getMipsInfoDESC, eval=TRUE>>=
 names(mips$DESC)[1:10]
 mips$DESC["510.40"]
 @ 
 
-The packages \Rpackage{GO} and \Rpackage{GOstats} have 
-methods of returning descriptions of any GO id, and, therefore, it is irrelevant to create such 
+The \Rpackage{GO} package has
+methods of returning descriptions of any GO ID, and, therefore, it is irrelevant to create such 
 a character vector containing the descriptions. Since there is no such methods for the MIPS 
 dataset, it is necessary to record this vector as we parse the MIPS files. 
 
@@ -359,6 +393,7 @@ matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunct
 
 <<createMipsMatrix, eval=TRUE>>=
 mipsM = createMipsMatrix(mips)
+
 @ 
 
 Again we see that the standard gene names for yeast index the rows of the MIPS incidence matrix
@@ -369,10 +404,40 @@ protein complex orginates. Again, investigating column and row sums gives insigh
 and relative protein membership.
 
 <<createMipsMatrixOut, eval=TRUE>>=
-mipsM[1:10, 1:6]
-table(colSums(mipsM))
-table(rowSums(mipsM))
+#mipsM[1:10, 1:6]
+#table(colSums(mipsM))
+#table(rowSums(mipsM))
 @ 
+
+While we have produced a method for user's to eliminate proteins from complexes based on the 
+absence of Mips evidence codes, there is no simple and efficient method to eliminate entire 
+protein complexes using these codes. To this end, we give two relatively benign ways to 
+delete certain protein complexes: 1. the deletion of protein complex estimates obtained from
+high through-put AP-MS experiments and 2. the deletion of irrelevant protein complexes. It must 
+be stated that the first method is exclusive to Mips protein complexes while the second can 
+be carried out for both Mips and GO protein complexes.
+
+Because the protein complex estimates for high through-put AP-MS experiments in the Mips
+repository were obtained via each individual investigator, the estimates lack uniformity 
+across the estimation algorithms. To this end we have decided to use the estimation algorithm 
+from the R package \Rpackage{apComplex} (which has shown considerable accuracy) in place 
+of the experimentally curated estimates found in Mips. 
+
+The nomenclature of Mips protein complexes makes it easy to select and eliminate
+the high through-put APMS protein complex estimates. All estimated based on APMS
+technology is encoded initially by $550$ (recall in the incidence matrix by $MIPS-550$);
+thus we can search for these codes and eliminate them from the incidence matrix.
+
+<<delAPMS>>=
+cn = colnames(mipsM)
+apms = grep("MIPS-550", cn)
+mipsM = mipsM[,-apms]
+@ 
+
+The second method concerns the manual investigation of curation of the protein complexes 
+obtained by the \Rfunction{getGOInfo} and \Rfunction{getMipsInfo}. We shall come back to 
+this method towards the end of the vignette where we comment on the customizing the 
+interactome based on manual curation.
 
 \subsection{Purified Data Set Complexes estimated by apComplex}
 The third set from which we can obtain protein complex co-membership data is from the R 
@@ -413,9 +478,9 @@ and multi-edge (the directed graph showed higher instances of reciprocity) were 
 high quality protein complex estimates. 
 
 <<getAPMSDataOut, eval=TRUE>>=
-gavin[1:10, 1:6]
-table(colSums(gavin))
-table(rowSums(gavin))
+#gavin[1:10, 1:6]
+#table(colSums(gavin))
+#table(rowSums(gavin))
 @ 
 
 Again the bi-partite graph incidence matrix are indexed in the rows by the yeast standard 
@@ -453,7 +518,8 @@ entries carry various statistical
 information. An explanation of each entry follows:
 
 \subsection{Jaccard Coefficients}
-The $JC$ entry of $mips2go$ contains a matrix of the Jaccard similarity coefficient between 
+The $JC$ entry of the output from \Rfunction{runCompareComplex} contains a matrix of the Jaccard 
+similarity coefficient between the two incidence matrices that are compaired - in our running example, 
 the complexes of mips and the complexes of go. The $(i,j)^{th}$ entry of this matrix corresponds to 
 the Jaccard similarity between the $i^{th}$ complex of mips and the $j^{th}$ complex of go. The 
 coefficient is calculated by taking the quotient of the cardinality of the intersection of these 
@@ -470,26 +536,27 @@ JC_{i,j} = \frac{|mips_i \cap go_j|}{|mips_i \cup go_j|}.
 
 Equality of complexes returns a Jaccard index of unity while disjoint complexes return zero. We 
 remark that if one complex completely contains another, e.g. $go_j \subset mips_i$, the Jaccard 
-index will be the cardinality of $go_j$ quotient the cardinality of $mips_i$: 
+index will be the cardinality of $go_j$ divided by the cardinality of $mips_i$: 
 
 \begin{equation}
 \frac{|go_j|}{|mips_i|};
 \end{equation}
 
 it is important to realize that containment is not easily 
-ascertained without the orders of each complex at hand.
+ascertained without the cardinality of each complex at hand.
 
 \subsection{Alignment of Protein Complexes}
 The $maxIntersect$ entry of mips2go aligns either the complexes of $go$ to complexes
 of $mips$ or complexes of $mips$ to complexes of $go$ or both. We define alignment in this 
 context to mean for a given protein complex of one bipartite graph which complex(es) in the second
-bipartite graph will return a maximal Jaccard coefficient. While not obvious, it is not hard to 
-prove that this operation is not symmetric, and therefore the $byWhich$ argument in 
+bipartite graph will return a maximal Jaccard coefficient. This operation is not symmetric, and 
+therefore the $byWhich$ argument in 
 \Rfunction{runCompareComplex} instructs the function as to which alignment to produce: ``ROW'' 
 compares all the complexes of the second bi-partite graph with each complex to the first; ``COL''
 compares all the complexes of the first bi-partite graph with each complex of the second; and 
-``BOTH'' will produce both the the outputs. It is clear then that this type of alignment is not
-injective, surjective, nor even well defined, i.e. it is not a function but rather a set mapping. 
+``BOTH'' will produce both the the outputs. This particular alignment will often not be one to one, but
+rather, one to many if either the ``ROW'' or the ``COL'' parameters are set. The mapping will
+be many to many if the ``BOTH'' parameter is set.
 
 <<runCompareComplexMaxInterSect, eval=TRUE>>=
 names(mips2go$maxIntersect)
@@ -498,16 +565,23 @@ names(mips2go$maxIntersect)
 The $maxIntersect$ entry is itself a named list with two entries: maximize and maxComp. The maximize 
 entry records the maximum Jaccard indices for each of the complex aligned either by ``row'' or by
 ``column'' or both if they are both called. The maxComp entry contains
-a list of named vectors also either by ``row'' or ``column''; the names of the vectors correspond to the complex 
-aligned and the entries are the names of those complexes for which produce the highest 
+a list of named vectors also either by ``row'' or ``column''; the names of the vectors correspond 
+to the complex aligned and the entries are the names of those complexes for which produce the highest 
 Jaccard index. 
 
 <<runCompareComplexMImaxComp, eval = TRUE>>=
 
-mips2go$maxIntersect$maximize$row[1:5]
-mips2go$maxIntersect$maxComp$row[1:5]
+mips2go$maxIntersect$maximize$row[1:3]
+mips2go$maxIntersect$maxComp$row[1:3]
 
 @ 
+
+The information obtained by the $maxIntersect$ entry allows us to interpret how similar (or close)
+each complex is with respect to other complexes. From this information, we can decide whether to 
+allow or dis-allow any protein complex within the \texttt{in silico} interactome if they are deemed
+to be too similar. For the creation of the working example interactome, we only dis-allow one complex
+from a pair if and only if that pair has Jaccard index 1 which implies equality between the two 
+complexes.
 
 \subsection{Equality of Protein Complexes}
 The $equal$ entry records protein complexes of the first bi-partite graph matrix equal to those
@@ -529,15 +603,19 @@ finally, ``intersect'' records the cardinality of $BG1Comp \cap BG2Comp$. Rather
 the complex names, this data structure allows the user to inspect relative size of those common 
 complexes. 
 
-We remark here that there is redendancy even within a single
+We remark here that there can be redendancy even within a single
  database as well, and it is necessary that we
 find and eliminate those protein complexes that may 
 have occurred more than once in a database:
 
-<<runCompareComplexEqualMips, eval=TRUE>>=
+<<runCompareComplexEqualMips, eval=TRUE, results=hide>>=
 ind = which(sapply(mips2mips$equal, function(w) w$BG1Comp != w$BG2Comp))
 mips2mips$equal[ind]
 @ 
+
+The code above shows the redundancy within the Mips data-base. Though we have hidden the outputs, 
+we encourage the user to run these commands to see the redundancies found within Mips and within 
+any other data repository.
 
 \subsection{Eliminating Redundancy}
 The ``toBeRm'' entry takes only those protein complexes of the first bi-partite graph (in our
@@ -545,7 +623,7 @@ running example, this would be mips or equivalently mipsM) which are equal to so
 of the second bi-partite graph. The result is a character vector of protein complexes that will need
 to be deleted in order to avoid redundancy in the \textit{in silico} interactome. 
 
-<<runCompareComplexRm, eval=TRUE>>=
+<<runCompareComplexRm, eval=TRUE, results=hide>>=
 length(mips2go$toBeRm)
 for(i in 1:5){
 print(mips2go$toBeRm[i] == mips2go$equal[[i]][1])
@@ -559,7 +637,7 @@ The ``subcomplex'' looks for any complex from one bi-partite graph which is comp
 in a complex from the other bi-partite graph. The outputs in this entry are identical to those of the 
 $equal$ and defer the reader to the explanation written previously.
 
-<<runCompareComplexSub, eval=TRUE>>=
+<<runCompareComplexSub, eval=TRUE, results=hide>>=
 mips2go$subcomplex[1:2]
 mips2mips$subcomplex[1:2]
 @ 
@@ -571,21 +649,37 @@ clear, however, whether or not to remove sub-complexes. For the purpose of simul
 sub-complexes will be masked by the aggregate complex, and thus, removal is needed to avoid 
 redundancy. There may be other computational tools that require the availability of the sub-complexes, 
 so there is no consistent framework calling for the removal of sub-complexes, and hence, we
-leave that decision to the users.
+leave that decision to the users. For the construction of the working example of the \texttt{in silico}
+interactome, we do not remove protein sub-complexes, and so our estimates will carry through with 
+their inclusion.
 
 \subsection{Removing Protein SubComplexes}
 
-In constructing our \textit{in silico} interactome, we have chosen to
-dis-allow the inclusion of protein sub-complexes. The $toBeRmSubC$ entry
+If removal of sub-complexes is necessary, we have built a simple component 
+into the \Rfunction{runCompareComplex} function that makes this process fairly simple.
+The $toBeRmSubC$ entry
 records all those protein clusters which a proper sub-complexes of 
 another protein complex, either within a single database or across 
 databases. 
 
 <<runCompareComplexSubC, eval=TRUE>>=
-mips2mips$toBeRmSubC[1:5]
-mips2go$toBeRmSubC[1:5]
+mips2mips$toBeRmSubC[1:3]
+mips2go$toBeRmSubC[1:3]
 @ 
 
+Much like the $toBeRm$ entry of the output from \Rfunction{runCompareComplex}, the $toBeRmSubC$
+entry is a a character vector of protein complexes that should be removed if sub-complexes are
+irrelevant.
+
+As an aside, we remark that 
+it is necessary to record what we have removed, either redundant protein complexes or protein 
+sub-complexes, so we advise users who are building these 
+\texttt{in silico} interactomes to save the pair-wise comparison data from the output of
+\Rfunction{runCompareComplex}.
+
+<<saveData>>=
+save(mips2go, file="mips2go.rda", compress=TRUE)
+@ 
 
 \section{Combining Bi-Partite Graphs - Building In Silico Interactomes}
 
@@ -600,11 +694,10 @@ To merge two incidence matrices, we simply call the \Rfunction{mergeBGMat} funct
 <<mergeBGMat, eval=TRUE>>=
   dim(mipsM)
   dim(goM)
-  merged = mergeBGMat(mipsM, goM, toBeRm = c(mips2go$toBeRm, mips2mips$toBeRm, go2go$toBeRm,
-                                             mips2go$toBeRmSubC, mips2mips$toBeRmSubC, 
-                                             go2go$toBeRmSubC))
-  dim(merged)
-  merged[1:10, c(1:2, 200:202)]
+  mergeMG = mergeBGMat(mipsM, goM, toBeRm = c(mips2go$toBeRm, mips2mips$toBeRm, go2go$toBeRm))
+                                             
+  dim(mergeMG)
+  #mergeMG[1:10, c(1:2, 200:202)]
 @ 
 
 The first two arguments of the \Rfunction{mergeBGMat} function is two bi-partite graph incidence
@@ -619,7 +712,132 @@ function on each bi-partite graph from within one database in addition to
 comparing across databases. In this way, redundancy can be eliminated in 
 all avenues, and we can construct the \textit{in silico} interactome
 iteratively by merging a new incidence matrix in each subsequent iteration. As examples, the user
-is encouraged to merge the AP-MS data with the newly created $merged$ matrix.
+is encouraged to merge the AP-MS data with the newly created $merged$ matrix (we will also merge
+the APMS data, but the process will be hidden, so the user can compare with the his/her interactome
+with ours in the end).
+
+<<mergeAPMS, eval=TRUE, results = hide>>=
+gavin2mergeMG <- runCompareComplex(gavin, mergeMG, byWhich="ROW")
+mergeMGG <- mergeBGMat(gavin, mergeMG, toBeRm = gavin2mergeMG$toBeRm)
+ho2mergeMGG = runCompareComplex(ho, mergeMGG, byWhich= "ROW")
+mergeMGGH = mergeBGMat(ho, mergeMGG, toBeRm = ho2mergeMGG$toBeRm)
+krogan2mergeMGGH = runCompareComplex(krogan, mergeMGGH, byWhich = "ROW")
+mergeMGGHK = mergeBGMat(krogan, mergeMGGH, toBeRm = krogan2mergeMGGH$toBeRm)
+ISI <- mergeMGGHK
+@ 
+
+\section{The estimated Saccharomyces cerevisiae In Silico Interactome}
+
+Up until now, we have demonstrated how to use the various functions of the \Rpackage{ScISI}, but 
+we diverge from that endeavor to explore the characteristics of our working example 
+\texttt{in silico} interactome for budding yeast. By calling obtaining the dimension tag of incidence
+matrix representing the interactome,
+
+<<dimISI>>=
+dim(ISI)
+@ 
+
+we can determine the number of uniquely expressed genes of the yeast genome (i.e. the number of rows
+of the ISI which is the first entry of the output above), and the number of distinct multi-protein
+complexes derived from the five different data sources (respectively the number of columns of the
+ISI which corresponds to the second entry). 
+
+There are two summary statistics that are of some importance. The first figure gives an indication 
+of the distribution of the cardinality of the protein complexes within the \textit{in silico} 
+interactome. We can see from this figure that the majority of the protein complexes have less
+than ten constituent proteins. 
+
+\begin{figure}[hb]
+\centering
+<<distPlot, fig=TRUE, echo=FALSE>>=
+cS <- table(colSums(ISI))
+size <- as.numeric(names(cS))
+repet <- as.vector(cS)
+freq = rep(size, repet)
+hist(freq, xlab = "ScISI Protein Complex Cardinality", ylab = "Frequency", 
+     main = "Cardinality Distribution of ScISI")
+@
+
+\caption{\label{Cardinality Distribution of ScISI}}
+\end{figure}
+
+The second summary statistic gives the distribution of the number of complexes for which each 
+protein may have membership. This statistic is important because we can use this distribution 
+(along with the summary statistic above concerning protein complex size) to give us a sense 
+of the generic nodal degree of a protein in this rather large co-membership network.
+
+\begin{figure}[hb]
+\centering
+<<distPlot2, fig=TRUE, echo=FALSE>>=
+rS <- table(rowSums(ISI))
+size <- as.numeric(names(rS))
+repet <- as.vector(rS)
+freq = rep(size, repet)
+hist(freq, xlab = "Complex Membership per Protein", ylab = "Frequency", 
+     main = "Distribution of Complex Membership per Protein")
+@
+\caption{\label{Distribution of Complex Membership per Protein}}
+\end{figure}
+
+The second histogram shows that an overwhelming majority of proteins participate in fewer that 
+five distinct protein complexes. Because the majority of complexes have fewer than ten members and
+because the majority of proteins are members of fewer than 5 protein complexes, the number of 
+neighbors of a generic protein in the protein-protein co-membership graph should also be relatively
+small. 
+
+We also discuss some simple summary statistic concerning the pairwise comparisons between the 
+five data-sets in which we have obtained our protein complexes.
+
+Table~\ref{ta:Repetitions} reports the number of protein complexes 
+that were redundant by comparing the repositories
+pairwise including self comparisons. Table~\ref{ta:Repetitions} shows 
+that the only data-set with self-redundancy is derived from the 
+MIPS repository; and upon investigation, MIPS has categorized protein
+complexes by known functionality, and three protein complexes were 
+placed in two different categories each. Table~\ref{ta:Repetitions} 
+directly shows that the no two repositories has extremely large 
+overlap.
+
+<<testStuff, echo=FALSE, results=hide>>=
+data("redundantM")
+data("subCompM")
+@ 
+
+
+<<redundant, eval = TRUE, echo=FALSE, results=tex >>=
+
+
+xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", 
+caption="Number of repetitive Protein Complexes")
+
+@ 
+
+Not limited to redundant protein complexes, we also process each data-set
+independently to find and to remove all protein
+sub-complexes. The
+results are reported in Table~\ref{ta:subComplexes} where the row
+names indicate the location of the sub-complex and the
+column names indicate the location of the aggregate protein complex.
+Reading across row two of Table~\ref{ta:subComplexes} we see that
+GO contains protein complexes that were protein sub-complexes 
+in each of the other data repositories including itself. Table~\ref{ta:subComplexes}
+is much less sparse relative to Table~\ref{ta:Repetitions}, and it is this
+relative comparison that makes all the estimates more credible since each 
+data repository is based on unique experiments coupled with unique 
+estimation algorithms. 
+
+<<redundant, eval = TRUE, echo=FALSE, results=tex>>=
+
+xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", 
+caption = "Number of Protein Sub-Complexes")
+
+@ 
+
+While these four summary statistics give a good description of the \textit{in silico} interactome, 
+these statistics cannot give a comprehensive description; that would take a much more considerable 
+dissection of the interactome (for which computational experiments should be conducted). It is also 
+necessary to state that this interactome represents Saccharomyces cerevisiae for some set of 
+environmental conditions. 
 
 \section{Customizing the Interactome}
 We have successfully built an \textit{in silico} interactome, and for some computational methodologies,
@@ -718,18 +936,19 @@ for(i in 1:length(mipsNames)){
 url[i] = getURL(mipsOb, mipsNames[i])
 linkNames[i] = Desc(mipsOb, mipsNames[i])
 }
-ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", title = "MIPS Protein Complex", compSize = mipsCompOrder)
+ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", 
+           title = "MIPS Protein Complex", compSize = mipsCompOrder)
 
-goNames = colnames(goM)
-goCompOrder = colSums(goM)
+goNames = goDF[,2]
+goCompOrder = colSums(goM[,goNames])
 url = vector(length = length(goNames))
 linkNames = vector(length = length(goNames))
 for(i in 1:length(goNames)){
 url[i] = getURL(goOb, goNames[i])
 linkNames[i] = Desc(goOb, goNames[i])
 }
-ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", title = "GO Protein Complex", compSize = goCompOrder)
-
+ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", 
+           title = "GO Protein Complex", compSize = goCompOrder)
 @ 
 
 The arguments for the \Rfunction{ScISI2html} are somewhat self explanatory, but we will provide
@@ -757,7 +976,7 @@ to the function \Rfunction{unWantedComp}.
 
 <<unWantedComp, eval = TRUE>>=
 
-updatedMerged = unWantedComp(merged, unwantedComplex =
+ScISI2 = unWantedComp(ISI, unwantedComplex =
                          c("GO:0000262",
                            "GO:0000228",
                            "GO:0000775",
@@ -770,14 +989,19 @@ updatedMerged = unWantedComp(merged, unwantedComplex =
                            "GO:0005844",
                            "GO:0001400"))
 
-dim(merged)
-dim(updatedMerged)
 @ 
 
 The function has two arguments, the bi-partite graph incidence matrix and a character vector. 
 Each entry of the character vector is an protein complex ID which will be deleted. After the 
 deletion of these protein complexes, the function also removes any proteins which are no longer 
 apart of any protein complex.
+
+<<checking>>=
+dim(ISI)
+dim(ScISI2)
+data(ScISI)
+sum(ScISI != ScISI2)
+@ 
 
 \section{Conclusion}
 The process given above has created one example on an \textit{in silico} interactome. For the purposes of 
@@ -788,6 +1012,10 @@ also change and refine itself as the data from the GO and MIPS databases are ref
 aspect to the R package \Rpackage{ScISI} is its dynamic nature, for the basic principal in which it has been  
 built is that the \textit{in silico} interactome must be amenable to change due to a number of outside
 circumstances. 
-\section{References} 
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{bioc}
 
 \end{document}

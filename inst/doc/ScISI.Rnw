@@ -568,7 +568,7 @@ estimation algorithms.
 xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", caption = "Number of Protein Sub-Complexes")
 
 @ 
-  
+
 Merging the multiple sub-interactomes into one is done 
 iteratively by combining the estimates pairwise.
 
