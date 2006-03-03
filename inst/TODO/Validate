@@ -1,3 +1,41 @@
+RG - March 2 Comments:
+
+
+ I think we need a data set (ScISI) based only on GO and MIPs and that
+ uses none of the apComplex output. Perhaps named ScISIverified or something
+ like that.
+
+ Then for the ScISI (possibly for both estimates) we should keep a 
+  vector of the names of complexes that are subcomplexes of
+  other complexes. So that these can be removed by the user, rather than
+  having us do it.
+
+  On reflection, it seems that both GO and MIPs complexes are verified and
+  there is not much we can say about them. The
+ only place where validation is needed is for apComplex estimates. There,
+  we should find some that are not largely overlapping with GO and MIPS 
+ complexes (or maybe just find all to start with), where the majority of
+  proteins localize to the nucleus. For these complexes we should have
+  reasonable Y2H data.
+
+  Some answers to the questions asked below. We will say a complex is in
+ the nucleus if some fraction of its constituent proteins are annotated
+ at the appropriate GO node ("GO:0005634" it seems). Perhaps we could 
+  start by being pretty stringent (say 75%, but if that does not give us 
+  a reasonable number then try 50%). 
+
+  I think we also want to concentrate on complexes that do not have a lot
+  of overlap with any MIPS or GO complexes (using the Jaccard index
+  as the measure).
+
+  For each of these look to see if we have reasonable amount of Y2H data.
+ All localization data have long since been included in GO by the SGD folks, 
+ so there is no need (and probably it will not be a good idea) to get the
+ data from other sources (same for KEGG, that is what Ting does, so if you need
+ something, talk to him or me first and save some time).
+
+
+================================================================
 Hi,
   I really want to push on this to the point where we at least have a workable, defensible validation tool.
 
