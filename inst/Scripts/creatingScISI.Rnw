@@ -97,23 +97,9 @@ budding yeast in the CC ontology.
 data(xtraGO)
 xtraGO
 length(xtraGO)
-xtraGO <- setdiff(xtraGO, colnames(goM))
-length(xtraGO)
-##Decide if each complex has overlap in yeast CC ontology
-##first we get the go term (i.e. the go ID's)
-##xx = names(as.list(GOTERM))
-##from the go ID's we can extract a desc of each node
-##gt <- getGOTerm(xx)
-##now we restrict to the CC ontology
-##gtcc <- gt$CC
-yG2P <- as.list(YEASTGO2PROBE)
-xtraComp <- yG2P[xtraGO]
-xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
-length(xtraComp)
-xCM <- createGOMatrix(xtraComp)
+length(setdiff(xtraGO, colnames(goM)))
 
-
-goM <- mergeBGMat(goM, xCM)
+goM <- xtraGONodesxtraGO, goM)
 
 @
 

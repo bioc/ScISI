@@ -33,6 +33,13 @@ For Tony (by Tony):
             has changed. There needs to be a large number of changes to the
             ScISI.Rnw, but that will wait.
 
+                --> In progress...I have made considerable changes today in the Vignette. I am not done, but 
+                    alot of changes have been made.
+
+        --> The script now saves all the data from the comparisons between the sub-interactomes before they
+            are merged. Therefore, we have all the information as to who is deleted as well as all the Jaccard
+            Indices, etc.
+
         1b. Write Scripts to generate summary statistics for the new ScISI. 
                 (The old ones are now obsolete as we have chosen to use a new paradigm)
 

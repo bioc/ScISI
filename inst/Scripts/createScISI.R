@@ -1,4 +1,4 @@
-createScISI <- function(){
+createScISI <- function(pathToSave=NULL){
 
 
 goECodes = c("IEA", "NAS", "ND", "NR")
@@ -148,6 +148,13 @@ mergeMGGHK = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ##After verifying each protein complex, we deleted those complexes
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(mergeMGGHK)
+
+if(!is.null(pathToSave)){
+    save(mips2go, file=paste(pathToSave, "mips2go.rda", sep=""), compress=TRUE)
+    save(gavin2mergeMG, file=paste(pathToSave, "gavin2mergeMG.rda", sep=""), compress=TRUE)
+    save(ho2mergeMGG, file=paste(pathToSave, "ho2mergeMGG.rda", sep=""), compress=TRUE)
+    save(krogan2mergeMGGH, file=paste(pathToSave, "krogan2mergeMGGH.rda", sep=""), compress=TRUE)
+ }
 
 ScISI
 }
