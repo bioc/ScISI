@@ -35,68 +35,72 @@
 \maketitle
 
 \section{Introduction}
-With the advent of technologies such as co-immunoprecipitation
-(CO-IP), affinity purification - mass spectroscopy (AP-MS), and tandem 
-affinity purification (TAP), high through-put data sets have become available
-in the determination of protein complex composition. We remark that such 
-technologies cannot assay an interactome 
-(the set of protein complexes in a particular cell or
-tissue under some conditions) without the addition of error (cite Chiang, et al). 
-These errors come 
-in two different ways: either a protein $p$ is shown to have membership in  a protein 
-complex to which $p$ does not belong and a false positve (FP) observation has 
-been recorded or a protein $q$ is shown not to have membership a protein 
-complex to which $q$ truly belongs and a false negative (FN) observation has 
-been recorded. 
+%With the advent of technologies such as co-immunoprecipitation
+%(CO-IP), affinity purification - mass spectroscopy (AP-MS), and tandem 
+%affinity purification (TAP), high through-put data sets have become available
+%in the determination of protein complex composition. We remark that such 
+%technologies cannot assay an interactome 
+%(the set of protein complexes in a particular cell or
+%tissue under some conditions) without the addition of error (cite Chiang, et al). 
+%These errors come 
+%in two different ways: either a protein $p$ is shown to have membership in  a protein 
+%complex to which $p$ does not belong and a false positve (FP) observation has 
+%been recorded or a protein $q$ is shown not to have membership a protein 
+%complex to which $q$ truly belongs and a false negative (FN) observation has 
+%been recorded. 
 
-The need to decipher these errors, either FP or FN, from true protein complexes
-has lead many to develop protein complex co-membership algorithms(cite diff alg). These 
-algorithms use different statistical and mathematical models to extrapolate the
-underlying interactomes - which protein complexes are present in the cell or 
-tissue and each protein complex's composition.
+%The need to decipher these errors, either FP or FN, from true protein complexes
+%has lead many to develop protein complex co-membership algorithms(cite diff alg). These 
+%algorithms use different statistical and mathematical models to extrapolate the
+%underlying interactomes - which protein complexes are present in the cell or 
+%tissue and each protein complex's composition.
 
-Many of these algorithms estimate the underlying interactomes as certain networks.
-Two entirely different networks become useful in the description of these 
-interactomes (cite Chiang). The first is a direct binary interaction graph where expressed 
-protein constitute the vertex set of the graph, and two vertices are adjacent if
-and only if their corresponding proteins directly interact with each other. 
-While this protein-protein interaction (PPI) network is of fundamental 
-importance to the understanding of biological processes, these protein 
-associations cannot be inferred from bait to prey technologies such as TAP
-or CO-IP. The second network is recognized as a protein complex membership structure 
-encapsulated in the form of a hyper-graph. Again, expressed proteins represent 
-the vertex set of the hyper-graph. The hyper-edges, which  can be any subset
-of the vertex set, is comprised of the clusters of proteins which determine the 
-protein complexes. By providing an estimate of these hyper-graphs, these algorithms 
-provide a necessary computational tool in the study of bio-physical and cellular
-processes.
+%Many of these algorithms estimate the underlying interactomes as certain networks.
+%Two entirely different networks become useful in the description of these 
+%interactomes (cite Chiang). The first is a direct binary interaction graph where expressed 
+%protein constitute the vertex set of the graph, and two vertices are adjacent if
+%and only if their corresponding proteins directly interact with each other. 
+%While this protein-protein interaction (PPI) network is of fundamental 
+%importance to the understanding of biological processes, these protein 
+%associations cannot be inferred from bait to prey technologies such as TAP
+%or CO-IP. The second network is recognized as a protein complex membership structure 
+%encapsulated in the form of a hyper-graph. Again, expressed proteins represent 
+%the vertex set of the hyper-graph. The hyper-edges, which  can be any subset
+%of the vertex set, is comprised of the clusters of proteins which determine the 
+%protein complexes. By providing an estimate of these hyper-graphs, these algorithms 
+%provide a necessary computational tool in the study of bio-physical and cellular
+%processes.
 
-A natural question arises concerning the statistical significance of these 
-estimation algorithms. Because scientists do not have the actual blueprint 
-of the interactome(s) for which they are testing (otherwise, the experiments 
-would be irrelevant), there is no clear methodology in discerning the accuracy of 
-any protein estimation algorithm. Most tests (for significance of such algorithms)
-compare the estimates with protein complexes found in databases such as the 
-Saccharomyces Genome Database, the Stanford Genomic Resources, or Gene Ontology. 
-Such tangential tests underscore the need for additional computational 
-resources so more direct methodologies can be used to ascertain statistical 
-significance.
+%A natural question arises concerning the statistical significance of these 
+%estimation algorithms. Because scientists do not have the actual blueprint 
+%of the interactome(s) for which they are testing (otherwise, the experiments 
+%would be irrelevant), there is no clear methodology in discerning the accuracy of 
+%any protein estimation algorithm. Most tests (for significance of such algorithms)
+%compare the estimates with protein complexes found in databases such as the 
+%Saccharomyces Genome Database, the Stanford Genomic Resources, or Gene Ontology. 
+%Such tangential tests underscore the need for additional computational 
+%resources so more direct methodologies can be used to ascertain statistical 
+%significance.
 
-To this end, we have developed the R-package \Rpackage{ScISI}. \Rpackage{ScISI} 
-builds an \textit{in silico} interactome within some set of parameters defined
-by the user for Saccharomyces cerevisiae. Presently, \Rpackage{ScISI} parses through three 
-different data sets and culls those elements that best represents the protein 
-complexes of interest. Two data sets are online yeast genome databases, Gene 
-Ontology and the Munich Information Center for Protein Sequences. The last data
-set is a collection of estimates from three different wet-lab experiments 
-(cite Gavin, Ho, Krogan) derived from the \Rpackage{apComplex} package 
-(footnote - explain that GO and MIPS do not rely heavily on AP-MS data). Once 
-an \textit{in silico} interactome is built, the R package \Rpackage{simulatorAPMS} (cite package) 
-can simulate AP-MS experiments rendering data sets very similar to those of actual wet-
-lab experiments. Estimates for the \textit{in silico} interactome can be generated
-by applying the various algorithms on the simulations, and, thus, a canonical methodology
-is available to test the statistical significance of the different estimation
-algorithms.
+%To this end, we have developed the R-package \Rpackage{ScISI}. \Rpackage{ScISI} 
+%builds an \textit{in silico} interactome within some set of parameters defined
+%by the user for Saccharomyces cerevisiae. Presently, \Rpackage{ScISI} parses through three 
+%different data sets and culls those elements that best represents the protein 
+%complexes of interest. Two data sets are online yeast genome databases, Gene 
+%Ontology and the Munich Information Center for Protein Sequences. The last data
+%set is a collection of estimates from three different wet-lab experiments 
+%(cite Gavin, Ho, Krogan) derived from the \Rpackage{apComplex} package 
+%(footnote - explain that GO and MIPS do not rely heavily on AP-MS data). Once 
+%an \textit{in silico} interactome is built, the R package \Rpackage{simulatorAPMS} (cite package) 
+%can simulate AP-MS experiments rendering data sets very similar to those of actual wet-
+%lab experiments. Estimates for the \textit{in silico} interactome can be generated
+%by applying the various algorithms on the simulations, and, thus, a canonical methodology
+%is available to test the statistical significance of the different estimation
+%algorithms.
+
+We explore the problem of estimating \textit{in silico} interactomes: a collection of 
+protein complexes for some cell or tissue under certain conditions. We will focus our
+attentions on Saccharomyces cerevisiae though this need not be the case in general.
 
 This document will detail the various functions of \Rpackage{ScISI} by creating a
 running example for an \textit{in silico} interactome. It is recommended that the reader
@@ -153,6 +157,11 @@ This vector must either be of length one or of the same length as the vector toG
 parseType is of length one, all entries of toGrep will be parsed uniformly. Otherwise, the 
 $i^{th}$ entry from parseType defines the command for the $i^{th}$ entry from toGrep.
 
+
+To illustrate one example of appending to the search defaults, we have supplied the 
+suffix $-somal$ as a candidate for \Rfunarg{toBeParsed}: 
+
+
 <<getGOInfoToGrep, eval=TRUE>>=
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
@@ -164,8 +173,7 @@ getGOTerm(setdiff(names(goGrep), names(go)))
 
 @
 
-To illustrate one example of appending to the search defaults, we have supplied the 
-suffix $-somal$ as a candidate for \Rfunarg{toBeParsed} above. Because \Rfunarg{wantDefault} 
+Because \Rfunarg{wantDefault} 
 is still kept as $TRUE$, the three default search terms were also parsed. The last line of
 code displays those GO protein complexes found with the addition of the term $-somal$ which 
 were not found with only the default search terms. 
@@ -212,11 +220,11 @@ represent the hyper-graph. Each entry of the return value represents a particula
 and the union over all the entries of the list (i.e. over all the hyper-edges) yields the
 vertex set.
 
-Now that we have derived part of our \textit{in silico} interactome from the GO  
-database, we need to modify the data structure to one that is more flexible and resiliant for
-computational methodologies. Most computational tools will rarely take the hyper-graph 
-structure in its list representation; rather, they generally use the matrix 
-representation of the bi-partite graphs.
+%Now that we have derived part of our \textit{in silico} interactome from the GO  
+%database, we need to modify the data structure to one that is more flexible and resiliant for
+%computational methodologies. Most computational tools will rarely take the hyper-graph 
+%structure in its list representation; rather, they generally use the matrix 
+%representation of the bi-partite graphs.
 
 The incidence matrix, $M$, of a bi-partite graph has its rows indexed by proteins and has its columns
 indexed by the protein complexes. $M_{i,j} = 1$ if and only if protein $i$ is a member of complex $j$,
@@ -233,9 +241,7 @@ goM = createGOMatrix(go)
 We remark that we the proteins names used to index the rows of the incidence matrix are the 
 standard gene names for yeast. To establish uniformity, we have used the standard gene names
 across all data sets. The columns of the incidence matrix are indexed by the GO id's 
-corresponding to certain protein complexes. By looking at a table of the column sums and row
-sums of the matrix \Robject{goM}, we can see a range of sizes of the protein complexes from GO
-and relative membership of each protein $p$ respectively.
+corresponding to certain protein complexes. 
 
 <<createGOMatrixOut, eval=TRUE>>=
 #table(colSums(goM))
@@ -252,7 +258,7 @@ $-ase$ nor $-some$. We have manually found additionally GO nodes of potential in
 by the \Rfunction{getGOInfo} function. From the remaining 26 complexes,
 only 6 complexes were found to have non-trivial overlap with S. cerevisae in the GO CC ontology. To 
 check possible GO nodes and to add to the GO protein complexes, we call the \Rfunction{xtraGONodes}
-function. It is important to note that the \Rfunction{xtraGONodes} can only be called after an 
+function (example code shown below). It is important to note that the \Rfunction{xtraGONodes} can only be called after an 
 initial incidence matrix for the bi-partite graph of the GO protein complexes has been built since
 this function will compare the extra GO nodes with those existing GO protein complexes.
 
@@ -306,6 +312,9 @@ This vector must either be of length one or of the same length as the vector toG
 parseType is of length one, all entries of toGrep will be parsed uniformly. Otherwise, the 
 $i^{th}$ entry from parseType defines the command for the $i^{th}$ entry from toGrep.
 
+Exactly like our in example with the \Rfunction{getGOInfo} function, we append to the default 
+search terms with the suffix $-somal$.
+
 <<getMipsInfoToGrep, eval=TRUE>>=
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
@@ -318,8 +327,7 @@ mId = strsplit(mNm, split = "-")
 sapply(mId, function(q) mipsGrep$DESC[q[2]])
 @ 
 
-Exactly like our in example with the \Rfunction{getGOInfo} function, we append to the default 
-search terms with the suffix $-somal$. Again the output of the code above shows the extra
+Again the output of the code above shows the extra
 protein clusters obtained with the addition of $-somal$ to the three default search terms.  
 
 \item[4] \Rfunarg{eCode}: A character vector. This is a character vector of evidence codes.
@@ -354,7 +362,7 @@ all protein complexes, and hence the logical is TRUE.
 
 Another difference between the \Rfunction{getGOInfo} and \Rfunction{getMipsInfo} functions is 
 their respective outputs. We have seen that the output from the \Rfunction{getGOInfo} is a named
-list that represents the hyper-graph, but, from looking at the output printed above,
+list that represents the hyper-graph, but, from looking at the output printed below,
 this is not the case for \Rfunction{getMipsInfo}. 
 
 The output of \Rfunction{getMipsInfo} is a list with two 
@@ -375,7 +383,7 @@ names(mips$Mips)[1:10]
 mips$Mips$"MIPS-510.40"
 @ 
 
-And the second is a named character vector where the names correspond to MIPS ID and the 
+And the second is a named character vector where the names, again,  correspond to MIPS ID and the 
 entries contain a description of its respective protein complex: 
 
 <<getMipsInfoDESC, eval=TRUE>>=
@@ -396,12 +404,11 @@ mipsM = createMipsMatrix(mips)
 
 @ 
 
-Again we see that the standard gene names for yeast index the rows of the MIPS incidence matrix
-and the the MIPS id's corresponding to protein complexes index the columns. It is important to 
+Again we use the standard gene names for yeast to index the rows of the MIPS incidence matrix
+and the the MIPS ID's corresponding to protein complexes index the columns. It is important to 
 note that \Rfunction{createMipsMatrix} has prefixed each of the MIPS id's with the term ``MIPS-''.
 This is useful when we merge different incidence matrices, for it allows us to know where each
-protein complex orginates. Again, investigating column and row sums gives insight to complex size 
-and relative protein membership.
+protein complex orginates. 
 
 <<createMipsMatrixOut, eval=TRUE>>=
 #mipsM[1:10, 1:6]
@@ -531,7 +538,7 @@ JC_{i,j} = \frac{|mips_i \cap go_j|}{|mips_i \cup go_j|}.
 \end{equation}
 
 <<runCompareComplexJC, eval=TRUE>>=
-  mips2go$JC[c(2, 23, 47, 53, 91),c(3, 17, 23, 67, 83)]
+  ###mips2go$JC[c(2, 23, 47, 53, 91),c(3, 17, 23, 67, 83)]
 @ 
 
 Equality of complexes returns a Jaccard index of unity while disjoint complexes return zero. We 
@@ -558,11 +565,13 @@ compares all the complexes of the first bi-partite graph with each complex of th
 rather, one to many if either the ``ROW'' or the ``COL'' parameters are set. The mapping will
 be many to many if the ``BOTH'' parameter is set.
 
+The $maxIntersect$ entry is itself a named list with two entries:
+
 <<runCompareComplexMaxInterSect, eval=TRUE>>=
 names(mips2go$maxIntersect)
 @ 
 
-The $maxIntersect$ entry is itself a named list with two entries: maximize and maxComp. The maximize 
+The maximize 
 entry records the maximum Jaccard indices for each of the complex aligned either by ``row'' or by
 ``column'' or both if they are both called. The maxComp entry contains
 a list of named vectors also either by ``row'' or ``column''; the names of the vectors correspond 
@@ -580,8 +589,8 @@ The information obtained by the $maxIntersect$ entry allows us to interpret how 
 each complex is with respect to other complexes. From this information, we can decide whether to 
 allow or dis-allow any protein complex within the \texttt{in silico} interactome if they are deemed
 to be too similar. For the creation of the working example interactome, we only dis-allow one complex
-from a pair if and only if that pair has Jaccard index 1 which implies equality between the two 
-complexes.
+from a pair of complexes if and only if that pair returns Jaccard index 1 
+which implies equality between the two complexes.
 
 \subsection{Equality of Protein Complexes}
 The $equal$ entry records protein complexes of the first bi-partite graph matrix equal to those
@@ -624,12 +633,12 @@ of the second bi-partite graph. The result is a character vector of protein comp
 to be deleted in order to avoid redundancy in the \textit{in silico} interactome. 
 
 <<runCompareComplexRm, eval=TRUE, results=hide>>=
-length(mips2go$toBeRm)
-for(i in 1:5){
-print(mips2go$toBeRm[i] == mips2go$equal[[i]][1])
-} 
-mips2go$toBeRm[1:5]
-mips2mips$toBeRm
+#length(mips2go$toBeRm)
+#for(i in 1:5){
+#print(mips2go$toBeRm[i] == mips2go$equal[[i]][1])
+#} 
+#mips2go$toBeRm[1:5]
+#mips2mips$toBeRm
 @ 
 
 \subsection{Protein Sub-Complexes}
@@ -638,8 +647,8 @@ in a complex from the other bi-partite graph. The outputs in this entry are iden
 $equal$ and defer the reader to the explanation written previously.
 
 <<runCompareComplexSub, eval=TRUE, results=hide>>=
-mips2go$subcomplex[1:2]
-mips2mips$subcomplex[1:2]
+#mips2go$subcomplex[1:2]
+#mips2mips$subcomplex[1:2]
 @ 
 
 While the storage of the data does not explicitly state which complex contains the other complex, it is 
@@ -730,7 +739,7 @@ ISI <- mergeMGGHK
 
 Up until now, we have demonstrated how to use the various functions of the \Rpackage{ScISI}, but 
 we diverge from that endeavor to explore the characteristics of our working example 
-\texttt{in silico} interactome for budding yeast. By calling obtaining the dimension tag of incidence
+\texttt{in silico} interactome for budding yeast. By obtaining the dimension tag of incidence
 matrix representing the interactome,
 
 <<dimISI>>=
@@ -745,39 +754,41 @@ ISI which corresponds to the second entry).
 There are two summary statistics that are of some importance. The first figure gives an indication 
 of the distribution of the cardinality of the protein complexes within the \textit{in silico} 
 interactome. We can see from this figure that the majority of the protein complexes have less
-than ten constituent proteins. 
+than ten constituent proteins. This statistic verfies what many have conjectured - that 
+most multi-protein complexes are have relatively few proteins. It is also widely conjectured that 
+the larger multi-protein complexes are built from the union of sub-complexes (e.g. Mitochondrial
+translocase complex) which can be verified in our working interactome by exploring the 
+relationships between aggregate complexes and sub-complexes. We have touched upon this analysis
+in Table~\ref{ta:subComplexes}, but a more thorough and exhaustive analysis is conducted in 
+(cite Chiang et al).
+
 
 \begin{figure}[hb]
 \centering
 <<distPlot, fig=TRUE, echo=FALSE>>=
+par(mfrow = c(1,2))
 cS <- table(colSums(ISI))
 size <- as.numeric(names(cS))
 repet <- as.vector(cS)
 freq = rep(size, repet)
-hist(freq, xlab = "ScISI Protein Complex Cardinality", ylab = "Frequency", 
-     main = "Cardinality Distribution of ScISI")
-@
+hist(freq, xlab = "ScISI Protein Complex Cardinality", ylab = "Frequency",
+     main = "Complex Cardinality")
 
-\caption{\label{Cardinality Distribution of ScISI}}
+rS <- table(rowSums(ISI))
+size <- as.numeric(names(rS))
+repet <- as.vector(rS)
+freq = rep(size, repet)
+hist(freq, xlab = "Complex Membership per Protein", ylab = "Frequency",
+     main = "Complex Membership")
+par(mfrow = c(1,1))
+@
+\caption{\label{Distribution of Complex Cardinality and Distribution of Complex Membership per Protein}}
 \end{figure}
 
 The second summary statistic gives the distribution of the number of complexes for which each 
 protein may have membership. This statistic is important because we can use this distribution 
 (along with the summary statistic above concerning protein complex size) to give us a sense 
-of the generic nodal degree of a protein in this rather large co-membership network.
-
-\begin{figure}[hb]
-\centering
-<<distPlot2, fig=TRUE, echo=FALSE>>=
-rS <- table(rowSums(ISI))
-size <- as.numeric(names(rS))
-repet <- as.vector(rS)
-freq = rep(size, repet)
-hist(freq, xlab = "Complex Membership per Protein", ylab = "Frequency", 
-     main = "Distribution of Complex Membership per Protein")
-@
-\caption{\label{Distribution of Complex Membership per Protein}}
-\end{figure}
+of the nodal degree of a generic protein in this rather large co-membership network.
 
 The second histogram shows that an overwhelming majority of proteins participate in fewer that 
 five distinct protein complexes. Because the majority of complexes have fewer than ten members and
@@ -805,12 +816,11 @@ data("subCompM")
 
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex >>=
-
-
 xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", 
 caption="Number of repetitive Protein Complexes")
 
 @ 
+
 
 Not limited to redundant protein complexes, we also process each data-set
 independently to find and to remove all protein
@@ -837,7 +847,12 @@ While these four summary statistics give a good description of the \textit{in si
 these statistics cannot give a comprehensive description; that would take a much more considerable 
 dissection of the interactome (for which computational experiments should be conducted). It is also 
 necessary to state that this interactome represents Saccharomyces cerevisiae for some set of 
-environmental conditions. 
+environmental conditions, and so is one of the many estimates that can be created by this package.
+
+We remark that the interactome can only give predicted members of the protein complexes of interest,
+but it cannot ascertain the multiplicity of each individual constituent protein member. Therefore,
+it is important to be mindful that the \textit{in silico} interactome is a good model and 
+representation of known biology, and so it is limited in its presentation.
 
 \section{Customizing the Interactome}
 We have successfully built an \textit{in silico} interactome, and for some computational methodologies,
@@ -1012,10 +1027,5 @@ also change and refine itself as the data from the GO and MIPS databases are ref
 aspect to the R package \Rpackage{ScISI} is its dynamic nature, for the basic principal in which it has been  
 built is that the \textit{in silico} interactome must be amenable to change due to a number of outside
 circumstances. 
-
-
-
-\bibliographystyle{plainnat}
-\bibliography{bioc}
 
 \end{document}
