@@ -16,7 +16,10 @@ unWantedComp <- function(ISI, unwantedComplex =
     
     index = sapply(unwantedComplex, function(x) which(colnames(ISI) == x)) 
     upDatedISI <- ISI[,-index]
+    index3 <- which(colSums(upDatedISI)==1)
+    upDatedISI <- upDatedISI[, -index3]
     index2 = which(rowSums(upDatedISI) == 0)
     upDatedISI <- upDatedISI[-index2,]
+        
     
 }

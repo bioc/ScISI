@@ -373,7 +373,7 @@ class(mips)
 names(mips)
 @ 
 
-The first, $Mips$ is a named list of character vectors where the names are the MIPS IDs
+The first, $Mips$, is a named list of character vectors where the names are the MIPS IDs
 and the vectors contain the constituent members to the respective protein complexes (i.e. it is also
 a hyper-graph representation exactly like the \Rfunction{getGOInfo} output):
 

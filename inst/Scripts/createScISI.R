@@ -154,6 +154,7 @@ if(!is.null(pathToSave)){
     save(gavin2mergeMG, file=paste(pathToSave, "gavin2mergeMG.rda", sep=""), compress=TRUE)
     save(ho2mergeMGG, file=paste(pathToSave, "ho2mergeMGG.rda", sep=""), compress=TRUE)
     save(krogan2mergeMGGH, file=paste(pathToSave, "krogan2mergeMGGH.rda", sep=""), compress=TRUE)
+    save(ScISI, file = paste(pathToSave,"ScISI.rda", sep=""), compress=TRUE)
  }
 
 ScISI
