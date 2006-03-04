@@ -131,6 +131,8 @@ For Tony (by Tony):
 
                         ?3 - How should we categorize complexes if ?1 and ?2 are both false?
 
+                                --> If 75% of members is in nuclues => entire complex is in the nucleus
+
                 --> I have read the paper of Huh WK, et al. concerning the localization of certain ORF's within sub-
                     components of the yeast cell. The answer to ?1 and ?2 is (at least right now) false. We do not 
                     have 100% certainty that a certain protein (ORF) exists only within the nucleus or without. To this
@@ -184,12 +186,16 @@ RG - March 2 Comments:
 
         --> Done
 
+                ***Need man pages
+
  9.  Then for the ScISI (possibly for both estimates) we should keep a 
      vector of the names of complexes that are subcomplexes of
      other complexes. So that these can be removed by the user, rather than
      having us do it.
 
         --> For the verified it is done.
+
+                ***Need man pages
 
         --> For the overall estimate, I am going to check whether keeping
             a record of the sub-comlexes (and redundant complexes) should 
@@ -201,6 +207,10 @@ RG - March 2 Comments:
                     it takes some effort to reverse engineer everything
                     backwards. The second option takes no reverse 
                     engineering, but stores much more data.
+
+                --> Right now the records at stored as data-sets are merged
+                        
+                        ***Create man pages
 
  10. On reflection, it seems that both GO and MIPs complexes are verified and
      there is not much we can say about them. The
