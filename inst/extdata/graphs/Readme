@@ -1,0 +1,11 @@
+For right now, we are still unsure of whether to uses these particular graphs or some other formatting, so I am putting of the official documentation until we get a definitive answer.
+
+Here is the short version of how to use these objects:
+
+*AM* => An adjacency matrix 
+*BP* => Bait/Prey model
+*CM* => Co-membership 
+*G*  => Graph (as graphNEL)
+ppi* => Protein-Protein Interaction
+
+* implies anything before or after. 
