@@ -69,6 +69,8 @@ For Tony (by Tony):
 
         1e. Streamline script to generate the .html files.
 
+                --> In Progress
+
 	
 
 2. Create images for ScISI paper; also some distribution graphs for y2h v. ScISI as well as pathway data. Awaiting
@@ -187,6 +189,8 @@ RG - March 2 Comments:
         --> Done
 
                 ***Need man pages
+                
+                        --> Done
 
  9.  Then for the ScISI (possibly for both estimates) we should keep a 
      vector of the names of complexes that are subcomplexes of
@@ -196,6 +200,8 @@ RG - March 2 Comments:
         --> For the verified it is done.
 
                 ***Need man pages
+
+                        -->Done
 
         --> For the overall estimate, I am going to check whether keeping
             a record of the sub-comlexes (and redundant complexes) should 
@@ -243,3 +249,25 @@ RG - March 2 Comments:
      something, talk to him or me first and save some time).
 
 
+****************************
+07 March 2006
+TC
+****************************
+
+1. Streamline script to generate .html files
+
+2. Change the yeastData class to new name and make sure propogations are caught; make changes in vignette.
+
+3. Create the graphNELs with combined data sets (i.e. crystal, y2h, and ppi)
+
+4. Find complexes with very little overlap with MIPS and GO to analyze with Y2H, PPI, and Pathway data.
+
+5. From those complexes from (4), determine which we can reasonably consider yeast nucleus complexes.
+
+6. I have decided record the summary stats at each merging process...since we are no longer deleting 
+   protein sub-complexes, there is no need to reverse engineer to obtain data, so this is the correct
+   place to record the summary stats.
+
+        --> Done
+        
+        *** Need to create man pages for the data sets.
