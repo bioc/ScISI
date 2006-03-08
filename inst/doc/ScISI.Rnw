@@ -266,6 +266,9 @@ throughput experimental data (FIXME: list the yeast data here).
 %%FIXME: a few pictures would surely help readers - how are we making
 %%out on that?
 
+%%FIXME: somewhere we need a discussion of the need to fix on a common
+%% set of gene names. Otherwise downstream analyses become really problematic
+
 We define a protein complex to be two or more proteins that physically
 interact for the purposes of carrying out some biological
 objective. There is no need for all members of a complex to physically
