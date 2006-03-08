@@ -149,12 +149,20 @@ mergeMGGHK = mergeBGMat(krogan, mergeMGGH, toBeRm = unique(c(rmFromKrogan,
 ##which were not appropriate for the ScISI:
 ScISI = unWantedComp(mergeMGGHK)
 
+imList = List()
+imList[[1]] <- mipsM
+imList[[2]] <- goM
+imList[[3]] <- gavin
+imList[[4]] <- ho
+imList[[5]] <- krogan
+
 if(!is.null(pathToSave)){
     save(mips2go, file=paste(pathToSave, "mips2go.rda", sep=""), compress=TRUE)
     save(gavin2mergeMG, file=paste(pathToSave, "gavin2mergeMG.rda", sep=""), compress=TRUE)
     save(ho2mergeMGG, file=paste(pathToSave, "ho2mergeMGG.rda", sep=""), compress=TRUE)
     save(krogan2mergeMGGH, file=paste(pathToSave, "krogan2mergeMGGH.rda", sep=""), compress=TRUE)
     save(ScISI, file = paste(pathToSave,"ScISI.rda", sep=""), compress=TRUE)
+    sumStat(imList, pathToSave)
  }
 
 ScISI

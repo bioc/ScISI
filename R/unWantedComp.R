@@ -9,7 +9,9 @@ unWantedComp <- function(ISI, unwantedComplex =
                            "GO:0005770",
                            "GO:0005777",
                            "GO:0005844",
-                           "GO:0001400")){
+                           "GO:0001400"),
+                         unwantedGenes = c("RNA_TLC1",
+                           "SNRNA_NME1", "RNA_RNASE-P")){
                            
 
     
@@ -20,6 +22,9 @@ unWantedComp <- function(ISI, unwantedComplex =
     upDatedISI <- upDatedISI[, -index3]
     index2 = which(rowSums(upDatedISI) == 0)
     upDatedISI <- upDatedISI[-index2,]
+    index4 = sapply(unwantedGenes, function(x) which(rownames(upDatedISI)==x))
+    print(index4)
+    upDatedISI <- upDatedISI[-index4,]
         
     
 }
