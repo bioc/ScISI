@@ -228,6 +228,8 @@ RG - March 2 Comments:
 
         --> In progress...
 
+                --> These complexes are found
+
  11. We will say a complex is in
      the nucleus if some fraction of its constituent proteins are annotated
      at the appropriate GO node ("GO:0005634" it seems). Perhaps we could 
@@ -236,11 +238,17 @@ RG - March 2 Comments:
 
         --> In progress
 
+                --> Done...right now all protein complexes are reported with    
+                    percentage of proteins which have been annotated to the 
+                    nucleus.
+
  12. I think we also want to concentrate on complexes that do not have a lot
      of overlap with any MIPS or GO complexes (using the Jaccard index
      as the measure).
 
         --> Same as 10
+
+                --> Done
 
  13. For each of these look to see if we have reasonable amount of Y2H data.
      All localization data have long since been included in GO by the SGD folks, 
@@ -262,7 +270,11 @@ TC
 
 4. Find complexes with very little overlap with MIPS and GO to analyze with Y2H, PPI, and Pathway data.
 
+        --> Done...created a script called getNucOrfs.R in the inst/Scripts/ directory
+
 5. From those complexes from (4), determine which we can reasonably consider yeast nucleus complexes.
+
+        --> Done
 
 6. I have decided record the summary stats at each merging process...since we are no longer deleting 
    protein sub-complexes, there is no need to reverse engineer to obtain data, so this is the correct
