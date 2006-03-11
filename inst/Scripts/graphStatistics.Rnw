@@ -54,6 +54,7 @@ from the Intact repository.
 <<loadData>>=
 data(ScISI)
 data(intactInfo)
+data(nucComp)
 @ 
 
 Currently, there are six summary statistics in which we are interested. 
@@ -108,8 +109,12 @@ We have generated a script to calculate each of these graph summary
 statistics:
 
 <<graphStats>>=
-graphStats <- graphSumStats(ScISI, intactInfo)
-ncol(ScISI)
+interestingComps <- colnames(ScISI) %in% nucComp
+
+ScISI2 <- ScISI[, interestingComps]
+
+graphStats <- graphSumStats(ScISI2, intactInfo)
+ncol(ScISI2)
 length(graphStats)
 names(graphStats[[1]])
 @ 
@@ -141,7 +146,7 @@ We produce each in the order they are listed above:
 graphStats[[1]]$complexBait
 graphStats[[1]]$complex
 graphStats[[1]]$notBait
-sampledProp <- (length(graphStats[[1]]$complexBait))/(length(setdiff(graphStats[[1]]$complex, graphStats[[1]]$notBait)))
+sampledProp <- (length(graphStats[[1]]$b2CompP))/(length(graphStats[[1]]$complexBait))
 sampledProp
 @ 
 

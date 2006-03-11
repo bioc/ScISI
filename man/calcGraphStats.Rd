@@ -39,7 +39,10 @@ calcGraphStats(comp, bait2PreyL)
   \item{complex}{A character vector of the constituent members of the
     proteinn complex of interest}
   \item{complexBait}{A character vector of those protein members which
-    were also tested as baits in the y2h experiment}
+    were also tested as baits in the y2h experiments}
+  \item{b2CompP}{A character vector of all proteins which were tested as
+    baits in the y2h experiments and also found a prey in the complex of
+    interest}
   \item{notBait}{A character vector of those protein members which were
     not tested as baits}
   \item{avgDegOut}{The average out-degree of the bait proteins of the

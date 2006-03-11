@@ -1,4 +1,4 @@
-getLocOrfs <- function(imList, goNode, pathToSave=NULL){
+getLocOrfs <- function(imList, goNode, pathToSave=NULL, name=NULL){
 
     options(error=recover)
     yG2AP <- as.list(YEASTGO2ALLPROBES)
@@ -43,10 +43,14 @@ getLocOrfs <- function(imList, goNode, pathToSave=NULL){
         }
     }
 
-    if(!is.null(pathToSave)){
-        save(localizationL, file = paste(pathToSave,"localizationL.rda", sep=""),
-             compress=TRUE)
-    }
+    if(!is.null(pathToSave) && !is.null(name)){
+        
+        e <- new.env(parent = emptyenv())
+        e[[name]] <- localizationL
+        save(list = name, file = paste(pathToSave, name, ".rda", sep=""),
+             envir=e, compress=TRUE)
+
+        }
     
     localizationL
 }

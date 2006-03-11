@@ -1,0 +1,90 @@
+%
+% NOTE -- ONLY EDIT THE .Rnw FILE!!!  The .tex file is
+% likely to be overwritten.
+%
+% \VignetteIndexEntry{Locating nuclear protein complexes}
+%\VignetteDepends{}
+%\VignettePackage{y2hStat}
+\documentclass[11pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+
+\usepackage[authoryear,round]{natbib}
+\usepackage{times}
+\usepackage{comment}
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+\bibliographystyle{plainnat}
+
+\title{Locating Nuclear Complexes}
+\author{T. Chiang}
+
+\begin{document}
+
+\maketitle
+
+This document details how we can find possible nuclear protein complexes.
+
+<<loadlibs>>=
+
+library("ScISI")
+
+@
+
+First we need to generated those protein complexes for which we need  
+localization data:
+
+<<getAPMS, eval=TRUE>>=
+data(ScISI)
+@
+
+Next we simply call the \Rfunction{getNucOrfs} script:
+
+<<getNuc>>=
+goNode <- c("GO:0005634", "GO:0005737")
+imList <- list()
+imList$ScISI <- ScISI
+localizationL <- getLocOrfs(imList, goNode)
+
+@ 
+
+This is a list of list. For our sake, we will only look at the first sublist to output of 
+\Rfunction{getLocOrfs}. There are 3 entries within this list. The first entry is a bi-partite
+graph incidence matrix where the rows are only those ORFs $O$ annotated to the nucleus and the
+columns are those protein complexes which are non-trivial when restricted to $O$. The second
+entry to the list is another bi-partite graph incidence matrix; the rows contain all the proteins
+of the original bi-partite graph incidence matrix (our example, the gavin incidence matrix) but
+the columns have been restricted to be the same as those in the first entry's incidence matrix. The
+third entry is the quotient between the cardinality of protein members of complexes in the first
+entry to those in the second. 
+
+<<makingSense>>=
+
+localizationL[[1]][[1]][[1]][1:5,1:5]
+localizationL[[1]][[1]][[2]][1:5,1:5]
+localizationL[[1]][[1]][[3]][1:10]
+
+@ 
+
+Since proteins don't simply localize to one cellular component in general, we 
+can estimate which protein complexes are nuclear by their compoisition of 
+nuclear-ly annotated constituent members:
+
+<<findNucComp>>=
+sum(localizationL[[1]][[1]][[3]]>0.75)
+
+@ 
+
+\end{document}
