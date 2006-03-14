@@ -502,7 +502,7 @@ can be obtained from the Gene Ontology (GO), \citep{GO, GOA},
 Protein Sequences (MIPS). Additionally we will make use of protein
 complex estimates from three publicly available wet-lab experiments
 \citep{Ho, Gavin, Krogan}. Rather than make use of these data
-directly, we first apply the technology of \cite{Scholtens,
+directly, we first apply the technology of \citep{Scholtens,
   ScholtensVidalGent} since, as demonstrated in those references, the
 resultant data are more consistent with known biological complexes.
 
@@ -587,7 +587,7 @@ There are several reasons why we dis-allow the inclusion of these protein
 complexes. One is the lack of uniformity by which these complexes we estimated;
 this lack of uniformity creates problems in the analysis and validation to 
 the interactome. Another reason is is the estimation algorithms themselves; previous
-analysis \cite{Scholtens, ScholtensVidalGent} of the resulting protein complexes 
+analysis \citep{Scholtens, ScholtensVidalGent} of the resulting protein complexes 
 annotated by high through-put experiments shows that in general, the protein 
 complex size tend to be over-estimated, i.e. the overall size distribution
 is higher than that of the set of well known protein complexes. Lastly, high 
@@ -716,7 +716,7 @@ estimates from the MIPs repository, we do not reject them universally.
 We obtained the reported bait to prey results from three high through-put 
 AP-MS experiments \citep{Ho, Gavin, Krogan}. These data-sets were then 
 assembled and processed using the technologies reported in 
-\cite{Scholtens, ScholtensVidalGent}, in particular using the software
+\citep{Scholtens, ScholtensVidalGent}, in particular using the software
 packages \Rpackage{apComplex} available from the Bioconductor project.
 
 
@@ -743,10 +743,11 @@ positive and false negative observations).
 
 The putative estimates resulting from the \Rpackage{apComplex} 
 processing has shown to be more consistent with known biology. 
-\cite{Scholtens, ScholtensVidalGent} have shown that the MBME 
+\citep{Scholtens, ScholtensVidalGent} have shown that the MBME 
 putative protein complexes have significant overlap when compared
 with well known protein complexes and have predicted the exact
-protein composition of Arp 2/3 and of Cleavage Factor IA complexes. 
+protein composition of Arp 2/3 and of Cleavage Factor IA complexes
+from the raw experimental data of \citep{Gavin}. 
 In addition, the size distribution of these MBME complexes 
 corresponds more with the distribution of the size of known 
 complexes indicating that these estimates have a better mechanism
