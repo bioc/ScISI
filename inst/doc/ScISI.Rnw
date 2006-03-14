@@ -9,6 +9,12 @@
 
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{amsmath,pstricks,fullpage}
+
+
+
 
 \textwidth=6.2in
 \textheight=8.5in
@@ -26,8 +32,7 @@
 
 
 
-\newcommand{\classdef}[1]{%
-  {\em #1}
+\newcommand{\classdef}[1]{%{\em #1}
 }
 
 \begin{document}
@@ -44,8 +49,8 @@ essential step in this process. A number of high throughput
 experiments have been carried out with the goal of helping to
 elucidate these nature and number of their occurances \citep{Gavin,
   Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge remains
-incomplete. Such experiments while valuable are expensive and time
-consuming to carry out, suggesting that simulation models may be
+incomplete. Such experiments, while valuable, are expensive and time
+consuming to carry out. This suggests that simulation models may be
 beneficially employed to identify the viability of experimental
 procedures, to aid in integrating data from disparate sources, and to
 provide a sound basis for the development of new methodology in
@@ -54,8 +59,8 @@ paper we outline one approach in the creation of \textit{in silico
   interactomes} that would be suitable for such simulation
 experiments. 
 
-In this paper we consider the problem of estimating an \textit{in
-  silico} interactome, ISI, for \textit{Saccharomyces cerevisiae} and
+We consider the problem of estimating \textit{in
+  silico} interactomes (ISI) for \textit{Saccharomyces cerevisiae} and
 we describe five different roles where such a computational device can
 be used.  First, the ISI provides a tool that can be used to mimic
 wet-lab experiments; these \textit{in silico} experiments can help to
@@ -95,11 +100,11 @@ to predict or to model other types of interactions, and provide
 information about the likelihood of interactions; the verification of
 interactions remains the domain of experimental biology.
 
-Protein interactions are very dynamic by nature and that different
+Protein interactions are dynamic by nature so that different
 interactions occur at different times and under different
 conditions. For example, some protein complexes such as those needed
 to facilitate cell division are often transient in nature appearing
-when needed and dissovling when no longer required, where as other
+when needed and dissovling when no longer required, whereas other
 complexes such as the ribosome (and its subunits) are essentially
 permanently constituted.  We provide some tools that will allow
 investigators the ability to indicate situations and conditions under
@@ -107,6 +112,8 @@ which an interaction is known to occur and we discuss a paradigm where
 an investigator will be able to select all interactions for a given
 condition. 
 
+%%I if we are going to validate the interactome we are building, should
+%%we not regulate the estimate behind the method?? -- TC
 While the estimated interactome is itself of some great interest, we
 note that it is more important to describe the procedure by which an
 ISI is produced. There are many reasons why the estimate is of less
@@ -139,7 +146,7 @@ some \textit{in silico} experiments that can be performed using the
 estimated interactome.
 
 
-\section{Methodology}
+\section{Preliminaries}
 
 In our discussion we do not distinguish between the term gene and the
 term protein, since the available resolution is not fine enough and
@@ -202,8 +209,19 @@ or not the two proteins are found as  constituent parts of some
 protein complex. If represented in this way there is a strict loss of
 information, since a graph can only represent binary relationships yet
 protein complex membership is a many-to-one relationship. For this
-reason we prefer the bipartite graph since in that format no
-information is lost.
+reason we prefer the hypergraph since in this format all important 
+information is conserved.
+
+\begin{figure}
+\centering
+\subfigure[Protein Binary Interaction Network]{
+\includegraphics[width = 65mm]{../extdata/protein_network_large.jpg}}
+\caption{A protein binary interaction network as a graph and protein complex
+membership network rendered as a bi-partite graph FIXME - Cannot use this as it is
+probably copyrighted, but wanted to put here as example...need to render one 
+ourselves}
+\end{figure}
+
 
 These two biological interactomes are related, but they are also
 distinct, and the use of the data in modeling and other downstream
@@ -243,52 +261,57 @@ can be used to construct an \textit{in silico interactome}
 for \textit{S. cerevisiae}. We restrict our attention to the two
 interactomes described above, $I_b$ and $I_c$. As we noted above, not
 all complexes are present at all times in the cells under study, but
-we are unable to model this aspect of the data due to the lack of
+we are unable to model this aspect due to the lack of
 appropriate data on which to base such classifications. When such data
 become more widely available they can easily be accomodated within the
 paradigm we are proposing.
 
 We first define what we mean by a protein complex and describe
-different models for representing these data. Next we give a concise
+different models for representing these data. Then we explain the 
+relationship of binary interactions within this working definition of 
+a protein complex. Next we give a concise
 description of the computational tool \textit{ScISI} and show its
 dynamic properties in constructing different complex membership
-interactomes. We then describe the process of creating an \textit{in
-  silico} protein complex interactome via \textit{ScISI} based on two
+interactomes and binary interactomes. We then describe the process of 
+creating an \textit{in silico} protein 
+complex interactome via \textit{ScISI} based on two
 public meta-data sources and three experimental data sets by combining
 purification of protein complexes with identification of their
-individual components via mass spectroscopy. Finally we consider the
+individual components via mass spectroscopy. In addition we consider the
 construction of an \textit{in silico} binary interactome based
 primarily on data from IntAct, which is itself based on high
-throughput experimental data (FIXME: list the yeast data here). 
+throughput experimental data assayed by the Yeast 2-Hybrid (Y2H) technology.
+The IntAct repository currently has fourty-one Y2H data-sets which 
+are parsed and processed in creating the binary interactome.
 
-\subsection{Protein complexes and their representations}
+%% (FIXME: list the yeast data here) ... can you explain which data you
+%% would like listed...certainly not all of the y2h data?  
+
+\subsection{Protein complexes: Definition, Representation and Characteristics}
 
 %%FIXME: a few pictures would surely help readers - how are we making
 %%out on that?
+% Working on it - TC
 
-%%FIXME: somewhere we need a discussion of the need to fix on a common
-%% set of gene names. Otherwise downstream analyses become really problematic
 
-We define a protein complex to be two or more proteins that physically
-interact for the purposes of carrying out some biological
-objective. There is no need for all members of a complex to physically
-interact with each one another, but all the proteins do need to
-combine to form a connected multi-protein structure. Some proteins
+We define a protein complex to be two or more proteins that creates one 
+functional unit for the purposes of carrying out some biological
+objective. This functional unit is the sum total effects of the binary 
+interactions amongst the constituent members. 
+There is no need for all members of a complex to physically
+interact with one another, but all the proteins do need to
+combine to form a connected multi-protein structure. In essence, a protein
+complex is a biological collection of affiliated proteins assembled via 
+binary interactions. We remark that some proteins
 will be involved in many complexes while others will be involved in
 relatively few. Protein complexes range in size from two proteins to
 more than fifty.
 
-There are sure to be situations where a protein complex, that exists
-under one set of conditions, is a proper subset of a complex that
-exists under another set of conditions. For some analyses it will be
-important to remove those complexes which are proper subsets of other
-complexes and we provide tools to help do that.
+Having determined a working definition, we describe the mathematical 
+representations chosen for binary interactions as well as for protein 
+complexes in this paper.
 
-%FIXME: it would be good to give some sort of concrete
-%example of what might go wrong.
-
-
-\subsection{Graphs and Hypergraphs}
+\subsubsection{Graphs and HyperGraphs}
 
 We require a small amount of graph theory to allow for succinct
 discussion of the relevant concepts. A graph $G$, consists of a pair
@@ -323,12 +346,132 @@ one in position $(i,j)$ indicates that protein $p_i$ interacts with
 protein $p_j$. This matrix is likely to be sparse and we will make use
 of appropriate software tools and data representations.
 
-The construction of the \textit{in silico} interactomes, $I_c$ and
-$I_b$, will be the construction of appropriate graph representations
-of these entities and for the most part we will compute adjacency
-matrices to represent the data.
+<<getGraph, echo=FALSE, results = hide>>=
+library("ScISI")
+library("Rgraphviz")
+data(arp23G)
+pdf("arp23Graph.pdf")
+plot(arp23G, "dot")
+dev.off()
+@ 
 
-\subsection{Constructing the Interactome}
+\begin{figure} 
+\centering
+\subfigure[Atomic rendering of ARP 2/3 labelled by common names]{
+\label{arp23Physical}
+\includegraphics[width = 75mm]{../extdata/Arp2_3_complex.png}}
+\subfigure[Graphical rendering of ARP 2/3 labelled by systematic names]{
+\label{arp23Graph}
+\includegraphics[width =75mm]{arp23Graph.pdf}}
+\caption{Some scientists might find the physical rendering of ARP 2/3 to be
+of more use while others might prefer a graphical representation. We note that
+the issue of identifiability presents itself as creator of the atomic rendering
+has chosen one version of the common names while the creator of the graph has
+chosen the systematic gene names.}
+\end{figure}
+
+\subsubsection{Protein Sub-Complexes}
+
+There are sure to be situations where a protein complex, that exists
+under one set of conditions, is a proper subset of a complex that
+exists under another set of conditions. For some analyses it will be
+important to remove those complexes which are proper subsets of other
+complexes and we provide tools to help do that.
+
+%%Maybe this example can be an done as a footnote with some pictures 
+%%of how APMS cannot but pull out the largest cluster since that is
+%%the limitation of the technology. I am thinking of using RNA Pol II 
+%%holenzyme including RNA Pol II
+
+One example is protein complex estimation using data collected from 
+Affinity Purification - Mass Spectrometry (AP-MS) experimentation (wet-lab 
+or in silico). Recall that in the AP-MS experiments, bait proteins are
+placed in vivo so that they may generate clusters with any proteins known
+to be co-members. In such an experiments, sub-complexes (if they are 
+known to exist) cannot be assayed due to the limitations of the technology.
+
+With the AP-MS limitations in mind, estimation algorithms cannot detect
+the composition of sub-complexes. Therefore, if in silico experiments are
+conducted with complex estimation as the goal, it is unnecessary (in fact
+in-efficient) to retain protein sub-complexes in the \textit{in silico}
+interactome.
+
+%FIXME: it would be good to give some sort of concrete
+%example of what might go wrong.
+
+%%FIXME: somewhere we need a discussion of the need to fix on a common
+%% set of gene names. Otherwise downstream analyses become really problematic
+%% OK - TC
+
+\subsubsection{Protein (Complex) Identifiability}
+
+For a protein complex to be uniquely identifiable, it is necessary for each 
+of the constituent protein members to be uniquely identifiable. Unfortunately,
+this is not always true. Currently there are two main methods of identifying
+proteins: 1. either using the locus name (common/alias name) for the protein or 2.
+using the ORF name (systematic name) for the gene. We remark that in addition
+to these two methods, many data repositories have their own system of 
+nomenclature, though they all seem to be derived from one of the two main 
+methods, so we will contain our discussion between the translation of these 
+two main nomenclatures.
+
+%%I am going to create a table that will give these examples in a more
+%%meaningful way.
+
+\begin{table}
+\centering
+\label{geneNames}
+\begin{tabular}{|l|p{0.65\textwidth}|}
+\hline
+Gene Gommon Names&Corresponding Gene Systematic Names\\
+\hline
+YRF1&YER190W, YDR545W, YGR296W, YLR466W, YLR467W, YNL339C, YPL283C\\
+YPK1&YKL126W, YJL093C, YNL307C\\
+POT1&YIL160C, YKL198C\\
+ZRG11&YIL046W, YOR030W\\
+RTS1&YOR014W\\
+\hline
+Gene Systematic Names&Corresponding Gene Common Names\\
+\hline
+YPL084W&NPI3, ASI6, VPS31, LPF2\\
+YIL148W& UB11, UBI1, CEP52A\\
+YNL041C& SEC37, COD2\\
+YGR028W& YTA4\\
+
+YHR133C&NA\\
+YPL170W&NA\\
+\hline
+\end{tabular}
+\caption{The correspondance between Gene Common Names and Gene Systematic Names. Notice
+that the correspondance can be many to one in both instances, and notice that the 
+correspondance can also be undefined.}
+
+\end{table}
+
+
+
+Thus determining protein complex composition and protein binary interactions
+becomes problematic if different 
+investigators chose to use differing systems of nomenclature. For our purposes, 
+we have chosen to use the ORF names to identify proteins exclusively, and we discuss
+our methods for overcoming the identifiability problems in the following sections. 
+
+\section {Methodology}
+
+\subsection*{Constructing the Interactomes}
+
+The construction of the \textit{in silico} interactomes is constrained by the 
+characteristics listed above. To build the binary interactome, $I_b$, is equivalent
+to constructing the binary interaction adjacency matrix while maintaining 
+identifiability of the proteins at hand. In addition to maintaining 
+identifiability, building the protein complex interactome, $I_c$, is equivalent to 
+constructing the corresponding complex membership incidence matrix while establishing
+conditions which determines the retention of sub-complexes. 
+
+The following sections provide the detailed description of the tools developed and 
+the steps taken to creating the respective \textit{in silico} interactomes. 
+
+\subsection{Protein Complex Interactomes}
 
 We first discuss the creation, or estimation of $I_c$. Our basic
 strategy is to assemble a number of software tools, together with
@@ -369,13 +512,37 @@ resultant data are more consistent with known biological complexes.
 %% the terms for keywords, we also carried out different hand curations
 %% to include other terms that had not been picked up by this approach
 
-\subsubsection{Keyword searching}
+\subsubsection{Obtaining Protein Complex Membership Information from Data Repositories}
 
-For each data repository the textual terms used to describe its
-contents are searched for specific key words. We make use of regular
-expressions searches and approximate matching regular expression
-searches. By default all terms that
-contain one of the three expressions listed here,
+%%FIXME: the numbers in here should be part of an \Sexpr and be
+%%computed from the actual data - otherwise why are we using a
+%%vignette? 
+
+<<getCompData, echo=FALSE, results=hide>>=
+library("ScISI")
+
+@ 
+
+In searching for and parsing through information from the two online 
+data repositories, GO and MIPS, we used somewhat indirect methodologies. 
+For the GO data source, we made use of the Bioconductor package 
+\Rpackage{GO}, a metadata package containing the pertinent information. 
+There does not exist a R metadata package for the MIPs data source, so
+we downloaded three files from its repository. The file \textit{complexcat.scheme}
+details the hierarchy classification structure of the MIPs protein 
+complexes, and the \textit{complexcat\_data\_14112005} file has the 
+protein annotations and evidence codes for each protein complex. We note that the 
+latter file is suffixed with an eight digit number which indicates the 
+day/month/year which this file is updated (there is a bi-annual update 
+for this file). The last file is the \textit{evidencecat.scheme} which 
+contains the evidence codes definitions. 
+
+For each data repository, the textual terms used to describe its
+contents are parsed for specific key words. While Making use of regular
+expression searches and approximate matching regular expression
+searches, we have searched for all the terms that contain one of the 
+three default character strings listed:
+
 \begin{enumerate}
 \item  the exact word \texttt{complex};
 \item one or more words that end with the suffix \texttt{ase};
@@ -385,7 +552,7 @@ contain one of the three expressions listed here,
 In particular we use the following three regular expression,
 \verb+complex+, \verb+\\Base\\b+, and \verb+\\Bsome\\b+ in our search.
 These narrow the pool of return values yet include terms such as
-\texttt{DNA-directed Polymerase II, holoenzyme} or 
+\texttt{DNA-directed Polymerase II holoenzyme} or 
 \texttt{repairosome}. 
 
 Users can modify the search criteria to add new terms or to remove any
@@ -393,15 +560,62 @@ of those default values listed above. Terms selected correspond to
 protein complexes and these are then collected and the corresponding
 incidence matrix is computed. The rows are indexed by the standard
 gene names and the columns are indexed by the protein complex identification 
-codes (unique to each different repository). 
+codes (unique to each different repository).
+
+We remark that even with the limited return values, the restrictions imposed 
+by the regular expression searches will still contain elements which we do not 
+consider protein complexes. Care must be taken to inspect those obtained 
+elements from each repository. 
+
+Elements such as arginase, and CTP synthetase are considered by some to be 
+protein complexes even though they contain one unique protein. Because the 
+data repositories do not include information such as multiplicity, we have 
+decided to remove any unital protein complexes since it does not meet the
+requirements we have established. In addition, some elements such as (FIXME - 
+look up some examples) are the names of polypeptides and not protein complexes, 
+so they too must be removed from the selected data. 
+
+In addition to those exceptions we have just mentioned, the regular expression 
+parsing methodology also obtains those protein complexes derived from high 
+through-put AP-MS experiments and estimated by each respective experimental
+investigator. Presently, only the MIPS data repository annotates proteins by 
+these high through-put experiments. In constructing the protein complex 
+interactome, we have elected not to retain those complexes whose constituent 
+members are annotatated in this manner.
+
+There are several reasons why we dis-allow the inclusion of these protein 
+complexes. One is the lack of uniformity by which these complexes we estimated;
+this lack of uniformity creates problems in the analysis and validation to 
+the interactome. Another reason is is the estimation algorithms themselves; previous
+analysis \cite{Scholtens, ScholtensVidalGent} of the resulting protein complexes 
+annotated by high through-put experiments shows that in general, the protein 
+complex size tend to be over-estimated, i.e. the overall size distribution
+is higher than that of the set of well known protein complexes. Lastly, high 
+through-put data is known to have a larger incidence of error than that of small
+scale systematic experiments, and therefore, caution needs to be taken when 
+dealing with these particular putative protein complexes.
+
+Realizing that there are elements extracted from the data-bases which need to be
+dis-allowed, we address the systematic and computational methods in excluding individual 
+proteins as well as entire protein complexes. Both GO and MIPS provide additional 
+information on the curation and
+provenance of the data that they report. This information comes in the
+form of evidence codes, which are used by both resource, although the
+codes themselves are unique to the different resources. Users can
+specify a list of evidence codes and dis-allow those proteins whose
+annotations are found in the supplied list. Table~\ref{goAndmipsECode} lists both 
+the GO and MIPs evidence codes we have used to reject protein membership in 
+the various complexes we have extracted:
 
 
 %%FIXME: name names or drop this
-While most protein interaction repositories store protein complex data
-by listing the constituent proteins for each complex, there are a
-small number of repositories which store the bipartite graph incidence
-graph matrix for the protein complex data. For these repositories,
-we simply download these matrices.
+%%Done - TC
+%While repositories such as Mips and GO will annotate proteins to each
+%complex and store this data by these annotations, there is a small number 
+%of repositories such as the \Rpackage{apComplex} package of the Bioconductor
+%project which store the bi-partite graph incidence matrix for the 
+%protein complex composition data. For repositories such as \Rpackage{apComplex},
+%we can simply download these matrices.
 
 %\subsection{Processing Online Repositories}
 %%FIXME: I don't think it is the right name - 
@@ -410,96 +624,135 @@ we simply download these matrices.
 %% and we need to extract them. Other repositories have protein
 %% complex predictions - then we don't need searching. Are there
 %% examples of the second type?
+\begin{table}[htp]
+\label{goAndmipsECodes}
+\centering
+\begin{tabular}{|l|p{0.65\textwidth}|}
+\hline
+GO Evidence Codes&GO Evidence Code Definitions\\
+\hline
+IEA&Inferred from Electronic Annotation\\
+NAS&Non-traceable Author Statement\\
+ND&No Biological Data Available\\
+NR&Not Recorded\\
+\hline
+Mips Evidence Codes&Mips Evidence Code Definitions\\
+\hline
+901.01.03&Overview information (TAS/NAS)\\
+901.01.03.01&Review\\
+901.01.03.02&Text-book\\
+901.01.04&Personal communication (TAS/NAS)\\
+901.01.04.01&Homepage (Web)\\
+901.01.04.02&E-mail\\
+901.01.05&Closed information (NAS)\\
+901.01.05.01&Institution\\
+901.01.05.02&Private\\
+902.01.01.02.01.01&Co-immunoprecipitation\\
+902.01.01.02.01.01.01&Co-immunoprecipitation, native\\
+902.01.01.02.01.01.02&Co-immunoprecipitation, epitope tag\\
+902.01.01.02.01.02&Affinity chromatography\\
+902.01.01.02.01.02.01&Affinity chromatography, native\\
+902.01.01.02.01.02.02&Affinity chromatography, affinity-tag\\ 
+902.01.01.04.01&Mass spectrometry (MS)\\
+902.01.01.04.01.01&MS with in-line two-dimensional liquid chromatography (MudPIT)\\
+902.01.01.04.01.02&MS with liquid chromatography coupled to tandem mass spectrometry (LC-MS/MS)\\
+902.01.01.04.01.03&MS with matrix-assisted laser desorption/ionization time-of-light (MALDI TOF MS)\\                         
+902.01.01.04.02&Immuno detection\\
+901.01.09.02&High throughput experiment\\
+\hline
+\end{tabular}
 
-Both GO and MIPS provide additional information on the curation and
-provenance of the data that they report. This information comes in the
-form of evidence codes, which are used by both resource, although the
-codes themselves are unique to the different resources. Users can
-specify a list of evidence codes and disallow those proteins whose
-annotations are found in the supplied list. Within the GO
-repository, we disallow those proteins annotated by the following
-evidence codes: Inferred from Electronic Annotation (IEA);
-Non-traceable Author Statement (NAS); No Biological Data Available
-(ND); Not Recorded(NR). 
-%%FIXME: please put both the GO and the MIPS exclusions into tables (two
-%% tables one for each). And then write some text that refers to them.
-For the MIPS repository, we restrict the
-following: Overview Information - review and text (901.01.03,
-901.01.03.01, 901.01.03.02); Personal Communication - via homepage
-(web) or electronic mail (901.01.04, 901.01.04.01, 901.01.04.02), and
-Closed Information - institution or private (901.01.05, 901.01.05.01,
-901.01.05.02). In addition to the MIPS evidence codes listed above, we have
-dis-allowed proteins which are indexed exclusively by the following
-codes:
+\caption{This table details the GO evidence codes as well as the MIPs evidence codes. 
+Presently, only the MIPs data repository has annotated genes/proteins via high 
+through-put experimental data; these are the evidence codes prefixed with by 902.}
+\end{table}
 
-"902.01.01.02.01.01.02" (co-immunoprecipitation, epitope tag)
-"902.01.01.04.01.03" (matrix-assisted laser desorption/ionization time-of-light
-mass spectrometry (MALDI TOF MS))
-"902.01.09.02" (high throughput experiment)
+For the GO data repository, only four evidence codes were used to reject protein membership. 
+Any protein having only these four evidence codes to support its annotation is considered 
+suspect, and we have chosen to remove them from the data. The MIPs evidence codes that are 
+selected is divided into two groups: 1. those that are prefixed by 901 and 2. those that are
+prefixed by 902. Similar to the chosen GO evidence codes, the MIPs evidence codes beginning 
+with 901 refer to non-experimental methods of inference. Indeed, some of the MIPs codes 
+are similar enough to the GO codes that the curators of MIPs have referenced some GO evidence
+codes when pertinent. The Mips evidence codes beginning with 902, however, refer to 
+experimental methods of inference and annotation. Because we have chosen to reject any estimates
+based on high through-put AP-MS experiments, we have selected any MIPs evidence code that
+corresponds to any high through-put technology. 
+
+Unfortunately, the use of evidence codes is not enough. Even with the selected evidence
+codes listed above, a large number of high through-put putative protein complexes are 
+still retained. In the addition to the evidence codes, we also make use of the MIPs hierarchy
+class system in which proteins complexes are grouped. The MIPs data repository groups 
+protein complexes by their functionality, and because the putative, high through put 
+protein complexes have yet to be validated nor been studied, they are grouped into one
+separate category. This category has a unique prefix code (550), and so we can simply reject
+any protein complex that has a prefix code 550. 
+
+As we have mentioned earlier, the functions of ScISI do have limitations, and so 
+unwanted protein clusters will inevitably make their way into the data-sets we select. 
+To this end, a non-trivial part of the construction process involves manual curation 
+of the protein complexes obtained from the sources. 
+
 
 %%FIXME: for some of these evidence codes we remove the predicted
 %%complexes because they are based on data that we will later perform
 %%our own modeling. I am not sure whether they should be included in
 %%the ScISIverified or not?
 
-When the function is given these three evidence codes, all high
-through-put protein complexes are eliminated (Gavin, Ho, Krogan) with
-the exception of one Krogan protein complex. This unique Krogan
-protein complex (originally with 14 constituent proteins) has 2
-proteins which are indexed by some other evidence codes in addition to
-those listed above, and therefore, the function selected these two
-proteins and the protein complex for which they belong in its parse
-mechanism. Because we have built \Rpackage{ScISI} in a way so that
-users can allow or dis-allow proteins based on evidence codes, this
-small anomoly cannot be circumvented by the function itself. We shall
-describe in a later section on QC for minor anomolies.
+%%I don't think so, it has yet to be validated...it is the investigator's
+%%estimate
 
 
-%%FIXME: the numbers in here should be part of an \Sexpr and be
-%%computed from the actual data - otherwise why are we using a
-%%vignette? 
-We made use of the version in the Bioconductor package \Rpackage{GO}
-version 1.10.0, which is version number XXX. We found 208 protein
-complexes. The MIPS repository (as of 17 December 2005) yielded 141
-protein complexes. The GO protein complexes include 1,213 unique
-proteins while the MIPS protein complexes contains 651 unique
-proteins. 
-
-As mentioned before some of the MIPS protein complexes have been
-uniquely identified by high through-put experimentation such as
-affinity purification - mass spectroscopy ; we have, however,
-deliberately chosen not to extract these protein
-complexes. %%FIXME: then we should do the same for GO? I don't know how, do you Denise?
-The protein complexes were estimated by clustering algorithms
-determined by the individual investigator of the high through-put
-experiments, and therefore, protein complexes identified via high
-through-put AP-MS technologies lack uniformity and consistency from
-one experiment to the next. We have chosen one standard algorithm to
-parse high through-put data and estimate protein complex composition
-from the raw data by this algorithm.
 %%FIXME: I would like to say that they tend to be too big - in that
 %%they include proteins that we would not use - maybe we need to give
 %%some specific examples - RNA Pol I, II and III? By being too big we
 %%then have some problems down the road, as estimates from apComplex
 %%will appear to be subcomplexes and get removed.
 
-\subsection{APMS Experimental Data}
+\subsubsection{AP-MS Experimental Data}
 
-We additionally obtained the reported results from three high
-throughput APMS experiments \citep{Ho, Gavin, Krogan}. These data were
-assembled and processed using the technology reported in
+Although we have excluded the high through-put AP-MS protein complex
+estimates from the MIPs repository, we do not reject them universally.
+We obtained the reported bait to prey results from three high through-put 
+AP-MS experiments \citep{Ho, Gavin, Krogan}. These data-sets were then 
+assembled and processed using the technologies reported in 
 \cite{Scholtens, ScholtensVidalGent}, in particular using the software
 packages \Rpackage{apComplex} available from the Bioconductor project.
+
+
 
 %%FIXME: Denise, can you add a descriptive paragraph or two.
 
 The output of the analysis are putative protein complexes. They come
 in several different varieties, and we make use exclusively of the
-multi-bait multi-hit (MBMH) complex estimates. Again, these form a
-hypergraph and we can obtain separate incidence matrix representations
-for the three experiments.
+multi-bait multi-hit (MBMH) complex estimates. 
 
-\subsection{Analysis and Merging of the Data-Sets}
+In using \Rpackage{apComplex} to process the raw, unfiltered AP-MS
+experimental data, we streamline the estimation process so that 
+high through-put annotated protein complexes depends on a single, 
+unique methodology. This uniformity is beneficial in many ways. 
+It allows for analysis on the putative protein complexes without 
+the use of other statistical mechanisms such as boot-strapping 
+adjustments. The technology of \Rpackage{apComplex} allows the 
+end user to adjust the levels of sensativity and of specificity, so
+that different users can generate different estimates based on 
+various error models. Lastly, the statistical model by which 
+\Rpackage{apComplex} processes the data gives a sound
+and robust mechanism to manage experimental errors (both false
+positive and false negative observations). 
+
+The putative estimates resulting from the \Rpackage{apComplex} 
+processing has shown to be more consistent with known biology. 
+\cite{Scholtens, ScholtensVidalGent} have shown that the MBME 
+putative protein complexes have significant overlap when compared
+with well known protein complexes and have predicted the exact
+protein composition of Arp 2/3 and of Cleavage Factor IA complexes. 
+In addition, the size distribution of these MBME complexes 
+corresponds more with the distribution of the size of known 
+complexes indicating that these estimates have a better mechanism
+to filter out false postive protein complex affiliations. 
+
+\subsubsection{Analysis and Merging of the Data-Sets}
 
 Table~\ref{ta:Repetitions} reports the number of protein complexes 
 that were redundant by comparing the repositories
@@ -608,8 +861,9 @@ $I_c$. %%FIXME: is it worth pointing out/proving that order does not matter?
 
 %What measures will we use? What graphics/summary statistics can be produced?
 
+\subsection{Binary Interaction Interactome}
 
-\section{The estimate}
+\section{The estimates}
 
 %%FIXME: these numbers should be computed from the package, not given
 The result of combining data from multiple database sources is an aggregate 
@@ -871,7 +1125,7 @@ desired and other measures made on the simulated graphs.
 
 Once we address real experimental data, the situation changes and
 becomes more problematic. Some alternative approaches will be needed. 
-In addition we propose three different summary statistics and
+In addition we propose four different summary statistics and
 investigate their behavior using the ScISI and the available Y2H data.
 
 \begin{enumerate}

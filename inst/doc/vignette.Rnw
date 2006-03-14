@@ -901,7 +901,7 @@ information for each protein complex: its name relative to the incidence matrix;
 and its description.
 
 <<dataFrameOut, eval=TRUE>>=
-head(mipsDF)
+#head(mipsDF)
 @ 
 
 Once we have created either the GO dataframe or the MIPS dataframe, we can proceed to call an 
