@@ -46,8 +46,8 @@
 Understanding protein interactions is relevant to our understanding of
 complex biological processes and to deciphering the different roles
 played by genes and proteins. In particular developing a set of maps
-that associate proteins with multiprotien complexes will be an
-essential step in this process. A number of high throughput
+that associate proteins with multi-protien complexes will be an
+essential step to this process. A number of high through-put
 experiments have been carried out with the goal of helping to
 elucidate these nature and number of their occurances \citep{Gavin,
   Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge remains
@@ -232,7 +232,7 @@ concepts. It is certainly the case that for our working definition of
 a protein complex the members of that complex will have some binary
 interactions with other members. But not all members have direct
 physical interactions with other members, so we would not use a
-so-called \textit{matrix} model \cite{} to
+so-called \textit{matrix} model to
 represent those interactions. These two examples highlight the subtle
 differences between two distinct interactomes and underscores the
 necessity to keeping distinct interactomes separate. We will refer to
@@ -957,6 +957,13 @@ plot(arp23G, "dot", edgeAttrs = eAt, nodeAttrs = nAt)
 dev.off()
 @ 
 
+<<getGraph3, echo = FALSE, results=hide>>=
+data(eAt2)
+pdf("arp23InfG.pdf")
+plot(arp23G, "dot", edgeAttrs = eAt2, nodeAttrs = nAt)
+dev.off()
+@ 
+
 \begin{figure} 
 \centering
 \subfigure[Crystal Graph of Arp 2/3 - the edges represent true protein-protein
@@ -967,9 +974,15 @@ interaction derived from crystallography.]{
 from the bait proteins towards the prey proteins.]{
 \label{arp23Y2HGraph}
 \includegraphics[width =50mm]{arp23Y2HG2.pdf}}
-\caption{The difference between the true atomic structure determined by crystallography
-and by Y2H experimentation. The missing edges from the Y2H graph is indeterminate since
-missing edges can either be due to un-testing or due to false negative observations.}
+\subfigure[Inferred Protein-Protein Graph of Arp 2/3 - the red edges represent 
+computationally inferred interactions.]{
+\label{arp23InfGraph}
+\includegraphics[width =50mm]{arp23InfG.pdf}}
+\caption{These figures show the  difference between the true atomic structure 
+determined by crystallography and by Y2H experimentation as well as crystallography
+and computationally inferred interactions. The missing edges from the Y2H graph is 
+indeterminate since missing edges can either be due to un-testing or due to false 
+negative observations.}
 \end{figure}
 
 
