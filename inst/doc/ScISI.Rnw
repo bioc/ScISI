@@ -11,7 +11,7 @@
 \usepackage{natbib}
 \usepackage{subfigure}
 \usepackage{graphicx}
-\usepackage{amsmath,pstricks,fullpage}
+\usepackage{amsmath,pstricks,fullpage,amsthm,amssymb}
 
 
 
@@ -34,6 +34,8 @@
 
 \newcommand{\classdef}[1]{%{\em #1}
 }
+\newtheorem{Lem}{Lemma}
+
 
 \begin{document}
 \title{Creating an Silico Interactome}
@@ -230,7 +232,7 @@ concepts. It is certainly the case that for our working definition of
 a protein complex the members of that complex will have some binary
 interactions with other members. But not all members have direct
 physical interactions with other members, so we would not use a
-so-called \textit{matrix} model \cite{FIXME:matrixmodelcitation} to
+so-called \textit{matrix} model \cite{} to
 represent those interactions. These two examples highlight the subtle
 differences between two distinct interactomes and underscores the
 necessity to keeping distinct interactomes separate. We will refer to
@@ -350,24 +352,27 @@ of appropriate software tools and data representations.
 library("ScISI")
 library("Rgraphviz")
 data(arp23G)
+data(nAt)
 pdf("arp23Graph.pdf")
-plot(arp23G, "dot")
+plot(arp23G, "dot", nodeAttrs = nAt)
 dev.off()
 @ 
 
 \begin{figure} 
 \centering
-\subfigure[Atomic rendering of ARP 2/3 labelled by common names]{
+\subfigure[Atomic rendering of ARP 2/3 labelled by common names.]{
 \label{arp23Physical}
 \includegraphics[width = 75mm]{../extdata/Arp2_3_complex.png}}
-\subfigure[Graphical rendering of ARP 2/3 labelled by systematic names]{
+\subfigure[Graphical rendering of ARP 2/3 identified by crystallography 
+labelled by the systematic names.]{
 \label{arp23Graph}
 \includegraphics[width =75mm]{arp23Graph.pdf}}
 \caption{Some scientists might find the physical rendering of ARP 2/3 to be
 of more use while others might prefer a graphical representation. We note that
 the issue of identifiability presents itself as creator of the atomic rendering
 has chosen one version of the common names while the creator of the graph has
-chosen the systematic gene names.}
+chosen the systematic gene names. The coloring scheme provided allows for one
+to one matching of proteins from one rendering to the other.}
 \end{figure}
 
 \subsubsection{Protein Sub-Complexes}
@@ -482,14 +487,14 @@ Some investigators may want to restrict their attention to well-known
 and documented complexes while others will be interested in exploring
 likely complex co-memberships. For this reason we construct two
 estimates of $I_C$ in yeast. One is based only on complexes reported
-in GO and MIPS \citep{GO, GOA, MIPS}, while the other extends this first
-estimate to include data from high throughput co-precipitation
+in GO and MIPS \citep{GO, GOA}, while the other extends this first
+estimate to include data from high through-put co-precipitation
 experiments. 
 
 We remark that the complexes documented within GO and MIP are
 based on many different technologies such as small scale protein
 complex verification experiments. Many of these protein complexes have
-been exhaustively verified.
+been exhaustively verified. 
 
 The choice of input data sources and the manner in which they are
 processed is subjective and different investigators are likely to make
@@ -524,9 +529,9 @@ library("ScISI")
 @ 
 
 In searching for and parsing through information from the two online 
-data repositories, GO and MIPS, we used somewhat indirect methodologies. 
-For the GO data source, we made use of the Bioconductor package 
-\Rpackage{GO}, a metadata package containing the pertinent information. 
+data repositories, GO and MIPS, we used somewhat indirect methods. 
+For the GO data source, we made use of the Bioconductor metadata package 
+\Rpackage{GO} which contains the pertinent information. 
 There does not exist a R metadata package for the MIPs data source, so
 we downloaded three files from its repository. The file \textit{complexcat.scheme}
 details the hierarchy classification structure of the MIPs protein 
@@ -535,7 +540,7 @@ protein annotations and evidence codes for each protein complex. We note that th
 latter file is suffixed with an eight digit number which indicates the 
 day/month/year which this file is updated (there is a bi-annual update 
 for this file). The last file is the \textit{evidencecat.scheme} which 
-contains the evidence codes definitions. 
+contains the evidence code definitions. 
 
 For each data repository, the textual terms used to describe its
 contents are parsed for specific key words. While Making use of regular
@@ -558,9 +563,11 @@ These narrow the pool of return values yet include terms such as
 Users can modify the search criteria to add new terms or to remove any
 of those default values listed above. Terms selected correspond to
 protein complexes and these are then collected and the corresponding
-incidence matrix is computed. The rows are indexed by the standard
-gene names and the columns are indexed by the protein complex identification 
-codes (unique to each different repository).
+incidence matrix is computed. We note that both the GO and the MIPs 
+repositories annotate proteins by their systematic gene names, and so
+the incidence matrix computed has the rows are indexed by the systematic
+gene names and the columns by the protein complex identification 
+codes (unique to each repository).
 
 We remark that even with the limited return values, the restrictions imposed 
 by the regular expression searches will still contain elements which we do not 
@@ -584,7 +591,7 @@ interactome, we have elected not to retain those complexes whose constituent
 members are annotatated in this manner.
 
 There are several reasons why we dis-allow the inclusion of these protein 
-complexes. One is the lack of uniformity by which these complexes we estimated;
+complexes. One is the lack of uniformity by which these complexes were estimated;
 this lack of uniformity creates problems in the analysis and validation to 
 the interactome. Another reason is is the estimation algorithms themselves; previous
 analysis \citep{Scholtens, ScholtensVidalGent} of the resulting protein complexes 
@@ -725,7 +732,7 @@ packages \Rpackage{apComplex} available from the Bioconductor project.
 
 The output of the analysis are putative protein complexes. They come
 in several different varieties, and we make use exclusively of the
-multi-bait multi-hit (MBMH) complex estimates. 
+multi-bait multi-hit (MBMH) complex estimates.
 
 In using \Rpackage{apComplex} to process the raw, unfiltered AP-MS
 experimental data, we streamline the estimation process so that 
@@ -751,69 +758,125 @@ from the raw experimental data of \citep{Gavin}.
 In addition, the size distribution of these MBME complexes 
 corresponds more with the distribution of the size of known 
 complexes indicating that these estimates have a better mechanism
-to filter out false postive protein complex affiliations. 
+to filter out false postive protein complex affiliations.
 
-\subsubsection{Analysis and Merging of the Data-Sets}
+The raw experimental data from \citep{Ho, Gavin, Krogan} have 
+already been processed, and each MBMH estimates are stored as 
+an bi-partite graph incidence matrix within the R package 
+\Rpackage{apComplex}. \Rpackage{apComplex} also uses systematic
+gene names to annotate proteins for complex membership, so that
+the incidence matrices stored within the package also have the
+rows indexed by these systematic gene names. Because 
+\Rpackage{apComplex} generates the putative protein complexes
+each time data is processed, it does not generate any meaningful
+names for each complex. Rather, \Rpackage{ScISI} creates an 
+ad hoc name for each protein complex based on the experiment by
+which the complex is derived.
 
-Table~\ref{ta:Repetitions} reports the number of protein complexes 
-that were redundant by comparing the repositories
-pairwise including self comparisons. Table~\ref{ta:Repetitions} shows 
-that the only data-set with self-redundancy is derived from the 
-MIPS repository; and upon investigation, MIPS has categorized protein
-complexes by known functionality, and three protein complexes were 
-placed in two different categories each. Table~\ref{ta:Repetitions} 
-directly shows that the no two repositories has extremely large 
-overlap.
+Having obtained the protein complex estimates from 
+\Rpackage{apComplex}, we proceed to the actual construction
+of the protein complex interactome.
+
+
+
+\subsubsection{Merging of the Data-Sets}
+
+%Table~\ref{ta:Repetitions} reports the number of protein complexes 
+%that were redundant by comparing the repositories
+%pairwise including self comparisons. Table~\ref{ta:Repetitions} shows 
+%that the only data-set with self-redundancy is derived from the 
+%MIPS repository; and upon investigation, MIPS has categorized protein
+%complexes by known functionality, and three protein complexes were 
+%placed in two different categories each. Table~\ref{ta:Repetitions} 
+%directly shows that the no two repositories has extremely large 
+%overlap.
 
 <<testStuff, echo=FALSE, results=hide>>=
-library("ScISI")
-data("redundantM")
-data("subCompM")
+
+#data("redundantM")
+#data("subCompM")
 @ 
 
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex >>=
 
 
-xtable(redundantM, display = c("s","d","d","d","d","d"), label =
-"ta:Repetitions", caption="Number of repetitive Protein Complexes") 
+#xtable(redundantM, display = c("s","d","d","d","d","d"), label =
+#"ta:Repetitions", caption="Number of repetitive Protein Complexes") 
 
 @ 
 
-Not limited to redundant protein complexes, we also process each
-data-set independently to find and to remove all protein
-sub-complexes. The results are reported in Table~\ref{ta:subComplexes}
-where the row names indicate the location of the sub-complex and the
-column names indicate the location of the aggregate protein complex.
-Reading across row two of Table~\ref{ta:subComplexes} we see that GO
-contains protein complexes that were protein sub-complexes in each of
-the other data repositories including
-itself. Table~\ref{ta:subComplexes} is much less sparse relative to
-Table~\ref{ta:Repetitions}, and it is this relative comparison that
-makes all the estimates more credible since each data repository is
-based on unique experiments coupled with unique estimation algorithms.
+%Not limited to redundant protein complexes, we also process each
+%data-set independently to find and to remove all protein
+%sub-complexes. The results are reported in Table~\ref{ta:subComplexes}
+%where the row names indicate the location of the sub-complex and the
+%column names indicate the location of the aggregate protein complex.
+%Reading across row two of Table~\ref{ta:subComplexes} we see that GO
+%contains protein complexes that were protein sub-complexes in each of
+%the other data repositories including
+%itself. Table~\ref{ta:subComplexes} is much less sparse relative to
+%Table~\ref{ta:Repetitions}, and it is this relative comparison that
+%makes all the estimates more credible since each data repository is
+%based on unique experiments coupled with unique estimation algorithms.
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex>>=
 
-xtable(subCompM, display = c("s","d","d","d","d","d"), label =
-"ta:subComplexes", caption = "Number of Protein Sub-Complexes") 
+#xtable(subCompM, display = c("s","d","d","d","d","d"), label =
+#"ta:subComplexes", caption = "Number of Protein Sub-Complexes") 
 @ 
 
-Merging the multiple sub-interactomes into one is done 
-iteratively by combining the estimates pairwise.
+After we have obtained the protein complex membership data-sets and 
+transformed each of them into the incidence matrix representation, we 
+proceed with constructing an aggregate protein complex interactome
+by combining the different incidence matrices into one single 
+non-redundant bi-partite graph incidence matrix. The process of merging
+the smaller incidence matrices is non-trivial, for we need to 
+analyze and compare each individual protein complex with all other
+protein complexes. Before we proceed, we prove a small lemma that will
+help simplify the merging process.
 
-Let $I_{GO}$ and $I_{MIPS}$ be two estimates that we wish to merge. We
-define the merging of two interactomes as not only combining the
+
+\begin{Lem}
+Let $C_1,\ldots,C_n$ be non-trivial finite sets which need not be
+disjoint. Comparing all the sets $(C_1,\ldots,C_n)$ and removing all 
+sets $C_{l_m}$ properly contained in any $C_i$ $\forall i \in [1,n]$
+is an associative process, so it can be reduced to pairwise comparisons 
+in any order.
+\end{Lem}
+
+\begin{proof}
+  The proof of the lemma is a clear application to the fact that set 
+  inclusion is a transitive property. For instance, suppose we have
+  three sets $\{C_i, C_j, C_k\}$. We may assume that $C_j \subseteqq C_i$ 
+  for otherwise, we do not delete $C_j$. If we first compare $C_j$ 
+  with $C_i$, we would immediately delete $C_j$ when we see the proper
+  inclusion. Now we can also suppose that $C_k \subseteqq C_j$. Then 
+  we must have $C_k \subseteqq C_i$, and so it still be removed. 
+  We have shown comparisons to be independent of ordering and therefore,
+  is an associative process.
+\end{proof}
+
+With the an application to the lemma, we can merge each bi-partite
+graph incidence matrix iteratively by combining these matrices
+pairwise. As an example, we detail how the proein complexes of GO,
+$I_{GO}$, and of MIPS, $I_{MIPS}$, are merged.
+
+We define the merging of two interactomes as not only combining the
 protein complexes from $I_{GO}$ to $I_{MIPS}$, but also removing
-protein complexes which are common to both interactomes. In addition
-to removing redundant protein complexes, we have removed any protein
-complex of $I_{GO}$ that is a sub-complex of a complex in $I_{MIPS}$
-and vice versa.
-
-Once the estimates $I_{GO}$ and $I_{MIPS}$ are merged into $I_{2}$,
-say, we can repeat the process described above by merging $I_{2}$ with
-another estimate. This process is repeated until all estimates are
-merged. We will refer to the resultant estimated interactome as
+protein complexes which are common to both interactomes. With such 
+a merging process, each protein complex needs to be compared with
+all other complexes to avoid redundancy. We note that we have not
+used the lemma to its full strength, i.e. we can also remove a
+protein complex of $I_{GO}$ which is sub-complex to a complex of 
+$I_{MIPS}$ (or vice versa), and the process would still be 
+independent of ordering. A different interactome can be estimated
+in such a merging process, but we have not elected to create such
+an estimate.
+ 
+Once the matrices $I_{GO}$ and $I_{MIPS}$ are merged into $I_{GM}$,
+say, we can repeat the process described above by merging $I_{GM}$ with
+another incidence matrix. This process is repeated until all estimates are
+merged. We will refer to the resulting aggregate interactome as
 $I_c$. %%FIXME: is it worth pointing out/proving that order does not matter?
 
 %%The stuff written below does not seem to fit in the methods section,
@@ -864,23 +927,143 @@ $I_c$. %%FIXME: is it worth pointing out/proving that order does not matter?
 
 \subsection{Binary Interaction Interactome}
 
+Now we consider the problem of creating the protein binary interactome, $I_b$.
+Again, our basic strategy is to assemble the available experimental results
+with the use of relevant software tools. Unlike the construction of $I_c$ where
+the data is collected from five disparate sources, we restrict ourselves to 
+the single data repository \texttt{IntAct}. There is a high level
+of redundancy across different databases with respect to direct protein-protein
+interaction data, so collecting data from the various repositories does not 
+offer substantially more interaction data that can be harvested exclusively from
+the \texttt{IntAct} database. 
+
+%[FIXME - is the following what needs to be said?]
+
+The protein binary interaction data is almost exclusively based on yeast 2-hybrid
+experimental data, and as a result, we have imposed extra structure to the 
+protein binary interactome by requiring it to contain the bait to prey relationship
+derived from the Y2H experiments. Imposition of this condition translates 
+the undirected protein-protein interaction graph to a directed bait to
+prey interaction graph. This relationship is still binary though non-symmetric, 
+and this will be the model
+by which we will base $I_b$. This additional structure produces an interactome that
+more accurately reflects the current state of biological knowledge, since the 
+majority of protein-protein interaction has yet to be tested in a symmetric manner.
+
+<<getGraph2, echo=FALSE, results = hide>>=
+data(eAt)
+pdf("arp23Y2HG2.pdf")
+plot(arp23G, "dot", edgeAttrs = eAt, nodeAttrs = nAt)
+dev.off()
+@ 
+
+\begin{figure} 
+\centering
+\subfigure[Crystal Graph of Arp 2/3 - the edges represent true protein-protein
+interaction derived from crystallography.]{
+\label{arp23Crystal}
+\includegraphics[width = 50mm]{arp23Graph.pdf}}
+\subfigure[Y2H Graph of Arp 2/3 - the directed edges represent affiliation 
+from the bait proteins towards the prey proteins.]{
+\label{arp23Y2HGraph}
+\includegraphics[width =50mm]{arp23Y2HG2.pdf}}
+\caption{The difference between the true atomic structure determined by crystallography
+and by Y2H experimentation. The missing edges from the Y2H graph is indeterminate since
+missing edges can either be due to un-testing or due to false negative observations.}
+\end{figure}
+
+
+A fundamental difference needs to be made between the lack of edges within this 
+graph. An edge is missing between two proteins $p_1$ and $p_2$ in $I_b$ if either
+$p_1$ never interacts with $p_2$ (a true negative interaction) or $p_1$ has never 
+been tested with resect to $p_2$ (an untested interaction). Problems arise in the 
+structure $I_b$ because neither the bait population nor the prey population is ever 
+fully documented. In this way, the distinction between true negative edges and
+untested edges becomes indeterminate. We detail some methods to overcome this
+problem in the following sections.
+
+Our choice to keep the bait to prey association is also subjective, and we note 
+that different investigators are likely to make different choices as the nature 
+of this interaction graph. 
+
+\subsubsection{Obtaining Binary Interaction Information from the IntAct Repository}
+
+In beginning the construction of the protein binary interactome, we again parsed 
+for specific key terms. Looking in the molecular interaction (MI) category of the
+Proteomics Standards Initiative (PSI) (cite PSI), we searched for the three
+related character strings:
+
+\begin{enumerate}
+\item y2h;
+\item yeast two hybrid;
+\item 2-hybrid.
+\end{enumerate}
+
+Of the return values from this textual search, we made use of four MI identification 
+codes:
+
+\begin{table}[hb]
+\centering
+\label{MI Codes}
+\begin{tabular}{|l|p{0.65\textwidth}|}
+\hline
+MI Code&Description\\
+\hline
+MI:0018&Two hybrid;\\
+MI:0397&Two hybrid array;\\
+MI:0398&Two hybrid pooling approach;\\
+MI:0399&Two hybrid fragment pooling approach.\\
+\hline
+\end{tabular}
+\caption{The MI codes corresponds to the type of experimentation conducted.}
+
+\end{table}
+
+We can use these MI codes to parse one sub-directory of the IntAct repository 
+accounting for the various wet-lab experiment information. We found fourty-one
+Intact Acension Codes (AC) whose interaction dectection slots
+contained one of the four MI codes. The fourty-one IntAct AC's represented the
+various wet-lab experiments conducted using the yeast 2-hybrid techonology or 
+some derivation thereof. 
+
+For each 2-hybrid experiment, we first generated a list of the proteins 
+hybridized with a binding domain (these constitute the bait proteins), and 
+for each of these bait proteins, we generated a list of proteins hybridized
+with an activation domain (the prey proteins) found to experimentally 
+interact with the respective bait protein. In essence, we have created 
+one representation of the bait to prey binary interaction graph.
+
+\subsubsection{Merging the Yeast 2-Hybrid Experimental Data}
+
+Before we merge the various bait to prey association lists, we need to restrict
+the experiments we allow into the protein binary interactome. In combining the 
+various experimental data, we would like only to merge those data-sets which have
+similar experimental structures so that statistical model on which we have 
+based the interactome is relatively independent for the sampling of bait proteins
+as well as identically distributed. With these structures in mind, we have set a 
+lower bound for the number of non-trivial interacting baits at the threshold of 
+twenty proteins. In addition, we have imposed the condition that the set of 
+potential prey population must be genome wide. 
+
+While it is problematic to assure that the latter of these two conidtions is 
+true, the addtion of this particular structure allows for a more meaningful
+dialog of $I_b$. This is so because the vertex set of $I_b$ will be genome 
+wide, and testing bait proteins implies generating the induced directed 
+sub-graph from the sampled baits against the genome. This genome-prey condition
+also reduces the un-tested edges to prey only proteins (i.e. those
+proteins never sampled and selected as baits) for otherwise, un-tested edges 
+could exist between bait proteins and non-prey proteins. 
+
+With these two conditions, we have restricted the number of viable Y2H 
+experiments to a total of eight. From these eight experiments, we can create
+the adjacency matrix representation of the binary protein interaction 
+graph, $I_b$. 
+
+
 \section{The estimates}
 
 %%FIXME: these numbers should be computed from the package, not given
-The result of combining data from multiple database sources is an aggregate 
-protein complex membership \textit{in silico interactome}. The elements of 
-this interactome consists of $1755$ proteins and $743$ protein complexes. The 
-number of proteins is consistent with biological estimates (%%~40% of genome?)
-of the number of expressed genes for the a particular genome;
-the number of unique protein complexes gives us enough complexity to 
-conduct \textit{in silico} experiments in order to emulate true wet-lab
-experiments.
 
-
-Histogram for the cardinalities or protein complexes?
-Histogram for the order of each particular protein's complex membership?
-
-What else should we put here???
    
 \section{Validation}
 
