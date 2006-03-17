@@ -50,6 +50,9 @@ sumStats <- function(imList, pathToSave = NULL){
             
         }
     }
+
+    dimnames(redundantM) <- list(names(imList), names(imList))
+    dimnames(subCompM) <- list(names(imList), names(imList))
     
     if(!is.null(pathToSave)){
         save(redundantM, file = paste(pathToSave,"redundantM.rda", sep=""), compress=TRUE)

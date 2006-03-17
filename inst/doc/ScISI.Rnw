@@ -1077,6 +1077,70 @@ graph, $I_b$.
 
 %%FIXME: these numbers should be computed from the package, not given
 
+We have now created two fundamentally different \textit{in silico}
+interactomes, $I_c$ and $I_b$ by using the resources obtained from
+the R package \Rpackage{ScISI}. From these two estimates, we can 
+generate a list of general summary statistics that offer a more 
+qualitative view of these interactomes.
+
+\subsection{Summary Statistics for the Protein Complex Interactome}
+
+<<ScISIdata, echo = FALSE, results = hide>>=
+data(ScISI)
+@ 
+
+A good starting point in dissecting $I_c$ looks at how many genes are 
+expressed from S. cerevisiae genome. In $I_c$, we can see that there is
+\Sexpr{nrow(ScISI)} uniquely expressed genes which translates to 
+\Sexpr{nrow(ScISI)} uniquely functional proteins participating within 
+some non-trivial protein complex. In addition to the expressed genes,
+we see that there is \Sexpr{ncol(ScISI)} distinct protein complexes
+within the cell. 
+
+\begin{figure}[p]
+\centering
+<<distPlot, fig=TRUE, echo=FALSE>>=
+par(mfrow = c(1,2))
+cS <- table(colSums(ScISI))
+size <- as.numeric(names(cS))
+repet <- as.vector(cS)
+freq = rep(size, repet)
+hist(freq, xlab = "ScISI Protein Complex Cardinality", ylab = "Frequency",
+     main = "Complex Cardinality")
+
+rS <- table(rowSums(ScISI))
+size <- as.numeric(names(rS))
+repet <- as.vector(rS)
+freq = rep(size, repet)
+hist(freq, xlab = "Complex Membership per Protein", ylab = "Frequency",
+     main = "Complex Membership")
+par(mfrow = c(1,1))
+@
+\label{distHist}
+\caption{Distribution of Complex Cardinality and Distribution of Complex 
+Membership per Protein}
+\end{figure}
+
+Not limited to the number of expressed genes and protein complexes, we can 
+investigate both the distribution of the size of the protein complexes as 
+well as the distribution of the number of complexes to which each protein
+belongs. Figure~\ref{distHist} shows gives us these distributions. We can 
+see from each histogram that the vast majority of proteins participate
+in relatively few protein complexes and also that an overwhelming number
+of protein complexes contain relatively few proteins. 
+
+<<testStuff, echo=FALSE, results=hide>>=
+data("redundantM")
+data("subCompM")
+@ 
+
+<<redundantSubC, eval = TRUE, echo=FALSE, results=tex >>=
+xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", 
+caption="Number of repetitive Protein Complexes")
+xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", 
+caption = "Number of Protein Sub-Complexes")
+@ 
+
    
 \section{Validation}
 

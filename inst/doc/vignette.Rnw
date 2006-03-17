@@ -836,7 +836,7 @@ relative comparison that makes all the estimates more credible since each
 data repository is based on unique experiments coupled with unique 
 estimation algorithms. 
 
-<<redundant, eval = TRUE, echo=FALSE, results=tex>>=
+<<subComp, eval = TRUE, echo=FALSE, results=tex>>=
 
 xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", 
 caption = "Number of Protein Sub-Complexes")
