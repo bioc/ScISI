@@ -98,9 +98,9 @@ current state of biological knowledge. It can, however, be used in any
 of the five tasks listed above and the outputs of the computational
 experiments will often provide predictions of real interactions that
 could be tested. Further, one type of interaction can be used either
-to predict or to model other types of interactions, and provide
+to predict or to model other types of interactions and to provide
 information about the likelihood of interactions; the verification of
-interactions remains the domain of experimental biology.
+interactions, however, remains the domain of experimental biology.
 
 Protein interactions are dynamic by nature so that different
 interactions occur at different times and under different
@@ -172,18 +172,18 @@ use for this second type of relationship is that of protein complex
 membership. In this setting all members of a complex are related to
 each other, but they need not directly interact and the relationship
 is not binary. A reasonable model for such data is as either a
-hypergraph \cite{Berge} or, equivalently, the bipartite graph
+hyper-graph \cite{Berge} or, equivalently, the bi-partite graph
 representation. Proteins are grouped into sets according to whether
-they are in a complex and these sets constitute the hyperedges of the
-hypergraph. There is no need for the hyperedges to be disjoint and
-proteins can be in many or few hyperedges, depending on whether the
+they are in a complex and these sets constitute the hyper-edges of the
+hyper-graph. There is no need for the hyper-edges to be disjoint and
+proteins can be in many or few hyper-edges, depending on whether the
 protein is in many or few complexes.
 
 We begin by distinguishing between many different types of
-interactomes with a few general comments, we will make the
+interactomes with a few general comments; we will make the
 terms and ideas more explicit in later sections of this report. There
 are interactomes that model direct binary interactions and hence are
-related to experiments using the yeast two hybrid (Y2H) system
+related to experiments using the yeast 2-hybrid (Y2H) system
 \citep{Y2H, Ito, Uetz}. A second type of interactome is one that
 models protein complex membership. In this model, two proteins are
 said to interact if they are constituent members of some protein complex 
@@ -304,10 +304,7 @@ There is no need for all members of a complex to physically
 interact with one another, but all the proteins do need to
 combine to form a connected multi-protein structure. In essence, a protein
 complex is a biological collection of affiliated proteins assembled via 
-binary interactions. We remark that some proteins
-will be involved in many complexes while others will be involved in
-relatively few. Protein complexes range in size from two proteins to
-more than fifty.
+binary interactions. 
 
 Having determined a working definition, we describe the mathematical 
 representations chosen for binary interactions as well as for protein 
@@ -330,20 +327,49 @@ relationships we will use a graph, where the edges indicate the
 presence of a binary interaction and for complex co-membership data we
 will use a hypergraph, where the hyperedges are the identities of the
 proteins that constitute the complex. There is a one-to-one
-relationship between hypergraphs and bipartite graphs and in some
-reports bipartite graphs are used.
+relationship between hypergraphs and bipartite graphs and we wil use these 
+terms inter-changeably in the report. Indeed it will be the case that
+bi-partite graphs are much easier to render pictorially, and so we 
+will defer to these graphs rather than the hyper-graphs when needed.
 
 There are a variety of different representations for both graphs and
 hypergraphs. We will mainly make use of the incidence matrix
 representation for $H$ and the adjacency matrix representation of $G$.
-For the protein complex hypergraph the
-incidence matrix representation, $M_B$, is a $\{0,1\}$-matrix where
-proteins index the rows and protein complexes index the columns. The
-$(i,j)$ entry for $M_B$ is one if protein $p_i$ is a constituent
-member of complex $c_j$; the entry is zero otherwise. When studying
+For the protein complex hyper-graph the
+incidence matrix representation, $M_H$, is a $\{0,1\}$-matrix where
+proteins index the rows and protein complexes index the columns. 
+
+\begin{equation}
+(M_H)_{ij} = 
+\begin{cases}
+1& \text{if protein i is a constituent member of complex j},\\
+0& \text{otherwise}.
+\end{cases}
+\end{equation}
+
+
+In the matrix $M_H$, a unital entry indicates that the protein $p_i$
+belongs to the protein complex $C_j$ while a zero entry implies 
+non-membership. We remark that this representation can be extended
+to include the multiplicities of protein membership by simply 
+letting the entries $(M_H)_{ij} \in \mathbb{N}$. The non-negative integer 
+would imply the multiplicity by which a protein appears in a given
+protein complex.  
+
+When studying
 binary interactions the representation will be of a graph, and then
 the adjacency matrix is typically square (or upper triangular) with
-the proteins indexing both the rows and the columns. In this matrix a
+the proteins indexing both the rows and the columns. 
+
+\begin{equation}
+(M_B)_{ij} = 
+\begin{cases}
+1& \text{if protein i directly interacts with protein j},\\
+0& \text{otherwise}.
+\end{cases}
+\end{equation}
+
+In this matrix a
 one in position $(i,j)$ indicates that protein $p_i$ interacts with
 protein $p_j$. This matrix is likely to be sparse and we will make use
 of appropriate software tools and data representations.
@@ -413,13 +439,18 @@ interactome.
 For a protein complex to be uniquely identifiable, it is necessary for each 
 of the constituent protein members to be uniquely identifiable. Unfortunately,
 this is not always true. Currently there are two main methods of identifying
-proteins: 1. either using the locus name (common/alias name) for the protein or 2.
-using the ORF name (systematic name) for the gene. We remark that in addition
+proteins: 1. either using the common name (equivalently the standard names)
+for the protein or 2. using the systematic name (alias name) for the gene. 
+We remark that in addition
 to these two methods, many data repositories have their own system of 
-nomenclature, though they all seem to be derived from one of the two main 
-methods, so we will contain our discussion between the translation of these 
+nomenclature, though they all seem to be derived from the two main 
+methods above, so we will contain our discussion between the translation of these 
 two main nomenclatures.
 
+Table~\ref{geneNames} give some examples of the problems that arise
+when mapping protein/gene names between the various nomenclatures.
+Downstream analysis can become inconsistent if there is no sound and
+uniform method to solve this mapping problem.  
 %%I am going to create a table that will give these examples in a more
 %%meaningful way.
 
@@ -458,8 +489,9 @@ correspondance can also be undefined.}
 Thus determining protein complex composition and protein binary interactions
 becomes problematic if different 
 investigators chose to use differing systems of nomenclature. For our purposes, 
-we have chosen to use the ORF names to identify proteins exclusively, and we discuss
-our methods for overcoming the identifiability problems in the following sections. 
+we have chosen to use the systematic gene names (SGN) to identify proteins exclusively, 
+and we discuss our methods for overcoming the identifiability problems in the 
+following sections. 
 
 \section {Methodology}
 
@@ -588,10 +620,15 @@ through-put AP-MS experiments and estimated by each respective experimental
 investigator. Presently, only the MIPS data repository annotates proteins by 
 these high through-put experiments. In constructing the protein complex 
 interactome, we have elected not to retain those complexes whose constituent 
-members are annotatated in this manner.
+members are annotatated in this manner for both the highly verified $I_c$ and
+the the extended $I_c$. 
+
+%%Fix - maybe we should give new names like I_C and I_c?
 
 There are several reasons why we dis-allow the inclusion of these protein 
 complexes. One is the lack of uniformity by which these complexes were estimated;
+it appears that the MIPS repository contains those estimates reported by the 
+investigators of each respective experiment themselves, and  
 this lack of uniformity creates problems in the analysis and validation to 
 the interactome. Another reason is is the estimation algorithms themselves; previous
 analysis \citep{Scholtens, ScholtensVidalGent} of the resulting protein complexes 
@@ -753,7 +790,8 @@ processing has shown to be more consistent with known biology.
 \citep{Scholtens, ScholtensVidalGent} have shown that the MBME 
 putative protein complexes have significant overlap when compared
 with well known protein complexes and have predicted the exact
-protein composition of Arp 2/3 and of Cleavage Factor IA complexes
+protein composition of \texttt{Arp 2/3} and of 
+\texttt{Cleavage Factor IA} complexes
 from the raw experimental data of \citep{Gavin}. 
 In addition, the size distribution of these MBME complexes 
 corresponds more with the distribution of the size of known 
@@ -859,22 +897,22 @@ in any order.
 With the an application to the lemma, we can merge each bi-partite
 graph incidence matrix iteratively by combining these matrices
 pairwise. As an example, we detail how the proein complexes of GO,
-$I_{GO}$, and of MIPS, $I_{MIPS}$, are merged.
+$I_{g}$, and of MIPS, $I_{m}$, are merged.
 
 We define the merging of two interactomes as not only combining the
-protein complexes from $I_{GO}$ to $I_{MIPS}$, but also removing
+protein complexes from $I_{g}$ to $I_{m}$, but also removing
 protein complexes which are common to both interactomes. With such 
 a merging process, each protein complex needs to be compared with
 all other complexes to avoid redundancy. We note that we have not
 used the lemma to its full strength, i.e. we can also remove a
-protein complex of $I_{GO}$ which is sub-complex to a complex of 
-$I_{MIPS}$ (or vice versa), and the process would still be 
+protein complex of $I_{g}$ which is sub-complex to a complex of 
+$I_{m}$ (or vice versa), and the process would still be 
 independent of ordering. A different interactome can be estimated
 in such a merging process, but we have not elected to create such
 an estimate.
  
-Once the matrices $I_{GO}$ and $I_{MIPS}$ are merged into $I_{GM}$,
-say, we can repeat the process described above by merging $I_{GM}$ with
+Once the matrices $I_g$ and $I_m$ are merged into $I_{gm}$,
+say, we can repeat the process described above by merging $I_{gm}$ with
 another incidence matrix. This process is repeated until all estimates are
 merged. We will refer to the resulting aggregate interactome as
 $I_c$. %%FIXME: is it worth pointing out/proving that order does not matter?
@@ -989,7 +1027,7 @@ negative observations.}
 A fundamental difference needs to be made between the lack of edges within this 
 graph. An edge is missing between two proteins $p_1$ and $p_2$ in $I_b$ if either
 $p_1$ never interacts with $p_2$ (a true negative interaction) or $p_1$ has never 
-been tested with resect to $p_2$ (an untested interaction). Problems arise in the 
+been tested with respect to $p_2$ (an untested interaction). Problems arise in the 
 structure $I_b$ because neither the bait population nor the prey population is ever 
 fully documented. In this way, the distinction between true negative edges and
 untested edges becomes indeterminate. We detail some methods to overcome this
@@ -1045,6 +1083,87 @@ for each of these bait proteins, we generated a list of proteins hybridized
 with an activation domain (the prey proteins) found to experimentally 
 interact with the respective bait protein. In essence, we have created 
 one representation of the bait to prey binary interaction graph.
+
+Once we have obtained the bait to prey data from IntAct, we need to modify 
+this list because all the proteins are denoted by its correspond IntAct 
+acension code. We want to translate these codes into the systematic gene
+names so that we have a uniform system of nomenclature. 
+
+\subsubsection{Translating protein names}
+
+While each of the data repositories hosting the complex membership data used 
+the systematic gene names to identify the constituent protein members, IntAct 
+uses its own unique nomenclature system to identify proteins involved in the
+Y2H experimental data. With this additional nomenclature, there is a need to 
+translate from the IntAct codes to the systematic gene names for yeast. 
+
+<<getGraph4, echo=FALSE, results = hide>>=
+data(mappingsG)
+data(nAtMap)
+pdf("intactMapping.pdf")
+plot(mappingsG, "dot", nodeAttrs = nAtMap)
+dev.off()
+@ 
+
+<<getGraph5, echo=FALSE, results = hide>>=
+data(mapping2SysG)
+pdf("map2Sys.pdf")
+plot(mapping2SysG, "dot")
+dev.off()
+@ 
+
+<<getGraph6, echo=FALSE, results = hide>>=
+data(egEBI16112)
+pdf("eg.pdf")
+plot(egEBI16112, "dot")
+dev.off()
+@ 
+
+\begin{figure} 
+\centering
+\subfigure[Mappings from IntAct to Systematic Gene Name]{
+\label{mapping}
+\includegraphics[width = 50mm]{intactMapping.pdf}}
+\subfigure[Mapping from IntAct directly to systematic genes]{
+\label{map2Sys}
+\includegraphics[width =50mm]{map2Sys.pdf}}
+\subfigure[Mapiing from IntAct through an intermidary to systematic genes]{
+\label{eg}
+\includegraphics[width =50mm]{eg.pdf}}
+\caption{The mappings from IntAct to the sysmatic genes takes a tree like structure.
+The first diagram shows what must happen to each IntAct ID in the mapping process. The
+middle diagram shows that sometimes the intermidiary mappings are trivial and the 
+process is direct (though the mapping may still be one to many). The diagram on the 
+right shows the mapping to an intermidiate. The number of intermidiary mappings tend 
+to be either zero or one from the Y2H data, but might be more than one for other data
+sets (there might even be no mapping available so that we keep only the IntAct ID). 
+All the mappings are, in general, one to one with a few that are one to many.}
+\end{figure}
+
+IntAct faces the same problems of identifiability as we do. They have streamlined this
+issue by inventing a new nomenclature which is consistent in their repository. Each
+protein is given a particular IntAct acension code, and for each of these protein 
+acension code, the protein names (common, systematic, or any other defined nomenclature) 
+is annotated. Therefore, some IntAct protein acension codes might map directly to 
+systematic gene names, while others might 
+map to other nomenclatures that need further mapping (though none of these 
+maps need necessarily be one to one). Some
+IntAct protein codes cannot be mapped to systematic gene names, and for these proteins,
+the IntAct codes is kept.
+
+Because the mappings from an Intact protein code need not be one to one, 
+we need to chose which specific systematic gene to use. The mapping from the IntAct
+protein code to the systematic gene names in the software induces a 
+unique and stable path structure, a rooted, directed tree 
+Figure~\ref{eg}. The choice will be made to take the systematic gene name that is 
+the destination of the left-most path in this tree, in Figure~\ref{eg}, 
+\Sexpr{egEBI16112@nodes[1]} will map to \Sexpr{egEBI16112@nodes[4]}. 
+Again this choice is arbitrary, and
+other users can define which path to take when conducting the mappings. Defining 
+this choice, we have now finished the construction of a representation of the 
+protein binary interactome on each experimental data set, and we continue with 
+generating the cumulative protein binary interactome $I_b$.
+
 
 \subsubsection{Merging the Yeast 2-Hybrid Experimental Data}
 
@@ -1141,6 +1260,8 @@ xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes"
 caption = "Number of Protein Sub-Complexes")
 @ 
 
+Need to still write about these two tables...generate the Y2H interactome and
+write about it...this is where I am so the following is un-edited still.
    
 \section{Validation}
 
@@ -1198,8 +1319,8 @@ interact with many. %%FIXME: Tony we need some pictures, we should
 
 We rely on Y2H data provided by IntAct (citation) and compute a number
 of summary statistics for the complex estimates in the ScISI. We
-obtained data on 41 Y2H experiments comprising 1980 unique reported bait 
-proteins and 3073 unique reported prey proteins. It is important to 
+obtained data on eight Y2H experiments comprising ZZZ unique reported bait 
+proteins and ZZZ unique reported prey proteins. It is important to 
 recognize the fact that information can
 only be obtained for complex estimates that contain one or more Y2H
 bait proteins. And since the actually physical interactions are not
