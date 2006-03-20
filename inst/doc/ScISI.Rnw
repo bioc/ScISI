@@ -56,32 +56,40 @@ on protein interactions and hence on the estimation problem we are
 interested in. These include the yeast two-hybrid system 
 \citep{Ito, Uetz, Giot} and high-throughput co-precipitation experiments 
 such as \citep{Gavin, Ho, Krogan}. Yet our knowledge remains
-incomplete. Such experiments, while valuable, are expensive and time
-consuming to carry out. They are subject to variation and there are
-many reports (FIXME: need to fill in some background on related studies 
-here) of high false negative and false postive rates. 
+incomplete. 
 
-%%FIXME: we need to justify the separate interactomes - perhaps with
-%% forward references to the Arp2/3 complexes
+While several authors have constructed, or estimated, interactomes
+by combining these, and other, data our approach is different (FIXME
+citations here). Instead, we will
+create different interactomes, each relevant to a particular concept
+or type of interaction. The resultant 
+interactomes can be combined by different users, often according
+to different criteria, to yield more comprehensive interactomes. We
+believe that there is value in keeping the different concepts separate. 
+Binary physical interactions are quite distinct from multi-protein complex 
+membership, since the relationships defined by the latter are not binary
+and not all members of a protein complex directly interact. Further,
+the data sources are quite different, and the experimental errors differ
+in type and magnitude according to the assays used. By keeping data types
+separate we will be able to better assemble and model the observed data.
 
-%%FIXME: we really need a more careful background and related methods
-%%section. Some of the papers that estimate FP and FN and some of the
-%% papers on estimating the interactome - how is ours different, and
-%% why.
-
+Data from high throughput experiments are expensive and time
+consuming to carry out. As a result relatively few statistical methods
+have been developed and those that have tend to be centered on
+a particular experiment and have not been broadly validated.
 These observations suggest that simulation models may be
 beneficially employed to identify the viability of experimental
 procedures, to aid in integrating data from disparate sources, and to
 provide a sound basis for the development of new methodology in
-designing experiments and in analyzing the resultant data. In this
-paper we outline one approach in the creation of \textit{in silico
-  interactomes} that would be suitable for such simulation
-experiments. 
+designing experiments. In this paper we outline an approach in the creation 
+of \textit{in silico interactomes} that would be suitable for such 
+simulation experiments as well as for a number of other analytic
+purposes. 
 
-We consider the problem of estimating \textit{in
-  silico} interactomes (ISI) for \textit{Saccharomyces cerevisiae} and
-we describe five different roles where such a computational device can
-be used.  First, the ISI provides a tool that can be used to mimic
+We consider the problem of estimating \textit{in silico} interactomes (ISI) 
+for \textit{Saccharomyces cerevisiae} and we describe five different roles 
+where such a computational device can be used.  First, the ISI provides a 
+tool that can be used to mimic
 wet-lab experiments; these \textit{in silico} experiments can help to
 confirm the viability of the wet-lab experimental procedures by
 allowing investigators to alter experimental conditions (by the modification
@@ -109,15 +117,18 @@ experiments. We note that there are a number of recent papers
 \citep{Oltavi,Goverview, SubsampNetworks} that raise many important
 issues in this regard.
 
-An ISI is not without its limitiations. It cannot reveal new
+An ISI is not without its limitiations. It cannot establish new
 relationships between its members, but rather can only reflect the
 current state of biological knowledge. It can, however, be used in any
 of the five tasks listed above and the outputs of the computational
 experiments will often provide predictions of real interactions that
-could be tested. Further, one type of interaction can be used either
+can be tested. If these predictions are accurate there will be a resultant
+savings in cost as wet lab experiments can be directly tailored to the
+set of likely candidates. Further, one type of interaction can be used either
 to predict or to model other types of interactions and to provide
 information about the likelihood of interactions; the verification of
 interactions, however, remains the domain of experimental biology.
+%%FIXME: Xia's paper could be cited here
 
 Protein interactions are dynamic by nature so that different
 interactions occur at different times and under different
