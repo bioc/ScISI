@@ -117,7 +117,7 @@ experiments. We note that there are a number of recent papers
 \citep{Oltavi,Goverview, SubsampNetworks} that raise many important
 issues in this regard.
 
-An ISI is not without its limitiations. It cannot establish new
+An ISI is not without its limitations. It cannot establish new
 relationships between its members, but rather can only reflect the
 current state of biological knowledge. It can, however, be used in any
 of the five tasks listed above and the outputs of the computational
@@ -134,7 +134,7 @@ Protein interactions are dynamic by nature so that different
 interactions occur at different times and under different
 conditions. For example, some protein complexes such as those needed
 to facilitate cell division are often transient in nature appearing
-when needed and dissovling when no longer required, whereas other
+when needed and dissolving when no longer required, whereas other
 complexes such as the ribosome (and its subunits) are essentially
 permanently constituted.  We provide some tools that will allow
 investigators the ability to indicate situations and conditions under
@@ -151,7 +151,7 @@ importance, among them the fact that the methodology can be applied to
 many organisms and tissue types to yield specialized ISI estimates. We
 also note that the data used in the construction is constantly being
 updated and improved, hence users will want to regularly update any
-estimate as new data sources become availble, or old ones are
+estimate as new data sources become available, or old ones are
 updated. Hence, to be viable there must be a mechanism for
 updating and refining the ISI. We also note that there are many
 different and disparate data sources and the system should be
@@ -211,8 +211,9 @@ We begin by distinguishing between many different types of
 interactomes with a few general comments; we will make the
 terms and ideas more explicit in later sections of this report. There
 are interactomes that model direct binary interactions and hence are
-related to experiments using the yeast 2-hybrid (Y2H) system
-\citep{Y2H, Ito, Uetz}. A second type of interactome is one that
+related to experiments using the yeast two-hybrid (Y2H) system
+\citep{Y2H} where \cite{Ito} and \cite{Uetz} both report the results
+of large scale analyses. A second type of interactome is one that
 models protein complex membership. In this model, two proteins are
 said to interact if they are constituent members of some protein complex 
 under the conditions of interest. This second type of interactome is
@@ -221,7 +222,7 @@ experiments \citep{Ho, Gavin, Krogan}. We note that proteins which
 interact in the second sense, need not interact in the first sense;
 hence, we separate these two different, but related, concepts. Other
 interactomes can be created by considering other relationships such as
-those between transcription factors and their direct targets or the
+those between transcription factors and their direct targets or an
 interaction network that can be defined on pairs of synthetically
 lethal genes \citep{Tong2004}.
 
@@ -293,7 +294,7 @@ interactomes described above, $I_b$ and $I_c$. As we noted above, not
 all complexes are present at all times in the cells under study, but
 we are unable to model this aspect due to the lack of
 appropriate data on which to base such classifications. When such data
-become more widely available they can easily be accomodated within the
+become more widely available they can easily be accommodated within the
 paradigm we are proposing.
 
 We first define what we mean by a protein complex and describe
@@ -353,7 +354,7 @@ relationships we will use a graph, where the edges indicate the
 presence of a binary interaction and for complex co-membership data we
 will use a hypergraph, where the hyperedges are the identities of the
 proteins that constitute the complex. There is a one-to-one
-relationship between hypergraphs and bipartite graphs and we wil use these 
+relationship between hypergraphs and bipartite graphs and we will use these 
 terms inter-changeably in the report. Indeed it will be the case that
 bi-partite graphs are much easier to render pictorially, and so we 
 will defer to these graphs rather than the hyper-graphs when needed.
@@ -374,8 +375,9 @@ proteins index the rows and protein complexes index the columns.
 \end{equation}
 
 
-In the matrix $M_H$, a unital entry indicates that the protein $p_i$
-belongs to the protein complex $C_j$ while a zero entry implies 
+In the matrix $M_H$, a one in row $i$ and column $j$ indicates
+that the protein $p_i$ belongs to the protein complex $C_j$ while a 
+zero entry implies 
 non-membership. We remark that this representation can be extended
 to include the multiplicities of protein membership by simply 
 letting the entries $(M_H)_{ij} \in \mathbb{N}$. The non-negative integer 
@@ -412,7 +414,7 @@ dev.off()
 
 \begin{figure} 
 \centering
-\subfigure[Atomic rendering of ARP 2/3 labelled by common names.]{
+\subfigure[Atomic rendering of ARP 2/3 labeled by common names.]{
 \label{arp23Physical}
 \includegraphics[width = 75mm]{../extdata/Arp2_3_complex.png}}
 \subfigure[Graphical rendering of ARP 2/3 identified by crystallography 
@@ -485,7 +487,7 @@ uniform method to solve this mapping problem.
 \label{geneNames}
 \begin{tabular}{|l|p{0.65\textwidth}|}
 \hline
-Gene Gommon Names&Corresponding Gene Systematic Names\\
+Gene Common Names&Corresponding Gene Systematic Names\\
 \hline
 YRF1&YER190W, YDR545W, YGR296W, YLR466W, YLR467W, YNL339C, YPL283C\\
 YPK1&YKL126W, YJL093C, YNL307C\\
@@ -504,9 +506,9 @@ YHR133C&NA\\
 YPL170W&NA\\
 \hline
 \end{tabular}
-\caption{The correspondance between Gene Common Names and Gene Systematic Names. Notice
-that the correspondance can be many to one in both instances, and notice that the 
-correspondance can also be undefined.}
+\caption{The correspondence between Gene Common Names and Gene Systematic Names. Notice
+that the correspondence can be many to one in both instances, and notice that the 
+correspondence can also be undefined.}
 
 \end{table}
 
@@ -635,8 +637,8 @@ elements from each repository.
 Elements such as arginase, and CTP synthetase are considered by some to be 
 protein complexes even though they contain one unique protein. Because the 
 data repositories do not include information such as multiplicity, we have 
-decided to remove any unital protein complexes since it does not meet the
-requirements we have established. In addition, some elements such as (FIXME - 
+decided to remove any protein complexes of size one. 
+In addition, some elements such as (FIXME - 
 look up some examples) are the names of polypeptides and not protein complexes, 
 so they too must be removed from the selected data. 
 
@@ -646,7 +648,7 @@ through-put AP-MS experiments and estimated by each respective experimental
 investigator. Presently, only the MIPS data repository annotates proteins by 
 these high through-put experiments. In constructing the protein complex 
 interactome, we have elected not to retain those complexes whose constituent 
-members are annotatated in this manner for both the highly verified $I_c$ and
+members are annotated in this manner for both the highly verified $I_c$ and
 the the extended $I_c$. 
 
 %%Fix - maybe we should give new names like I_C and I_c?
@@ -680,7 +682,7 @@ the various complexes we have extracted:
 
 %%FIXME: name names or drop this
 %%Done - TC
-%While repositories such as Mips and GO will annotate proteins to each
+%While repositories such as MIPS and GO will annotate proteins to each
 %complex and store this data by these annotations, there is a small number 
 %of repositories such as the \Rpackage{apComplex} package of the Bioconductor
 %project which store the bi-partite graph incidence matrix for the 
@@ -706,7 +708,7 @@ NAS&Non-traceable Author Statement\\
 ND&No Biological Data Available\\
 NR&Not Recorded\\
 \hline
-Mips Evidence Codes&Mips Evidence Code Definitions\\
+MIPS Evidence Codes & MIPS Evidence Code Definitions\\
 \hline
 901.01.03&Overview information (TAS/NAS)\\
 901.01.03.01&Review\\
@@ -744,7 +746,7 @@ selected is divided into two groups: 1. those that are prefixed by 901 and 2. th
 prefixed by 902. Similar to the chosen GO evidence codes, the MIPs evidence codes beginning 
 with 901 refer to non-experimental methods of inference. Indeed, some of the MIPs codes 
 are similar enough to the GO codes that the curators of MIPs have referenced some GO evidence
-codes when pertinent. The Mips evidence codes beginning with 902, however, refer to 
+codes when pertinent. The MIPS evidence codes beginning with 902, however, refer to 
 experimental methods of inference and annotation. Because we have chosen to reject any estimates
 based on high through-put AP-MS experiments, we have selected any MIPs evidence code that
 corresponds to any high through-put technology. 
@@ -804,7 +806,7 @@ unique methodology. This uniformity is beneficial in many ways.
 It allows for analysis on the putative protein complexes without 
 the use of other statistical mechanisms such as boot-strapping 
 adjustments. The technology of \Rpackage{apComplex} allows the 
-end user to adjust the levels of sensativity and of specificity, so
+end user to adjust the levels of sensitivity and of specificity, so
 that different users can generate different estimates based on 
 various error models. Lastly, the statistical model by which 
 \Rpackage{apComplex} processes the data gives a sound
@@ -822,7 +824,7 @@ from the raw experimental data of \citep{Gavin}.
 In addition, the size distribution of these MBME complexes 
 corresponds more with the distribution of the size of known 
 complexes indicating that these estimates have a better mechanism
-to filter out false postive protein complex affiliations.
+to filter out false positive protein complex affiliations.
 
 The raw experimental data from \citep{Ho, Gavin, Krogan} have 
 already been processed, and each MBMH estimates are stored as 
@@ -1042,17 +1044,19 @@ from the bait proteins towards the prey proteins.]{
 computationally inferred interactions.]{
 \label{arp23InfGraph}
 \includegraphics[width =50mm]{arp23InfG.pdf}}
-\caption{These figures show the  difference between the true atomic structure 
-determined by crystallography and by Y2H experimentation as well as crystallography
-and computationally inferred interactions. The missing edges from the Y2H graph is 
-indeterminate since missing edges can either be due to un-testing or due to false 
-negative observations.}
+\caption{These figures show the difference between the true atomic 
+structure determined by crystallography and by Y2H experimentation as well 
+as crystallography and computationally inferred interactions. The missing 
+edges from the Y2H graph are
+indeterminate since missing edges can either be due to the relationship
+not being tested or due to false negative observations.}
 \end{figure}
 
 
-A fundamental difference needs to be made between the lack of edges within this 
-graph. An edge is missing between two proteins $p_1$ and $p_2$ in $I_b$ if either
-$p_1$ never interacts with $p_2$ (a true negative interaction) or $p_1$ has never 
+A fundamental difference needs to be made between the lack of edges within 
+this graph. An edge is missing between two proteins $p_1$ and $p_2$ in 
+$I_b$ if either $p_1$ never interacts with $p_2$ (a true negative interaction) 
+or $p_1$ has never 
 been tested with respect to $p_2$ (an untested interaction). Problems arise in the 
 structure $I_b$ because neither the bait population nor the prey population is ever 
 fully documented. In this way, the distinction between true negative edges and
@@ -1098,9 +1102,9 @@ MI:0399&Two hybrid fragment pooling approach.\\
 
 We can use these MI codes to parse one sub-directory of the IntAct repository 
 accounting for the various wet-lab experiment information. We found fourty-one
-Intact Acension Codes (AC) whose interaction dectection slots
+Intact Acension Codes (AC) whose interaction detection slots
 contained one of the four MI codes. The fourty-one IntAct AC's represented the
-various wet-lab experiments conducted using the yeast 2-hybrid techonology or 
+various wet-lab experiments conducted using the yeast 2-hybrid technology or 
 some derivation thereof. 
 
 For each 2-hybrid experiment, we first generated a list of the proteins 
@@ -1112,7 +1116,7 @@ one representation of the bait to prey binary interaction graph.
 
 Once we have obtained the bait to prey data from IntAct, we need to modify 
 this list because all the proteins are denoted by its correspond IntAct 
-acension code. We want to translate these codes into the systematic gene
+accession code. We want to translate these codes into the systematic gene
 names so that we have a uniform system of nomenclature. 
 
 \subsubsection{Translating protein names}
@@ -1153,14 +1157,14 @@ dev.off()
 \subfigure[Mapping from IntAct directly to systematic genes]{
 \label{map2Sys}
 \includegraphics[width =50mm]{map2Sys.pdf}}
-\subfigure[Mapiing from IntAct through an intermidary to systematic genes]{
+\subfigure[Mapiing from IntAct through an intermediary to systematic genes]{
 \label{eg}
 \includegraphics[width =50mm]{eg.pdf}}
-\caption{The mappings from IntAct to the sysmatic genes takes a tree like structure.
+\caption{The mappings from IntAct to the systematic genes takes a tree like structure.
 The first diagram shows what must happen to each IntAct ID in the mapping process. The
-middle diagram shows that sometimes the intermidiary mappings are trivial and the 
+middle diagram shows that sometimes the intermediary mappings are trivial and the 
 process is direct (though the mapping may still be one to many). The diagram on the 
-right shows the mapping to an intermidiate. The number of intermidiary mappings tend 
+right shows the mapping to an intermediate. The number of intermediary mappings tend 
 to be either zero or one from the Y2H data, but might be more than one for other data
 sets (there might even be no mapping available so that we keep only the IntAct ID). 
 All the mappings are, in general, one to one with a few that are one to many.}
@@ -1168,9 +1172,9 @@ All the mappings are, in general, one to one with a few that are one to many.}
 
 IntAct faces the same problems of identifiability as we do. They have streamlined this
 issue by inventing a new nomenclature which is consistent in their repository. Each
-protein is given a particular IntAct acension code, and for each of these protein 
-acension code, the protein names (common, systematic, or any other defined nomenclature) 
-is annotated. Therefore, some IntAct protein acension codes might map directly to 
+protein is given a particular IntAct accession code, and for each of these protein 
+accession code, the protein names (common, systematic, or any other defined nomenclature) 
+is annotated. Therefore, some IntAct protein accession codes might map directly to 
 systematic gene names, while others might 
 map to other nomenclatures that need further mapping (though none of these 
 maps need necessarily be one to one). Some
@@ -1203,8 +1207,8 @@ lower bound for the number of non-trivial interacting baits at the threshold of
 twenty proteins. In addition, we have imposed the condition that the set of 
 potential prey population must be genome wide. 
 
-While it is problematic to assure that the latter of these two conidtions is 
-true, the addtion of this particular structure allows for a more meaningful
+While it is problematic to assure that the latter of these two conditions is 
+true, the addition of this particular structure allows for a more meaningful
 dialog of $I_b$. This is so because the vertex set of $I_b$ will be genome 
 wide, and testing bait proteins implies generating the induced directed 
 sub-graph from the sampled baits against the genome. This genome-prey condition
@@ -1528,7 +1532,7 @@ desired and other measures made on the simulated graphs.
 % estimate of the true outdegree. That, times the number of nodes/genes
 % in the complex gives an estimate of the number of edges, which has
 % the advantage of being unbiased. One suspects that better estimates
-% of the number of edges could be acheived by using in-degree as well,
+% of the number of edges could be achieved by using in-degree as well,
 % but those estimates are biased.
 
 Once we address real experimental data, the situation changes and
