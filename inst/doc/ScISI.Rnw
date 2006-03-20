@@ -45,14 +45,31 @@
 
 Understanding protein interactions is relevant to our understanding of
 complex biological processes and to deciphering the different roles
-played by genes and proteins. In particular developing a set of maps
-that associate proteins with multi-protien complexes will be an
-essential step to this process. A number of high through-put
-experiments have been carried out with the goal of helping to
-elucidate these nature and number of their occurances \citep{Gavin,
-  Ho, Krogan, Ito, Uetz, Giot}. Yet our knowledge remains
+played by genes and proteins. Since proteins seldom act alone, but
+rather tend to form multi-protein complexes which then perform different
+molecular tasks it seems that this is an important level of organization.
+In this paper we discuss the problem of estimating the set of
+protein complexes that exist in a cell. In particular we
+propose a sound statistical approach to this estimation problem.
+There are several high through-put experiments that provide data
+on protein interactions and hence on the estimation problem we are
+interested in. These include the yeast two-hybrid system 
+\citep{Ito, Uetz, Giot} and high-throughput co-precipitation experiments 
+such as \citep{Gavin, Ho, Krogan}. Yet our knowledge remains
 incomplete. Such experiments, while valuable, are expensive and time
-consuming to carry out. This suggests that simulation models may be
+consuming to carry out. They are subject to variation and there are
+many reports (FIXME: need to fill in some background on related studies 
+here) of high false negative and false postive rates. 
+
+%%FIXME: we need to justify the separate interactomes - perhaps with
+%% forward references to the Arp2/3 complexes
+
+%%FIXME: we really need a more careful background and related methods
+%%section. Some of the papers that estimate FP and FN and some of the
+%% papers on estimating the interactome - how is ours different, and
+%% why.
+
+These observations suggest that simulation models may be
 beneficially employed to identify the viability of experimental
 procedures, to aid in integrating data from disparate sources, and to
 provide a sound basis for the development of new methodology in
@@ -288,13 +305,11 @@ are parsed and processed in creating the binary interactome.
 
 %% (FIXME: list the yeast data here) ... can you explain which data you
 %% would like listed...certainly not all of the y2h data?  
+%% FIXME:RG:March I think we should have a table that lists the main ones - 
+%%genome wide ones, with some notion of number of reported baits and number 
+%% of reported hits. 
 
 \subsection{Protein complexes: Definition, Representation and Characteristics}
-
-%%FIXME: a few pictures would surely help readers - how are we making
-%%out on that?
-% Working on it - TC
-
 
 We define a protein complex to be two or more proteins that creates one 
 functional unit for the purposes of carrying out some biological
@@ -564,21 +579,20 @@ In searching for and parsing through information from the two online
 data repositories, GO and MIPS, we used somewhat indirect methods. 
 For the GO data source, we made use of the Bioconductor metadata package 
 \Rpackage{GO} which contains the pertinent information. 
-There does not exist a R metadata package for the MIPs data source, so
-we downloaded three files from its repository. The file \textit{complexcat.scheme}
+For MIPS we downloaded three files: \textit{complexcat.scheme}
 details the hierarchy classification structure of the MIPs protein 
-complexes, and the \textit{complexcat\_data\_14112005} file has the 
-protein annotations and evidence codes for each protein complex. We note that the 
-latter file is suffixed with an eight digit number which indicates the 
-day/month/year which this file is updated (there is a bi-annual update 
-for this file). The last file is the \textit{evidencecat.scheme} which 
-contains the evidence code definitions. 
+complexes; 
+\textit{evidencecat.scheme} contains the evidence code definitions;
+and \textit{complexcat\_data\_14112005} contains the 
+protein annotations and evidence codes for each protein complex.
+We the name of the last file has a suffix which is an eight digit number 
+indicating the day/month/year which this file is updated 
+(there is a bi-annual update for this file). 
 
 For each data repository, the textual terms used to describe its
-contents are parsed for specific key words. While Making use of regular
-expression searches and approximate matching regular expression
-searches, we have searched for all the terms that contain one of the 
-three default character strings listed:
+contents are parsed for specific key words. Using regular
+expression searches with approximate matching we have searched for all the 
+terms that contain one of the three default character strings listed:
 
 \begin{enumerate}
 \item  the exact word \texttt{complex};
@@ -592,7 +606,8 @@ These narrow the pool of return values yet include terms such as
 \texttt{DNA-directed Polymerase II holoenzyme} or 
 \texttt{repairosome}. 
 
-Users can modify the search criteria to add new terms or to remove any
+The software allows users to modify the search criteria to add new terms or to 
+remove any
 of those default values listed above. Terms selected correspond to
 protein complexes and these are then collected and the corresponding
 incidence matrix is computed. We note that both the GO and the MIPs 
