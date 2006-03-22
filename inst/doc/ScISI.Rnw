@@ -1157,7 +1157,11 @@ dev.off()
 \subfigure[Mapping from IntAct directly to systematic genes]{
 \label{map2Sys}
 \includegraphics[width =50mm]{map2Sys.pdf}}
+<<<<<<< .mine
+\subfigure[Mapping from IntAct through an intermidary to systematic genes]{
+=======
 \subfigure[Mapiing from IntAct through an intermediary to systematic genes]{
+>>>>>>> .r16780
 \label{eg}
 \includegraphics[width =50mm]{eg.pdf}}
 \caption{The mappings from IntAct to the systematic genes takes a tree like structure.
@@ -1175,19 +1179,22 @@ issue by inventing a new nomenclature which is consistent in their repository. E
 protein is given a particular IntAct accession code, and for each of these protein 
 accession code, the protein names (common, systematic, or any other defined nomenclature) 
 is annotated. Therefore, some IntAct protein accession codes might map directly to 
-systematic gene names, while others might 
-map to other nomenclatures that need further mapping (though none of these 
-maps need necessarily be one to one). Some
-IntAct protein codes cannot be mapped to systematic gene names, and for these proteins,
-the IntAct codes is kept.
+the SGNs, while others might 
+map to other nomenclatures that need to be furhter mapped to obtain 
+SGNs (though none of these maps need necessarily be one to one). Some
+IntAct protein codes cannot be mapped to any SGN, and for these proteins,
+the IntAct codes is retained.
 
 Because the mappings from an Intact protein code need not be one to one, 
 we need to chose which specific systematic gene to use. The mapping from the IntAct
 protein code to the systematic gene names in the software induces a 
-unique and stable path structure, a rooted, directed tree 
-Figure~\ref{eg}. The choice will be made to take the systematic gene name that is 
-the destination of the left-most path in this tree, in Figure~\ref{eg}, 
-\Sexpr{egEBI16112@nodes[1]} will map to \Sexpr{egEBI16112@nodes[4]}. 
+unique and stable path structure, a rooted, directed tree (figure~\ref{map2Sys} and 
+figure~\ref{eg}). The choice will be made to take the SGN that is 
+the destination of the left-most path in this tree: in figure~\ref{map2Sys}, 
+\Sexpr{mapping2SysG@nodes[1]} will map directly to \Sexpr{mapping2SysG@nodes[2]},
+while in figure~\ref{eg}, 
+\Sexpr{egEBI16112@nodes[1]} will map to \Sexpr{egEBI16112@nodes[2]} and then 
+to \Sexpr{egEBI16112@nodes[4]}. 
 Again this choice is arbitrary, and
 other users can define which path to take when conducting the mappings. Defining 
 this choice, we have now finished the construction of a representation of the 
@@ -1283,15 +1290,105 @@ data("redundantM")
 data("subCompM")
 @ 
 
+We can also inspect each pair of protein complexes from each of the data
+repositories. In table~\ref{ta:Repetitions}, we have the number of 
+protein complexes which are common between each pair of databases. For 
+instance, the number of common protein complexes between the GO and MIPS
+repositories is \Sexpr{redundantM[1,2]}, and this is a relatively
+small overlap between protein complexes which have been verified. It 
+comes as no surprise that the overlap of putative protein complexes estimated
+from the high through-put data via \Rpackage{apComplex} with each other as 
+well as with GO and MIPS is particularly small. While this fact does not
+repudiate these putative protein complexes, it does signal the need for further
+validation. 
+
 <<redundantSubC, eval = TRUE, echo=FALSE, results=tex >>=
 xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", 
 caption="Number of repetitive Protein Complexes")
 xtable(subCompM, display = c("s","d","d","d","d","d"), label = "ta:subComplexes", 
-caption = "Number of Protein Sub-Complexes")
+caption = "Number of Protein Sub-Complexes: the rows indicates the data repository
+where the sub-complexes belong and the columns the over-all complex.")
 @ 
 
-Need to still write about these two tables...generate the Y2H interactome and
-write about it...this is where I am so the following is un-edited still.
+The table~\ref{ta:subComplexes} accounts for the number of protein 
+complexes from one database which are proper sub-complexes of protein
+complexes in the other databases. This table is much less sparse than
+table~\ref{ta:Repetitions}. These cross-references show one limitation
+discussed by \citep{Scholtens}; the fact that \Rpackage{apComplex} 
+is highly sensative the false negative observations in the AP-MS 
+technology. From table~\ref{ta:subComplexes} and this limitation, we 
+can reasonably assume that those putative estimates by
+\Rpackage{apComplex} which are proper sub-complexes to verified 
+complexes are ideal candidates for further computational work. 
+
+\subsection{Summary Statistics for the Protein Binary Interactome}
+
+<<getY2H, eval=TRUE, echo=FALSE, results=hide>>=
+library("y2hStat")
+data(y2hSysGW)
+data(y2h)
+data(y2hGW)
+@ 
+
+Much like the analysis for $I_c$, we begin the dissection of $I_b$ by
+investigating the number of baits sampled. From the restrictions 
+described above, we made use of only \Sexpr{length(y2hSysGW)} of the
+experimental data-sets, and from these, a total of 
+\Sexpr{length(unique(unlist(lapply(y2hSysGW, function(x) names(x)))))}
+unique proteins were tagged with binding domains and became function
+bait proteins. While the prey population is genome wide, only
+\Sexpr{length(unique(unlist(y2hSysGW)))} unique proteins interacted with
+some particular bait protein(s) and became function prey proteins.
+
+The identifiability problem is plays an important role in $I_b$. A small
+calculation shows that that mapping from the IntAct acension codes could
+identify \Sexpr{length(grep("Y",unique(unlist(lapply(y2hSysGW, function(x) names(x))))))}
+bait proteins and \Sexpr{length(grep("Y", (unique(unlist(y2hSysGW)))))} 
+prey proteins by their repsect SGNs. These un-defined mappings percolate
+through $I_b$, but we have left them in the interactome because their 
+inclusion has no effect on our computational analysis (we remark that removal is 
+trivial and the choice is left to the user).
+
+<<someY2HStats, eval=TRUE, echo=FALSE, results=hide>>=
+
+baitsUsed <- unique(unlist(sapply(y2hGW, function(x) {sapply(x, function(y) y[1])})))
+translation <- y2h$baitsSystematic[baitsUsed]
+numMulNameBaits <- sapply(translation, length)
+
+preysUsed <- unique(unlist(y2hGW))
+translation2 <- y2h$preysSystematic[preysUsed]
+numMulNamePreys <- sapply(translation2, length)
+@ 
+
+\begin{figure}[p]
+\centering
+<<multiPlot, fig=TRUE, echo=FALSE>>=
+par(mfrow = c(1,2))
+multi <- table(numMulNameBaits)
+size <- as.numeric(names(multi))
+repet <- as.vector(multi)
+freq <- rep(size, repet)
+hist(freq, xlab = "Number of SGN", ylab = "Frequency",
+     main = "Bait Mapping Multiplicity")
+
+
+multi <- table(numMulNamePreys)
+size <- as.numeric(names(multi))
+repet <- as.vector(multi)
+freq <- rep(size, repet)
+hist(freq, xlab = "Number of SGN", ylab = "Frequency",
+     main = "Prey Mapping Multiplicity")
+
+par(mfrow = c(1,1))
+@
+\label{multiHist}
+\caption{Histograms giving the multiplicity of the bait and 
+prey protein mappings from the IntAct Codes to SGNs.}
+\end{figure}
+
+%%%What else shoule be said? I don't like the histograms because 
+%%it does not give any indication if the mapping is has >2 outcomes
+
    
 \section{Validation}
 
