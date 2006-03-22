@@ -1157,11 +1157,7 @@ dev.off()
 \subfigure[Mapping from IntAct directly to systematic genes]{
 \label{map2Sys}
 \includegraphics[width =50mm]{map2Sys.pdf}}
-<<<<<<< .mine
 \subfigure[Mapping from IntAct through an intermidary to systematic genes]{
-=======
-\subfigure[Mapiing from IntAct through an intermediary to systematic genes]{
->>>>>>> .r16780
 \label{eg}
 \includegraphics[width =50mm]{eg.pdf}}
 \caption{The mappings from IntAct to the systematic genes takes a tree like structure.
