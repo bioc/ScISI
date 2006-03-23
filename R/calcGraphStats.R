@@ -1,10 +1,12 @@
 calcGraphStats <- function(comp, bait2PreyL){
 
     #options(error=recover)
-    genWide <- sapply(bait2PreyL, function(x) x$expList[["GW"]])
-    b2GWPreyL <- bait2PreyL[genWide]
-    b2GWPreyL <- b2GWPreyL[!sapply(b2GWPreyL, is.null)]
-    b2GWPreyL <- lapply(b2GWPreyL, function(x) x$bpList)
+    #genWide <- sapply(bait2PreyL, function(x) x$expList[["GW"]])
+    #b2GWPreyL <- bait2PreyL[genWide]
+    #b2GWPreyL <- b2GWPreyL[!sapply(b2GWPreyL, is.null)]
+    #b2GWPreyL <- lapply(b2GWPreyL, function(x) x$bpList)
+
+    b2PGWPreyL <- bait2PreyL
     
     degBait <- list()
     compB2P <- list()

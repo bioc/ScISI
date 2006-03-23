@@ -997,11 +997,19 @@ Now we consider the problem of creating the protein binary interactome, $I_b$.
 Again, our basic strategy is to assemble the available experimental results
 with the use of relevant software tools. Unlike the construction of $I_c$ where
 the data is collected from five disparate sources, we restrict ourselves to 
-the single data repository \texttt{IntAct}. There is a high level
+two data sources: the \texttt{IntAct} repository and the experimental data obtained
+from (cite Miller et al). There is a high level
 of redundancy across different databases with respect to direct protein-protein
-interaction data, so collecting data from the various repositories does not 
+interaction data of non-membranous proteins, so collecting data from the various 
+repositories does not 
 offer substantially more interaction data that can be harvested exclusively from
 the \texttt{IntAct} database. 
+
+The traditional Y2H methods fail to detect interactions between membrane bound 
+proteins; (cite Miller et al) have determined a new Y2H methodology to overcome
+these failures. While the protein interaction data from \texttt{IntAct} relies
+on the traditional Y2H methods, the experimental data set of (cite Miller et al) 
+is unique with little overlap with those of \texttt{IntAct}.
 
 %[FIXME - is the following what needs to be said?]
 
@@ -1010,7 +1018,7 @@ experimental data, and as a result, we have imposed extra structure to the
 protein binary interactome by requiring it to contain the bait to prey relationship
 derived from the Y2H experiments. Imposition of this condition translates 
 the undirected protein-protein interaction graph to a directed bait to
-prey interaction graph. This relationship is still binary though non-symmetric, 
+prey interaction graph. This relationship is still binary, though non-symmetric, 
 and this will be the model
 by which we will base $I_b$. This additional structure produces an interactome that
 more accurately reflects the current state of biological knowledge, since the 
@@ -1069,7 +1077,8 @@ of this interaction graph.
 
 \subsubsection{Obtaining Binary Interaction Information from the IntAct Repository}
 
-In beginning the construction of the protein binary interactome, we again parsed 
+In beginning the construction of the protein binary interactome from the \textt{IntAct}
+database, we again parsed 
 for specific key terms. Looking in the molecular interaction (MI) category of the
 Proteomics Standards Initiative (PSI) (cite PSI), we searched for the three
 related character strings:
@@ -1100,7 +1109,7 @@ MI:0399&Two hybrid fragment pooling approach.\\
 
 \end{table}
 
-We can use these MI codes to parse one sub-directory of the IntAct repository 
+We can use these MI codes to parse one sub-directory of the \textt{IntAct} repository 
 accounting for the various wet-lab experiment information. We found fourty-one
 Intact Acension Codes (AC) whose interaction detection slots
 contained one of the four MI codes. The fourty-one IntAct AC's represented the
@@ -1114,15 +1123,26 @@ with an activation domain (the prey proteins) found to experimentally
 interact with the respective bait protein. In essence, we have created 
 one representation of the bait to prey binary interaction graph.
 
-Once we have obtained the bait to prey data from IntAct, we need to modify 
+Once we have obtained the bait to prey data from \textt{IntAct}, we need to modify 
 this list because all the proteins are denoted by its correspond IntAct 
 accession code. We want to translate these codes into the systematic gene
 names so that we have a uniform system of nomenclature. 
 
+\subsection{Obtaining Membrane Bound Binary Interaction Information}
+
+The membranous bound protein interaction action data is given by 
+(cite Miller et al) in the supplementary section of their manuscript. 
+Again, we keep the bait to prey interaction relationships and create
+the list of reflecting this association.
+
+Unlike the protein interactions obtained from \texttt{IntAct}, (cite Miller)
+have given definitive SGN's for all interacting membranous proteins, 
+and we make use of those denoted names.
+
 \subsubsection{Translating protein names}
 
 While each of the data repositories hosting the complex membership data used 
-the systematic gene names to identify the constituent protein members, IntAct 
+the systematic gene names to identify the constituent protein members, \textt{IntAct} 
 uses its own unique nomenclature system to identify proteins involved in the
 Y2H experimental data. With this additional nomenclature, there is a need to 
 translate from the IntAct codes to the systematic gene names for yeast. 
@@ -1219,10 +1239,13 @@ also reduces the un-tested edges to prey only proteins (i.e. those
 proteins never sampled and selected as baits) for otherwise, un-tested edges 
 could exist between bait proteins and non-prey proteins. 
 
-With these two conditions, we have restricted the number of viable Y2H 
-experiments to a total of eight. From these eight experiments, we can create
-the adjacency matrix representation of the binary protein interaction 
-graph, $I_b$. 
+The situation becomes problematic when merging the membranous portein interaction
+data with that of the \texttt{IntAct} protein interaction data. While the 
+genome-wide prey condition restricts the number of experimental data-sets we use
+from the \texttt{IntAct} repository, this condition also eliminates the data-set
+obtained from (cite Miller). 
+
+%%What should we do about this???
 
 
 \section{The estimates}
