@@ -53,7 +53,7 @@ from the Intact repository.
 
 <<loadData>>=
 data(ScISI)
-data(intactInfo)
+data(y2hSysGW)
 data(nucComp)
 @ 
 
@@ -71,11 +71,13 @@ only those bait proteins which successfully found at least one prey.
 \frac{\hat{X}}{n(n-1)/2} & = & \frac{x}{[(n-1)+(n-2)+\ldots+(n-k)]} \\
 \hat{X} & = & \frac{ x (n)(n-1)}{2 [(n-1)+(n-2)+\ldots+(n-k)]} \\
 \end{eqnarray*}
-\item Mean Nodal Degree\\
+\item Estimated Number of Edges based on Mean nodal degree\\
 \[
 \tilde{X} = \frac{ n \sum_{i=1}^k d_i}{2k}.
 \]
 \end{enumerate}
+
+
 
 The latter four summary statistics is more robust with respect to 
 experimental error. 
@@ -109,14 +111,14 @@ We have generated a script to calculate each of these graph summary
 statistics:
 
 <<graphStats>>=
-interestingComps <- colnames(ScISI) %in% nucComp
+#interestingComps <- colnames(ScISI) %in% nucComp
 
-ScISI2 <- ScISI[, interestingComps]
+#ScISI2 <- ScISI[, interestingComps]
 
-graphStats <- graphSumStats(ScISI2, intactInfo)
-ncol(ScISI2)
-length(graphStats)
-names(graphStats[[1]])
+#graphStats <- graphSumStats(ScISI2, y2hSysGW)
+#ncol(ScISI2)
+#length(graphStats)
+#names(graphStats[[1]])
 @ 
 
 We first mention why only a subset of the complexes of ScISI seem
@@ -130,8 +132,8 @@ The first two hyper-geometric sampling statistics are directly
 calculated by the \Robject{graphSumStats} script:
 
 <<hyperGeo>>=
-graphStats[[1]]$edgeProp
-graphStats[[1]]$popMeanDeg
+#graphStats[[2]]$edgeProp
+#graphStats[[2]]$popMeanDeg
 @ 
 
 These two statistics give a reasonable estimate over each 
@@ -143,27 +145,108 @@ to provide the final outcome.
 We produce each in the order they are listed above:
 
 <<sampledB>>=
-graphStats[[1]]$complexBait
-graphStats[[1]]$complex
-graphStats[[1]]$notBait
-sampledProp <- (length(graphStats[[1]]$b2CompP))/(length(graphStats[[1]]$complexBait))
-sampledProp
+#graphStats[[2]]$complexBait
+#graphStats[[2]]$complex
+#graphStats[[2]]$notBait
+#sampledProp <- (length(graphStats[[1]]$b2CompP))/(length(graphStats[[1]]$complexBait))
+#sampledProp
 @ 
 
 <<avgOut>>=
-graphStats[[1]]$avgOutDeg
+#graphStats[[2]]$avgOutDeg
 @ 
 
 <<notIsolated>>=
-graphStats[[1]]$notIsolated
+#graphStats[[2]]$notIsolated
 @ 
 
 <<connComp>>=
 
-cc <- connectedComp(graphStats[[1]]$y2hGraph)
-cc
-ratio <- (length(cc)-1)/(length(graphStats[[1]]$complex)-1)
-ratio
+#cc <- connectedComp(graphStats[[2]]$y2hGraph)
+#cc
+#ratio <- (length(cc)-1)/(length(graphStats[[2]]$complex)-1)
+#ratio
 @ 
+
+We use a contrived example to show that the calculations of hte
+graph summary statistics is what we want it to be:
+
+
+
+
+
+<<testEx>>=
+
+exam <- matrix(0, nrow=10, ncol=4)
+present <- c(1,3,4,7,10,12,15,16,19,21,26,29,34,35,36, 38)
+exam[present] <- 1
+#rnames <- c(letters[1:8],letters[17:18])
+#cnames <- c("C1", "C2", "C3", "C4")
+dimnames(exam) <- list(c(letters[1:10]), c("C1", "C2", "C3", "C4"))
+y2h <- list()
+y2h$exp1 <- list()
+y2h$exp2 <- list()
+y2h$exp3 <- list()
+y2h$exp4 <- list()
+y2h$exp1$a <- c("b","c","e","x","z","w")
+y2h$exp1$d <- c("f","g","h","t","s")
+y2h$exp1$g <- c("x","z")
+y2h$exp2$a <- c("b","c","g","t")
+y2h$exp2$e <- c("a","b","z")
+y2h$exp2$z <- c("a","e")
+y2h$exp3$h <- c("a","b","e")
+y2h$exp4$z <- c("t","s","e","v")
+y2h$exp4$w <- c("r","j")
+y2h$exp4$c <- c("d","d")
+
+t <- graphSumStats(exam, y2h)
+#t
+
+#cc <- connectedComp(t[["C4"]]$y2hGraph)
+
+#ratio <- (length(cc)-1)/(length(t[["C4"]]$complex)-1)
+
+#cc
+#ratio
+@
+
+<<example2>>=
+set.seed(235)
+comp2 <- matrix(0, nrow = 10, ncol = 3)
+ind <- sample(30, 12)
+comp2[ind] = 1
+dimnames(comp2) <- list(letters[11:20], c("Comp1","Comp2", "Comp3"))
+comp2
+
+baits <- sample(letters[11:20], 3)
+
+interact <- list()
+interact$exp1 <- list()
+interact$exp1[[baits[1]]] <- letters[sample(1:26, 6)]
+interact$exp1[[baits[2]]] <- letters[sample(1:26, 7)]
+interact$exp2 <- list()
+interact$exp2[[baits[3]]] <- letters[sample(1:26, 5)]
+interact
+t2 <- graphSumStats(comp2, interact)
+t2
+
+@ 
+
+<<example3>>=
+#comp = matrix(1, nrow = 10, ncol = 1)
+#dimnames(comp) <- list(letters[1:10], "t")
+
+#test <- list()
+#test$exp1 <- list()
+#test$exp1$a <- c("b", "d")
+#test$exp1$c <- "e"
+#test$exp2 <- list()
+#test$exp2$a <- c("b", "e", "g")
+#test$exp2$d <- "z"
+
+#ex1 <- graphSumStats(comp, test)
+
+@ 
+
 
 \end{document}

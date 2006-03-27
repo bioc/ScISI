@@ -1009,7 +1009,7 @@ of this interaction graph.
 
 \subsubsection{Obtaining Binary Interaction Information from the IntAct Repository}
 
-In beginning the construction of the protein binary interactome from the \textt{IntAct}
+In beginning the construction of the protein binary interactome from the \texttt{IntAct}
 database, we again parsed 
 for specific key terms. Looking in the molecular interaction (MI) category of the
 Proteomics Standards Initiative (PSI) (cite PSI), we searched for the three
@@ -1041,7 +1041,7 @@ MI:0399&Two hybrid fragment pooling approach.\\
 
 \end{table}
 
-We can use these MI codes to parse one sub-directory of the \textt{IntAct} repository 
+We can use these MI codes to parse one sub-directory of the \texttt{IntAct} repository 
 accounting for the various wet-lab experiment information. We found fourty-one
 Intact Acension Codes (AC) whose interaction detection slots
 contained one of the four MI codes. The fourty-one IntAct AC's represented the
@@ -1055,7 +1055,7 @@ with an activation domain (the prey proteins) found to experimentally
 interact with the respective bait protein. In essence, we have created 
 one representation of the bait to prey binary interaction graph.
 
-Once we have obtained the bait to prey data from \textt{IntAct}, we need to modify 
+Once we have obtained the bait to prey data from \texttt{IntAct}, we need to modify 
 this list because all the proteins are denoted by its correspond IntAct 
 accession code. We want to translate these codes into the systematic gene
 names so that we have a uniform system of nomenclature. 
@@ -1074,7 +1074,7 @@ and we make use of those denoted names.
 \subsubsection{Translating protein names}
 
 While each of the data repositories hosting the complex membership data used 
-the systematic gene names to identify the constituent protein members, \textt{IntAct} 
+the systematic gene names to identify the constituent protein members, \texttt{IntAct} 
 uses its own unique nomenclature system to identify proteins involved in the
 Y2H experimental data. With this additional nomenclature, there is a need to 
 translate from the IntAct codes to the systematic gene names for yeast. 

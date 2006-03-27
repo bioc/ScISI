@@ -11,7 +11,7 @@ graphSumStats <- function(ISI, bait2PreyL){
     names(stats) = colnames(ISI)
 
     
-    stats <- stats[sapply(stats, function(x) !is.na(x$edgeProp))]
+    #stats <- stats[sapply(stats, function(x) !is.na(x$edgeProp))]
 
     stats
     

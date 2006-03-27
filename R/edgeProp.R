@@ -16,7 +16,8 @@ edgeProp <- function(comp, compB2P, sampled){
         }
     }
 
-    ###print(b2pAM)
+    diag(b2pAM) = 0
+    
     if(sum(b2pAM)>0){
         y2hGraph <- as(b2pAM, "graphNEL")
     }
@@ -35,6 +36,7 @@ edgeProp <- function(comp, compB2P, sampled){
         eProp <- (((sum(b2pAM))/2)*(length(comp))*(length(comp) - 1))/(2*(sum(denominator)))
     }
 
+    
 
     else{
         eProp <- NA
