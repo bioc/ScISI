@@ -742,9 +742,8 @@ proteins.
 The identifiability problem is plays an important role in $I_b$. A
 small calculation shows that that mapping from the IntAct acension
 codes could identify
-\Sexpr{length(grep("Y",unique(unlist(lapply(y2hSysGW, function(x)
-  names(x))))))} bait proteins and \Sexpr{length(grep("Y",
-  (unique(unlist(y2hSysGW)))))} prey proteins by their repsect
+\Sexpr{length(grep("Y",unique(unlist(lapply(y2hSysGW, function(x) names(x))))))} bait proteins and \Sexpr{length(grep("Y", (unique(unlist(y2hSysGW)))))} 
+prey proteins by their respective 
 SGNs. These un-defined mappings percolate through $I_b$, but we have
 left them in the interactome because their inclusion has no effect on
 our computational analysis (we remark that removal is trivial and the
