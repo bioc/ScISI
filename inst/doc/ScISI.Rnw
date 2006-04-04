@@ -466,15 +466,17 @@ the supplementary data. In brief, we assembled data from available
 public databases (GOA and MIPS) that report information on known, or
 predicted protein complexes and assembled that with protein complexes
 predicted from experimental data \citep{Ho, Gavin, Krogan} using the
-methodology of \cite{Scholtens, ScholtensVidalGent}. We chose to
-process all experimental data uniformly, and attempted to exclude
-estimates from GOA and MIPS that were based on the high-throughput
+methodology of \cite{Scholtens, ScholtensVidalGent}. In order to make
+the data as comparable as possible we chose to process all
+experimental data uniformly, and attempted to exclude all predicted
+complexes from GOA and MIPS that were based on the high-throughput
 experimental co-precipitation experiments.
 
 %%FIXME: Tony, here we need the number of complex estimates from GO, MIPS
 %%and each of the three experiments, all separate in one table. You
 %%should get a more recent (the most recent) GO build from Ting as I
 %%think that there are some substantial improvements.
+%% and we need number of genes involved (as a third column)
 
 \subsubsection{Merging of the Data-Sets}
 
@@ -594,14 +596,12 @@ view of these interactomes.
 data(ScISI)
 @ 
 
-A good starting point in dissecting $I_c$ looks at how many genes are 
-expressed from S. cerevisiae genome. In $I_c$, we can see that there is
-\Sexpr{nrow(ScISI)} uniquely expressed genes which translates to 
-\Sexpr{nrow(ScISI)} uniquely functional proteins participating within 
-some non-trivial protein complex. In addition to the expressed genes,
-we see that there is \Sexpr{ncol(ScISI)} distinct protein complexes
-within the cell. 
+Our estimate of $I_c$ has \Sexpr{nrow(ScISI)} unique genes
+participating within \Sexpr{ncol(ScISI)} non-trivial protein
+complex. We do note that this estimate will continue to expand as more
+data are included in it.
 
+%%FIXME: need to shrink this down a lot
 \begin{figure}[p]
 \centering
 <<distPlot, fig=TRUE, echo=FALSE>>=
@@ -621,9 +621,8 @@ hist(freq, xlab = "Complex Membership per Protein", ylab = "Frequency",
      main = "Complex Membership")
 par(mfrow = c(1,1))
 @
-\label{distHist}
 \caption{Distribution of Complex Cardinality and Distribution of Complex 
-Membership per Protein}
+Membership per Protein \label{distHist}}
 \end{figure}
 
 Not limited to the number of expressed genes and protein complexes, we
@@ -632,16 +631,24 @@ complexes as well as the distribution of the number of complexes to
 which each protein belongs. Figure~\ref{distHist} shows gives us these
 distributions. We can see from each histogram that the vast majority
 of proteins participate in relatively few protein complexes and also
-that an overwhelming number of protein complexes contain relatively
-few proteins.
+that most of predicted protein complexes contain relatively few
+proteins.
 
 <<testStuff, echo=FALSE, results=hide>>=
 data("redundantM")
 data("subCompM")
 @ 
 
+%%FIXME: without numbers of complexes in each of these I am not sure
+%%how to interpret Table 2, could we have a table that lists each data
+%%source and the number of estimated complexes?
+%% also I think it would be good to use some sort of comparison of the
+%% different estimates (Gavin, Ho and Krogan) to the known complexes
+%% from GO and MIPS as a validation. Also, is there anything in
+%% apComplex that can be used to estimate either FP or FN rates on a
+%% per experiment basis?
 We can also inspect each pair of protein complexes from each of the
-data repositories. In table~\ref{ta:Repetitions}, we have the number
+data repositories. In Table~\ref{ta:Repetitions}, we have the number
 of protein complexes which are common between each pair of
 databases. For instance, the number of common protein complexes
 between the GO and MIPS repositories is \Sexpr{redundantM[1,2]}, and
@@ -656,24 +663,34 @@ validation.
 <<redundantSubC, eval = TRUE, echo=FALSE, results=tex >>=
 xtable(redundantM, display = c("s","d","d","d","d","d"), 
     label = "ta:Repetitions", 
-    caption="Number of repetitive Protein Complexes") 
+    caption="Number of repetitive protein complexes.") 
 
 xtable(subCompM, display = c("s","d","d","d","d","d"),
        label = "ta:subComplexes", 
-caption = "Number of Protein Sub-Complexes: the rows indicates the data repository
-where the sub-complexes belong and the columns the over-all complex.")
+caption = "Number of protein sub-complexes: the rows indicates the
+       source of the sub-complex while the column indicates the source
+       of the complex containing the sub-complex. For example, 51 MIPS
+       complexes are sub-complexes of GO complexes.")
 @ 
 
-The table~\ref{ta:subComplexes} accounts for the number of protein 
+Table~\ref{ta:subComplexes} accounts for the number of protein 
 complexes from one database which are proper sub-complexes of protein
-complexes in the other databases. This table is much less sparse than
-table~\ref{ta:Repetitions}. These cross-references show one limitation
+complexes in any database. These cross-references show one limitation
 discussed by \citep{Scholtens}; the fact that \Rpackage{apComplex} 
 is highly sensative the false negative observations in the AP-MS 
-technology. From table~\ref{ta:subComplexes} and this limitation, we 
-can reasonably assume that those putative estimates by
-\Rpackage{apComplex} which are proper sub-complexes to verified 
-complexes are ideal candidates for further computational work. 
+technology. From Table~\ref{ta:subComplexes} we can observe on
+anomalie in these data. The Gavin and Krogan estimates are roughly
+symmetric with respect to GO and MIPS, but Ho is not. Many Ho
+estimates are sub-complexes of GO and MIPS complexes, but almost no GO
+and MIPS complexes are sub-complexes of Ho estimates.
+%%how are the proportions? Does this suggest that the Ho estimates are
+%%too small?
+
+
+%and this limitation, we 
+%can reasonably assume that those putative estimates by
+%\Rpackage{apComplex} which are proper sub-complexes to verified 
+%complexes are ideal candidates for further computational work. 
 
 \subsection{Summary Statistics for the Protein Binary Interactome}
 
@@ -684,6 +701,8 @@ data(y2h)
 data(y2hGW)
 @ 
 
+%%FIXME: a table of the experiments, number of baits and number of
+%%interactions - please 
 Much like the analysis for $I_c$, we begin the dissection of $I_b$ by
 investigating the number of baits sampled. From the restrictions
 described above, we made use of only \Sexpr{length(y2hSysGW)} of the
@@ -692,9 +711,11 @@ experimental data-sets, and from these, a total of
 unique proteins were tagged with binding domains and became function
 bait proteins. While the prey population is genome wide, only
 \Sexpr{length(unique(unlist(y2hSysGW)))} unique proteins interacted
-with some particular bait protein(s) and became function prey
+with some particular bait protein(s) and became functional prey
 proteins.
 
+%%FIXME: please remove things we cannot map to known identifiers. The
+%%down stream consequences are a pain...
 The identifiability problem is plays an important role in $I_b$. A
 small calculation shows that that mapping from the IntAct acension
 codes could identify
@@ -783,14 +804,15 @@ protein-protein interactions from \cite{PPIpred}.
 
 Before describing the data we briefly discuss the statistical issues
 involved. In most cases only a subset of the genes were assayed, or
-considered and it will be important to restrict the computations to 
-
-A working hypothesis is that every protein complex is a single
-connected component, so that when the complex is functional it is a
-single unit. This does not mean that every protein physically
-interacts with every other protein, in some cases a protein may
-interact with only one other protein, while in other cases it may
-interact with many. 
+considered and it will be important to restrict the computations to
+those genes that were assayed.  A working hypothesis is that every
+protein complex is a single connected component, so that when the
+complex is functional it is a single unit. When considered in terms of
+binary interactions this requires that there be at least $k-1$ edges
+for a complex containing $k$ proteins, but not any set of $k-1$ edges
+will suffice. There can be no more than $k \cdot (k-1)$ edges in
+total. It does seem that most complexes tend to have fewer, rather
+than more edges.
 
 \subsection{Y2H Validation}
 
