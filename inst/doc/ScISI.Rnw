@@ -702,29 +702,27 @@ data(y2hGW)
 @ 
 
 %%FIXME: a table of the experiments, number of baits and number of
-%%interactions - please 
+%%interactions - system (Gal4 or ???) etc. 
+
+%%FIXME: Tony, please report here thenumber of experiments, that we
+%%are dropping e.g. those with less than 20 interactions since there is
+
 Much like the analysis for $I_c$, we begin the dissection of $I_b$ by
 investigating the number of baits sampled. From the restrictions
 described above, we made use of only \Sexpr{length(y2hSysGW)} of the
 experimental data-sets, and from these, a total of
 \Sexpr{length(unique(unlist(lapply(y2hSysGW, function(x) names(x)))))}
-unique proteins were tagged with binding domains and became function
+unique proteins were tagged with binding domains and became functional
 bait proteins. While the prey population is genome wide, only
 \Sexpr{length(unique(unlist(y2hSysGW)))} unique proteins interacted
-with some particular bait protein(s) and became functional prey
-proteins.
+with some particular bait protein(s) and were observed as prey.
 
-%%FIXME: please remove things we cannot map to known identifiers. The
+%%FIXME: Tony, you used to say something about the problems mapping
+%% the IntAct data and the fact that you kept the ids that did not map
+%% I have moved that discussion to the supplementary data - but please
+%% remove these observations, we only want things that map to
+%% systematic names otherwise the
 %%down stream consequences are a pain...
-The identifiability problem is plays an important role in $I_b$. A
-small calculation shows that that mapping from the IntAct acension
-codes could identify
-\Sexpr{length(grep("Y",unique(unlist(lapply(y2hSysGW, function(x) names(x))))))} bait proteins and \Sexpr{length(grep("Y", (unique(unlist(y2hSysGW)))))} 
-prey proteins by their respective 
-SGNs. These un-defined mappings percolate through $I_b$, but we have
-left them in the interactome because their inclusion has no effect on
-our computational analysis (we remark that removal is trivial and the
-choice is left to the user).
 
 <<someY2HStats, eval=TRUE, echo=FALSE, results=hide>>=
 
@@ -739,6 +737,10 @@ translation2 <- y2h$preysSystematic[preysUsed]
 numMulNamePreys <- sapply(translation2, length)
 @ 
 
+%%FIXME: I have no idea what a SGN is - it seems not to be defined.
+%% I don't like the histograms because they are uninformative. Lets
+%% look at prey per bait, per experiment or something like that
+%% instead. But maybe that is not what you are showing me here.
 \begin{figure}[p]
 \centering
 <<multiPlot, fig=TRUE, echo=FALSE>>=
@@ -768,16 +770,65 @@ prey protein mappings from the IntAct Codes to SGNs.}
 %%%What else shoule be said? I don't like the histograms because 
 %%it does not give any indication if the mapping is has >2 outcomes
 
+\subsection{PPI Predictions}
+
+<<ppipred, echo=FALSE, results=hide>>=
+library("y2hStat")
+data(ppipred)
+@ 
+
+\cite{PPIpred} report \Sexpr{nrow(ppipred)} pairwise predictions
+between proteins in \textit{S. cerevisiae}, with a presumed 
+false positive rate of $3E-4$ and a presumed false negative rate of
+$0.85$. The predictions are accompanied by a probability and one can
+select only those predicted interactions according to this
+probability. We have chosen to use only those interactions where the
+probability is at least $0.5$. This greatly reduces the number of 
+predicted interactions and also greatly reduces the number of
+proteins that were observed. 
+
+When using these data, only proteins that are predicted to be involved
+in at least one interaction are \textit{observable}. This changes as
+the probability cut-off changes and can be interpreted as the
+sensitivity of the analysis. This phenomenon is no different than that
+observed with different experimental procedures, not all interactions can
+be detected with all procedures and one must make some efforts to determine
+which interactions can be detected.
+
+Once the observable proteins have been determined they can be use to
+compute the different summary statistics discussed in
+Section~\ref{sec:summary}. 
+
+For each protein complex, $C$, we divide its constituent proteins into two
+sets, those that are observable, denoted $U$ and those that are not,
+$\overline{U} = C \\ U$. If $P \in U$, then we expect there to be 
+an edge between $P$ and some other member of $C$, but we will only
+observe this edge if it is to another member of $U$. 
+
+\subsection{Putting it together}
+
+Are we going to put the predictions and the binary data together to
+get $I_b$? It seems like we should...
+
    
 \section{Validation}
 
-There are a number of different methods that can be used to validate
-the ScISI prediction. Our basic premise is that the complex is a
-collection of physically connected proteins. While, in some cases this
-may not be strictly true and there could be two or more subcomponents
-that do not physically interact we will demonstrate that such cases
+Perhaps the only truly contentious aspect of our analysis is the use
+of the methodology of \cite{Scholtens, ScholtensVidalGent} to provide
+a majority of the predicted complexes in $I_c$. And we now turn our
+attention to a validation of that approach. Our basic premise is that
+the complex is a collection of physically connected proteins. While,
+in some cases this may not be strictly true and there could be two or
+more subcomponents that do not physically interact such cases will
 have little impact on the validation methods we employ and hence are,
-to a large extent, covered by our proposals.
+to a large extent, covered by our proposals. To validate our estimates
+we will compare them directly to the curated complexes of MIPS and
+GO. If the distribution of different test statistics looks the same
+for our data as for MIPS and GO estimated complexes then this
+observation provides some validation of our approach and suggests that
+for the criteria tested there is little difference between our
+estimates and the more heavily curated protein complex estimates from
+MIPS and GO.
 
 If all physical interactions between proteins were known, then the
 problem would be somewhat straightforward to address. One would simply
@@ -816,22 +867,27 @@ than more edges.
 
 \subsection{Y2H Validation}
 
-%%FIXME: Tony, please report here 1) number of experiments, that we
-%%are dropping those with less than 20 interactions since there is
-%%likely to be substantial experiment to experiment variability.
-%% Maybe a table with experiments, system (Gal4), number of baits
-%% and whether it is genome wide.
+We will make use of $I_b$ to provide us with an estimate of the binary
+interactome. These data give us some sense of the known binary
+interactions but the logic underlying their use requires some care in
+application. APMS data indicates the consituent members of the
+complex but gives no information about the true topology of the binary
+interactions. 
 
-We rely on Y2H data provided by IntAct (citation) and compute a number
-of summary statistics for the complex estimates in the ScISI. We
-obtained data on eight Y2H experiments comprising ZZZ unique reported bait 
-proteins and ZZZ unique reported prey proteins. It is important to 
-recognize the fact that information can
+%%FIXME: we need some data before this is going anywhere.
+Since Y2H data are somewhat notorious for high false positive and
+false negative rates we have chosen to restrict the data to more
+informative subset. Since the Y2H reactions occur in the nucleus 
+
+
+Hence we require only that for a given complex, any
+member used as a bait pro
+unknown we cannot test whether the observed Y2H
+
 only be obtained for complex estimates that contain one or more Y2H
 bait proteins. And since the actually physical interactions are not
 known, the topology of the Y2H graph is also not known.
-%%FIXME: Tony describe the number of experiments here, a table
-%%describing something about baits into
+
 
 Any bait protein in a Y2H experiment should find one or more complex
 co-members provided those co-members were available as prey in the Y2H
@@ -843,197 +899,6 @@ could be. We do not know if it was tested and not found or not tested,
 and these are very different things.
 
 
-\subsection{PPI Predictions}
-
-<<ppipred, echo=FALSE, results=hide>>=
-library("y2hStat")
-data(ppipred)
-@ 
-
-\cite{PPIpred} report \Sexpr{nrow(ppipred)} pairwise predictions
-between proteins in \textit{S. cerevisiae}, with a presumed 
-false positive rate of $3E-4$ and a presumed false negative rate of
-$0.85$. The predictions are accompanied by a probability and one can
-select only those predicted interactions according to this
-probability. We have chosen to use only those interactions where the
-probability is at least $0.5$. This greatly reduces the number of 
-predicted interactions and also greatly reduces the number of
-proteins that were observed. 
-
-When using these data, only proteins that are predicted to be involved
-in at least one interaction are \textit{observable}. This changes as
-the probability cut-off changes and can be interpreted as the
-sensitivity of the analysis. This phenomenon is no different than that
-observed with different experimental procedures, not all interactions can
-be detected with all procedures and one must make some efforts to determine
-which interactions can be detected.
-
-Once the observable proteins have been determined they can be use to
-compute the different summary statistics discussed in
-Section~\ref{sec:summary}. 
-
-For each protein complex, $C$, we divide its constituent proteins into two
-sets, those that are observable, denoted $U$ and those that are not,
-$\overline{U} = C \\ U$. If $P \in U$, then we expect there to be 
-an edge between $P$ and some other member of $C$, but we will only
-observe this edge if it is to another member of $U$. 
-
-
-\subsection{Summary Statistics}
-\label{sec:summary}
-
-As stated above, our definition of a multiprotein complex presumes
-that every member is physically linked to at least one other member of
-the complex. Stated in graph theoretic terms we assume that the graph
-of a complex where nodes represent proteins and edges represent
-physical interactions is connected. 
-
-To develop appropriate statistical methods we describe the same
-setting in a slightly more abstract notation. For a given complex,
-$C$, say, consisting of $n$ proteins the graph that represents this
-complex must be connected, by our definition of a complex. Hence,
-there are between $n-1$ and $n(n-1)/2$ edges. We can conceptualize
-this in the following way. Consider an urn that contains balls, each
-ball represents on possible edge, or binary interaction. For $C$ there
-are $n(n-1)/2$ possible edges and hence there are that many balls in the
-urn. Some of the balls represent edges that truly exist in $C$, and these
-are colored black, the remainder of the balls are white.
-
-We will, in some cases, use the notation $G_C = (V_C, E_C)$, to denote
-the graph induced by $C$. We note that in this graph the edges are not
-directed and there are no self-loops. That is, we assume that no
-protein in $C$ has an edge to itself, in part this makes the math
-simpler and in part it reflects the technology. While AP-MS can
-determine the constituent elements of complex it cannot directly
-ascertain their multiplicity.
-
-The first problem we address is estimating the number of black balls
-in the urn. We label this unknown quantity $X$. The basis for this
-estimation is the sampling of some nodes of $C$ and determining which
-other members of $C$ they are observed to be connected to. We will
-presume that the nodes that are sampled are a simple random sample
-from the population $V_C$, but note that this is not always the case
-in real experiments. Let $k$ denote the number of nodes sampled and
-let $n= |V_C|$, when needed we will also use $n_C$. Further, let $x$
-denote the number of distinct edges found based on the sampling of $k$
-nodes. 
-
-To determine how many edges were tested we note that the first node is
-compared to the remaining $n-1$, the second to the remaining $n-2$ and
-so on. So, the number of edges tested is $[(n-1)+(n-2)+\ldots+(n-k)]$.
-If we sample all nodes then the sequence is, 
-\[
-\sum_{j=1}^{n-1} (n-j) = \sum_{j=1}^{n-1} j = \frac{(n-1)n}{2},
-\]
-where we have made use of the well known relationship regarding the sum
-of the first $n$ integers. And hence, sampling all nodes does in fact
-result in the inspection of all edges.
-
-A widely used estimate of $X$ arises from equating the observed
-proportion of edges in the sample, with the unknown proportion in the
-population. That is,
-\begin{eqnarray*}
-\frac{\hat{X}}{n(n-1)/2} & = & \frac{x}{[(n-1)+(n-2)+\ldots+(n-k)]} \\
-\hat{X} & = & \frac{ x (n)(n-1)}{2 [(n-1)+(n-2)+\ldots+(n-k)]} \\
-\end{eqnarray*}
-
-A second estimator can be derived from the following argument. If the
-nodes that are sampled represent a random sample from the population
-of nodes, $V_C$, then the observed mean degree is an unbiased estimate
-of the population mean degree. The population mean degree times $n$
-divided by 2 is an estimate of the number of edges. For each sampled
-node we let $d_i$ denote its observed degree. So, we have
-\[
-\tilde{X} = \frac{ n \sum_{i=1}^k d_i}{2k}.
-\]
-
-The two estimators are quite similar, and sometimes identical.
-
-At this point we have merely estimated the number of edges in $G_C$,
-from that we make the next step of assessing whether or not $G_C$ is
-connected. There are a number of factors that influence that
-determination and we provide simulation examples and evidence of how
-these different factors can be used.
-
-First, the larger $X$ the more likely the graph is connected. Next, we
-can examine the number of unique nodes that were selected either as
-part of the $k$ nodes used to probe the graph or as the other ends of
-the detected edges. The more nodes detected this way, the higher the
-probability that the graph is connected. And finally, we can take the
-observed subgraph, induced by our sampling, and determine how many
-more edges are needed to obtain a connected graph; the fewer the more
-likely it is that the true graph is connected.
-
-We also explore a simulation approach to assessing whether the
-underlying graph is connected. Given the observed edges for the $k$
-query nodes and the estimated number of edges in the graph, $X$, one
-can simulate the remainder of the graph by drawing from the remaining
-edges. For each sample, one can assess whether the graph is
-connected. Repeating this a large number of times yields some number
-of connected graphs and some number of unconnected graphs. The
-relative proportions can be used to assign a probability that the
-underlying graph is connected. This approach can also be loosened if
-desired and other measures made on the simulated graphs.
-
-% If the graph is connected there must be at least $n-1$ black balls,
-% but simply having $n-1$ black balls will not ensure that the graph is
-% connected. However, the more black balls there are, the more likely it
-% is that the graph is connected. We use this observation as the basis
-% for our proposals. We let $X$ represent the true number of black balls
-% in the urn and note that this number is unknown and hence needs to be
-% estimated.
-%%FIXME: note that if we associate a pair of names with each ball then
-%%the graph is connected when the union of those names is of size n,
-%%but it is not obvious to me how we might use that.
-
-% Both sampling schemes, Y2H and PPI predictions, can be viewed as
-% drawing some number of balls from the urn. For each ball drawn we do
-% know if that ball represents a true edge (and hence is black) or not,
-% provided we are willing to presume that there are no false positives
-% and no false negatives. Thus the observed data can be interpreted as
-% having $k$ black balls among $l$ draws. A simple estimate of $X$ can
-% then be found by equating the proportion of black balls in the sample
-% with the proportion of black balls in the population. And hence that, 
-% \[
-% \hat{X} = \frac{k n (n-1)}{l},
-% \]
-% and one can also easily show that $E(k n(n-1) / l) = X$, under a
-% random sampling scheme and that
-% $var(k n(n-1)/l ) = X(n(n-1) - X) (n(n-1) - l) / [l (n(n-1) - 1)]$,
-% although one suspects that better estimates can be obtained.
-
-% A potentially better idea is to use the fact that for some types of sampling,
-% especially that of Y2H, the observed out-degree is an unbiased
-% estimate of the true outdegree. That, times the number of nodes/genes
-% in the complex gives an estimate of the number of edges, which has
-% the advantage of being unbiased. One suspects that better estimates
-% of the number of edges could be achieved by using in-degree as well,
-% but those estimates are biased.
-
-Once we address real experimental data, the situation changes and
-becomes more problematic. Some alternative approaches will be needed. 
-In addition we propose four different summary statistics and
-investigate their behavior using the ScISI and the available Y2H data.
-
-\begin{enumerate}
-\item For a given protein complex, $C_i$, find all complex members,
-  $P_j$ that were used as a bait in some Y2H experiment. For these,
-  compute the proportion that found at least one other member of the
-  complex. If $P_j$ was used as a bait in more than one Y2H experiment
-  do not double count, but take any positive result as positive.
-\item For a given protein complex, $C_i$, find the average out-degree
-  of all bait proteins, again avoid double counting, in this case by
-  taking the maximum out-degree. Divide this by the complex size.
-\item Given the number of proteins in a complex that are detected as
-  either bait or prey, find the number that are connected to at least
-  one other complex co-member. [Should this be the proportion of
-  complex members that are connected to at least one other complex
-  member?] 
-\item Compute the ratio of the number of edges needed to make the
-  complex connected, by adding to the observed edges, divided by the
-  minimum number of edges needed to create a connected graph from the
-  complex. This is essentially a measure of incompleteness.
-\end{enumerate}
 
 
 \section{Discussion}
