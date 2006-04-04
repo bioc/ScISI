@@ -43,20 +43,23 @@
 
 \section{Introduction}
 
-%%FIXME: we need to describe creating interactomes - not just one
 Understanding protein interactions is relevant to our understanding of
 complex biological processes and to deciphering the different roles
 played by genes and proteins. Since proteins seldom act alone, but
 rather tend to form multi-protein complexes which then perform
 different molecular tasks it seems that this is an important level of
-organization.  In this paper we discuss the problem of estimating the
-set of protein complexes that exist in a cell. In particular we
-propose a sound statistical approach to this estimation problem.
-There are several high through-put experiments that provide data on
-protein interactions and hence on the estimation problem we are
-interested in. These include the yeast two-hybrid system (Y2H) with
-data from \cite{Ito, Uetz, Giot} and high-throughput co-precipitation
-experiments such as \citep{Gavin, Ho, Krogan}. 
+organization. In this paper we discuss the problem of estimating
+interactomes and in particular we concetrate on two different
+interactomes, one representing binary interaction data and the second
+representing protein complexes. We propose treating these as
+estimation problems and apply a sound statistical approach. The
+estiamtes are based on experimental data as well as data from other
+sources and we consider how and when to combine data from these
+different sources. There are several high through-put experiments that
+provide data on protein interactions and hence on the estimation
+problem we are interested in. These include the yeast two-hybrid
+system (Y2H) with data from \cite{Ito, Uetz, Giot} and high-throughput
+co-precipitation experiments such as \citep{Gavin, Ho, Krogan}.
 
 While several authors have constructed, or estimated, interactomes
 by combining these, and other, data our approach is different (FIXME
@@ -125,7 +128,6 @@ interaction can be used either to predict or to model other types of
 interactions and to provide information about the likelihood of
 interactions; the verification of interactions, however, remains the
 domain of experimental biology.
-%%FIXME: Xia's paper could be cited here
 
 Protein interactions are dynamic by nature so that different
 interactions occur at different times and under different
@@ -133,14 +135,15 @@ conditions. For example, some protein complexes such as those needed
 to facilitate cell division are often transient in nature appearing
 when needed and dissolving when no longer required, whereas other
 complexes such as the ribosome (and its subunits) are essentially
-permanently constituted.  We provide some tools that will allow
-investigators the ability to indicate situations and conditions under
-which an interaction is known to occur and we discuss a paradigm where
-an investigator will be able to select all interactions for a given
-condition.
+permanently constituted. We will not directly address this concern but
+note that the tools and methods we are proposing have natural
+extensions that would cover many of the important scenarios that this
+observation suggests.
 
 %%I if we are going to validate the interactome we are building, should
 %%we not regulate the estimate behind the method?? -- TC
+%%FIXME:RG says, I have no idea what that sentence means - the words
+%%are ok, but the grouping of them????
 While the estimated interactome is itself of some great interest, we
 note that it is more important to describe the procedure by which an
 ISI is produced. There are many reasons why the estimate is of less
@@ -161,18 +164,10 @@ data, or to satisfy personal beliefs. The paradigm we describe here
 allows investigators to create their own personalized estimates, to
 share interactomes and to revise and update interactomes.
 
-In this paper we first define the notion of a biological interactome
-and give various examples of such interactomes. We then present a set
-of computational tools, embodied in the \Rpackage{ScISI} package available
-through the Bioconductor project (\url{www.bioconductor.org}), that
-we have assembled to construct \textit{in silico interactomes}. The
-general steps that must be carried out are, first assembling the data
-that are to be used for the construction and second to process those
-data into an estimated interactome that can be used as an input for
-the various computational tasks described above. Finally we report on
-some \textit{in silico} experiments that can be performed using the
-estimated interactome.
-
+We provide the complete set of tools used to create and manipulate the
+interactome in the \Rpackage{ScISI} package available through the
+Bioconductor project (\url{www.bioconductor.org}). Others are free to
+explore, extend, critique, and improve these methods.
 
 \section{Preliminaries}
 
@@ -185,49 +180,28 @@ they arise.
 
 \subsection{Biological Interactomes}
 
-In the broadest sense, an interactome is a set of elements $P$, for
-our purposes $P$ is the set of genes, or their related proteins,
-within a particular organism or cell type. The elements of $P$ have a
-variety relationships with each other and each of these different
-relationships can be modeled using some form of graph. Some
+In the broadest sense, an interactome is a set of genes, or their
+related proteins, within a particular organism or cell type. The
+genes, or proteins have a variety relationships with each other and
+each of these different relationships can be modeled using some form
+of graph. We represent genes as nodes in a graph and then use edges to
+represent the different types of relationships that exist. Some
 relationships are binary, for example, protein $p_1$ is known to
-directly physically interact with some other protein, $p_2$, perhaps
-under a specific set of conditions. In other cases, the relations are
-not binary but rather are one to many or many to many. 
-In this setting all members of a complex are related to
-each other, but they need not directly interact and the relationship
-is not binary. A reasonable model for such data is as either a
-hypergraph \cite{Berge} or, equivalently, the bipartite graph
-representation. Proteins are grouped into sets according to whether
-they are in a complex and these sets constitute the hyperedges of the
-hypergraph. There is no need for the hyperedges to be disjoint and
-proteins can be in many or few hyperedges, depending on whether the
-protein is in many or few complexes.
-
-We can put these concepts into a more biological framework as
-follows. Let $P$ denote the set of expressed genes in some cell or tissue,
-and hence each such gene is represented by a node in our graph. Any
-two genes that have either a direct biochemical or biophysical
-interaction will have an edge between them. We remark that a gene may
-be associated with itself if it induces a homodimer and such an
-observation would be represented by a self-loop in the graph. 
-Next, we consider a different set of relationships which are those of
-protein complex co-membership. In this, different graph, we again
-represent the genes as nodes, but now edges are determined by whether
-or not the two proteins are found as  constituent parts of some
-protein complex. If represented in this way there is a strict loss of
-information, since a graph can only represent binary relationships yet
-protein complex membership is a many-to-one relationship. For this
-reason we prefer the hypergraph since in this format all important 
-information is conserved.
-
-%%FIXME:
-%representation: somewhere we probably want to discuss this concept
-%There are sure to be situations where a protein complex, that exists
-%under one set of conditions, is a proper subset of a complex that
-%exists under another set of conditions. For some analyses it will be
-%important to remove those complexes which are proper subsets of other
-%complexes and we provide tools to help do that.
+directly physically interact with some other protein, $p_2$. In other
+cases, the relations are not binary but rather are one to many or many
+to many.  For example, all members of a complex are related to each
+other, but they need not directly interact and the relationship
+between the members of a multi-protein complex is not binary. A
+reasonable model for protein complex data is as either a hypergraph
+\cite{Berge} or an equivalent bipartite graph. Proteins are grouped
+into sets according to whether they are in a complex and these sets
+constitute the hyperedges of the hypergraph. There is no need for the
+hyperedges to be disjoint and proteins can be in many or few
+hyperedges, depending on whether the protein is in many or few
+complexes. While some represent multi-protein complex data in the form
+of a binary graph we do not since such a representation imposes a
+strict loss of information; we prefer the hypergraph since it
+conserves all important information.
 
 \begin{figure}
 \centering
@@ -246,15 +220,14 @@ uses requires that some caution be used to not confuse the
 concepts. It is certainly the case that for our working definition of
 a protein complex the members of that complex will have some binary
 interactions with other members. But not all members have direct
-physical interactions with other members, so we would not use a
-so-called \textit{matrix} model to represent those interactions. These
-two examples highlight the subtle differences between two distinct
-interactomes and underscores the necessity to keeping distinct
-interactomes separate. We will refer to the first of these
-interactomes as $I_b$, where the $b$ subscript reinforces the notion
-that binary relationships are being modeled and the second as $I_c$
-where the $c$ subscript reinforces the notion that protein complexes
-are being modeled.
+physical interactions with other members. These two examples highlight
+the subtle differences between two distinct interactomes and
+underscores the necessity to keeping distinct interactomes
+separate. We will refer to the interactomes modeling binary
+interactions as $I_b$, where the $b$ subscript reinforces the notion
+that binary relationships are being modeled and the protein complex
+interactome as $I_c$ where the $c$ subscript reinforces the notion
+that protein complexes are being modeled.
 
 There are of course many limitations to such an approach, however,
 there will be ample opportunity to refine and revise the models
@@ -263,43 +236,10 @@ as the available computer technology improves. Among the limitations
 is the observation that some interactions will only take place under a
 specific set of conditions, and that other interactions, sometimes
 involving the same proteins, will occur under other conditions. Thus,
-the model representing these data will need to become richer and to be
-able to indicate under which conditions a given relationship is known
-to occur. Some interactions are specific to certain tissues (in higher
-organisms) or to particular phases of the cell cycle, and so on. The
+the model representing these data will need to become richer. The
 models we propose can be extended in fairly straightforward ways to
 encompass these details, but the available data are currently to
-sparse to warrant such an approach. We will note some experiments, and
-some uses of existing experimental data, that can provide some
-insight.
-
-In this paper, we will report on a set of methodological tools that
-can be used to construct an \textit{in silico interactome} for
-\textit{S. cerevisiae}. We restrict our attention to the two
-interactomes described above, $I_b$ and $I_c$. As we noted above, not
-all complexes are present at all times in the cells under study, but
-we are unable to model this aspect due to the lack of appropriate data
-on which to base such classifications. When such data become more
-widely available they can easily be accommodated within the paradigm
-we are proposing.
-
-We first define what we mean by a protein complex and describe
-different models for representing these data. Then we explain the
-relationship of binary interactions within this working definition of
-a protein complex. Next we give a concise description of the
-computational tool \textit{ScISI} and show its dynamic properties in
-constructing different complex membership interactomes and binary
-interactomes. We then describe the process of creating an \textit{in
-  silico} protein complex interactome via \textit{ScISI} based on two
-public meta-data sources and three experimental data sets by combining
-purification of protein complexes with identification of their
-individual components via mass spectroscopy. In addition we consider
-the construction of an \textit{in silico} binary interactome based
-primarily on data from IntAct, which is itself based on high
-throughput experimental data assayed by the Yeast 2-Hybrid (Y2H)
-technology.  The IntAct repository currently has fourty-one Y2H
-data-sets which are parsed and processed in creating the binary
-interactome.
+sparse to warrant such an approach.
 
 %% (FIXME: list the yeast data here) ... can you explain which data you
 %% would like listed...certainly not all of the y2h data?  
@@ -307,19 +247,8 @@ interactome.
 %%genome wide ones, with some notion of number of reported baits and number 
 %% of reported hits. 
 
-\subsection{Protein complexes: Definition, Representation and
-  Characteristics} 
 
-We define a protein complex to be two or more proteins that combine to
-form a single, connected functional unit for the purposes of carrying
-out some biological objective. There is no assumption that all members
-of a complex physically interact with one another, but there must be
-sufficient physical binary interactions so that all proteins form a
-connected multi-protein structure. In essence, we define a
-multi-protein complex as a collection of proteins, and in some cases
-polypeptides, that are connected via binary interactions.
-
-\subsubsection{Graphs and HyperGraphs}
+\subsection{Graphs and HyperGraphs}
 
 We require a small amount of graph theory to allow for succinct
 discussion of the relevant concepts. A graph $G$, consists of a pair
@@ -385,6 +314,9 @@ plot(arp23G, "dot", nodeAttrs = nAt)
 dev.off()
 @ 
 
+%%FIXME: here and in all other figures - you get one caption, not a
+%%bunch. Label subfigures a), b) and so on and refer to them in the
+%%single caption, please.
 \begin{figure} 
 \centering
 \subfigure[Atomic rendering of ARP 2/3 labeled by common names.]{
@@ -399,8 +331,20 @@ of more use while others might prefer a graphical representation. We note that
 the issue of identifiability presents itself as creator of the atomic rendering
 has chosen one version of the common names while the creator of the graph has
 chosen the systematic gene names. The coloring scheme provided allows for one
-to one matching of proteins from one rendering to the other.}
+to one matching of proteins from one rendering to the other.\label{fig:arp23}}
 \end{figure}
+
+\subsection{Protein complexes: Definition, Representation and
+  Characteristics} 
+
+We define a protein complex to be two or more proteins that combine to
+form a single, connected functional unit for the purposes of carrying
+out some biological objective. There is no assumption that all members
+of a complex physically interact with one another, but there must be
+sufficient physical binary interactions so that all proteins form a
+connected multi-protein structure. In essence, we define a
+multi-protein complex as a collection of proteins, and in some cases
+polypeptides, that are connected via binary interactions.
 
 \subsubsection{Protein (Complex) Identifiability}
 
@@ -445,17 +389,30 @@ both instances and can also be undefined.}
 
 \end{table}
 
+%%FIXME: data sources need to be listed somewhere - or perhaps only in
+%%the supplimentary data.
+
 \section {Methodology}
 
 The creation of an interactome is based on the integration of a number
-of different data sources. We identify three distinct sources of data
-that can be used to construct the protein complex interactome and then
-two other sources of data that can be used to create the binary
-interactome. We emphasize the construction of the protein complex
-interactome as it is quite different from other published protein
-interaction data bases, while the binary interaction estimate is quite
-similar to other constructs and tends to differ in important, but less
-dramatic ways from those estimates.
+of different data sources. These data sources need to be identified,
+the likely sources of variability and the nature and extent of
+incompleteness needs to be assessed. Once these issues have been
+addressed we can then proceed to develop methods for combining the
+data into a single overall estimate. Many methods for combining data
+have an intrinsic assumption that the error rates are similar for the
+experiments being combined. While the use of graph models makes some
+of the steps easier, their use does not preclude the application of
+sound statistical practice.
+
+We identify three distinct sources of data that can be used to
+construct the protein complex interactome and then two other sources
+of data that can be used to create the binary interactome. We
+emphasize the construction of the protein complex interactome as it is
+quite different from other published protein interaction data bases,
+while the binary interaction estimate is more similar to other
+constructs and tends to differ from them in important, but less
+dramatic ways.
 
 <<getGraph2, echo=FALSE, results = hide>>=
 data(eAt)
@@ -471,6 +428,7 @@ plot(arp23G, "dot", edgeAttrs = eAt2, nodeAttrs = nAt)
 dev.off()
 @ 
 
+%%FIXME: one label - and one caption, please
 \begin{figure} 
 \centering
 \subfigure[Crystal Graph of Arp 2/3 - the edges represent true protein-protein
@@ -493,20 +451,13 @@ indeterminate since missing edges can either be due to the relationship
 not being tested or due to false negative observations.}
 \end{figure}
 
-
-A fundamental difference needs to be made between the lack of edges
-within this graph. An edge is missing between two proteins $p_1$ and
-$p_2$ in $I_b$ if either $p_1$ never interacts with $p_2$ (a true
-negative interaction) or $p_1$ has never been tested with respect to
-$p_2$ (an untested interaction). Problems arise in the structure $I_b$
-because neither the bait population nor the prey population is ever
-fully documented. In this way, the distinction between true negative
-edges and untested edges becomes indeterminate. We detail some methods
-to overcome this problem in the following sections.
-
-Our choice to keep the bait to prey association is also subjective,
-and we note that different investigators are likely to make different
-choices as the nature of this interaction graph.
+To provide some measure of concreteness to our discussion we will
+consider the Arp 2/3 complex. Figure~\ref{arp23} provides two
+different views of the Arp 2/3 complex. In panel b) we see a graph
+that represents the known topology of protein interactions in Arp
+2/3. Not all proteins interact with each other and in fact the graph
+is quite sparse. Of the 21 possible edges there are 8, and the minimum
+number of edges that would connect all proteins is 6.
 
 \subsection{Estimation of the Protein Complex Interactome}
 
@@ -592,27 +543,31 @@ process. The traditional Y2H methods fail to detect interactions
 between membrane bound proteins; (cite Miller et al) developed a
 variant of the Y2H methodology to overcomes these difficulties.
 
-One of the difficulties in interpreting Y2H data arises from the
-interpretation of missing edges, or equivalently missing
-interactions. These can arise for a number of different reasons, false
-positive and false negative results being among them. But a
-potentially larger source of misinformation comes from a
-misinterpretation of the meaning of the lack of an edge in the
-observed data. If the bait protein is exposed to a complete set of
-prey (i.e. all proteins in the organism are modified with the addition
-of an activation domain) then the lack of an edge between the bait and
-a true interactor is a false negative observation. But if that edge
-was not tested, because the other protein did not have an activation
-domain then the lack of an observed edge does not represent a false
-negative result, but rather it is a missing value. 
+A fundamental distinction needs to be made regarding the lack of edges
+within $I_b$. An edge is missing between two proteins $p_1$ and $p_2$
+in $I_b$ if either $p_1$ never interacts with $p_2$, a true negative
+interaction, or $p_1$ has never been tested with respect to $p_2$, an
+untested interaction. Problems arise in interpreting the structure
+$I_b$ because the bait population and the prey population are seldom
+fully documented. In this way, the distinction between true negative
+edges and untested edges becomes indeterminate. 
 
-For these reasons and to make the data more comparable we
-restricted our analysis to the XXX data sets reported in IntAct that
-appeared to be genome wide (i.e. at least 80\% of the genome was
-tested as prey). We set a lower bound for the number of baits used at
-the threshold of twenty proteins and note that due to the manner in
-which the data are reported we will not know about baits for which no
-interactions were detected. 
+In order to make the data more comparable we restricted our analysis
+to the XXX data sets reported in IntAct that appeared to be genome
+wide (i.e. at least 80\% of the genome was tested as prey). We set a
+lower bound for the number of baits used at the threshold of twenty
+proteins and note that due to the manner in which the data are
+reported we will not know about baits for which no interactions were
+detected. In this case, armed with knowledge of the bait proteins we
+can correctly interpret missing edges between known baits and prey as
+tested but not observed and those between prey only proteins as not
+tested. 
+
+We further used a number of different statistical tests, explicit
+details are given in the supplementary details section, to assess the
+observed error rates in the different experiments. If experiments have
+vastly different error rates combining them has the potential to
+dilute the good data more than we improve it.
 
 % The situation becomes problematic when merging the membrane bound protein
 % interaction data with that of the \texttt{IntAct} protein interaction
@@ -622,6 +577,7 @@ interactions were detected.
 %Miller).
 
 %%What should we do about this???
+
 
 
 \section{The estimates}
