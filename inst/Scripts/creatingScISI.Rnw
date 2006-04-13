@@ -99,7 +99,7 @@ xtraGO
 length(xtraGO)
 length(setdiff(xtraGO, colnames(goM)))
 
-goM <- xtraGONodesxtraGO, goM)
+goM <- xtraGONodes(xtraGO, goM)
 
 @
 

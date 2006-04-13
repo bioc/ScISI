@@ -17,13 +17,15 @@ edgeProp <- function(comp, compB2P, sampled){
     }
 
     diag(b2pAM) = 0
+    #print(b2pAM)
     
-    if(sum(b2pAM)>0){
-        y2hGraph <- as(b2pAM, "graphNEL")
+    if(sum(b2pAM) >= 0){
+        y2hGraph <- as(new("graphAM", b2pAM), "graphNEL")
     }
 
     else{
         y2hGraph <- NA
+        print("I should never see this")
     }
     ###print(y2hGraph)
     

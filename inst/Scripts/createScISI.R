@@ -156,6 +156,8 @@ imList[[3]] <- gavin
 imList[[4]] <- ho
 imList[[5]] <- krogan
 
+names(imList) <- c("MIPS", "GO", "Gavin", "Ho", "Krogan")
+
 if(!is.null(pathToSave)){
     save(mips2go, file=paste(pathToSave, "mips2go.rda", sep=""), compress=TRUE)
     save(gavin2mergeMG, file=paste(pathToSave, "gavin2mergeMG.rda", sep=""), compress=TRUE)

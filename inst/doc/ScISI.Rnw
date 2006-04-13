@@ -46,15 +46,16 @@
 Understanding protein interactions is relevant to our understanding of
 complex biological processes and to deciphering the different roles
 played by genes and proteins. Since proteins seldom act alone, but
-rather tend to form multi-protein complexes which then perform
-different molecular tasks it seems that this is an important level of
-organization. In this paper we discuss the problem of estimating
-interactomes and in particular we concetrate on two different
-interactomes, one representing binary interaction data and the second
-representing protein complexes. We propose treating these as
+generally form multi-protein complexes which carry out
+different molecular tasks. The presence of these complexes and 
+their respective composition define an important level of
+organization within tissues or cells. In this paper we discuss the problem of estimating
+interactomes; in particular we concetrate on two different
+interactomes: one representing binary interaction data and the second
+representing protein complex composition. We propose treating these as
 estimation problems and apply a sound statistical approach. The
 estiamtes are based on experimental data as well as data from other
-sources and we consider how and when to combine data from these
+sources, and we consider how and when to combine data from these
 different sources. There are several high through-put experiments that
 provide data on protein interactions and hence on the estimation
 problem we are interested in. These include the yeast two-hybrid
@@ -62,10 +63,9 @@ system (Y2H) with data from \cite{Ito, Uetz, Giot} and high-throughput
 co-precipitation experiments such as \citep{Gavin, Ho, Krogan}.
 
 While several authors have constructed, or estimated, interactomes
-by combining these, and other, data our approach is different (FIXME
-citations here). Instead, we will
-create different interactomes, each relevant to a particular concept
-or type of interaction. The resultant 
+by combining these, and other data sets, our approach is different (FIXME
+citations here). We create different interactomes, each relevant to 
+a particular concept or type of interaction. The resultant 
 interactomes can be combined by different users, often according
 to different criteria, to yield more comprehensive interactomes. We
 believe that there is value in keeping the different concepts separate. 
@@ -91,7 +91,7 @@ purposes.
 We consider the problem of estimating \textit{in silico} interactomes
 (ISI) for \textit{Saccharomyces cerevisiae} and we describe five
 different roles where such a computational device can be used.  First,
-the ISI provides a tool that can be used to mimic wet-lab experiments;
+the ISI provides a tool on which wet-lab experiments can be simulated;
 these \textit{in silico} experiments can help to confirm the viability
 of the wet-lab experimental procedures by allowing investigators to
 alter experimental conditions (by the modification of both stochastic
@@ -140,10 +140,7 @@ note that the tools and methods we are proposing have natural
 extensions that would cover many of the important scenarios that this
 observation suggests.
 
-%%I if we are going to validate the interactome we are building, should
-%%we not regulate the estimate behind the method?? -- TC
-%%FIXME:RG says, I have no idea what that sentence means - the words
-%%are ok, but the grouping of them????
+
 While the estimated interactome is itself of some great interest, we
 note that it is more important to describe the procedure by which an
 ISI is produced. There are many reasons why the estimate is of less
@@ -218,7 +215,7 @@ These two biological interactomes are related, but they are also
 distinct, and the use of the data in modeling and other downstream
 uses requires that some caution be used to not confuse the
 concepts. It is certainly the case that for our working definition of
-a protein complex the members of that complex will have some binary
+a protein complex (to be defined) the members of that complex will have some binary
 interactions with other members. But not all members have direct
 physical interactions with other members. These two examples highlight
 the subtle differences between two distinct interactomes and
@@ -238,7 +235,7 @@ specific set of conditions, and that other interactions, sometimes
 involving the same proteins, will occur under other conditions. Thus,
 the model representing these data will need to become richer. The
 models we propose can be extended in fairly straightforward ways to
-encompass these details, but the available data are currently to
+encompass these details, but the available data is currently to
 sparse to warrant such an approach.
 
 %% (FIXME: list the yeast data here) ... can you explain which data you
@@ -319,11 +316,10 @@ dev.off()
 %%single caption, please.
 \begin{figure} 
 \centering
-\subfigure[Atomic rendering of ARP 2/3 labeled by common names.]{
+\subfigure[]{
 \label{arp23Physical}
 \includegraphics[width = 75mm]{../extdata/Arp2_3_complex.png}}
-\subfigure[Graphical rendering of ARP 2/3 identified by crystallography 
-labelled by the systematic names.]{
+\subfigure[]{
 \label{arp23Graph}
 \includegraphics[width =75mm]{arp23Graph.pdf}}
 \caption{Some scientists might find the physical rendering of ARP 2/3 to be
@@ -390,9 +386,27 @@ both instances and can also be undefined.}
 \end{table}
 
 %%FIXME: data sources need to be listed somewhere - or perhaps only in
-%%the supplimentary data.
+%%the supplimentary data. 
+
 
 \section {Methodology}
+
+<<getdataS, echo=FALSE, results = hide>>=
+data(dataS)
+@ 
+
+<<expdataStats, eval = TRUE, echo=FALSE, results=tex >>=
+xtable(dataS, display = c("s","d","d","d","d","d", "d", "d"), 
+    label = "ta:dataSource", 
+    caption="This table details the data sources from
+which we have derived both the complex membership (CM) 
+data as well as the protein-protein interaction (PPI)
+data. The rows (in descending order) detail the gene
+association type, the method of detection of the association
+type, and the time-table of updates.") 
+
+
+@ 
 
 The creation of an interactome is based on the integration of a number
 of different data sources. These data sources need to be identified,
@@ -431,16 +445,13 @@ dev.off()
 %%FIXME: one label - and one caption, please
 \begin{figure} 
 \centering
-\subfigure[Crystal Graph of Arp 2/3 - the edges represent true protein-protein
-interaction derived from crystallography.]{
+\subfigure[]{
 \label{arp23Crystal}
 \includegraphics[width = 50mm]{arp23Graph.pdf}}
-\subfigure[Y2H Graph of Arp 2/3 - the directed edges represent affiliation 
-from the bait proteins towards the prey proteins.]{
+\subfigure[]{
 \label{arp23Y2HGraph}
 \includegraphics[width =50mm]{arp23Y2HG2.pdf}}
-\subfigure[Inferred Protein-Protein Graph of Arp 2/3 - the red edges represent 
-computationally inferred interactions.]{
+\subfigure[]{
 \label{arp23InfGraph}
 \includegraphics[width =50mm]{arp23InfG.pdf}}
 \caption{These figures show the difference between the true atomic 
@@ -477,6 +488,23 @@ experimental co-precipitation experiments.
 %%should get a more recent (the most recent) GO build from Ting as I
 %%think that there are some substantial improvements.
 %% and we need number of genes involved (as a third column)
+
+<<data1, echo=FALSE, results=hide>>=
+data(expStats)
+@ 
+
+<<expStats, eval = TRUE, echo=FALSE, results=tex >>=
+xtable(expStats, display = c("s","d","d","d","d","d"), 
+    label = "ta:expStats", 
+    caption="This table details the number of complexes
+             derived from each data repository or high-
+             through-put experiment as well as the 
+             number of expressed genes participating 
+             in some none trivial protein complex.") 
+
+
+@ 
+
 
 \subsubsection{Merging of the Data-Sets}
 
@@ -528,6 +556,7 @@ resulting aggregate interactome as $I_c$.
 
 %%FIXME: Tony are you sure that the Miller data are not in the newest
 %%IntAct data?
+%%just checked and it is still not there
 
 %%It seems that we have not made use of the predicted interaction data
 %% - should we?
@@ -579,6 +608,8 @@ dilute the good data more than we improve it.
 %Miller).
 
 %%What should we do about this???
+
+
 
 
 

@@ -49,4 +49,4 @@ names(imList) <- c("Gavin", "Krogan")
 sumStats(imList)
 
 }
-\keyword{dataGen}
+\keyword{datagen}

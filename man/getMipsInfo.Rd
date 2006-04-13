@@ -14,7 +14,16 @@
 }
 \usage{
 getMipsInfo(wantDefault = TRUE, toGrep = NULL,
-parseType = NULL, wantAllComplexes=TRUE)
+parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
+                 "901.01.04", "901.01.04.01", "901.01.04.02",
+                 "901.01.05", "901.01.05.01", "901.01.05.02",
+                 "902.01.09.02", "902.01.01.02.01.01",
+                 "902.01.01.02.01.01.01", "902.01.01.02.01.01.02",
+                 "902.01.01.02.01.02", "902.01.01.02.01.02.01",
+                 "902.01.01.02.01.02.02", "902.01.01.04",
+                 "902.01.01.04.01", "902.01.01.04.01.01",
+                 "902.01.01.04.01.02", "902.01.01.04.01.03",
+                 "902.01.01.04.02", "901.01.09.02"), wantAllComplexes=TRUE)
 }
 \arguments{
   \item{wantDefault}{A logical. If true, the default parameters
@@ -29,7 +38,7 @@ parseType = NULL, wantAllComplexes=TRUE)
   \item{wantAllComplexes}{A logical.If TRUE, the function only returns
     aggregate protein complexes. If FALSE, the function will also return
     subcomplexes as well.}
-  }
+}
 
 \details{
   This function's generic operation is to parse the Mips protein complex
@@ -61,7 +70,8 @@ parseType = NULL, wantAllComplexes=TRUE)
 
   5. If wantAllComplexes parameter is True, the function will return the
   sub-groupings (sub-complexes or sub-structures) as given by the
-  clusterings in the MIPS protein complex database. 
+  clusterings in the MIPS protein complex database.
+
 }
 \value{
   The return value is a list - 

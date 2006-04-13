@@ -7,11 +7,15 @@
 %\VignettePackage{y2hStat}
 \documentclass[11pt]{article}
 
-\usepackage{times}
 \usepackage{hyperref}
 
+
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{amsmath,pstricks,fullpage,amsthm,amssymb}
+
 \usepackage[authoryear,round]{natbib}
-\usepackage{times}
+
 \usepackage{comment}
 
 \textwidth=6.2in
@@ -42,6 +46,10 @@ to validate the ScISI.
 
 library("ScISI")
 library("y2hStat")
+library("graph")
+library("Rgraphviz")
+library("GO")
+library("YEAST")
 
 @
 
@@ -51,15 +59,12 @@ we simply need the \Robject{ScISI} which we have already built as well as
 the various bait to prey experimental data which we have already parsed
 from the Intact repository.
 
-<<loadData>>=
-data(ScISI)
-data(y2hSysGW)
-data(nucComp)
-@ 
 
 Currently, there are six summary statistics in which we are interested. 
-The first two concern hyper-geometric sampling schemes to estimate 
-edge proportions and the mean node degree of the induced Y2H graph under 
+The first two concern hyper-geometric sampling schemes to either calculate 
+the edge proportions from a sampled set of nodes or to estimate the number 
+of edges based on the mean node degree of the induced Y2H graph. These two
+sampling schemes were derived under 
 the assumptions that the Y2H experiments were perfectly sensative and 
 specific (i.e. we did not record any FN nor any FP) and that the prey 
 population is genome wide while the bait population is restricted to 
@@ -106,109 +111,179 @@ experimental error.
   complex. This is essentially a measure of incompleteness.
 \end{enumerate}
 
-
-We have generated a script to calculate each of these graph summary 
-statistics:
-
-<<graphStats>>=
-#interestingComps <- colnames(ScISI) %in% nucComp
-
-#ScISI2 <- ScISI[, interestingComps]
-
-#graphStats <- graphSumStats(ScISI2, y2hSysGW)
-#ncol(ScISI2)
-#length(graphStats)
-#names(graphStats[[1]])
-@ 
-
-We first mention why only a subset of the complexes of ScISI seem
-to have been investigated with respect to the graph statistics. 
-Only those complexes containing some bait protein with non-trivial
-out degree can produce meaningful statistics (otherwise, we would 
-have a quotient with 0 denominator). Thus we have chosen only to 
-record meaningful complexes in our investigation.
-
-The first two hyper-geometric sampling statistics are directly 
-calculated by the \Robject{graphSumStats} script:
-
-<<hyperGeo>>=
-#graphStats[[2]]$edgeProp
-#graphStats[[2]]$popMeanDeg
-@ 
-
-These two statistics give a reasonable estimate over each 
-\Robject{ScISI} protein complex induced Y2H sub-graph. 
-
-Each of the other four statistics needs a bit of simple manipulation 
-to provide the final outcome.
-
-We produce each in the order they are listed above:
-
-<<sampledB>>=
-#graphStats[[2]]$complexBait
-#graphStats[[2]]$complex
-#graphStats[[2]]$notBait
-#sampledProp <- (length(graphStats[[1]]$b2CompP))/(length(graphStats[[1]]$complexBait))
-#sampledProp
-@ 
-
-<<avgOut>>=
-#graphStats[[2]]$avgOutDeg
-@ 
-
-<<notIsolated>>=
-#graphStats[[2]]$notIsolated
-@ 
-
-<<connComp>>=
-
-#cc <- connectedComp(graphStats[[2]]$y2hGraph)
-#cc
-#ratio <- (length(cc)-1)/(length(graphStats[[2]]$complex)-1)
-#ratio
-@ 
-
-We use a contrived example to show that the calculations of hte
-graph summary statistics is what we want it to be:
-
-
-
-
+Using the Y2H data obtained from \texttt{IntAct} and the putative 
+protein complexes of \texttt{ScISI}, we derive can derive each of 
+the six summary statistics above with respect to each estimated
+protein complex. Before we begin the analysis, we run some quality 
+control tests to make sure that the code we have implemented 
+does what we intend it to do. 
 
 <<testEx>>=
 
 exam <- matrix(0, nrow=10, ncol=4)
 present <- c(1,3,4,7,10,12,15,16,19,21,26,29,34,35,36, 38)
 exam[present] <- 1
-#rnames <- c(letters[1:8],letters[17:18])
-#cnames <- c("C1", "C2", "C3", "C4")
 dimnames(exam) <- list(c(letters[1:10]), c("C1", "C2", "C3", "C4"))
-y2h <- list()
-y2h$exp1 <- list()
-y2h$exp2 <- list()
-y2h$exp3 <- list()
-y2h$exp4 <- list()
-y2h$exp1$a <- c("b","c","e","x","z","w")
-y2h$exp1$d <- c("f","g","h","t","s")
-y2h$exp1$g <- c("x","z")
-y2h$exp2$a <- c("b","c","g","t")
-y2h$exp2$e <- c("a","b","z")
-y2h$exp2$z <- c("a","e")
-y2h$exp3$h <- c("a","b","e")
-y2h$exp4$z <- c("t","s","e","v")
-y2h$exp4$w <- c("r","j")
-y2h$exp4$c <- c("d","d")
+y2htest <- list()
+y2htest$exp1 <- list()
+y2htest$exp2 <- list()
+y2htest$exp3 <- list()
+y2htest$exp4 <- list()
+y2htest$exp1$a <- c("b","c","e","x","z","w")
+y2htest$exp1$d <- c("f","g","h","t","s")
+y2htest$exp1$g <- c("x","z")
+y2htest$exp2$a <- c("b","c","g","t")
+y2htest$exp2$e <- c("a","b","z")
+y2htest$exp2$z <- c("a","e")
+y2htest$exp3$h <- c("a","b","e")
+y2htest$exp4$z <- c("t","s","e","v")
+y2htest$exp4$w <- c("r","j")
+y2htest$exp4$c <- c("d","d")
+
+exam
+y2htest
 
 t <- graphSumStats(exam, y2h)
-#t
 
-#cc <- connectedComp(t[["C4"]]$y2hGraph)
-
-#ratio <- (length(cc)-1)/(length(t[["C4"]]$complex)-1)
-
-#cc
-#ratio
 @
+
+The example above creates an interactome of \Sexpr{ncol(exam)} protein 
+complexes with the names of the proteins as $\{a,\ldots,j\}$. The 
+binary interactions are encapsulated within the list \Robject{y2h}. The
+proteins that were tested as baits are $\{a,d,g,e,z,h,z,w,c\}$ We will 
+systematically verify and detail how each summary statistic is obtained.
+
+First we consider the edge proportion for the first complex. Complex $C1$ has
+five co-members $\{a,c,d,g,j\}$, and of which, only $j$ was not sampled as
+a bait in an y2h experiment. 
+
+<<graphC1>>=
+
+load("C1G.rda")
+pdf("C1G.pdf")
+plot(C1G, "dot")
+dev.off()
+@ 
+
+\begin{figure}
+\centering
+\subfigure[Undirected Graph of Complex C1]{
+\label{C1}
+\includegraphics[width=75mm]{C1G.pdf}}
+\end{figure}
+
+From the Y2H induced sub-graph on $C1$, we can see that there is four observed 
+edges from four sampled proteins. Thus the edge proportion is given by the 
+equation:
+
+\begin{equation}
+\hat{X} = \frac{(4)(4)(5)}{2(4+3+2+1)} = \frac{48}{20} = 4
+\end{equation}
+
+and from the output $t$, we can see that:
+
+<<tEdgeProp>>=
+t$C1$edgeProp
+@ 
+
+Using the out degree from each bait, we can estimate the number of edges. We 
+have $deg(a) = 2$, $deg(c) = 1$, and $deg(d)=1$, so that we can estimate the
+number of edges by:
+
+\begin{equation}
+\tilde{X} = \frac{(5)(2+1+1)}{(2)(4)} = \frac{20}{8} = 2.5
+\end{equation}
+
+which we can verify by the output of $t$:
+
+<<tEst>>=
+t$C1$estNumEdges
+@ 
+
+These two sampling schemes are easily verifiable using the y2h data (though we
+have surpressed the directionality of the bait to prey affiliations). Now we 
+move onto calculating each of the four subsequent summary statistics. The first
+of these summary statistics looks to calculate the rate of bait proteins 
+within the complex that finds at least one other co-member to all bait proteins
+withing the complex. For $C1$, we have four proteins tested as baits, but only
+three of these baits $\{a,c,d\}$ found non-trivial co-members. Therefore
+
+\begin{equation}
+  \frac{nonTrivialComplexBaits}{allComplexBaits} = \frac{3}{4}.
+\end{equation}
+
+From the output of $t$, we can generate more information than just the ratio.
+We can find those baits that found complex co-members of $C1$ as well as all
+elements of $C1$ used as baits. We can then take the quotient of cardinality of
+these two sets to get the desired ratio:
+
+<<nonTrivial>>=
+t$C1$nonTrivialCompBaits
+t$C1$complexBaits
+(length(t$C1$nonTrivialCompBait))/(length(t$C1$complexBaits))
+@ 
+
+The next summary statistic calculates the average out-degree for each sampled
+protein with respect to each protein complex to which it belongs. From the 
+estimating the number of edges in the second hypergeometric sampling scheme, we 
+have already found that $deg(a) = 2$, $deg(c) = 1$, and $deg(d)=1$, and we 
+must be mindful that we also sampled $j$ though with regards to $C1$, $deg(j) = 0$.
+Averaging these out-degrees gives:
+
+\begin{equation}
+\frac{\sum degree}{k} = \frac{2+1+1+0}{4} = 1
+\end{equation}
+
+which we can verify by checking the \Robject{avgOutDeg} entry for the output
+of $t$ with respect to a certain protein complex (here $C1$). 
+
+<<outD>>=
+t$C1$avgOutDeg
+@ 
+
+Enumerating the number of un-isolated proteins in each complex follows. 
+Because we have taken only those experiments where the prey population 
+is genome wide, searching for un-isolated proteins amounts to collecting
+each sampled bait protein from each complex that finds a non-empty set
+of co-members as prey and taking the union over all these baits and each
+respective co-member prey set. In our example, the un-isolated set is 
+the four proteins $\{a,c,d,g\}$. We note that only three of these were 
+baits that found non-trivial co-member prey sets, $\{a,c,d\}$ while $g$
+was apart of some non-trivial prey set.
+
+<<uniso>>=
+t$C1$nonIsolatedCompProt
+@ 
+
+The last summary statistic is a measure of in-completeness on the induced Y2H
+graph over the estimated protein complex. We begin by enumerating the connected
+components to the Y2H graph; once we have determined the set of connected 
+components, we contract each component into one single node creating a new 
+graph $G$ where each node is isolated. Now we can calculate the number of edges 
+needed to connect $G$ (equal to  $Nodes(G) - 1$). Now, we can compare this number
+to the number of edges needed to connect orginal graph over the protein complex
+if it were totally dis-connected. From our working example, we see that it
+takes at least four edges to connect $C1$ if it were totally dis-connected; 
+contracting on the connected components, the new dis-connected graph $G$ has
+two nodes, so only one edge is needed to connect $G$. Therefore, the measure
+of incompleteness is $\frac{1}{4}$ 
+
+The output of \Robject{graphSumStats} does not calculate this statistic, but
+does give the required information for us to do so:
+
+<<incomplete>>=
+cc <- connectedComp(t$C1$y2hGraph)
+cc
+m1 <- length(cc)
+complex <- t$C1$complex
+m2 <- length(complex)
+incompleteness <- (m1-1)/(m2-1)
+incompleteness
+@ 
+
+We have manually calculated the six summary statistics in order to verify the 
+implementing R code used. The same calculations are done for the complexes 
+$\{C2,C3,C4\}$, and the resulting 
 
 <<example2>>=
 set.seed(235)
@@ -227,26 +302,178 @@ interact$exp1[[baits[2]]] <- letters[sample(1:26, 7)]
 interact$exp2 <- list()
 interact$exp2[[baits[3]]] <- letters[sample(1:26, 5)]
 interact
-t2 <- graphSumStats(comp2, interact)
-t2
+#t2 <- graphSumStats(comp2, interact)
+#t2
 
 @ 
 
-<<example3>>=
-#comp = matrix(1, nrow = 10, ncol = 1)
-#dimnames(comp) <- list(letters[1:10], "t")
+<<loadData>>=
+data(ScISI)
+data(y2hSysGW)
+data(nucComp)
+@ 
 
-#test <- list()
-#test$exp1 <- list()
-#test$exp1$a <- c("b", "d")
-#test$exp1$c <- "e"
-#test$exp2 <- list()
-#test$exp2$a <- c("b", "e", "g")
-#test$exp2$d <- "z"
+<<graphStats>>=
+interestingComps <- colnames(ScISI) %in% nucComp
 
-#ex1 <- graphSumStats(comp, test)
+ScISI2 <- ScISI[, interestingComps]
+
+graphStats <- graphSumStats(ScISI2, y2hSysGW)
+ncol(ScISI2)
+length(graphStats)
+names(graphStats[[1]])
+
+nonSampled <- sapply(graphStats, function(x) {length(x$complexBaits)!=0})
+nonTrivSampBaits <- graphStats[nonSampled]
+setdiff(names(graphStats),names(nonTrivSampBaits))
+trivCompBaits <- sapply(nonTrivSampBaits, function(x) {length(x$nonTrivialCompBaits)==0})
+trivCompStats <- nonTrivSampBaits[trivCompBaits]
+names(trivCompStats)
+
+nonTrivGraphStats <- nonTrivSampBaits[!trivCompBaits]
+length(nonTrivGraphStats)
+
+degree <- lapply(y2hSysGW, function(x) {sapply(x, length)})
+degree
+minD <- lapply(degree, min)
+maxD <- lapply(degree, max)
+medD <- lapply(degree, median)
+avgD <- lapply(degree, mean)
+
+minD
+maxD
+medD
+avgD
+
+yG2P <- as.list(YEASTGO2PROBE)
+nucProt <- yG2P[["GO:0005634"]] 
+
+ckNuc <- lapply(y2hSysGW, function(x) {sapply(x, function(y) {y %in% nucProt})})
+ckNuc
+
+sym <- vector("list", length=length(y2hSysGW))
+
+for(i in 1:length(sym)){
+baits <- names(y2hSysGW[[i]])
+sym[[i]] <- list()
+
+for(j in 1:length(baits)){
+    
+    for(k in 1:length(y2hSysGW[[i]][[baits[j]]])){
+        
+        preyOfInt <- y2hSysGW[[i]][[baits[j]]][k]
+        #print(preyOfInt)
+        if(!is.null(unlist(y2hSysGW[[i]][[preyOfInt]]))){
+            #print("get here?")
+            #print(baits[j])
+            #print(unlist(y2hSysGW[[i]][[preyOfInt]]))
+            if (baits[j] %in% unlist(y2hSysGW[[i]][[preyOfInt]])){
+                #print("how about here")
+                sym[[i]][[preyOfInt]] <- c(sym[[i]][[preyOfInt]],baits[j])
+            }
+        }
+    }
+    
+}
+
+}
+
+names(sym) <- names(y2hSysGW)
+
+preyS <- lapply(y2hSysGW, function(x) {unique(unlist(x))})
+recip <- vector("list", length=length(preyS))
+for(i in 1:length(preyS)){
+
+recip[[i]] <- names(y2hSysGW[[i]][preyS[[i]]])[!is.na(names(y2hSysGW[[i]][preyS[[i]]]))]
+
+
+}
+
+names(recip) <- names(preyS)
+
+@
+
+<<eProp>>=
+eP <- sapply(nonTrivGraphStats, function(x) x$edgeProp)
+table(eP)
+@ 
+
+<<estEdge>>=
+eE <- sapply(nonTrivGraphStats, function(x) x$estNumEdges)
+table(eE)
 
 @ 
+
+<<sampledB>>=
+
+proportion <- sapply(nonTrivGraphStats, function(x) {length(x$nonTrivialCompBaits)/length(x$complexBaits)})
+table(proportion)
+
+
+@
+
+<<avgOut>>=
+
+MeanOutDeg <- sapply(nonTrivGraphStats, function(x) {x$avgOutDeg})
+table(ceiling(MeanOutDeg))
+@ 
+
+<<notIsolated>>=
+notIsolated <- sapply(nonTrivGraphStats, function(x) {length(x$nonIsolatedCompProt)})
+table(ceiling(notIsolated))
+@ 
+
+<<connComp>>=
+#graphStats[1:5]
+
+#cc <- connectedComp(nonTrivGraphStats[[2]]$y2hGraph)
+#cc
+#ratio <- (length(cc)-1)/(length(nonTrivGraphStats[[2]]$complex)-1)
+#ratio
+
+yGraphs <- lapply(nonTrivGraphStats, function(x) {x$y2hGraph})
+connComp <- lapply(nonTrivGraphStats, function(x) {if(length(x$y2hGraph)!=1){
+                   connectedComp(x$y2hGraph)}})
+
+ratio <- vector()
+homodimer <- vector()
+complete <- vector()
+for(i in 1:length(connComp)){
+    
+    ratio[i] <- (length(connComp[[i]])-1)/(length(nonTrivGraphStats[[i]]$complex)-1)
+    if (ratio[i] == 1) {homodimer <- c(homodimer,names(connComp)[i])}
+    if (ratio[i] == 0) {complete <- c(complete,names(connComp)[i])}
+
+
+      
+}
+
+names(ratio) = names(connComp)
+
+table(ratio)
+complete
+homodimer
+
+@ 
+
+<<allout>>=
+comps <- vector()
+for(i in 1:length(nonTrivGraphStats)){
+    n <- length(nonTrivGraphStats[[i]]$complex)
+    if((nonTrivGraphStats[[i]]$edgeProp > (n-2)) || (nonTrivGraphStats[[i]]$estNumEdges > (n-2))){
+        comps <- c(comps, names(nonTrivGraphStats)[i])
+        print(n)
+        print("***")
+        print(nonTrivGraphStats[[i]]$edgeProp)
+        print("***")
+        print(nonTrivGraphStats[[i]]$estNumEdges)
+        print("------")
+    }
+}
+comps
+
+@ 
+  
 
 
 \end{document}

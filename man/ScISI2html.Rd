@@ -11,7 +11,7 @@
 }
 \usage{
 ScISI2html(urlVect, linkName, filename, title,
-othernames, table.head, table.center = TRUE)
+othernames, table.head, table.center = TRUE, compSize=NULL)
 }
 \arguments{
   \item{urlVect}{A character vector containing the url for each
@@ -23,6 +23,8 @@ othernames, table.head, table.center = TRUE)
   \item{othernames}{Other titles that are needed; sub-titles}
   \item{table.head}{The title for the table}
   \item{table.center}{Logical; to center the table}
+  \item{compSize}{A numeric vector of the complex sizes for the various
+    protein complexes of GO and MIPS}
 }
 
 \value{

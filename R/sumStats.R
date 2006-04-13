@@ -57,11 +57,22 @@ sumStats <- function(imList, pathToSave = NULL){
     if(!is.null(pathToSave)){
         save(redundantM, file = paste(pathToSave,"redundantM.rda", sep=""), compress=TRUE)
         save(subCompM, file = paste(pathToSave,"subCompM.rda", sep=""), compress=TRUE)
+        save(expStats, file=paste(pathToSave,"expStats.rda", sep=""), compress=TRUE)
+    }
+
+    expStats <- matrix(0, ncol=length(imList), nrow=2)
+    rownames(expStats) <- c("Distinct Complexes","Expressed Genes")
+    colnames(expStats) <- names(imList)
+
+    for(i in 1:length(imList)){
+        expStats[1,names(imList)[i]] <- ncol(imList[[i]])
+        expStats[2,names(imList)[i]] <- nrow(imList[[i]])
     }
     
     tableL <- list()
     tableL$redundantM <- redundantM
     tableL$subCompM <- subCompM
+    tableL$expStats <- expStats 
 
     tableL
 

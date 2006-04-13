@@ -73,7 +73,7 @@ calcGraphStats <- function(comp, bait2PreyL){
     if(length(complexBaits) != 0){
         ##the avgOutDeg calc the gw average out degree for each bait which is why
         ##it uses degBait and not degCompBait
-        avgOutDeg <- (sum(unlist(degBait)))/(length(complexBaits))
+        avgOutDeg <- (sum(unlist(degCompBait)))/(length(complexBaits))
     }
     else{
         avgOutDeg = NA
@@ -96,7 +96,7 @@ calcGraphStats <- function(comp, bait2PreyL){
     sumStats$nonTrivialCompBaits <- b2CompP
     sumStats$nonTrivialCompPreys <- unique(unlist(compB2P))
     sumStats$notBait <- notBait
-    sumStats$gwAvgOutDeg <- avgOutDeg
+    sumStats$avgOutDeg <- avgOutDeg
     sumStats$nonIsolatedCompProt <- unique(notIsolated)
     sumStats$y2hGraph <- eList$y2hGraph
     sumStats$estNumEdges <- mDeg

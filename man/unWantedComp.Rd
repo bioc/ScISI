@@ -10,16 +10,18 @@
   removes those columns whose names are found in the character vector.
 }
 \usage{
-unWantedComp(ISI, unwantedComplex = c("GO:0000262", "GO:0000228", "GO:0000775", "GO:0010008", "GO:0005792", "GO:0005768", "GO:0005769", "GO:0005770", "GO:0005777", "GO:0005844", "GO:0001400"))
+unWantedComp(ISI, unwantedComplex = c("GO:0000262", "GO:0000228",
+"GO:0000775", "GO:0010008", "GO:0005792", "GO:0005768", "GO:0005769",
+"GO:0005770", "GO:0005777", "GO:0005844", "GO:0001400"), unwantedGenes =
+c("RNA_TLC1", "SNRNA_NME1","RNA_RNASE-P"))
 }
 
 \arguments{
   \item{ISI}{The in silico interactome as a bipartite graph}
   \item{unwantedComplex}{A character vector. Each entry is a protein
     complex id for which should be removed from the interactome.}
-}
-\details{
-
+  \item{unwantedGenes}{A character vector of gene names that will be
+    deleted from the row indexing set of the in silico interactome.}
 }
 \value{
   An incidence matrix. A new matrix with those columns indexed by
