@@ -954,13 +954,14 @@ linkNames[i] = Desc(mipsOb, mipsNames[i])
 ScISI2html(urlVect = url, linkName = linkNames, filename = "mips.html", 
            title = "MIPS Protein Complex", compSize = mipsCompOrder)
 
-goNames = goDF[,2]
+goNames = as.character(goDF[,1])
 goCompOrder = colSums(goM[,goNames])
 url = vector(length = length(goNames))
 linkNames = vector(length = length(goNames))
 for(i in 1:length(goNames)){
-url[i] = getURL(goOb, goNames[i])
-linkNames[i] = Desc(goOb, goNames[i])
+    print(i)
+    url[i] = getURL(goOb, goNames[i])
+    linkNames[i] = Desc(goOb, goNames[i])
 }
 ScISI2html(urlVect = url, linkName = linkNames, filename = "go.html", 
            title = "GO Protein Complex", compSize = goCompOrder)
@@ -1015,7 +1016,10 @@ apart of any protein complex.
 dim(ISI)
 dim(ScISI2)
 data(ScISI)
-sum(ScISI != ScISI2)
+if(dim(ScISI)==dim(ScISI2)){
+print(sum(ScISI != ScISI2))
+}
+
 @ 
 
 \section{Conclusion}

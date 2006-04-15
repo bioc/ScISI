@@ -1,7 +1,7 @@
-\name{ID-methods}
-\docType{methods}
-\alias{ID-methods}
+\name{ID}
 \alias{ID}
+\alias{ID,yeastData,character-method}
+
 
 \title{A method to return the ID of a protein complex}
 
@@ -21,5 +21,5 @@ ID(object, name)
   yeastData.
   
 }
-\keyword{methods}
+\keyword{classes}
 

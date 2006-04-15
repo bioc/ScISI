@@ -4,7 +4,7 @@ setClass("yeastData", representation(reference="data.frame"))
 setGeneric("ID", function(object, name) standardGeneric("ID"))
 
 
-setMethod("ID", "yeastData",
+setMethod("ID", signature(object="yeastData", name = "character"),
           function(object, name){
               ind = which(object@reference[,"names"] == name)
               object@reference[ind,"id"]
@@ -12,7 +12,7 @@ setMethod("ID", "yeastData",
 
 setGeneric("Desc", function(object, name) standardGeneric("Desc"))
 
-setMethod("Desc", "yeastData",
+setMethod("Desc", signature(object="yeastData", name = "character"),
           function(object, name){
               ind = which(object@reference[,"names"] == name)
               object@reference[ind,"description"]
@@ -20,7 +20,7 @@ setMethod("Desc", "yeastData",
 
 setGeneric("getURL", function(object, name) standardGeneric("getURL"))
 
-setMethod("getURL", "yeastData",
+setMethod("getURL", signature(object="yeastData", name = "character"),
           function(object, name){
               
               goInto = TRUE                           

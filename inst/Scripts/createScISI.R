@@ -10,14 +10,14 @@ goM = createGOMatrix(go)
 
 data(xtraGO)
 xtraGO <- setdiff(xtraGO, colnames(goM))
-yG2P <- as.list(YEASTGO2PROBE)
-xtraComp <- yG2P[xtraGO]
-xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
-xCM <- createGOMatrix(xtraComp)
+#yG2P <- as.list(YEASTGO2PROBE)
+#xtraComp <- yG2P[xtraGO]
+#xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
+#xCM <- createGOMatrix(xtraComp)
 ######This ends the section for notesOtherComps
 
-goM <- mergeBGMat(goM, xCM)
-
+#goM <- mergeBGMat(goM, xCM)
+goM <- xtraGONodes(xtraGO, goM)
 
 ##Comparing GO complexes with all other GO complexes:
 go2go = runCompareComplex(goM, goM, byWhich = "ROW")

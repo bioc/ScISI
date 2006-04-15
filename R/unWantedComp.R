@@ -23,7 +23,7 @@ unWantedComp <- function(ISI, unwantedComplex =
     index2 = which(rowSums(upDatedISI) == 0)
     upDatedISI <- upDatedISI[-index2,]
     index4 = sapply(unwantedGenes, function(x) which(rownames(upDatedISI)==x))
-    print(index4)
+    #print(index4)
     upDatedISI <- upDatedISI[-index4,]
         
     

@@ -1,7 +1,7 @@
-\name{Desc-methods}
-\docType{methods}
-\alias{Desc-methods}
+\name{Desc}
 \alias{Desc}
+\alias{Desc,yeastData,character-method}
+
 
 \title{A method to return a description of a protein complex}
 
@@ -23,5 +23,5 @@ Desc(object, name)
   yeastData.
   
 }
-\keyword{methods}
+\keyword{classes}
 

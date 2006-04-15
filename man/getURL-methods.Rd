@@ -1,7 +1,7 @@
-\name{getURL-methods}
-\docType{methods}
-\alias{getURL-methods}
+\name{getURL}
 \alias{getURL}
+\alias{getURL,yeastData,character-method}
+
 
 \title{A method to return an url location of a protein complex}
 
@@ -23,5 +23,5 @@ getURL(object, name)
   yeastData.
   
 }
-\keyword{methods}
+\keyword{classes}
 
