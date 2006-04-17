@@ -729,7 +729,8 @@ and MIPS complexes are sub-complexes of Ho estimates.
 library("y2hStat")
 data(y2hSysGW)
 data(y2h)
-data(y2hGW)
+#data(y2hGW)
+data(intActData)
 @ 
 
 %%FIXME: a table of the experiments, number of baits and number of
@@ -756,47 +757,60 @@ with some particular bait protein(s) and were observed as prey.
 %%down stream consequences are a pain...
 
 <<someY2HStats, eval=TRUE, echo=FALSE, results=hide>>=
+#tmp <- intActData$indexSetAll
+#names(tmp) <- intActData$shortLabel
+#tmp2 <- list()
+#tmp2[[1]] <- sapply(tmp, function(x) {sapply(x, function(v) v[1])})
+#tmp2[[2]] <- sapply(tmp, function(x) {sapply(x, function(v) v[2])})
 
-baitsUsed <- unique(unlist(sapply(y2hGW, function(x) {sapply(x,
-                                                             function(y)
-                                                             y[1])}))) 
-translation <- y2h$baitsSystematic[baitsUsed]
-numMulNameBaits <- sapply(translation, length)
+#for (i in 1:length(tmp)){
+#    tmp[[i]] <- split(tmp2[[2]][[i]], tmp2[[1]][[i]])
+#}
 
-preysUsed <- unique(unlist(y2hGW))
-translation2 <- y2h$preysSystematic[preysUsed]
-numMulNamePreys <- sapply(translation2, length)
+#y2hGW <- tmp[c(1,4,28,39,40,41,42)]
+
+#baitsUsed <- unique(unlist(sapply(y2hGW, function(x) {sapply(x,
+#                                                             function(y)
+#                                                             y[1])}))) 
+#translation <- y2h$baitsSystematic[baitsUsed]
+#numMulNameBaits <- sapply(translation, length)
+
+#preysUsed <- unique(unlist(y2hGW))
+#translation2 <- y2h$preysSystematic[preysUsed]
+#numMulNamePreys <- sapply(translation2, length)
 @ 
 
 %%FIXME: I have no idea what a SGN is - it seems not to be defined.
 %% I don't like the histograms because they are uninformative. Lets
 %% look at prey per bait, per experiment or something like that
 %% instead. But maybe that is not what you are showing me here.
-\begin{figure}[p]
-\centering
+
+%\begin{figure}[p]
+%\centering
 <<multiPlot, fig=TRUE, echo=FALSE>>=
-par(mfrow = c(1,2))
-multi <- table(numMulNameBaits)
-size <- as.numeric(names(multi))
-repet <- as.vector(multi)
-freq <- rep(size, repet)
-hist(freq, xlab = "Number of SGN", ylab = "Frequency",
-     main = "Bait Mapping Multiplicity")
+#par(mfrow = c(1,2))
+#multi <- table(numMulNameBaits)
+#size <- as.numeric(names(multi))
+#repet <- as.vector(multi)
+#freq <- rep(size, repet)
+#hist(freq, xlab = "Number of SGN", ylab = "Frequency",
+#     main = "Bait Mapping Multiplicity")
 
 
-multi <- table(numMulNamePreys)
-size <- as.numeric(names(multi))
-repet <- as.vector(multi)
-freq <- rep(size, repet)
-hist(freq, xlab = "Number of SGN", ylab = "Frequency",
-     main = "Prey Mapping Multiplicity")
+#multi <- table(numMulNamePreys)
+#size <- as.numeric(names(multi))
+#repet <- as.vector(multi)
+#freq <- rep(size, repet)
+#hist(freq, xlab = "Number of SGN", ylab = "Frequency",
+#     main = "Prey Mapping Multiplicity")
 
-par(mfrow = c(1,1))
+#par(mfrow = c(1,1))
 @
-\label{multiHist}
-\caption{Histograms giving the multiplicity of the bait and 
-prey protein mappings from the IntAct Codes to SGNs.}
-\end{figure}
+
+%\label{multiHist}
+%\caption{Histograms giving the multiplicity of the bait and 
+%prey protein mappings from the IntAct Codes to SGNs.}
+%\end{figure}
 
 %%%What else shoule be said? I don't like the histograms because 
 %%it does not give any indication if the mapping is has >2 outcomes
