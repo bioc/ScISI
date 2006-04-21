@@ -8,3 +8,4 @@ Suggests:
 Maintainer: Tony Chiang <tchiang@fhcrc.org>
 License: LGPL
 Packaged: Fri Dec  2  10:56:58 2005; tchiang
+biocViews: GraphsAndNetworks, Proteomics
