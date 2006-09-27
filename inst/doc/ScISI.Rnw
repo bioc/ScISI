@@ -726,7 +726,8 @@ and MIPS complexes are sub-complexes of Ho estimates.
 \subsection{Summary Statistics for the Protein Binary Interactome}
 
 <<getY2H, eval=TRUE, echo=FALSE, results=hide>>=
-library("y2hStat")
+library("ppiStats")
+library("ppiData")
 data(y2hSysGW)
 data(y2h)
 #data(y2hGW)
@@ -818,7 +819,7 @@ with some particular bait protein(s) and were observed as prey.
 \subsection{PPI Predictions}
 
 <<ppipred, echo=FALSE, results=hide>>=
-library("y2hStat")
+library("ppiData")
 data(ppipred)
 @ 
 
