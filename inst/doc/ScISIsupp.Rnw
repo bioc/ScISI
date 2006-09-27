@@ -643,7 +643,7 @@ cumulative protein binary interactome $I_b$.
 \subsection{Binary Protein Interaction data}
 
 <<getY2H, eval=TRUE, echo=FALSE, results=hide>>=
-library("y2hStat")
+library("ppiData")
 data(y2hSysGW)
 data(y2h)
 data(y2hGW)
