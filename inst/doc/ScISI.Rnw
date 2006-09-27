@@ -74,6 +74,7 @@ membership, since the relationships defined by the latter are not binary
 and not all members of a protein complex directly interact. Further,
 the data sources are quite different, and the experimental errors differ
 in type and magnitude according to the assays used. By keeping data types
+
 separate we will be able to better assemble and model the observed data.
 
 Data from high throughput experiments are expensive and time consuming
@@ -731,7 +732,7 @@ library("ppiData")
 data(y2hSysGW)
 data(y2h)
 #data(y2hGW)
-data(intActData)
+data(intActPPIData)
 @ 
 
 %%FIXME: a table of the experiments, number of baits and number of
