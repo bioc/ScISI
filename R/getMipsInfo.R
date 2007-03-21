@@ -24,9 +24,9 @@ getMipsInfo <- function(wantDefault = TRUE,
                           "902.01.01.04.01.03",
                           "902.01.01.04.02",
                           "901.01.09.02"),
-                        wantAllComplexes = TRUE){
+                        wantSubComplexes = TRUE, ht=FALSE){
 
-  fileToRead <- gzfile(system.file("extdata", "complexcat_data_14112005.gz", package="ScISI"))
+  fileToRead <- gzfile(system.file("extdata", "complexcat_data_18052006.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")
 
   if(!is.null(eCode)){
@@ -127,7 +127,7 @@ getMipsInfo <- function(wantDefault = TRUE,
   parsed = unlist(parsed)
   parsed = unique(parsed)
 
-  if(wantAllComplexes == FALSE){
+  if(wantSubComplexes == FALSE){
     toDel = vector()
     for (j in 1:length(parsed)){
       index = grep(paste("^",parsed[j], "\\.", sep=""), parsed)
@@ -185,9 +185,14 @@ getMipsInfo <- function(wantDefault = TRUE,
   isZero = sapply(MipList, function(u) length(u) == 0)
   
   MipList = MipList[!isZero]
-
   desc = desc[!isZero]
 
+  if(!ht){
+    apms <- sapply(strsplit(names(MipList), "\\."), function(x) x[1]) == "MIPS-550"
+    
+    MipList = MipList[!apms]
+    desc = desc[!apms]}
+  
   inPutforCreate = list()
   inPutforCreate$Mips = MipList
   inPutforCreate$DESC = desc
