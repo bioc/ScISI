@@ -109,9 +109,7 @@ has a working session of $R$ and investigates the examples as they arise.
 
 
 <<loadlibs, eval=TRUE, results=hide>>=
-
 library("ScISI")
-
 @
 
 \section{Obtaining Information}
@@ -120,8 +118,9 @@ library("ScISI")
 Before an \textit{in silico} interactome can be assembled, we must obtain the necessary
 information. As remarked earlier, two sources are online databases, Gene Ontology (GO) 
 and the Munich Information Center for Protein Sequences (MIPS), and the third is a 
-catalogue of \Rpackage{apComplex} estimates from three wet-lab experiments. We start by 
-discussing how information is parsed from the GO and MIPS databases.
+catalogue of \Rpackage{apComplex} estimates from a number of small and large
+wet-lab experiments. We start by discussing how information is parsed from the GO and 
+MIPS databases.
 
 Parsing through the GO database to collect the required information is done by calling the
 \Rfunction{getGOInfo} function:
@@ -173,33 +172,17 @@ getGOTerm(setdiff(names(goGrep), names(go)))
 
 @
 
-Because \Rfunarg{wantDefault} 
-is still kept as $TRUE$, the three default search terms were also parsed. The last line of
-code displays those GO protein complexes found with the addition of the term $-somal$ which 
-were not found with only the default search terms. 
+Because \Rfunarg{wantDefault} is still kept as $TRUE$, the three default search terms were also 
+parsed. The last line of code displays those GO protein complexes found with the addition of the 
+term $-somal$ which were not found with only the default search terms. 
 
 \item[4] \Rfunarg{eCode}: A character vector of evidence code terms (cite here). The is 
 another search restriction; whereas perl regular expression put restrictions on 
-the protein complexes as a whole, 
-the evidence codes operate on the individual proteins themselves. If a protein is only referenced by 
-evidence codes found within the eCode vector, it is dis-allowed and removed from the protein 
-complex. In the example above, we have chosen the evidence codes $IEA$ (Inferred from Electronic
-Annotation), $NAS$ (Non-traceable Author Statement), $ND$ (No biological Data available),
-and $NR$ (Not Recorded).
-
-<<getGOInfoCoded, eval = TRUE>>=
-#  goNoCode = getGOInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
-#                      eCode = NULL, wantAllComplexes = FALSE)
-#  nm = names(go)
-#  protDiff = sapply(nm, function(w) {setdiff(goNoCode[[w]], go[[w]])})
-#  for (i in 1:length(protDiff)){
-#      if (length(protDiff[[i]]) != 0){
-#          print(protDiff[[i]])
-#      }
-#  }
-@ 
-
-
+the protein complexes as a whole, the evidence codes operate on the individual proteins themselves. 
+If a protein is only referenced by evidence codes found within the eCode vector, it is dis-allowed 
+and removed from the protein complex. In the example above, we have chosen the evidence codes $IEA$ 
+(Inferred from Electronic Annotation), $NAS$ (Non-traceable Author Statement), $ND$ (No biological 
+Data available), and $NR$ (Not Recorded).
 
 \item[5] \Rfunarg{wantAllComplexes}: A logical. If TRUE, the children of parsed nodes will 
 also be returned (accounting for sub-complexes). In addition, nodes that are children of 
@@ -235,20 +218,12 @@ bi-partite graph incidence matrix of this hyper-graph list.
 
 <<createGOMatrix, eval=TRUE>>=
 goM = createGOMatrix(go)
-
 @ 
 
 We remark that we the proteins names used to index the rows of the incidence matrix are the 
-standard gene names for yeast. To establish uniformity, we have used the standard gene names
+systematic gene names for yeast. To establish uniformity, we have used the systematic gene names
 across all data sets. The columns of the incidence matrix are indexed by the GO id's 
 corresponding to certain protein complexes. 
-
-<<createGOMatrixOut, eval=TRUE>>=
-#table(colSums(goM))
-#table(rowSums(goM))
-@
-
-
 
 Unfortunately, term mining is rarely comprehensive nor exhaustive. There exists GO nodes that 
 neither have the term $complex$ in the Go terms nor do they have any terms ending in the suffixes
@@ -258,9 +233,9 @@ $-ase$ nor $-some$. We have manually found additionally GO nodes of potential in
 by the \Rfunction{getGOInfo} function. From the remaining 26 complexes,
 only 6 complexes were found to have non-trivial overlap with S. cerevisae in the GO CC ontology. To 
 check possible GO nodes and to add to the GO protein complexes, we call the \Rfunction{xtraGONodes}
-function (example code shown below). It is important to note that the \Rfunction{xtraGONodes} can only be called after an 
-initial incidence matrix for the bi-partite graph of the GO protein complexes has been built since
-this function will compare the extra GO nodes with those existing GO protein complexes.
+function (example code shown below). It is important to note that the \Rfunction{xtraGONodes} can only 
+be called after an initial incidence matrix for the bi-partite graph of the GO protein complexes has 
+been built since this function will compare the extra GO nodes with those existing GO protein complexes.
 
 <<xtraGO>>=
 data(xtraGO)
@@ -278,7 +253,7 @@ is completely analogous to parsing the GO database and is done by calling the
 
 <<getMipsInfo, eval=TRUE>>=
 mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL, 
-                   eCode = NULL, wantAllComplexes = TRUE)
+                   eCode = NULL, wantSubComplexes = TRUE, ht=FALSE)
 
 
 @
@@ -286,12 +261,11 @@ mips = getMipsInfo(wantDefault = TRUE, toGrep = NULL, parseType = NULL,
 Unlike the \Rfunction{getGOInfo} function, \Rfunction{getMipsInfo} parse through three files 
 downloaded from the complex catalogue of the MIPS database. One file contains a hierarchy 
 for the protein complexes (i.e. complexes are built from sub-complexes)
- while the second file contains the protein 
-composition of each of the levels of the hierarchy from the first. Finally, the third file contains
-evidence codes which are used to annotate proteins to each protein complex. These files 
-are updated bi-annually, so it is important to note that \Rfunction{getMipsInfo} should be 
-updated periodically to correspond with the newer data files. With the exception of the
- \Rfunarg{wantAllComplexes} argument, the functionality of \Rfunction{getMipsInfo} is identical 
+while the second file contains the protein composition of each of the levels of the hierarchy from the 
+first. Finally, the third file contains evidence codes which are used to annotate proteins to each 
+protein complex. These files are updated bi-annually, so it is important to note that \Rfunction{getMipsInfo} 
+should be updated periodically to correspond with the newer data files. With the exception of the
+ \Rfunarg{wantSubComplexes} argument, the functionality of \Rfunction{getMipsInfo} is identical 
 to that of \Rfunction{getGOInfo} though the implementation is quite different. 
 Thus, the parameters of \Rfunction{getMipsInfo} have the following characteristics:
 
@@ -319,7 +293,7 @@ search terms with the suffix $-somal$.
 toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
-                       eCode = NULL, wantAllComplexes = TRUE)
+                       eCode = NULL, wantSubComplexes = TRUE)
 #length(mips$Mips)
 #length(mipsGrep$Mips)
 mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
@@ -345,12 +319,17 @@ experiments.
 
 @ 
 
-\item[5] \Rfunarg{wantAllComplexes}: A logical. If FALSE, only the top levels of the 
+\item[5] \Rfunarg{wantSubComplexes}: A logical. If FALSE, only the top levels of the 
 hierarchy will be returned (the aggregate protein complex); if TRUE, 
 all the intermediates of the hierarchy  will also be returned 
 (the sub-complexes as well). There are certain computational instances when retaining
 only the top level protein complexes is necessary, but the default setting is to retain
 all protein complexes, and hence the logical is TRUE. 
+
+\item[6] \Rfunarg{ht}: A logical. If FALSE, then the protein complexes obtained by 
+high throughput experimentation will not be extracted. Otherwise, if TRUE, those protein
+complexes obtained by high throughput analysis are extracted.
+
 \end{itemize}
 
 <<getMipsInfoEntries, eval=TRUE>>=
@@ -391,62 +370,27 @@ names(mips$DESC)[1:10]
 mips$DESC["510.40"]
 @ 
 
-The \Rpackage{GO} package has
-methods of returning descriptions of any GO ID, and, therefore, it is irrelevant to create such 
-a character vector containing the descriptions. Since there is no such methods for the MIPS 
-dataset, it is necessary to record this vector as we parse the MIPS files. 
+The \Rpackage{GO} package has methods of returning descriptions of any GO ID, and, therefore, it is 
+redundant to create such a character vector containing the descriptions. Since there is no such 
+methods for the MIPS dataset, it is necessary to record this vector as we parse the MIPS files. 
 
 The MIPS bi-partite graph incidence matrix is created exactly as the GO bipartite graph incidence
 matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunction{getMipsInfo}.
 
 <<createMipsMatrix, eval=TRUE>>=
 mipsM = createMipsMatrix(mips)
-
 @ 
 
-Again we use the standard gene names for yeast to index the rows of the MIPS incidence matrix
+Again we use the systematic gene names for yeast to index the rows of the MIPS incidence matrix
 and the the MIPS ID's corresponding to protein complexes index the columns. It is important to 
 note that \Rfunction{createMipsMatrix} has prefixed each of the MIPS id's with the term ``MIPS-''.
 This is useful when we merge different incidence matrices, for it allows us to know where each
 protein complex orginates. 
 
-<<createMipsMatrixOut, eval=TRUE>>=
-#mipsM[1:10, 1:6]
-#table(colSums(mipsM))
-#table(rowSums(mipsM))
-@ 
-
-While we have produced a method for user's to eliminate proteins from complexes based on the 
-absence of Mips evidence codes, there is no simple and efficient method to eliminate entire 
-protein complexes using these codes. To this end, we give two relatively benign ways to 
-delete certain protein complexes: 1. the deletion of protein complex estimates obtained from
-high through-put AP-MS experiments and 2. the deletion of irrelevant protein complexes. It must 
-be stated that the first method is exclusive to Mips protein complexes while the second can 
-be carried out for both Mips and GO protein complexes.
-
-Because the protein complex estimates for high through-put AP-MS experiments in the Mips
-repository were obtained via each individual investigator, the estimates lack uniformity 
-across the estimation algorithms. To this end we have decided to use the estimation algorithm 
-from the R package \Rpackage{apComplex} (which has shown considerable accuracy) in place 
-of the experimentally curated estimates found in Mips. 
-
-The nomenclature of Mips protein complexes makes it easy to select and eliminate
-the high through-put APMS protein complex estimates. All estimated based on APMS
-technology is encoded initially by $550$ (recall in the incidence matrix by $MIPS-550$);
-thus we can search for these codes and eliminate them from the incidence matrix.
-
-<<delAPMS>>=
-cn = colnames(mipsM)
-apms = grep("MIPS-550", cn)
-mipsM = mipsM[,-apms]
-@ 
-
-The second method concerns the manual investigation of curation of the protein complexes 
-obtained by the \Rfunction{getGOInfo} and \Rfunction{getMipsInfo}. We shall come back to 
-this method towards the end of the vignette where we comment on the customizing the 
-interactome based on manual curation.
-
 \subsection{Purified Data Set Complexes estimated by apComplex}
+
+FIXME - this section and all codes need to be completely re-done!!!
+
 The third set from which we can obtain protein complex co-membership data is from the R 
 package \Rpackage{apComplex}. Having been designed as a complex co-membership estimation
 algorithm, \Rpackage{apComplex} takes wet-lab AP-MS data and produces consistent and 

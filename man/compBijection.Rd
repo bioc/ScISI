@@ -66,7 +66,7 @@ compBijection(TSNMat, estMat, c2kMatrix, bijMat, counter = 1)
 \author{Tony Chiang}
 
 \examples{
-mips = getMipsInfo(wantAllComplexes=FALSE)
+mips = getMipsInfo(wantSubComplexes=FALSE)
 go = getGOInfo(wantAllComplexes=FALSE)
 mipsM = createMipsMatrix(mips)
 goM = createGOMatrix(go)

@@ -66,7 +66,7 @@ maximizeSimilarity(simMat, bywhich = "ROW", zeroSim = "NO")
 
 \examples{
 go = getGOInfo(wantAllComplexes = FALSE)
-mips = getMipsInfo(wantAllComplexes = FALSE)
+mips = getMipsInfo(wantSubComplexes = FALSE)
 goM = createGOMatrix(go)
 mipsM = createMipsMatrix(mips)
 cc = runCompareComplex(mipsM, goM, byWhich="ROW")

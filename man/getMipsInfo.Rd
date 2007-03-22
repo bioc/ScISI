@@ -23,7 +23,8 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
                  "902.01.01.02.01.02.02", "902.01.01.04",
                  "902.01.01.04.01", "902.01.01.04.01.01",
                  "902.01.01.04.01.02", "902.01.01.04.01.03",
-                 "902.01.01.04.02", "901.01.09.02"), wantAllComplexes=TRUE)
+                 "902.01.01.04.02", "901.01.09.02"), wantSubComplexes=TRUE,	
+		 ht=FALSE)
 }
 \arguments{
   \item{wantDefault}{A logical. If true, the default parameters
@@ -35,9 +36,11 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
     how each entry of toGrep should be parsed; e.g. "grep" or "agrep"}
   \item{eCode}{A character vector. The evidence code is given in the
   file evidence.scheme found in the inst/extdata section of the package.}
-  \item{wantAllComplexes}{A logical.If TRUE, the function only returns
-    aggregate protein complexes. If FALSE, the function will also return
+  \item{wantSubComplexes}{A logical.If FALSE, the function only returns
+    aggregate protein complexes. If TRUE, the function will also return
     subcomplexes as well.}
+  \item{ht}{A logical. If FALSE, the function will not extract protein 
+  complex estimates obtained from high throughput analysis.}
 }
 
 \details{
@@ -68,9 +71,13 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
   evidence codes used to annotate the protein are supplied in the eCode
   argument; otherwise, it is left in the complex.
 
-  5. If wantAllComplexes parameter is True, the function will return the
+  5. If wantSubComplexes parameter is True, the function will return the
   sub-groupings (sub-complexes or sub-structures) as given by the
   clusterings in the MIPS protein complex database.
+
+  6. If ht parameter is True, the function will return the
+  will return those protein complex estimates obtained from 
+  high throughput analysis as well.
 
 }
 \value{
@@ -88,9 +95,8 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
 \author{Tony Chiang}
 
 \examples{
-mips = getMipsInfo(wantAllComplexes = FALSE)
+mips = getMipsInfo(wantSubComplexes = FALSE)
 mipsPhrase = getMipsInfo(wantDefault = FALSE, toGrep = "\\Bsomal\\b",
-parseType = "grep", wantAllComplexes=FALSE)
-
+parseType = "grep", wantSubComplexes=FALSE)
 }
 \keyword{datagen}

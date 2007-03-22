@@ -33,7 +33,7 @@ createMipsDataFrame(desc, mips)
 
 
 \examples{
-mips = getMipsInfo(wantAllComplexes=FALSE)
+mips = getMipsInfo(wantSubComplexes=FALSE)
 mipsM = createMipsMatrix(mips)
 mipsDF = createMipsDF(mips$DESC, mipsM)
 }

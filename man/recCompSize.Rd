@@ -35,7 +35,7 @@ recCompSize(bg1, bg2)
 \examples{
 go = getGOInfo(wantAllComplexes = FALSE)
 goM = createGOMatrix(go)
-mips = getMipsInfo(wantAllComplexes = FALSE)
+mips = getMipsInfo(wantSubComplexes = FALSE)
 mipsM = createMipsMatrix(mips)
 recCompSize(goM, mipsM)
 }
