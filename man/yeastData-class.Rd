@@ -9,12 +9,12 @@
   A class representing an interactome of yeast. The object is in the
   form of a dataframe with three generic methods. The methods take two
   arguments: the first is the instance of the class yeastData; the
-  second is the name of a protein complexe with respect as given by the
+  second is the name of a protein complex with respect as given by the
   bi-partite graph incidence matrix.
   }
 
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("yeaseData",
+Objects can be created by calls of the form \code{new("yeastData",
   reference = dataFrameISI)}.
 }
 \section{Slots}{

@@ -65,10 +65,19 @@ for(name in ls(bpVBPMat)) {
   dontKeep <- setdiff(systematic, check)
   keepR <- setdiff(rownames(bpAllMat[[name]]), dontKeep)
   keepC <- setdiff(colnames(bpAllMat[[name]]), dontKeep)
-  sel[keep] <- TRUE 
+  sel[keep] <- TRUE
+
+  vbpRedMat <- bpVBPMat[[name]][sel, sel]
+  allRedMat <- bpAllMat[[name]][keepR, keepC]
+
+  vbpRedMat <- vbpRedMat[rownames(vbpRedMat)[rowSums(vbpRedMat)>0],
+                         colnames(vbpRedMat)[colSums(vbpRedMat)>0]]
+
+  allRedMat <- allRedMat[rownames(allRedMat)[rowSums(allRedMat)>0],
+                         colnames(allRedMat)[colSums(allRedMat)>0]]
   
-  assign(name, bpVBPMat[[name]][sel, sel], envir=bpVBPRed)
-  assign(name, bpAllMat[[name]][keepR, keepC], envir=bpAllRed)
+  assign(name, vbpRedMat, envir=bpVBPRed)
+  assign(name, allRedMat, envir=bpAllRed)
 }
 
 bpVBPRedAPMS <- new.env(parent=globalenv(), hash=FALSE)
