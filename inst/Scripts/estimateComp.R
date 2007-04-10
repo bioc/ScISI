@@ -87,3 +87,5 @@ for(name in bpExperimentNames[8:12]){
   assign(name, bpVBPRed[[name]], envir=bpVBPRedAPMS)
   assign(name, bpAllRed[[name]], envir=bpAllRedAPMS)
 }
+
+save(bpAllRedAPMS, file="bpAllRedAPMS.rda", compress=TRUE)
