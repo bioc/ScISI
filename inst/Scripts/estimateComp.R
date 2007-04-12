@@ -59,13 +59,13 @@ for(name in ls(bpVBPMat)) {
   f = assessSymmetry(bpVBPMat[[name]], pLevels=pLevels)
   sel = (f$p>=pThresh)
   systematic <- names(sel[!sel])
-  deg <- calcInOutDegStats(bpGraphs[[name]])
-  check <- names(which(deg$inDegreeMinusOutDegree>0))
-  keep <- intersect(systematic, check)
-  dontKeep <- setdiff(systematic, check)
-  keepR <- setdiff(rownames(bpAllMat[[name]]), dontKeep)
-  keepC <- setdiff(colnames(bpAllMat[[name]]), dontKeep)
-  sel[keep] <- TRUE
+  #deg <- calcInOutDegStats(bpGraphs[[name]])
+  #check <- names(which(deg$inDegreeMinusOutDegree>0))
+  #keep <- intersect(systematic, check)
+  #dontKeep <- setdiff(systematic, check)
+  keepR <- setdiff(rownames(bpAllMat[[name]]), systematic)
+  keepC <- setdiff(colnames(bpAllMat[[name]]), systematic)
+  #sel[keep] <- TRUE
 
   vbpRedMat <- bpVBPMat[[name]][sel, sel]
   allRedMat <- bpAllMat[[name]][keepR, keepC]
@@ -89,3 +89,10 @@ for(name in bpExperimentNames[8:12]){
 }
 
 save(bpAllRedAPMS, file="bpAllRedAPMS.rda", compress=TRUE)
+save(bpVBPRedAPMS, file="bpVBPRedAPMS.rda", compress=TRUE)
+
+library(apComplex)
+load("bpVBPRedAPMS.rda")
+matList = as.list(bpVBPRedAPMS)
+t = matList[[5]]
+test = findComplexes2(t, commonFrac=.5)
