@@ -88,23 +88,6 @@ for(name in bpExperimentNames[8:12]){
   assign(name, bpAllRed[[name]], envir=bpAllRedAPMS)
 }
 
-#save(bpAllRedAPMS, file="bpAllRedAPMS.rda", compress=TRUE)
-#save(bpVBPRedAPMS, file="bpVBPRedAPMS.rda", compress=TRUE)
+save(bpAllRedAPMS, file="bpAllRedAPMS.rda", compress=TRUE)
+save(bpVBPRedAPMS, file="bpVBPRedAPMS.rda", compress=TRUE)
 
-library(apComplex)
-#load("bpVBPRedAPMS.rda")
-#matList = as.list(bpVBPRedAPMS)
-#t = matList[[5]]
-#test = findComplexes(t, commonFrac=.5)
-
-mList <- as.list(bpAllRedAPMS)
-Gavin02CompEst <- findComplexes(mList[["Gavin2002BPGraph"]])
-save(Gavin02CompEst, file="Gavin02CompEst.rda", compress=TRUE)
-#Ho02CompEst <- findComplexes(mList[["Ho2002BPGraph"]])
-#save(Ho02CompEst, file="Ho02CompEst.rda", compress=TRUE)
-#Krogan04CompEst <- findComplexes(mList[["Krogan2004BPGraph"]])
-#save(Krogan04CompEst, file="Krogan04CompEst.rda", compress=TRUE)
-#Gavin06CompEst <- findComplexes(mList[["Gavin2006BPGraph"]], commonFrac=.5)
-#save(Gavin06CompEst, file="Gavin06CompEst.rda", compress=TRUE)
-#Krogan06CompEst <- findComplexes(mList[["Krogan2006BPGraph"]], commonFrac=.5)
-#save(Krogan06CompEst, file="Krogan06CompEst.rda", compress=TRUE)
