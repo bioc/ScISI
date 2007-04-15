@@ -1,5 +1,7 @@
 runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich){
     options(error=recover)
+    BGMat1 <- as.matrix(BGMat1)
+    BGMat2 <- as.matrix(BGMat2)
     ##This function prepares two matrix representation of bipartite
     ##graphs for comparison. We need the rows of TSNMat and erComplex
     ##to be identical if reasonable comparisons can be made. To that
@@ -37,7 +39,7 @@ runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich){
         simInd = JaccardCoef(compArray)
     }
 
-    maxInterS = maximizeSimilarity(simInd, byWhich)
+    #maxInterS = maximizeSimilarity(simInd, byWhich)
     #align = runAlignment(BGMat1, BGMat2, simInd)
     
     #rowToDel = which(apply(align, 1, function(x) all(is.na(x))))
@@ -49,8 +51,8 @@ runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich){
     comparisonList = list()
 
     
-    comparisonList$JC = simInd
-    comparisonList$maxIntersect = maxInterS
+    comparisonList$JC = as(simInd, "Matrix")
+    #comparisonList$maxIntersect = maxInterS
     comparisonList$equal = subC$equal
     comparisonList$toBeRm = subC$toBeRm
     

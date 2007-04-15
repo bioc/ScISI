@@ -4,7 +4,7 @@ xtraGONodes <- function(xtraGO, goM){
     yG2P <- as.list(YEASTGO2PROBE)
     xtraComp <- yG2P[xtraGO]
     xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
-    xCM <- createGOMatrix(xtraComp)
+    xCM <- list2Matrix(xtraComp)
     
 
     goM <- mergeBGMat(goM, xCM)
