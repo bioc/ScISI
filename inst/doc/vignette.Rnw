@@ -147,7 +147,7 @@ The function \Rfunction{createGOMatrix} takes the output of \Rfunction{getGOInfo
 bi-partite graph incidence matrix of this hyper-graph list. 
 
 <<createGOMatrix, eval=TRUE>>=
-goMatrix = list2Matrix(go)
+goM = list2Matrix(go)
 @ 
 
 We remark that we the proteins names used to index the rows of the incidence matrix are the 
@@ -173,7 +173,7 @@ xtraGO
 length(xtraGO)
 length(setdiff(xtraGO, colnames(goM)))
 
-goMatrix <- xtraGONodes(xtraGO, goM)
+goM <- xtraGONodes(xtraGO, goM)
 @ 
 
 \subsection{Munich Information Center for Protein Sequences}
