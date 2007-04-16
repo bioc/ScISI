@@ -7,7 +7,7 @@ getGOInfo <- function(wantDefault = TRUE,
   ##GO database.
   xx = names(as.list(GOTERM))
   gt <- getGOTerm(xx)
-  gtcc <- gt$CC
+  gtcc <- gt[["CC"]]
   yy <- as.list(YEASTGO2PROBE)
   Grepl = list()
 
@@ -18,10 +18,10 @@ getGOInfo <- function(wantDefault = TRUE,
 
   if(wantDefault){
     for(i in 1:length(pattern)){
-      theDefault[[i]]$pattern = pattern[i]
-      theDefault[[i]]$x = gtcc
+      theDefault[[i]][["pattern"]] = pattern[i]
+      theDefault[[i]][["x"]] = gtcc
       if(parseT[i] == "grep"){
-        theDefault[[i]]$perl = TRUE
+        theDefault[[i]][["perl"]] = TRUE
       }
     }
   }
@@ -43,9 +43,9 @@ getGOInfo <- function(wantDefault = TRUE,
       }
       
       for(j in 1:length(toGrep)){
-          toGrep[[j]]$x = gtcc
+          toGrep[[j]][["x"]] = gtcc
           if(parseType[j] == "grep"){
-              toGrep[[j]]$perl = TRUE
+              toGrep[[j]][["perl"]] = TRUE
           }
       }
   }
@@ -96,7 +96,7 @@ getGOInfo <- function(wantDefault = TRUE,
 
         ##GO:0043234 is the node referring to Protein Complex
         ##Must check to see if all the children have "is a" edge
-        pComplex = GOCCCHILDREN$"GO:0043234"
+        pComplex = GOCCCHILDREN[["GO:0043234"]]
 
         ##Combine into one set
         moreNames = unique(union(union(names(cMembers), names(moreCMembers)),

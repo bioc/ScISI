@@ -3,6 +3,8 @@ library(apComplex)
 library(ppiData)
 library(ppiStats)
 
+sessionInfo()
+
 bpGraphs = new.env(parent=globalenv(), hash=FALSE)
 data(list=bpExperimentNames, envir=bpGraphs)
 for(j in ls(bpGraphs))
