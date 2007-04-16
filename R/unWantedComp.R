@@ -15,16 +15,24 @@ unWantedComp <- function(ISI, unwantedComplex =
                            
 
     
-    
-    index = sapply(unwantedComplex, function(x) which(colnames(ISI) == x)) 
-    upDatedISI <- ISI[,-index]
-    index3 <- which(colSums(upDatedISI)==1)
-    upDatedISI <- upDatedISI[, -index3]
-    index2 = which(rowSums(upDatedISI) == 0)
-    upDatedISI <- upDatedISI[-index2,]
-    index4 = sapply(unwantedGenes, function(x) which(rownames(upDatedISI)==x))
-    #print(index4)
+  upDatedISI <- ISI
+  
+  index = sapply(unwantedComplex, function(x) which(colnames(ISI) == x))
+  if(length(index !=0)){
+    upDatedISI <- upDatedISI[,-index]
+  }
+  index2 <- which(colSums(upDatedISI)==1)
+  if(length(index2)!=0){
+    upDatedISI <- upDatedISI[, -index2]
+  }
+  index3 = which(rowSums(upDatedISI) == 0)
+  if(length(index3)!=0){
+    upDatedISI <- upDatedISI[-index3,]
+  }
+  index4 = sapply(unwantedGenes, function(x) which(rownames(upDatedISI)==x))
+  if(length(index4)!=0){
     upDatedISI <- upDatedISI[-index4,]
-        
-    
+  }
+  
+  upDatedISI
 }
