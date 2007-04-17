@@ -3,7 +3,7 @@ Title: In Silico Interactome
 Version: 1.7.5
 Author: Tony Chiang <tchiang@fhcrc.org>
 Description: Package to create In Silico Interactomes 
-Depends: methods, apComplex, GO, GOstats, graph, RBGL, Rgraphviz, YEAST, xtable
+Depends: methods, apComplex, GO, GOstats, graph, RBGL, Rgraphviz, YEAST, xtable, Matrix
 Suggests:ppiData, ppiStats
 Maintainer: Tony Chiang <tchiang@fhcrc.org>
 License: LGPL
