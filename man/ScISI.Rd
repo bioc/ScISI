@@ -19,7 +19,7 @@
   will percolate through the protein complexes or protein complex composition
   and so the ScISIC will need to be rebuilt. A script located in the 
   inst/Scripts/ entitled createScISIC.R creates an updated ScISIC if the GO and
-  MIPS's files are up to date. GO 1.15.13 and complexcat_data_20062005 (MIPS) were 
+  MIPS's files are up to date. GO 1.15.13 and complexcat-data-20062005 (MIPS) were 
   used to build ScISIC for Bioconductor 2.0 release of the package ScISI. Both are 
   the most up to date versions of the repository as of 19 April 2007. 
 
