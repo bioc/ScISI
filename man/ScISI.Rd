@@ -1,6 +1,7 @@
 \name{ScISI}
 \alias{ScISI}
 \alias{ScISIC}
+\alias{ScISIverified}
 \docType{data}
 \title{The In Silico Interactome for Saccharomyces cerevisiae}
 \description{
@@ -18,13 +19,18 @@
   will percolate through the protein complexes or protein complex composition
   and so the ScISIC will need to be rebuilt. A script located in the 
   inst/Scripts/ entitled createScISIC.R creates an updated ScISIC if the GO and
-  MIPS's files are up to date.
+  MIPS's files are up to date. GO 1.15.13 and complexcat_data_20062005 (MIPS) were 
+  used to build ScISIC for Bioconductor 2.0 release of the package ScISI. Both are 
+  the most up to date versions of the repository as of 19 April 2007. 
+
+  ScISIC replaces ScISIverified which has been deprecated.
 
   ScISI combines ScISIC with protein complex estimates on the datasets
-  derived by Gavin et al (2002), Ho et al (2002), Krogan et al (2004), Gavin et al (2006),
-  and Krogan et al (2006) using the penalized algorithm found with apComplex
+  derived by Gavin et al (2002), Ho et al (2002), and Krogan et al (2004)
+  using the penalized algorithm found with apComplex
   developed by Scholtens et al (2004). 
 
+  
 
 }
 \usage{data(ScISI)}

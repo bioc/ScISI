@@ -831,6 +831,9 @@ ISI2 = unWantedComp(ISI, unwantedComplex =
                            "GO:0005844",
                            "GO:0001400"))
 
+data(ScISIC)
+identical(ISI2, ScISIC)
+
 @ 
 
 The function has two arguments, the bi-partite graph incidence matrix and a character vector. 
@@ -839,13 +842,6 @@ deletion of these protein complexes, the function also removes any proteins whic
 apart of any protein complex.
 
 <<checking>>=
-dim(ISI)
-dim(ISI2)
-data(ScISIC)
-if(dim(ScISIC)==dim(ISI2)){
-print(sum(ScISIC != ISI2))
-}
-
 @ 
 
 \section{Conclusion}

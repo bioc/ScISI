@@ -1,0 +1,13 @@
+import("Matrix")
+import("GOstats")
+
+
+exportClasses(yeastData)
+
+exportMethods(ID, Desc, getURL)
+
+export(JaccardCoef, ScISI2html, calcGraphStats, checkComplex, checkSGN, compBijection, compareComplex,
+       createGODataFrame, createGOMatrix, createMipsDataFrame, createMipsMatrix, createYeastDataObj,
+       edgeProp, findSubComp, getAPMSData, getGOInfo, getLocOrfs, getMipsInfo, graphSumStats, list2Matrix,
+       maximizeSimilarity, meanDeg, mergeBGMat, recCompSize, rmByEvi, runAlignment, runCompareComplex,
+       sumStats, unWantedComp, xtraGONodes)

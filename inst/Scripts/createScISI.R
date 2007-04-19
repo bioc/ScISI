@@ -1,5 +1,5 @@
-createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE
-                        Ho02 = FALSE, Krogan04 = FALSE, Gavin06 = FALSE
+createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE,
+                        Ho02 = FALSE, Krogan04 = FALSE, Gavin06 = FALSE,
                         Krogan06 = FALSE){
 
   library(apComplex)
@@ -12,15 +12,15 @@ createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE
     eCode = goECodes, wantAllComplexes = TRUE)
   
   goMatrix = list2Matrix(go)
-
-
+  
+  
   data(xtraGO)
                                         #xtraGO <- setdiff(xtraGO, colnames(goMatrix))
                                         #yG2P <- as.list(YEASTGO2PROBE)
                                         #xtraComp <- yG2P[xtraGO]
                                         #xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
                                         #xCM <- createGOMatrix(xtraComp)
-  ######This ends the section for notesOtherComps
+######This ends the section for notesOtherComps
   
                                         #goM <- mergeBGMat(goM, xCM)
   goMatrix <- xtraGONodes(xtraGO, goMatrix)
@@ -32,7 +32,7 @@ createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE
   rmFromGo = go2go$toBeRm
   ##End of GO##
 
-
+  
   ##MIPS Section##
   ##Determine the MIPS evidence codes to exclude:
   mipsECode = c("901.01.03",
@@ -93,13 +93,14 @@ createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE
   ## 2. After each bait-prey data set has been filtered, we run apComplex on
   ## each dataset
 
-  gavin02Marix <- NULL
+  gavin02Matrix <- NULL
   ho02Matrix <- NULL
   krogan04Matrix <- NULL
   gavin06Matrix <- NULL
   krogan06Matrix <- NULL
   
   if(Gavin02){
+    
     source("estGavin02.R")
     g02 <- sortComplexes(Gavin02CompEst)
     gavin02Matrix <- list2Matrix(g02[["MBME"]])
@@ -154,11 +155,13 @@ createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE
     colnames(krogan06Matrix) <- cn
   }
 
+  
   if(!is.null(gavin02Matrix)){
     gav022ISI = runCompareComplex(gavin02Matrix, ISI, byWhich= "ROW")
     ISI = mergeBGMat(gavin02Matrix, ISI, toBeRm = gav022ISI[["toBeRm"]])
   }
-
+  
+  
   if(!is.null(ho02Matrix)){
     ho022ISI = runCompareComplex(ho02Matrix, ISI, byWhich= "ROW")
     ISI = mergeBGMat(ho02Matrix, ISI, toBeRm = ho022ISI[["toBeRm"]])
