@@ -193,8 +193,13 @@ getMipsInfo <- function(wantDefault = TRUE,
     MipList = MipList[!apms]
     desc = desc[!apms]}
   
-  inPutforCreate = list()
-  inPutforCreate$Mips = MipList
-  inPutforCreate$DESC = desc
-  inPutforCreate
+  mipsFinalList <- mapply(function(x,y) {attributes(x) <- list(desc = y); return(x)}, MipList, desc)
+  
+  #inPutforCreate = list()
+  #inPutforCreate$Mips = MipList
+  #inPutforCreate$DESC = desc
+  #inPutforCreate$test <- t
+  #inPutforCreate
+
+  mipsFinalList
 }

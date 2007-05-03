@@ -1,6 +1,7 @@
 getGOInfo <- function(wantDefault = TRUE,
                       toGrep = NULL, parseType = NULL,
-                      eCode = NULL, wantAllComplexes=TRUE){
+                      eCode = NULL, wantAllComplexes=TRUE,
+                      xtraGOTerms=NULL){
 
   #options(error=recover)
   ##This first section of code sets up the stage for parsing through the
@@ -134,5 +135,21 @@ getGOInfo <- function(wantDefault = TRUE,
     pComp = pComp[!isUnit]
     isZero = sapply(pComp, function(w) length(w) == 0)
     pComp = pComp[!isZero]
+
+  if(is.null(xtraGOTerms)){
+    load(system.file("data", "xtraGO.rda", package="ScISI"))
+    xg <- yy[xtraGO][!sapply(yy[xtraGO], is.null)]
+    xg <- xg[!(names(xg)%in%names(pComp))]
+  }
+  else{
+    xg <- yy[xtraGO][!sapply(yy[xtraGOTerms], is.null)]
+    xg <- xg[!(names(xg)%in%names(pComp))]
+  }
+
+  pComp <- c(pComp, xg)
+
+  pComp2 <- mapply(function(x,y) {z <- gtcc[y]; names(z) <- NULL;
+                                  attributes(x) <- list(desc = z); return(x)},
+                   pComp, names(pComp))
 
 }
