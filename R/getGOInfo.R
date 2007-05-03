@@ -1,7 +1,11 @@
 getGOInfo <- function(wantDefault = TRUE,
                       toGrep = NULL, parseType = NULL,
                       eCode = NULL, wantAllComplexes=TRUE,
-                      xtraGOTerms=NULL){
+                      includedGOTerms=NULL, not2BeIncluded=NULL){
+
+  if(length(intersect(includedGOTerms, not2BeIncluded)) > 0)
+    stop("You have at least one GO term you want both included and
+          not included!")
 
   #options(error=recover)
   ##This first section of code sets up the stage for parsing through the
@@ -130,24 +134,31 @@ getGOInfo <- function(wantDefault = TRUE,
     
     pComp = lapply(pComp, function(y) y = unique(y))
     
-    ##Removes those complexes with singleton or no proteins.
-    isUnit = sapply(pComp, function(w) length(w) == 1)
-    pComp = pComp[!isUnit]
-    isZero = sapply(pComp, function(w) length(w) == 0)
-    pComp = pComp[!isZero]
-
-  if(is.null(xtraGOTerms)){
+  if(is.null(includedGOTerms)){
     load(system.file("data", "xtraGO.rda", package="ScISI"))
     xg <- yy[xtraGO][!sapply(yy[xtraGO], is.null)]
     xg <- xg[!(names(xg)%in%names(pComp))]
   }
   else{
-    xg <- yy[xtraGO][!sapply(yy[xtraGOTerms], is.null)]
+    xg <- yy[xtraGO][!sapply(yy[includedGOTerms], is.null)]
     xg <- xg[!(names(xg)%in%names(pComp))]
   }
 
   pComp <- c(pComp, xg)
+  
+  load(system.file("data","unwanted.rda",package="ScISI"))
+  disallow <- c(unwanted, not2BeIncluded)
+  allow <- setdiff(names(pComp), disallow)
+  pComp <- pComp[allow]
+  
 
+  
+  ##Removes those complexes with singleton or no proteins.
+  isUnit = sapply(pComp, function(w) length(w) == 1)
+  pComp = pComp[!isUnit]
+  isZero = sapply(pComp, function(w) length(w) == 0)
+  pComp = pComp[!isZero]
+  
   pComp2 <- mapply(function(x,y) {z <- gtcc[y]; names(z) <- NULL;
                                   attributes(x) <- list(desc = z); return(x)},
                    pComp, names(pComp))

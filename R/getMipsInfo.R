@@ -24,7 +24,8 @@ getMipsInfo <- function(wantDefault = TRUE,
                           "902.01.01.04.01.03",
                           "902.01.01.04.02",
                           "901.01.09.02"),
-                        wantSubComplexes = TRUE, ht=FALSE){
+                        wantSubComplexes = TRUE,
+                        ht=FALSE, dubiousGenes = NULL){
 
   fileToRead <- gzfile(system.file("extdata", "complexcat_data_18052006.gz", package="ScISI"))
   dataY = read.table(fileToRead, sep = "|")
@@ -177,6 +178,12 @@ getMipsInfo <- function(wantDefault = TRUE,
     
   }
 
+  MipList <- lapply(MipList, toupper)
+  
+  load(system.file("data","nonGenes.rda",package="ScISI"))
+  dubious <- c(nonGenes, dubiousGenes)
+  MipList <- lapply(MipList, function(l) {setdiff(l, dubious)})
+  
   isUnit = sapply(MipList, function(u) length(u) == 1)
   MipList = MipList[!isUnit]
 

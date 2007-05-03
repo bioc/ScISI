@@ -2,9 +2,9 @@ import("Matrix")
 import("GOstats")
 
 
-exportClasses(yeastData)
+exportClasses("yeastData")
 
-exportMethods(ID, Desc, getURL)
+exportMethods("ID", "Desc", "getURL")
 
 export(JaccardCoef, ScISI2html, calcGraphStats, checkComplex, checkSGN, compBijection, compareComplex,
        createGODataFrame, createGOMatrix, createMipsDataFrame, createMipsMatrix, createYeastDataObj,

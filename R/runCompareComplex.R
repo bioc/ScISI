@@ -1,4 +1,4 @@
-runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich){
+runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich="ROW"){
     options(error=recover)
     BGMat1 <- as.matrix(BGMat1)
     BGMat2 <- as.matrix(BGMat2)
