@@ -17,8 +17,8 @@ getGOInfo <- function(wantDefault = TRUE,
   Grepl = list()
 
   ##The pattern and parseT is used for the default searches
-  pattern = c("complex", "\\Base\\b", "\\Bsome\\b")
-  parseT = c("agrep","grep","grep")
+  pattern = c("complex", "\\Base\\b", "\\Bsome\\b", "\\Bmer\\b")
+  parseT = c("agrep","grep","grep", "grep")
   theDefault = vector("list", length = length(pattern))
 
   if(wantDefault){

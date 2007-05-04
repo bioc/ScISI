@@ -74,7 +74,7 @@ getMipsInfo <- function(wantDefault = TRUE,
   names(desc) <- id
   
 
-  pattern = c("\\b[Cc]omplex\\b","\\Base\\b","\\Bsome\\b")
+  pattern = c("\\b[Cc]omplex\\b","\\Base\\b","\\Bsome\\b", "\\Bmer\\b")
   parseT = rep("grep", length(pattern))
   theDefault = vector("list", length = length(pattern))
 
