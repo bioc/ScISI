@@ -12,7 +12,6 @@
  chr "mappingsG"
 }
 
-}
 \examples{
 data(mappingsG)
 

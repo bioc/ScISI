@@ -20,7 +20,6 @@ recCompSize(bg1, bg2)
   \item{bg2}{The second bipartite graph as an incidence matrix}
 }
 
-}
 \value{
   The return value is a list:
   \item{OneOverTwo}{The matrix where the cardinalities of complexes from

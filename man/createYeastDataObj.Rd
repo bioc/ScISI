@@ -12,7 +12,6 @@ createYeastDataObj(dataFrameISI)
   \item{dataFrameISI}{A dataframe with three slots: complex name (from
     the incidence matrix), complex ID (from some database), complex description.}
 }
-}
 \value{
   An object of class yeastData.
 }

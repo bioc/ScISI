@@ -43,8 +43,8 @@ goOb = createYeastDataObj(goDF)
 goNames = colnames(goM)
 url = vector(length = length(goNames))
 for(i in 1:length(goNames)){
-url[i] = getURL(goOb, goNames[i])
+   url[i] = getURL(goOb, goNames[i])
 }
-ScISI2html(url, goNames, test, GO Complexes}
+ScISI2html(url, goNames, test, GO Complexes)
 }
 \keyword{datagen}
