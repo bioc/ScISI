@@ -168,14 +168,6 @@ function (example code shown below). It is important to note that the \Rfunction
 be called after an initial incidence matrix for the bi-partite graph of the GO protein complexes has 
 been built since this function will compare the extra GO nodes with those existing GO protein complexes.
 
-<<xtraGO>>=
-data(xtraGO)
-xtraGO
-length(xtraGO)
-length(setdiff(xtraGO, colnames(goM)))
-goM <- xtraGONodes(xtraGO, goM)
-@ 
-
 \subsection{Munich Information Center for Protein Sequences}
 Parsing for information from the MIPS database (http://mips.gsf.de/genre/proj/yeast/)
 is completely analogous to parsing the GO database and is done by calling the 
@@ -222,9 +214,9 @@ toBeParsed = list()
 toBeParsed$pattern = "\\Bsomal\\b"
 mipsGrep = getMipsInfo(wantDefault = TRUE, toGrep = toBeParsed, parseType = "grep",
                        eCode = NULL, wantSubComplexes = TRUE)
-mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
-mId = strsplit(mNm, split = "-")
-sapply(mId, function(q) mipsGrep$DESC[q[2]])
+#mNm = setdiff(names(mipsGrep$Mips), names(mips$Mips))
+#mId = strsplit(mNm, split = "-")
+#sapply(mId, function(q) mipsGrep$DESC[q[2]])
 @ 
 
 Again the output of the code above shows the extra
@@ -268,8 +260,8 @@ and the vectors contain the constituent members to the respective protein comple
 a hyper-graph representation exactly like the \Rfunction{getGOInfo} output):
 
 <<getMipsInfoMips, eval=TRUE>>=
-class(mips$Mips)
-names(mips$Mips)[1:10]
+class(mips)
+names(mips)[1:10]
 mips$Mips$"MIPS-510.40"
 @ 
 
@@ -289,7 +281,7 @@ The MIPS bi-partite graph incidence matrix is created exactly as the GO bipartit
 matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunction{getMipsInfo}.
 
 <<createMipsMatrix, eval=TRUE>>=
-mipsM = list2Matrix(mips[["Mips"]])
+mipsM = list2Matrix(mips)
 @ 
 
 Again we use the systematic gene names for yeast to index the rows of the MIPS incidence matrix
@@ -359,9 +351,9 @@ for which we must find when cross referencing protein complexes: equality or inc
 two bi-partite graph incidence matrices, we use the \Rfunction{runCompareComplex} function:
 
 <<runCompareComplex, eval=TRUE>>=
-mips2mips = runCompareComplex(mipsM, mipsM, byWhich = "ROW")
-go2go = runCompareComplex(goM, goM, byWhich = "ROW")  
-mips2go = runCompareComplex(mipsM, goM, byWhich="BOTH")
+mips2mips = runCompareComplex(mipsM, mipsM)
+go2go = runCompareComplex(goM, goM)  
+mips2go = runCompareComplex(mipsM, goM)
 names(mips2go)
 @ 
 

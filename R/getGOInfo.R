@@ -78,6 +78,7 @@ getGOInfo <- function(wantDefault = TRUE,
     }
 
         newGoNames = unique(newGoNames)
+  
         cMembers = newCMembers[newGoNames]
 
 
@@ -110,6 +111,7 @@ getGOInfo <- function(wantDefault = TRUE,
         pComp = moreCMembers[moreNames]
       }
 
+  
     else{
       pComp <- cMembers
     }
@@ -149,6 +151,7 @@ getGOInfo <- function(wantDefault = TRUE,
   load(system.file("data","unwanted.rda",package="ScISI"))
   disallow <- c(unwanted, not2BeIncluded)
   allow <- setdiff(names(pComp), disallow)
+  
   pComp <- pComp[allow]
   
 
