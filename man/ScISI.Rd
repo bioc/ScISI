@@ -21,7 +21,11 @@
   inst/Scripts/ entitled createScISIC.R creates an updated ScISIC if the GO and
   MIPS's files are up to date. GO 1.15.13 and complexcat-data-20062005 (MIPS) were 
   used to build ScISIC for Bioconductor 2.0 release of the package ScISI. Both are 
-  the most up to date versions of the repository as of 19 April 2007. 
+  the most up to date versions of the repository as of 19 April 2007.
+
+  In addition to the protein complexes found within MIPS and GO, ScISIC also
+  contains manually curated protein complexes obtained from IntAct. Because IntAct
+  has yet to version its release, the protein complexes were obtained on 25 May 2007. 
 
   ScISIC replaces ScISIverified which has been deprecated.
 
@@ -41,7 +45,7 @@
 \details{
   This is the working in silico interactome built for computational
   experimentation. The data from which this interactome is built is from
-  the Gene Ontology, Mips, and estimated protein complexes from
+  the Intact, Gene Ontology, Mips, and estimated protein complexes from
   apComplex. 
 }
 \source{
