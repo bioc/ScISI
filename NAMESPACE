@@ -1,5 +1,6 @@
 import("Matrix")
 import("GOstats")
+import("Rintact")
 
 
 exportClasses("yeastData")
@@ -8,6 +9,6 @@ exportMethods("ID", "Desc", "getURL")
 
 export(JaccardCoef, ScISI2html, calcGraphStats, checkComplex, checkSGN, compBijection, compareComplex,
        createGODataFrame, createGOMatrix, createMipsDataFrame, createMipsMatrix, createYeastDataObj,
-       edgeProp, findSubComp, getAPMSData, getGOInfo, getLocOrfs, getMipsInfo, graphSumStats, list2Matrix,
+       edgeProp, findSubComp, getAPMSData, getGOInfo, getLocOrfs, getMipsInfo, graphSumStats, 
        maximizeSimilarity, meanDeg, mergeBGMat, recCompSize, rmByEvi, runAlignment, runCompareComplex,
        sumStats, unWantedComp, xtraGONodes)
