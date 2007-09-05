@@ -1,6 +1,8 @@
 import("Matrix")
 import("GOstats")
 import("Rintact")
+importMethodsFrom("AnnotationDbi", "as.list", "mget", "get", "[[", "ls",
+                  "exists", "$", "eapply")
 
 
 exportClasses("yeastData")
