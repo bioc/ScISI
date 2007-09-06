@@ -148,7 +148,7 @@ The function \Rfunction{createGOMatrix} takes the output of \Rfunction{getGOInfo
 bi-partite graph incidence matrix of this hyper-graph list. 
 
 <<createGOMatrix, eval=TRUE>>=
-goM = list2Matrix(go)
+goM = t(list2Matrix(go))
 @ 
 
 We remark that we the proteins names used to index the rows of the incidence matrix are the 
@@ -281,7 +281,7 @@ The MIPS bi-partite graph incidence matrix is created exactly as the GO bipartit
 matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunction{getMipsInfo}.
 
 <<createMipsMatrix, eval=TRUE>>=
-mipsM = list2Matrix(mips)
+mipsM = t(list2Matrix(mips))
 @ 
 
 Again we use the systematic gene names for yeast to index the rows of the MIPS incidence matrix
@@ -688,7 +688,8 @@ the \Rfunction{createGODataFrame} or \Rfunction{createMipsDataFrame} function.
 
 <<createDataFrame, eval=TRUE>>=
 goDF = createGODataFrame(go, goM)
-mipsDF = createMipsDataFrame(mips$DESC, mipsM)
+mipsDesc <- sapply(mips, function(x) {attr(x, "desc")})
+mipsDF = createMipsDataFrame(mipsDesc, mipsM)
 @ 
 
 The names of these two
@@ -804,27 +805,23 @@ the output file will be named ``mips.html'' and ``go.html''.
 The purpose for this .html file is a quick and efficient way for users to manually parse the 
 protein complexes derived from \Rpackage{ScISi} either for quality control and for refinement.\
 
-In the interactome that we wish to create, we have deleted eleven protein complexes. These were chosen 
-after investigating each protein complex from the .html file. Deleting these complexes is done by a call
-to the function \Rfunction{unWantedComp}.
-
 <<unWantedComp, eval = TRUE>>=
 
-ISI2 = unWantedComp(ISI, unwantedComplex =
-                         c("GO:0000262",
-                           "GO:0000228",
-                           "GO:0000775",
-                           "GO:0010008",
-                           "GO:0005792",
-                           "GO:0005768",
-                           "GO:0005769",
-                           "GO:0005770",
-                           "GO:0005777",
-                           "GO:0005844",
-                           "GO:0001400"))
+#ISI2 = unWantedComp(ISI, unwantedComplex =
+#                         c("GO:0000262",
+#                           "GO:0000228",
+#                           "GO:0000775",
+#                           "GO:0010008",
+#                           "GO:0005792",
+#                           "GO:0005768",
+#                           "GO:0005769",
+#                           "GO:0005770",
+#                           "GO:0005777",
+#                           "GO:0005844",
+#                           "GO:0001400"))
 
 data(ScISIC)
-identical(ISI2, ScISIC)
+identical(ISI, ScISIC)
 
 @ 
 

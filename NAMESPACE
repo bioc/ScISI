@@ -1,4 +1,4 @@
-import("Matrix")
+#import("Matrix")
 import("GOstats")
 import("Rintact")
 importMethodsFrom("AnnotationDbi", "as.list", "mget", "get", "[[", "ls",

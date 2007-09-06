@@ -24,7 +24,7 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
                  "902.01.01.04.01", "902.01.01.04.01.01",
                  "902.01.01.04.01.02", "902.01.01.04.01.03",
                  "902.01.01.04.02", "901.01.09.02"), wantSubComplexes=TRUE,	
-		 ht=FALSE)
+		 ht=FALSE, dubiousGenes=NULL)
 }
 \arguments{
   \item{wantDefault}{A logical. If true, the default parameters
@@ -41,6 +41,8 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
     subcomplexes as well.}
   \item{ht}{A logical. If FALSE, the function will not extract protein 
   complex estimates obtained from high throughput analysis.}
+  \item{dubiousGenes}{A character vector of genes that will be removed 
+  when parsing the MIPS repository.}
 }
 
 \details{

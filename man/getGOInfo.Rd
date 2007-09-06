@@ -11,7 +11,8 @@
   defined phrases in the description of these nodes.}
 \usage{
 getGOInfo(wantDefault = TRUE, toGrep = NULL,
-parseType=NULL, eCode = NULL, wantAllComplexes = TRUE)
+parseType=NULL, eCode = NULL, wantAllComplexes = TRUE,
+includedGOTerms=NULL, not2BeIncluded=NULL)
 }
 
 \arguments{
@@ -32,6 +33,11 @@ parseType=NULL, eCode = NULL, wantAllComplexes = TRUE)
     incorporate all GO children of the nodes found by term searches. In
     addition, children of node GO:0043234 (the protein complex node)
     will also be incorporated.}
+\item{includedGOTerms}{A character vector of GO terms that will be
+   parsed regardless of the default and parseType parameters. In 
+   essence, these GO terms forced to be included.}
+\item{not2BeIncluded}{A character vector of GO terms that should not
+   be parsed nor included in the output.}
 }
 \details{
   This function's generic operation is to parse the GO database and

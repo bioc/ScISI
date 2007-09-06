@@ -51,7 +51,7 @@ runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich="ROW"){
     comparisonList = list()
 
     
-    comparisonList$JC = as(simInd, "Matrix")
+    comparisonList$JC = simInd
     #comparisonList$maxIntersect = maxInterS
     comparisonList$equal = subC$equal
     comparisonList$toBeRm = subC$toBeRm
