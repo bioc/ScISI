@@ -148,7 +148,7 @@ The function \Rfunction{createGOMatrix} takes the output of \Rfunction{getGOInfo
 bi-partite graph incidence matrix of this hyper-graph list. 
 
 <<createGOMatrix, eval=TRUE>>=
-goM = t(list2Matrix(go))
+goM = list2Matrix(go)
 @ 
 
 We remark that we the proteins names used to index the rows of the incidence matrix are the 
@@ -281,7 +281,7 @@ The MIPS bi-partite graph incidence matrix is created exactly as the GO bipartit
 matrix. The argument for \Rfunction{createMipsMatrix} is the output from \Rfunction{getMipsInfo}.
 
 <<createMipsMatrix, eval=TRUE>>=
-mipsM = t(list2Matrix(mips))
+mipsM = list2Matrix(mips)
 @ 
 
 Again we use the systematic gene names for yeast to index the rows of the MIPS incidence matrix

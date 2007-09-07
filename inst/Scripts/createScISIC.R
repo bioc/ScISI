@@ -2,24 +2,29 @@ createScISIC <- function(pathToSave=NULL){
 
   xml <- system.file("PSI25XML/14681455.xml", package="Rintact")
   intactComp <- psi25complex(xml)
-  compNames <- sapply(intactComp@complexes, function(x)
-                      x@fullName)
+  compID <- sapply(intactComp@complexes, function(x)
+                      x@intactId)
   complexes <- lapply(intactComp@complexes, function(x)
-                      x@interactors)
-  yeastCompNames <- compNames[150:182]
+                      x@members)
+  yeastCompID <- compID[150:182]
   yeastComplexes <- complexes[150:182]
 
   yeastCompSysName <- vector("list", length = length(yeastComplexes))
   for(i in 1:length(yeastCompSysName)){
     uni <- yeastComplexes[[i]][,1]
-    ind <- intactComp@interactors[,2] %in% uni
-    yeastCompSysName[[i]]<- intactComp@interactors[ind,5]
+    ind <- rownames(intactComp@interactors) %in% uni
+   # print(sysN)
+    sysN <- intactComp@interactors[ind,4]
+    ind2 <- names(sysN)[(is.na(sysN))]
+    sysN[ind2] <- intactComp@interactors[ind2,2]
+    #print(sysN)
+    yeastCompSysName[[i]] <- sysN
   }
 
   yeastCompSysName <- lapply(yeastCompSysName, function(x)
                              x[!is.na(x)])
 
-  names(yeastCompSysName) <- yeastCompNames
+  names(yeastCompSysName) <- yeastCompID
 
   intactBGM <- list2Matrix(yeastCompSysName)
 
@@ -34,6 +39,7 @@ createScISIC <- function(pathToSave=NULL){
     eCode = goECodes, wantAllComplexes = TRUE)
   
   goMatrix = list2Matrix(go)
+  rownames(goMatrix) = toupper(rownames(goMatrix))
   
   
   #data(xtraGO)
@@ -60,6 +66,7 @@ createScISIC <- function(pathToSave=NULL){
   mips2mips = runCompareComplex(mipsMatrix, mipsMatrix,
     byWhich= "ROW")
   ##Those Mips complexes which are redundan:
+  
   rmFromMips = mips2mips$toBeRm
   ##Comparing the mips complexes to the GO complexes:
   mips2ig = runCompareComplex(mipsMatrix, ig,
