@@ -31,10 +31,9 @@ createGODataFrame(cMembers, goMat)
 \references{www.geneontology.org }
 \author{Tony Chiang}
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-goM = createGOMatrix(go)
-
-createGODF(go, goM)
+#go = getGOInfo(wantAllComplexes = FALSE)
+#goM = createGOMatrix(go)
+#createGODF(go, goM)
 }
 \keyword{datagen}
 

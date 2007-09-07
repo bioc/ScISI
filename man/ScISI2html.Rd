@@ -36,15 +36,15 @@ othernames, table.head, table.center = TRUE, compSize=NULL)
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-goM = createGOMatrix(go)
-goDF = createGODataFrame(go, goM)
-goOb = createYeastDataObj(goDF)
-goNames = colnames(goM)
-url = vector(length = length(goNames))
-for(i in 1:length(goNames)){
-   url[i] = getURL(goOb, goNames[i])
-}
-ScISI2html(url, goNames, test, GO Complexes)
+#go = getGOInfo(wantAllComplexes = FALSE)
+#goM = createGOMatrix(go)
+#goDF = createGODataFrame(go, goM)
+#goOb = createYeastDataObj(goDF)
+#goNames = colnames(goM)
+#url = vector(length = length(goNames))
+#for(i in 1:length(goNames)){
+#   url[i] = getURL(goOb, goNames[i])
+#}
+#ScISI2html(url, goNames, test, GO Complexes)
 }
 \keyword{datagen}

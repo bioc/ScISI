@@ -45,8 +45,5 @@ checkComplex(comps, interactome)
 \author{T Chiang}
 
 \examples{
-##data(moreGO)
-##data(ScISI)
-##checkComplex(moreGO, ScISI)
 }
 \keyword{datagen}

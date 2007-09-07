@@ -39,14 +39,14 @@ sumStats(imList, pathToSave = NULL)
 \author{TC}
 
 \examples{
-gavin <- getAPMSData("Gavin")
-krogan <- getAPMSData("Krogan")
-imList <- lisst()
-imList[[1]] <- gavin
-imList[[2]] <- krogan
-names(imList) <- c("Gavin", "Krogan")
+#gavin <- getAPMSData("Gavin")
+#krogan <- getAPMSData("Krogan")
+#imList <- vector("list", length=2)
+#imList[[1]] <- gavin
+#imList[[2]] <- krogan
+#names(imList) <- c("Gavin", "Krogan")
 
-sumStats(imList)
+#sumStats(imList)
 
 }
 \keyword{datagen}

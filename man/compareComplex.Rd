@@ -43,11 +43,7 @@ compareComplex(BGMat1, BGMat2)
 
 
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-mips = getMipsInfo(wantSubComplexes = FALSE)
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-runCompareComplex(goM, mipsM)
+
 }
 \keyword{array}
 \keyword{datagen}

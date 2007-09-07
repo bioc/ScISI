@@ -26,16 +26,15 @@ recCompSize(bg1, bg2)
   bg1 are numerators.}
   \item{TwoOverOne}{Matrix where cardinalities of complexes from bg2 are
     numerators.}
-  ...
 }
 
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-goM = createGOMatrix(go)
-mips = getMipsInfo(wantSubComplexes = FALSE)
-mipsM = createMipsMatrix(mips)
-recCompSize(goM, mipsM)
+#go = getGOInfo(wantAllComplexes = FALSE)
+#goM = createGOMatrix(go)
+#mips = getMipsInfo(wantSubComplexes = FALSE)
+#mipsM = createMipsMatrix(mips)
+#recCompSize(goM, mipsM)
 }
 \keyword{datagen}

@@ -204,7 +204,7 @@ conserves all important information.
 \begin{figure}
 \centering
 \subfigure[Protein Binary Interaction Network]{
-\includegraphics[width = 65mm]{../extdata/protein_network_large.jpg}}
+\includegraphics[width = 65mm]{protein_network_large.jpg}}
 \caption{A protein binary interaction network as a graph and protein complex
 membership network rendered as a bipartite graph FIXME - Cannot use this as it is
 probably copyrighted, but wanted to put here as example...need to render one 
@@ -319,7 +319,7 @@ dev.off()
 \centering
 \subfigure[]{
 \label{arp23Physical}
-\includegraphics[width = 75mm]{../extdata/Arp2_3_complex.png}}
+\includegraphics[width = 75mm]{Arp2_3_complex.png}}
 \subfigure[]{
 \label{arp23Graph}
 \includegraphics[width =75mm]{arp23Graph.pdf}}

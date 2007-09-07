@@ -1,5 +1,5 @@
 runCompareComplex <- function(BGMat1, BGMat2, index="Jaccard", byWhich="ROW"){
-    options(error=recover)
+
     BGMat1 <- as.matrix(BGMat1)
     BGMat2 <- as.matrix(BGMat2)
     ##This function prepares two matrix representation of bipartite

@@ -1,6 +1,6 @@
 getLocOrfs <- function(imList, goNode, pathToSave=NULL, name=NULL){
 
-    options(error=recover)
+
     yG2AP <- as.list(YEASTGO2ALLPROBES)
     locOrf <- yG2AP[goNode]
 

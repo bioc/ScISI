@@ -18,8 +18,8 @@ createYeastDataObj(dataFrameISI)
 \author{Tony Chiang}
 
 \examples{
- mips = createMipsMatrix(wantList=TRUE)
- mipsDF = createMipsDF(mips$DESC, mips$Matrix)
- mipsOb = createYeastDataObj(mipsDF)
+ #mips = createMipsMatrix(wantList=TRUE)
+ #mipsDF = createMipsDF(mips$DESC, mips$Matrix)
+ #mipsOb = createYeastDataObj(mipsDF)
 }
 \keyword{classes}

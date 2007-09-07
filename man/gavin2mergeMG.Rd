@@ -13,6 +13,5 @@
 }
 \examples{
 data(gavin2mergeMG)
-
 }
 \keyword{datasets}

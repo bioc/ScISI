@@ -7,7 +7,7 @@ getGOInfo <- function(wantDefault = TRUE,
     stop("You have at least one GO term you want both included and
           not included!")
 
-  #options(error=recover)
+
   ##This first section of code sets up the stage for parsing through the
   ##GO database.
   xx = names(as.list(GOTERM))

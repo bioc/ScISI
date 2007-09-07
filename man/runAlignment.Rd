@@ -26,12 +26,12 @@ runAlignment(TSNMat, estMat, c2kMat)
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo()
-mips = getMipsInfo()
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
-align = runAlignment(mipsM, goM, cc$simInd)
+#go = getGOInfo()
+#mips = getMipsInfo()
+#goM = createGOMatrix(go)
+#mipsM = createMipsMatrix(mips)
+#cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#align = runAlignment(mipsM, goM, cc$simInd)
 }
 \keyword{array}
 \keyword{datagen}

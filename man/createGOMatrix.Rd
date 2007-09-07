@@ -25,8 +25,8 @@ createGOMatrix(cMembers)
 \author{Tony Chiang}
 
 \examples{
-cMembers = getGOInfo(wantAllComplexes = FALSE)
-createGOMatrix(cMembers)
+#cMembers = getGOInfo(wantAllComplexes = FALSE)
+#createGOMatrix(cMembers)
 }
 \keyword{datagen}
 \keyword{array}

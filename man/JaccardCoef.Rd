@@ -51,11 +51,11 @@ JaccardCoef(dataMat)
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo(wantAllComplexes=FALSE)
-mips = getMipsInfo(wantSubComplexes=FALSE)
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
-cc$simInd
+#go = getGOInfo(wantAllComplexes=FALSE)
+#mips = getMipsInfo(wantSubComplexes=FALSE)
+#goM = createGOMatrix(go)
+#mipsM = createMipsMatrix(mips)
+#cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#cc$simInd
 }
 \keyword{datagen}

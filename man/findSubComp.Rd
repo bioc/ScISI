@@ -67,11 +67,11 @@ findSubComp(bg1, bg2, interSectMat, simMat)
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo()
-mips = getMipsInfo()
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#go = getGOInfo()
+#mips = getMipsInfo()
+#goM = createGOMatrix(go)
+#mipsM = createMipsMatrix(mips)
+#cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
 
 }
 \keyword{datagen}

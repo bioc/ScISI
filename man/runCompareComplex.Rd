@@ -60,10 +60,10 @@ runCompareComplex(BGMat1, BGMat2, index = "Jaccard", byWhich)
 \author{Tony Chiang}
 
 \examples{
-go = getGOInfo()
-mips = getMipsInfo()
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#go = getGOInfo()
+#mips = getMipsInfo()
+#goM = createGOMatrix(go)
+#mipsM = createMipsMatrix(mips)
+#cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
 }
 \keyword{datagen}

@@ -86,15 +86,15 @@ includedGOTerms=NULL, not2BeIncluded=NULL)
 \references{www.geneontology.org}
 \author{Tony Chiang}
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-goCoded = getGOInfo(code = c("IPI","ND","IDA"))
-goPhrase = getGOInfo(wantDefault = FALSE, toGrep = "\\Bsomal\\b",
-parseType = "grep", wantAllComplexes = FALSE)
-nam1 = names(go)
-nam2 = names(goCoded)
-if(length(nam1) == length(nam2) && nam1 == nam2){
-sapply(nam1, function(x) setdiff(go[[x]], goCoded[[x]]))
-}
+#go = getGOInfo(wantAllComplexes = FALSE)
+#goCoded = getGOInfo(code = c("IPI","ND","IDA"))
+#goPhrase = getGOInfo(wantDefault = FALSE, toGrep = "\\Bsomal\\b",
+#parseType = "grep", wantAllComplexes = FALSE)
+#nam1 = names(go)
+#nam2 = names(goCoded)
+#if(length(nam1) == length(nam2) && nam1 == nam2){
+#sapply(nam1, function(x) setdiff(go[[x]], goCoded[[x]]))
+#}
 
 }
 \keyword{datagen}

@@ -11,7 +11,6 @@
 \usage{
 getLocOrfs(imList, goNode, pathToSave = NULL, name = NULL)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{imList}{A list of bi-partite graph incidence matrices}
   \item{goNode}{A character vector of GO ID's}

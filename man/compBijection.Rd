@@ -66,13 +66,6 @@ compBijection(TSNMat, estMat, c2kMatrix, bijMat, counter = 1)
 \author{Tony Chiang}
 
 \examples{
-mips = getMipsInfo(wantSubComplexes=FALSE)
-go = getGOInfo(wantAllComplexes=FALSE)
-mipsM = createMipsMatrix(mips)
-goM = createGOMatrix(go)
-cc = runCompareComplex(mipsM, goM)
-runAlignment(mipsM, goM, cc$JC)
-
 }
 \keyword{array}
 \keyword{datagen}

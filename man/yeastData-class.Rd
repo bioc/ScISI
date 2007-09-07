@@ -35,14 +35,14 @@ Objects can be created by calls of the form \code{new("yeastData",
 
 
 \examples{
-go = getGOInfo(wantAllComplexes = FALSE)
-goM = createGOMatrix(go)
-cNames = colnames(goM)
-goDF = createGODataFrame(go, goM)
-goOb = createYeastObj(goDF)
-ID(goOb, cNames[5])
-Desc(goOb, cNames[5])
-getUrl(goOb, cNames[5])
+#go = getGOInfo(wantAllComplexes = FALSE)
+#goM = createGOMatrix(go)
+#cNames = colnames(goM)
+#goDF = createGODataFrame(go, goM)
+#goOb = createYeastObj(goDF)
+#ID(goOb, cNames[5])
+#Desc(goOb, cNames[5])
+#getUrl(goOb, cNames[5])
 }
 
 \keyword{classes}

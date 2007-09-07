@@ -30,8 +30,8 @@ createMipsMatrix(mipsL)
 \author{Tony Chiang}
 
 \examples{
-mips= getMipsInfo(wantSubComplexes = FALSE)
-mipsM = createMipsMatrix(mips)
+#mips= getMipsInfo(wantSubComplexes = FALSE)
+#mipsM = createMipsMatrix(mips)
 }
 \keyword{datagen}
 \keyword{array}

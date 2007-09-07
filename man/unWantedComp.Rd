@@ -37,13 +37,13 @@ c("RNA_TLC1", "SNRNA_NME1","RNA_RNASE-P"))
 }
 \examples{
 
-mips = getMipsInfo()
-go = getGOInfo()
-mipsM = createMipsMatrix(mips)
-goM = createGOMatrix(go)
-mips2go = runCompareComplex(mipsM, goM, byWhich = "ROW")
-merged = mergeBGMat(mipsM, goM, mips2go$toBeRm)
-ISI = unWantedComp(merged)
+#mips = getMipsInfo()
+#go = getGOInfo()
+#mipsM = createMipsMatrix(mips)
+#goM = createGOMatrix(go)
+#mips2go = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#merged = mergeBGMat(mipsM, goM, mips2go$toBeRm)
+#ISI = unWantedComp(merged)
 
 }
 \keyword{datagen}

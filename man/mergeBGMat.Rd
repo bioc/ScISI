@@ -43,12 +43,12 @@ mergeBGMat(mat1, mat2, toBeRm)
 \author{ Tony Chiang }
 
 \examples{
-go = getGOInfo()
-mips = getMipsInfo()
-goM = createGOMatrix(go)
-mipsM = createMipsMatrix(mips)
-cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
-merged = mergeBGMat(mipsM, goM, cc$toBeRm)
+#go = getGOInfo()
+#mips = getMipsInfo()
+#goM = createGOMatrix(go)
+#mipsM = createMipsMatrix(mips)
+#cc = runCompareComplex(mipsM, goM, byWhich = "ROW")
+#merged = mergeBGMat(mipsM, goM, cc$toBeRm)
 }
 \keyword{datagen}
 \keyword{array}

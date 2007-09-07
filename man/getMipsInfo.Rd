@@ -97,8 +97,8 @@ parseType = NULL, eCode = c("901.01.03", "901.01.03.01", "901.01.03.02",
 \author{Tony Chiang}
 
 \examples{
-mips = getMipsInfo(wantSubComplexes = FALSE)
-mipsPhrase = getMipsInfo(wantDefault = FALSE, toGrep = "\\Bsomal\\b",
-parseType = "grep", wantSubComplexes=FALSE)
+#mips = getMipsInfo(wantSubComplexes = FALSE)
+#mipsPhrase = getMipsInfo(wantDefault = FALSE, toGrep = "\\Bsomal\\b",
+#parseType = "grep", wantSubComplexes=FALSE)
 }
 \keyword{datagen}
