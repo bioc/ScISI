@@ -19,9 +19,12 @@
   will percolate through the protein complexes or protein complex composition
   and so the ScISIC will need to be rebuilt. A script located in the 
   inst/Scripts/ entitled createScISIC.R creates an updated ScISIC if the GO and
-  MIPS's files are up to date. GO 1.15.13 and complexcat-data-20062005 (MIPS) were 
-  used to build ScISIC for Bioconductor 2.0 release of the package ScISI. Both are 
-  the most up to date versions of the repository as of 19 April 2007.
+  MIPS's files are up to date. GO 2.0.0 and complexcat-data-2006 (MIPS) were 
+  used to build ScISIC for Bioconductor 2.1 release of the package ScISI. Both are 
+  the most up to date versions of the repository as of 9 October 2007. In addition
+  to MIPS and GO, we have also incorporated protein complexes curated by the 
+  IntAct repository. The IntAct protein complexes are obtained from the 
+  complex data XML file obtained from IntAct via Rintact. 
 
   In addition to the protein complexes found within MIPS and GO, ScISIC also
   contains manually curated protein complexes obtained from IntAct. Because IntAct
@@ -39,8 +42,10 @@
 }
 \usage{data(ScISI)}
 \format{
-  The format is:
- chr "ScISI"
+  The format of both the ScISI and ScISIC is a binary incidence matrix.  The rows 
+  are indexed by the gene locus names and the columns are indexed by the 
+  identification codes for the protein complexes based on the repository from
+  where they are obtained. 
 }
 \details{
   This is the working in silico interactome built for computational
