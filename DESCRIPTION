@@ -1,11 +1,11 @@
 Package: ScISI
 Title: In Silico Interactome
-Version: 1.11.1
+Version: 1.11.2
 Author: Tony Chiang <tchiang@fhcrc.org>
 Description: Package to create In Silico Interactomes 
 Depends: methods, apComplex, GO, GOstats, graph, RBGL, Rgraphviz,
          YEAST, xtable, Rintact (>= 0.3.19)
-Suggests:ppiData, ppiStats
+Suggests:ppiData
 Imports: AnnotationDbi
 Maintainer: Tony Chiang <tchiang@fhcrc.org>
 License: LGPL
