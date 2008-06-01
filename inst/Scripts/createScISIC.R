@@ -38,9 +38,21 @@ createScISIC <- function(pathToSave=NULL){
     parseType = NULL,
     eCode = goECodes, wantAllComplexes = TRUE)
   
-  goMatrix = list2Matrix(go)
+  goMatrix = list2Matrix(go, type="complex")
   rownames(goMatrix) = toupper(rownames(goMatrix))
-  
+
+  ##test
+  cnames <- colnames(goMatrix)
+  toCheck <- vector()
+  for(i in 1:ncol(goMatrix)){
+    if(!(identical(unique(go[[cnames[i]]]),names(which(goMatrix[,cnames[i]]==1))))){
+      if(length(setdiff(unique(toupper(go[[cnames[i]]])),names(which(goMatrix[,cnames[i]]==1))))>0)
+        toCheck <- c(toCheck, cnames[i])
+    }
+       
+  }
+
+  stopifnot(length(toCheck)==0)
   
   #data(xtraGO)
   #goMatrix <- xtraGONodes(xtraGO, goMatrix)
@@ -61,7 +73,20 @@ createScISIC <- function(pathToSave=NULL){
     parseType = NULL, eCode = NULL, wantSubComplexes = TRUE,
     ht=FALSE)
   ##Creating the Mips bi-partite graph incidence matrix:
-  mipsMatrix = list2Matrix(mips)
+  mipsMatrix = list2Matrix(mips, type="complex")
+
+  cnames1 <- colnames(mipsMatrix)
+  toCheck1 <- vector()
+  for(i in 1:ncol(mipsMatrix)){
+    if(!(identical(unique(mips[[cnames1[i]]]),names(which(mipsMatrix[,cnames1[i]]==1))))){
+      if(length(setdiff(unique(toupper(mips[[cnames1[i]]])),names(which(mipsMatrix[,cnames1[i]]==1))))>0)
+        toCheck1 <- c(toCheck1, cnames[i])
+    }
+       
+  }
+
+  stopifnot(length(toCheck1)==0)
+  
   ##Comparing Mips complexes with all other Mips complexes:
   mips2mips = runCompareComplex(mipsMatrix, mipsMatrix,
     byWhich= "ROW")
@@ -78,9 +103,16 @@ createScISIC <- function(pathToSave=NULL){
     unique(c(rmFromMips, rmFromMipsGo)))
 
   #mergeMipsGo <- unWantedComp(mergeMipsGo)
+
   
   ScISIC <- mergeMipsGo
+
+  nonComplexes <-c("GO:0000794","GO:0000780","GO:0000781","GO:0000784","GO:0000778",
+                 "GO:0000942","GO:0031902","GO:0045009","GO:0000776")
   
-  ScISIC
+  keep <- which(!colnames(ScISIC) %in% nonComplexes)
+  ScISIC <- ScISIC[,keep]
+  
+  return(ScISIC)
   
 }
