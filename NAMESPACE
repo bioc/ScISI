@@ -1,6 +1,6 @@
 #import("Matrix")
 import("GOstats")
-import("Rintact")
+#import("Rintact")
 importMethodsFrom("AnnotationDbi", "as.list", "mget", "get", "[[", "ls",
                   "exists", "$", "eapply")
 
