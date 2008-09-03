@@ -5,8 +5,8 @@
   gene names.}
 \description{
   This function takes the in silico interactome and checks the rownames
-  against the names of the meta-data set YEASTALIAS from the meta-data
-  package YEAST
+  against the names of the meta-data set org.Sc.sgdALIAS from the meta-data
+  package org.Sc.sgd
 }
 \usage{
 checkSGN(ISI)

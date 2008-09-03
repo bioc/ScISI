@@ -49,7 +49,7 @@ library("y2hStat")
 library("graph")
 library("Rgraphviz")
 library("GO")
-library("YEAST")
+library("org.Sc.sgd.db")
 
 @
 
@@ -345,7 +345,7 @@ maxD
 medD
 avgD
 
-yG2P <- as.list(YEASTGO2PROBE)
+yG2P <- as.list(org.Sc.sgdGO2ORF)
 nucProt <- yG2P[["GO:0005634"]] 
 
 ckNuc <- lapply(y2hSysGW, function(x) {sapply(x, function(y) {y %in% nucProt})})

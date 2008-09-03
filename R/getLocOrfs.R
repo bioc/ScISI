@@ -1,13 +1,13 @@
 getLocOrfs <- function(imList, goNode, pathToSave=NULL, name=NULL){
 
 
-    yG2AP <- as.list(YEASTGO2ALLPROBES)
+    yG2AP <- as.list(org.Sc.sgdGO2ALLORFS)
     locOrf <- yG2AP[goNode]
 
     #xx = names(as.list(GOTERM))
     #gt <- getGOTerm(xx)
     #gtcc <- gt$CC
-    #yy <- as.list(YEASTGO2PROBE)
+    #yy <- as.list(org.Sc.sgdGO2ORF)
 
     #goCCO <- as.list(GOCCOFFSPRING)
     #nucOff <- unlist(goCCO[goNode])

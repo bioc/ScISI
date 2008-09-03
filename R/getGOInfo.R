@@ -13,7 +13,7 @@ getGOInfo <- function(wantDefault = TRUE,
   xx = names(as.list(GOTERM))
   gt <- getGOTerm(xx)
   gtcc <- gt$CC
-  yy <- as.list(YEASTGO2PROBE)
+  yy <- as.list(org.Sc.sgdGO2ORF)
   Grepl = list()
 
   ##The pattern and parseT is used for the default searches
@@ -66,7 +66,7 @@ getGOInfo <- function(wantDefault = TRUE,
     these <- lapply(parsed, function(y) which(names(y) %in% names(yy)))
     num = 1:length(these)
     cMembersL = lapply(num, function(z) mget(names(parsed[[z]])[these[[z]]],
-      env=YEASTGO2PROBE, ifnotfound=NA))
+      env=org.Sc.sgdGO2ORF, ifnotfound=NA))
 
     goNames = sapply(cMembersL, function(w) names(w))
     newGoNames = vector()
@@ -96,7 +96,7 @@ getGOInfo <- function(wantDefault = TRUE,
         for (i in 1:length(parsed)){
           comp = c(comp, parsed[[i]])
         }
-        moreCMembers <- mget(names(comp)[alsoThese], env=YEASTGO2PROBE,
+        moreCMembers <- mget(names(comp)[alsoThese], env=org.Sc.sgdGO2ORF,
                              ifnotfound=NA)
 
 
@@ -121,7 +121,7 @@ getGOInfo <- function(wantDefault = TRUE,
       ##This part allows us to drop any protein from the protein complexe
       ##if the only evidence codes reference it is given by the user as
       ##codes to be eliminated
-      yg = as.list(YEASTGO)
+      yg = as.list(org.Sc.sgdGO)
       
       yg1 = lapply(yg, function(x) dropECode(x, eCode))
      

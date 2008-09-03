@@ -16,7 +16,7 @@ createScISI <- function(pathToSave=NULL, filter=FALSE, Gavin02 = FALSE,
   
   data(xtraGO)
                                         #xtraGO <- setdiff(xtraGO, colnames(goMatrix))
-                                        #yG2P <- as.list(YEASTGO2PROBE)
+                                        #yG2P <- as.list(org.Sc.sgdGO2ORF)
                                         #xtraComp <- yG2P[xtraGO]
                                         #xtraComp <- xtraComp[!sapply(xtraComp, is.null)]
                                         #xCM <- createGOMatrix(xtraComp)
