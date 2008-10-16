@@ -55,7 +55,7 @@ getMipsInfo <- function(wantDefault = TRUE,
 
 
   if (nrow(dataY) != 0){
-      mipsYeastComplex = split(dataY$V1, dataY$V2)
+      mipsYeastComplex = split(dataY[,1], dataY[,2])
     }
   else{
       stop("There are no proteins for which to populate the protein complexes")
