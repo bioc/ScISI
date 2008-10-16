@@ -27,7 +27,7 @@ getMipsInfo <- function(wantDefault = TRUE,
                         wantSubComplexes = TRUE,
                         ht=FALSE, dubiousGenes = NULL){
 
-  fileToRead <- gzfile(system.file("extdata", "complexcat_data_18052006.gz", package="ScISI"))
+  fileToRead <- gzfile(system.file("extdata", "complexcat_data_18052006.gz", package="ScISI"), open = "rb")
   dataY = read.table(fileToRead, sep = "|")
 
   if(!is.null(eCode)){
