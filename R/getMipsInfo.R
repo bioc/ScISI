@@ -28,7 +28,7 @@ getMipsInfo <- function(wantDefault = TRUE,
                         ht=FALSE, dubiousGenes = NULL){
 
   fileToRead <- gzfile(system.file("extdata", "complexcat_data_18052006.gz", package="ScISI"), open = "rb")
-  dataY = read.table(fileToRead, sep = "|")
+  dataY = rbind.data.frame(strsplit(scan(fileToRead, what = ""), sep = "|", fixed = TRUE))
 
   if(!is.null(eCode)){
       codes = as.vector(dataY[,3])

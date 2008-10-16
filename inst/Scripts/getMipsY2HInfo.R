@@ -2,7 +2,7 @@ getMipsY2HInfo <- function(wantDefault = TRUE, toGrep = NULL,
                            parseType = NULL, eCode = NULL){
 
     fileToRead <- gzfile(system.file("extdata", "PPI_141105.tab.gz", package = "ScISI"), open = "rb")
-    dataTable <- read.table(fileToRead, sep = "|")
+    dataTable <- rbind.data.frame(strsplit(scan(fileToRead, what = ""), sep = "|", fixed = TRUE))
 
     dataMat = as.matrix(dataTable)
 
