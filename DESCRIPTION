@@ -3,7 +3,7 @@ Title: In Silico Interactome
 Version: 1.15.0
 Author: Tony Chiang <tchiang@fhcrc.org>
 Description: Package to create In Silico Interactomes 
-Depends: methods, apComplex, GO.db, GOstats, graph, RBGL, Rgraphviz,
+Depends: methods, apComplex, GO.db, GOstats, RBGL, Rgraphviz,
          org.Sc.sgd.db, xtable, RpsiXML
 Suggests:ppiData
 Imports: AnnotationDbi
