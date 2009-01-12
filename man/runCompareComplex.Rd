@@ -30,7 +30,7 @@ runCompareComplex(BGMat1, BGMat2, index = "Jaccard", byWhich)
   
   \item{simInd}{The matrix of similarity measures between two bipartite
     graphs.}
-  \irem{maxIntersect}{The output of maximizeSimilarity. A list. The
+  \item{maxIntersect}{The output of maximizeSimilarity. A list. The
     first value is the largest similarity indices between complexes of
     the row and complexes of the columns if byWhich is "ROW" and vice
     versa if byWhich="COL". The second value returns the actual complex
@@ -52,7 +52,7 @@ runCompareComplex(BGMat1, BGMat2, index = "Jaccard", byWhich)
     of C, the cardinality of K, and the cardinality of the intersection
     of C and K}
   \item{toBeRmSubC}{A character vector. The same as toBeRm but instead
-  of redudant protein complexes, this is a compilation of all the
+  of redundant protein complexes, this is a compilation of all the
   sub-complexes between two bi-partite graph matrices (bi-partite graph
   matrices need not be different)}
 }

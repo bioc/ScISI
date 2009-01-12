@@ -1,8 +1,33 @@
-#import("Matrix")
-import("graph")
-#import("Rintact")
-importMethodsFrom("AnnotationDbi", "as.list", "mget", "get", "[[", "ls",
-                  "exists", "$", "eapply")
+import("AnnotationDbi")
+
+importClassesFrom("methods",
+                  "character",
+                  "data.frame")
+
+importFrom("annotate",
+           "dropECode",
+           "getGOTerm")
+
+importFrom("methods",
+           "as",
+           "new")
+
+importFrom("RpsiXML",
+           "list2Matrix")
+
+importFrom("utils",
+           "data",
+           "read.table")
+
+importFrom("GO.db",
+           "GOCCCHILDREN",
+           "GOTERM")
+
+importFrom("org.Sc.sgd.db",
+           "org.Sc.sgdALIAS",
+           "org.Sc.sgdGO",
+           "org.Sc.sgdGO2ALLORFS",
+           "org.Sc.sgdGO2ORF")
 
 exportClasses("yeastData")
 

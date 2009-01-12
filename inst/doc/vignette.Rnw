@@ -2,7 +2,7 @@
 % NOTE -- ONLY EDIT ScISI.Rnw!!!
 %
 %\VignetteIndexEntry{ScISI Vignette}
-%\VignetteDepends{}
+%\VignetteDepends{ppiData, xtable}
 %\VignetteKeywords{Interactome}
 %\VignettePackage{ScISI}
 \documentclass{article}
@@ -302,7 +302,7 @@ from such AP-MS experiments and complex estimation algorithms on such data to ge
 novel protein complex estimates (which have not been curated). 
 
 <<ppiData, eval=TRUE>>=
-library(ppiData)
+library("ppiData")
 get("Gavin2006BPGraph")
 @ 
 
@@ -634,6 +634,7 @@ data("subCompM")
 
 
 <<redundant, eval = TRUE, echo=FALSE, results=tex >>=
+library("xtable")
 xtable(redundantM, display = c("s","d","d","d","d","d"), label = "ta:Repetitions", 
 caption="Number of repetitive Protein Complexes")
 
