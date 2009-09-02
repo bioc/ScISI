@@ -19,7 +19,7 @@ Objects can be created by calls of the form \code{new("yeastData",
 }
 \section{Slots}{
   \describe{
-    \item{yeastData:}{The yeastData slot is merely a data frame
+    \item{reference}{The yeastData slot is merely a data frame
       for some in silico interactome.}
    }
 }
