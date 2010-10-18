@@ -1,6 +1,6 @@
 Package: ScISI
 Title: In Silico Interactome
-Version: 1.22.0
+Version: 1.23.0
 Author: Tony Chiang <tchiang@fhcrc.org>
 Description: Package to create In Silico Interactomes
 Depends: GO.db, RpsiXML, annotate, apComplex
